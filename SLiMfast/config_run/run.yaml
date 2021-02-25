@@ -1,0 +1,22 @@
+
+hhblits:
+  executable:
+  dirname:
+  options:
+    d: "UniRef30_2020_06"
+
+hhsearch:
+  executable:
+  dirname:
+  options:
+    d: "pdb70"
+
+dssp:
+  executable:
+  dirname:
+  options:
+
+naccess:
+  executable:
+  dirname:
+  options:
