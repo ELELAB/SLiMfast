@@ -5,7 +5,7 @@
 #
 #    Default values.
 #
-#    Copyright (C) 2020 Valentina Sora 
+#    Copyright (C) 2021 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
