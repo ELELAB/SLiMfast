@@ -3,7 +3,7 @@
 
 #    uniprot_tools.py
 #
-#    
+#    Utility functions to retrieve data from the UniProt database.
 #
 #    Copyright (C) 2021 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
@@ -28,9 +28,9 @@
 
 
 
-# standard library
+# Standard library
 import requests
-# third-party packages
+# Third-party packages
 import pandas as pd
 # SLiMfast
 from SLiMfast.defaults import (
@@ -42,6 +42,7 @@ from SLiMfast.defaults import (
     UNP_ID_FIELD,
     UNP_SEGMENTS_FIELD)
 from SLiMfast import pdb_tools
+
 
 
 def write_uniprot_fasta(uniprot_id, fasta_file_handle):
