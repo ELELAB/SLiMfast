@@ -1,22 +1,168 @@
+# Version of the configuration file
+version: 1
 
+# Working directory (where the pipeline will be run)
+wd:
+
+#
+slims:
+  out:
+    sep: ","
+    index: False
+
+# Settings to be used for the PDB structures found
+structures:
+
+  # Whether it is the core or the extended SLiM that needs to be
+  # found in the structures (of the protein of interest or of
+  # a homolog)
+  find_in_pdb: core
+
+  # Minimum length (in number of residues) that a disordered region
+  # needs to be to be considered a true disordered region
+  min_len_disorder: 10
+
+  # Settings for the dataframe that will contain the structures
+  # of the protein of interest (if available)
+  protein:
+    
+    # Dataframe settins
+    df:
+      
+      # Sort the dataframe
+      sort:
+        # Sorting criteria (will be applied in order)
+        sort_by:
+          - "resolution"
+          - "deposition_date"
+        # Whether, for each sorting criterion, to sort in ascending
+        # order (if False, descending order will be used)
+        ascending:
+          - True
+          - False
+    
+    # Output CSV settings (will be passed to DataFrame.to_csv())
+    out:
+      sep: ","
+      index: False
+      date_format: "%Y/%m/%d"
+
+  # Settings for the dataframe that will contain the structures
+  # of the homologs found for the protein of interest (if needed)
+  homolog:
+    
+    # Dataframe settings
+    df:
+      
+      # Sort the dataframe
+      sort:
+        # Sorting criteria (will be applied in order)
+        sort_by:
+          - "identities"
+          - "resolution"
+          - "deposition_date"
+        # Whether, for each sorting criterion, to sort in ascending
+        # order (if False, descending order will be used)
+        ascending:
+          - False
+          - True
+          - False
+    
+      # Filter the dataframe
+      filter:
+        # Only homologs covering a portion of the protein of
+        # interest higher than this threshold will be kept
+        min_identities: 30
+        # Only homologs covering a portion of the protein of
+        # interest higher than this threshold will be kept
+        min_coverage_percent: 20
+        # Only proteins from humans will be kept
+        organism: "Homo sapiens"
+
+    # Output CSV settings (will be passed to DataFrame.to_csv())
+    out:
+      sep: ","
+      index: True
+      date_format: "%Y/%m/%d"
+
+    # Other available filters (can represent an exact value or a
+    # minimum/maximum for numeric fields, if prefixed with
+    # min_/max_)
+
+    # prob, e_value, p_value, score, identities, similarity,
+    # sum_probs, template_neff, organism, coverage,
+    # coverage_percent, experimental_method, resolution,
+    # deposition_date
+
+# HHblits settings
 hhblits:
-  executable:
-  dirname:
-  options:
-    d: "UniRef30_2020_06"
+  # Run options
+  run:
+    # Path to the executable
+    executable: "hhblits"
+    # Name of the directory where to run HHblits (if it is an empty
+    # string, it will be run in the pipeline working directory)
+    dirname: ""
+    # HHblits options
+    options:
+      d: "/data/databases/hh-suite-20210225/UniRef30_2020_06_hhsuite"
 
+# HHsearch settings
 hhsearch:
-  executable:
-  dirname:
-  options:
-    d: "pdb70"
+  # Run options
+  run:
+    # Path to the executable
+    executable: "hhsearch"
+    # Name of the directory where to run HHsearch (if it is an empty
+    # string, it will be run in the pipeline working directory)
+    dirname: ""
+    # HHsearch options
+    options:
+      # Defaults used by hhsearch on the HHpred server as of Feb 24th 2021
+      -d: "/data/databases/hh-suite-20210225/pdb70_from_mmcif_latest"
+      -o: "hhsearch_output.txt"
+      -p: 20
+      -Z: 250
+      -loc: True
+      -z: 1
+      -b: 1
+      -B: 250
+      -ssm: 2
+      -sc: 1
+      -seq: 1
+      -dbstrlen: 10000
+      -norealign: True
+      -maxres: 32000
+      -contxt:
 
+# DSSP settings
 dssp:
-  executable:
-  dirname:
-  options:
-
-naccess:
-  executable:
-  dirname:
-  options:
+  
+  # Run options
+  run:
+    # Path to the executable
+    executable: "mkdssp"
+    # Name of the directory where to run DSSP for each PDB structure
+    # (if it is an empty string, it will be run in the pipeline 
+    # working directory)
+    dirname: "dssp"
+    options:
+  
+  # Processing options for the DSSP output
+  processing:
+    # Mapping of DSSP symbols to custom symbols
+    dssp_mapping:
+      G: "H"
+      I: "H"
+      H: "H"
+      B: "-"
+      S: "-"
+      E: "E"
+      T: "-"
+    # How to represent unstructures residues (represented by
+    # whitespaces in DSSP outputs) in the FASTA-like DSSP
+    # sequence
+    whitespace_repr: "-"
+    # Which symbols of the DSSP mapping represent disordered residues
+    disorder_symbols:
+      - "-"
