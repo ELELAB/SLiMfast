@@ -18,6 +18,7 @@ entry_points = \
     }
 install_requires = ["biopython",
                     "pandas",
+                    "pytest",
                     "pyyaml",
                     "requests"]
 
