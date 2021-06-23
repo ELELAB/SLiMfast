@@ -50,13 +50,6 @@ class HHsearchParser:
     # Format for data in scientific notation
     SCI_FMT = "{:,.1E}"
 
-    # Column-width specifiers (open intervals)
-    # for the fields of the hits' table (it will be read by
-    # pandas as a fixed-width dataframe)
-    COLSPECS_HITS = [(0,3), (4,11), (11,34), (35,40), (41,48),
-                     (49,57), (58,64), (65,69), (70,74),
-                     (75,84), (85,102)]
-
     # Column names for the hits' table
     COLNAMES_HITS = ["num", "hit", "description", "prob",
                      "e_value", "p_value", "score", "ss", "cols",
@@ -153,34 +146,82 @@ class HHsearchParser:
         """Parse the hits' section.
         """
 
+        # Create an empty dictionary to store data
+        data = []
+
+        # Boolean switch for when to start parsing the hits'
+        # section 
+        parse = False
+
         # Unpack the range in starting and ending index
         start_ix, end_ix = range_indexes
 
-        # Read the hits' section as a fixed-width-formatted file
+        # Go to the beginning of the file
         f.seek(0)
-        hits_df = pd.read_fwf(f,
-                              skiprows = start_ix,
-                              nrows = end_ix-start_ix-1,
-                              header = 0,
-                              colspecs = self.COLSPECS_HITS)
+        
+        # For each line
+        for i, line in enumerate(f):
 
-        # Specify column names
+            # If you reached the beginning of the hits' section,
+            # start parsing
+            if i == start_ix + 1:
+                parse = True
+
+            # If you reached the end of the hits' section,
+            # exit from the loop
+            elif i == end_ix:
+                break
+
+            # If parsing is not active, continue
+            if not parse:
+                continue
+
+            # Split the line with whitespaces and take all
+            # non empty elements
+            line = [i for i in line.split(" ") if i != ""]
+
+            # Get the hit ID
+            hit = \
+                line[1].split("_")[0].lower() + "." \
+                + line[1].split("_")[1]
+
+            # If the PDB segments are stored in the last
+            # elements of the line
+            if "-" in line[-1]:
+                data.append(\
+                    {"num" : int(line[0]),
+                     "hit" : hit,
+                     "description" : " ".join(line[2:-8]),
+                     "prob" : float(line[-8]),
+                     "e_value" : self.SCI_FMT.format(float(line[-7])),
+                     "p_value" : self.SCI_FMT.format(float(line[-6])),
+                     "score" : float(line[-5]),
+                     "ss" : float(line[-4]),
+                     "cols" : int(line[-3]),
+                     "uniprot_segments" : line[-2],
+                     "pdb_segments" : line[-1].split("(")[0]})
+
+            # If the PDB segments are stored in the second-to-last
+            # element of the line
+            else:
+                data.append(\
+                    {"num" : int(line[0]),
+                     "hit" : hit,
+                     "description" : " ".join(line[2:-9]),
+                     "prob" : float(line[-9]),
+                     "e_value" : self.SCI_FMT.format(float(line[-8])),
+                     "p_value" : self.SCI_FMT.format(float(line[-7])),
+                     "score" : float(line[-6]),
+                     "ss" : float(line[-5]),
+                     "cols" : int(line[-4]),
+                     "uniprot_segments" : line[-3],
+                     "pdb_segments" : line[-2]})
+
+        # Convert the dictionary containing the hits into a data frame
+        hits_df = pd.DataFrame(data)
+
+        # Specify the column names
         hits_df.columns = self.COLNAMES_HITS
-
-        # Format the 'hit' column
-        hits_df["hit"] = \
-            [h.split("_")[0].lower() + "." + h.split("_")[1] \
-             for h in hits_df["hit"]]
-
-        # Format the 'e_value' and 'p_value' columns
-        hits_df["e_value"] = \
-            hits_df["e_value"].map(self.SCI_FMT.format)
-        hits_df["p_value"] = \
-            hits_df["p_value"].map(self.SCI_FMT.format)
-
-        # Clean up the 'pdb_segments' column
-        hits_df["pdb_segments"] = \
-            [s.split("(")[0] for s in hits_df["pdb_segments"]]
 
         # Add two columns storing just the PDB ID and the chain
         hits_df[self.COLNAMES_PDB] = \
@@ -192,7 +233,7 @@ class HHsearchParser:
         hits_df.index = [str(n) + self.HIT_NUM_ID_SEP + h for n, h \
                          in zip(hits_df["num"], hits_df["hit"])]
 
-        # Return the dataframe
+        # Return the data frame
         return hits_df
 
 
@@ -221,30 +262,36 @@ class HHsearchParser:
         *Dictionary*
         
         {hit_id : 
-            {'Q' : {'ss_pred' : 'cCCCCCCCCCCceeeEEEEcCCCCceEEEEEC',
-                    'query' : 'ATQSKPTPVKPNYALKFTLAGHTKAVSSVKFS',
-                    'Consensus' : '~~~~~~~~~~~~~~~~~~~~~~~~~i~~~~~s'},
+            {"Q" : {"ss_pred" : "cCCCCCCCCCCceeeEEEEcCCCCceEEEEEC",
+                    "query" : "ATQSKPTPVKPNYALKFTLAGHTKAVSSVKFS",
+                    "Consensus" : "~~~~~~~~~~~~~~~~~~~~~~~~~i~~~~~s"},
 
-             'quality' : '+++++.+....+...+.+.+|...|.+++|+|',
+             "quality" : "+++++.+....+...+.+.+|...|.+++|+|",
              
-             'T' : {'Consensus' : '~~~~~~~~~~~~~~~~~~~~~~~~~i~~~~~~',
-                    'template' : 'ATQSKPTPVKPNYALKFTLAGHTKAVSSVKFS',
-                    'ss_dssp' : '--------CCCCCEEEEEECCCSSCEEEEEEC',
-                    'ss_pred' : 'CCCCCCCCCCCcEEEEeecCCcCCCeeEEEEc'}
+             'T' : {"Consensus" : "~~~~~~~~~~~~~~~~~~~~~~~~~i~~~~~~",
+                    "template" : "ATQSKPTPVKPNYALKFTLAGHTKAVSSVKFS",
+                    "ss_dssp" : "--------CCCCCEEEEEECCCSSCEEEEEEC",
+                    "ss_pred" : "CCCCCCCCCCCcEEEEeecCCcCCCeeEEEEc"}
             }
         }
         """
 
-        # Initialize the boolean switch that indicates to
+        # Set the boolean switch that indicates to
         # parse the alignment to False
         parse = False
 
+        # Set the starting and ending points of query
+        # and template to None
         start_q = None
         start_t = None
         end_q = None
         end_t = None
 
+        # Set the hit ID to None
         hit_id = None
+
+        # Set the number of residues in the query to None
+        num_res = None
 
         # Initialize an empty dictionary to store the info
         # on the hits gathered from the alignments
@@ -253,11 +300,18 @@ class HHsearchParser:
         # Create an empty dictionary to atore the alignments
         als = {}
         
+        # Go to the beginning of the file
         f.seek(0)
+
+        # For each line
         for ix, line in enumerate(f):
+
+            # If you reached the beginning of the alignments'
+            # section, start parsing
             if ix == range_indexes[0]:
                 parse = True
 
+            # If parsing is not active, continue
             if not parse:
                 continue
 
@@ -268,7 +322,27 @@ class HHsearchParser:
             # If you just entered a new aligment...
             elif line.startswith("No"):
 
+                # If there are data from a previous hit to
+                # be stored
                 if hit_id is not None:
+
+                    # If no info for the coverage of the UniProt
+                    # sequence by the alignment has been stored
+                    # for the hit
+                    if not self.COLNAME_COV in \
+                        info_from_als[hit_id].keys() \
+                            and num_res is not None:
+                                    
+                        # Get the coverage of the UniProt sequence by
+                        # the current alignment in percent points
+                        cov_percent = \
+                            float("{:.1f}".format(\
+                                    (int(aligned_cols) / num_res) * 100))
+
+                        # Save this info for the current alignment
+                        info_from_als[hit_id].update(\
+                            {self.COLNAME_COV : cov_percent})
+                    
                     # Save the start and end numbers of both
                     # the query and the template/target
                     als[hit_id]["Q"]["start"] = start_q
@@ -340,6 +414,7 @@ class HHsearchParser:
                 # Reset the sub-lines of the alignment
                 sublines = []
 
+                # Continue to the next line
                 continue
 
             # Split the line by spaces and get rid of empty strings
@@ -393,6 +468,15 @@ class HHsearchParser:
                         # split on multiple lines)  
                         end_q = int(line[4])
 
+                        # If no info about the percent of the full UniProt
+                        # query sequence covered by the current alignment
+                        # has been saved yet
+
+                        if num_res is None:
+                            # Get the total number of residues of the
+                            # UniProt query sequence
+                            num_res = int(line[5].lstrip("(").rstrip(")"))
+
                     # If the section regards the template sequence
                     elif sec == "T":
                         # If no record of starting point for the
@@ -414,25 +498,6 @@ class HHsearchParser:
 
                     # The sequence is the fourth item
                     seq = line[3]
-                    
-                    # If no info about the percent of the full UniProt
-                    # query sequence covered by the current alignment
-                    # has been saved yet
-                    if not self.COLNAME_COV \
-                        in info_from_als[hit_id].keys():
-
-                        # Get the total number of residues of the
-                        # UniProt query sequence
-                        num_res = int(line[5].lstrip("(").rstrip(")"))
-                        
-                        # Get the coverage of the UniProt sequence by
-                        # the current alignment in percent points
-                        cov_percent = \
-                            (int(aligned_cols) / num_res) * 100
-
-                        # Save this info for the current alignment
-                        info_from_als[hit_id].update(\
-                            {self.COLNAME_COV : cov_percent})
 
                         
                 # If it is the first time we are parsing that
@@ -581,7 +646,7 @@ def sort_hits(hits, sort_by, ascending):
     return hits
 
 
-def get_aligned_sequence(hit_al, seq_range):
+def get_aligned_region(hit_al, seq_range):
     """Given a range of positions in the UniProt sequence,
     get the aligned portion in the alignment.
     """
