@@ -96,7 +96,7 @@ def get_uniprot_segments(pdb_id, uniprot_id):
             continue
 
         # Create a tuple of tuples to store those ranges
-        ranges = ((pdb_start, pdb_end), (uniprot_start, uniprot_end))
+        ranges = [[pdb_start, pdb_end], [uniprot_start, uniprot_end]]
 
         # If the chain ID was already encountered (i.e. the PDB
         # chain corresponds to multiple discontinuous protein
@@ -214,9 +214,9 @@ def get_missing_residues(pdb_data):
                 # Add the missing residue to the chain it
                 # should have belonged to
                 if chain in missing_residues.keys():
-                    missing_residues[chain].append(resnum)
+                    missing_residues[chain].append(int(resnum))
                 else:
-                    missing_residues[chain] = [resnum]
+                    missing_residues[chain] = [int(resnum)]
 
                 # Add the missing residue to the list of
                 # missing residues
