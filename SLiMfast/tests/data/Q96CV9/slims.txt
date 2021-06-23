@@ -1,0 +1,2 @@
+# slim_type,core_start,core_seq,core_end,ext_start,ext_seq,ext_end
+LIG_LIR_Gen_1,178,FVEI,181,177,SFVEI,181

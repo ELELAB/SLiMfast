@@ -1,0 +1,44 @@
+,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,pdb_segments,pdb_id,pdb_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
+4_6so3.B,4,6so3.B,Myosin 2 heavy chain st,99.5,1.8E-08,3.4E-13,124.0,63.7,441,37-521,1341-1798,6so3,B,16.0,0.143,0.0,10.0,Lethocerus indicus,76.4
+5_6so3.B,5,6so3.B,Myosin 2 heavy chain st,99.5,2.1E-08,3.9E-13,123.5,63.6,433,37-521,1429-1876,6so3,B,9.0,0.097,0.0,10.0,Lethocerus indicus,75.0
+6_7ju4.B,6,7ju4.B,Flagellar-associated pr,99.5,1.8E-07,3.3E-12,106.8,62.1,434,37-521,131-578,7ju4,B,11.0,0.062,0.0,11.8,Chlamydomonas reinhardtii,75.2
+7_6yuf.A,7,6yuf.A,Structural maintenance,99.5,1.2E-07,2.1E-12,112.3,62.3,443,37-520,245-937,6yuf,A,11.0,0.11,0.0,11.2,Schizosaccharomyces pombe (strain 972 / atcc 24843),76.8
+8_7ju4.B,8,7ju4.B,Flagellar-associated pr,99.5,2.5E-07,4.6E-12,105.6,60.9,437,37-510,257-706,7ju4,B,11.0,0.084,0.0,11.8,Chlamydomonas reinhardtii,75.7
+9_6s6v.D,9,6s6v.D,Nuclease SbcCD subunit,99.5,4.5E-09,8.3E-14,122.0,47.3,433,37-510,382-874,6s6v,D,9.0,0.009,0.0,11.3,Escherichia coli,75.0
+10_7ju4.B,10,7ju4.B,Flagellar-associated pr,99.5,3.0E-07,5.4E-12,105.1,61.0,430,37-510,82-522,7ju4,B,13.0,0.133,0.0,11.8,Chlamydomonas reinhardtii,74.5
+11_6s6v.D,11,6s6v.D,Nuclease SbcCD subunit,99.4,3.6E-08,6.5E-13,114.6,48.5,438,37-521,313-810,6s6v,D,11.0,0.035,0.0,11.3,Escherichia coli,75.9
+13_6x0v.H,13,6x0v.H,Centrosome protein Cep2,99.4,1.9E-06,3.5E-11,103.3,62.0,442,1-510,23-486,6x0v,H,14.0,0.132,0.0,7.1,Homo sapiens,76.6
+14_7ju4.A,14,7ju4.A,Flagellar-associated pr,99.4,1.5E-06,2.8E-11,97.9,57.7,414,37-517,118-546,7ju4,A,15.0,0.161,0.0,7.5,Chlamydomonas reinhardtii,71.8
+16_6s6v.D,16,6s6v.D,Nuclease SbcCD subunit,99.4,1.6E-07,3.0E-12,109.1,51.6,430,37-521,249-747,6s6v,D,11.0,0.044,0.0,11.3,Escherichia coli,74.5
+17_6yuf.A,17,6yuf.A,Structural maintenance,99.4,1.7E-06,3.2E-11,102.4,60.7,438,36-521,170-889,6yuf,A,11.0,0.05,0.0,11.2,Schizosaccharomyces pombe (strain 972 / atcc 24843),75.9
+18_6z47.B,18,6z47.B,Myosin heavy chain 11;,99.3,4.1E-06,7.4E-11,103.1,63.9,460,37-540,1487-1953,6z47,B,13.0,0.125,0.0,8.9,Meleagris gallopavo,79.7
+19_7ju4.A,19,7ju4.A,Flagellar-associated pr,99.3,5.3E-06,9.7E-11,93.6,58.3,429,41-517,178-613,7ju4,A,10.0,0.01,0.0,7.5,Chlamydomonas reinhardtii,74.4
+20_6x0v.H,20,6x0v.H,Centrosome protein Cep2,99.3,5.4E-06,9.8E-11,99.6,60.1,417,37-510,223-678,6x0v,H,13.0,0.117,0.0,7.1,Homo sapiens,72.3
+21_6s6v.D,21,6s6v.D,Nuclease SbcCD subunit,99.3,6.6E-07,1.2E-11,104.1,52.0,434,37-521,186-691,6s6v,D,9.0,0.031,0.0,11.3,Escherichia coli,75.2
+22_7ju4.A,22,7ju4.A,Flagellar-associated pr,99.3,7.4E-06,1.4E-10,92.4,58.1,430,37-510,258-711,7ju4,A,14.0,0.089,0.0,7.5,Chlamydomonas reinhardtii,74.5
+23_6z47.B,23,6z47.B,Myosin heavy chain 11;,99.3,9.4E-06,1.7E-10,99.9,63.7,444,37-521,881-1365,6z47,B,14.0,0.14,0.0,8.9,Meleagris gallopavo,76.9
+25_6yuf.A,25,6yuf.A,Structural maintenance,99.3,5.1E-06,9.3E-11,98.5,59.8,431,38-521,377-1059,6yuf,A,10.0,0.036,0.0,11.2,Schizosaccharomyces pombe (strain 972 / atcc 24843),74.7
+26_6x0v.H,26,6x0v.H,Centrosome protein Cep2,99.3,1.3E-05,2.4E-10,96.4,61.0,441,37-521,110-571,6x0v,H,13.0,0.067,0.0,7.1,Homo sapiens,76.4
+27_6fsa.B,27,6fsa.B,Myosin-7; Motor protein,99.3,1.2E-05,2.2E-10,99.9,61.9,433,38-510,843-1284,6fsa,B,15.0,0.149,0.0,11.2,Bos taurus,75.0
+28_6z47.B,28,6z47.B,Myosin heavy chain 11;,99.3,2.7E-05,4.8E-10,96.1,63.7,444,37-521,937-1442,6z47,B,15.0,0.145,0.0,8.9,Meleagris gallopavo,76.9
+29_6fsa.B,29,6fsa.B,Myosin-7; Motor protein,99.2,8.9E-06,1.6E-10,101.0,59.7,427,37-510,1488-1924,6fsa,B,14.0,0.109,0.0,11.2,Bos taurus,74.0
+30_7ju4.A,30,7ju4.A,Flagellar-associated pr,99.2,1.9E-05,3.4E-10,89.2,59.6,435,23-510,19-454,7ju4,A,12.0,0.062,0.0,7.5,Chlamydomonas reinhardtii,75.4
+31_6fsa.B,31,6fsa.B,Myosin-7; Motor protein,99.2,3.7E-05,6.8E-10,95.6,63.0,436,37-521,1425-1875,6fsa,B,12.0,0.118,0.0,11.2,Bos taurus,75.6
+33_6x0v.H,33,6x0v.H,Centrosome protein Cep2,99.2,4.2E-05,7.7E-10,92.1,59.6,417,38-521,158-619,6x0v,H,10.0,0.085,0.0,7.1,Homo sapiens,72.3
+37_6fsa.B,37,6fsa.B,Myosin-7; Motor protein,99.2,9.5E-05,1.7E-09,92.1,62.7,416,37-521,1379-1797,6fsa,B,15.0,0.122,0.0,11.2,Bos taurus,72.1
+41_6yuf.A,41,6yuf.A,Structural maintenance,99.1,7.4E-05,1.3E-09,88.8,54.5,416,70-521,159-774,6yuf,A,10.0,0.036,0.0,11.2,Schizosaccharomyces pombe (strain 972 / atcc 24843),72.1
+43_7kzo.X,43,7kzo.X,Outer dynein arm-dockin,99.0,1.1E-04,2.0E-09,80.9,56.9,404,1-510,39-454,7kzo,X,10.0,0.032,0.0,7.2,Chlamydomonas reinhardtii,70.0
+81_4uxv.A,81,4uxv.A,SEPTATION RING FORMATIO,98.4,6.2E-03,1.1E-07,65.3,51.8,434,37-510,12-488,4uxv,A,10.0,0.056,0.0,11.4,Bacillus subtilis subsp. subtilis str. 168,75.2
+91_6yvd.D,91,6yvd.D,Structural maintenance,98.3,3.4E-02,6.2E-07,67.8,60.1,430,37-510,512-1114,6yvd,D,16.0,0.115,0.0,10.6,Saccharomyces cerevisiae (strain atcc 204508 / s288c),74.5
+105_6yvd.D,105,6yvd.D,Structural maintenance,98.0,9.6E-02,1.8E-06,64.0,62.1,452,37-521,428-1079,6yvd,D,10.0,0.1,0.0,10.6,Saccharomyces cerevisiae (strain atcc 204508 / s288c),78.3
+111_6yuf.C,111,6yuf.C,Structural maintenance,97.9,1.1E-01,2.0E-06,61.3,54.0,446,37-510,267-889,6yuf,C,14.0,0.112,0.0,7.7,Schizosaccharomyces pombe (strain 972 / atcc 24843),77.3
+119_6wg3.B,119,6wg3.B,Structural maintenance,97.8,1.6E-01,2.9E-06,60.6,60.3,429,37-510,225-847,6wg3,B,11.0,0.1,0.0,11.7,Homo sapiens,74.4
+126_6yvd.C,126,6yvd.C,Structural maintenance,97.7,2.5E-01,4.6E-06,58.7,56.1,434,37-510,298-940,6yvd,C,11.0,0.093,0.0,9.4,Saccharomyces cerevisiae (strain atcc 204508 / s288c),75.2
+131_6yuf.C,131,6yuf.C,Structural maintenance,97.7,2.7E-01,4.9E-06,58.1,54.6,434,36-521,391-1020,6yuf,C,13.0,0.085,0.0,7.7,Schizosaccharomyces pombe (strain 972 / atcc 24843),75.2
+137_6yuf.C,137,6yuf.C,Structural maintenance,97.6,3.4E-01,6.2E-06,57.3,54.6,441,36-523,340-969,6yuf,C,11.0,0.078,0.0,7.7,Schizosaccharomyces pombe (strain 972 / atcc 24843),76.4
+140_6wg3.B,140,6wg3.B,Structural maintenance,97.5,4.2E-01,7.6E-06,57.1,61.5,430,37-521,168-781,6wg3,B,10.0,0.086,0.0,11.7,Homo sapiens,74.5
+146_6wg3.B,146,6wg3.B,Structural maintenance,97.5,5.2E-01,9.6E-06,56.2,59.1,410,37-506,337-946,6wg3,B,13.0,0.102,0.0,11.7,Homo sapiens,71.1
+148_6wg3.B,148,6wg3.B,Structural maintenance,97.4,6.1E-01,1.1E-05,55.7,59.8,442,37-519,274-906,6wg3,B,11.0,0.1,0.0,11.7,Homo sapiens,76.6
+157_7ju4.4,157,7ju4.4,Dynein regulatory compl,97.3,3.6E-01,6.6E-06,50.9,60.6,428,10-499,2-451,7ju4,4,12.0,0.12,0.0,10.6,Chlamydomonas reinhardtii,74.2
+164_6yvd.C,164,6yvd.C,Structural maintenance,97.1,1.1E+00,2.0E-05,53.4,55.2,415,36-510,248-835,6yvd,C,11.0,0.105,0.0,9.4,Saccharomyces cerevisiae (strain atcc 204508 / s288c),71.9
+179_6yuf.C,179,6yuf.C,Structural maintenance,96.9,1.7E+00,3.1E-05,51.6,58.7,440,27-521,142-771,6yuf,C,13.0,0.052,0.0,7.7,Schizosaccharomyces pombe (strain 972 / atcc 24843),76.3

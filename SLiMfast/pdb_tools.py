@@ -46,7 +46,7 @@ logger = log.getLogger(__name__)
 
 
 
-def get_uniprot_segments(pdb_id, uniprot_id):
+def get_protein_segments(pdb_id, uniprot_id):
     """Get which portions (segments) of a protein, identified by its
     UniProt ID, are covered in a given PDB file, given its PDB ID.
     """
@@ -136,6 +136,9 @@ def get_pdb_data(pdb_id, model = None):
     # line of the file should be saved or not
     save_line = True
 
+    #
+    prev_line = ""
+
     # Initialize the model to 1 (since in case there is
     # no MODEL field, all lines of the only model present
     # will be saved anyway)
@@ -157,13 +160,17 @@ def get_pdb_data(pdb_id, model = None):
                 save_line = False
 
         # If you reached the end of the ATOM section
-        elif line.startswith("TER"):
+        elif line.startswith("ENDMDL"):
             # Start saving the lines again
             save_line = True
 
         # If the save-line switch is on, save the current line
         if save_line:
-            data.append(line)
+            prev_line = line
+            if prev_line.startswith("ENDMDL"):
+                continue
+            if line != "":
+                data.append(line)
 
     # Return the data retrieved
     return data

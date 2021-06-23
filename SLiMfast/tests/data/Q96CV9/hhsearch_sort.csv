@@ -1,0 +1,251 @@
+,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,pdb_segments,pdb_id,pdb_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
+18_6z47.B,18,6z47.B,Myosin heavy chain 11;,99.3,4.1E-06,7.4E-11,103.1,63.9,460,37-540,1487-1953,6z47,B,13.0,0.125,0.0,8.9,Meleagris gallopavo,79.7
+105_6yvd.D,105,6yvd.D,Structural maintenance,98.0,9.6E-02,1.8E-06,64.0,62.1,452,37-521,428-1079,6yvd,D,10.0,0.1,0.0,10.6,Saccharomyces cerevisiae (strain atcc 204508 / s288c),78.3
+111_6yuf.C,111,6yuf.C,Structural maintenance,97.9,1.1E-01,2.0E-06,61.3,54.0,446,37-510,267-889,6yuf,C,14.0,0.112,0.0,7.7,Schizosaccharomyces pombe (strain 972 / atcc 24843),77.3
+28_6z47.B,28,6z47.B,Myosin heavy chain 11;,99.3,2.7E-05,4.8E-10,96.1,63.7,444,37-521,937-1442,6z47,B,15.0,0.145,0.0,8.9,Meleagris gallopavo,76.9
+23_6z47.B,23,6z47.B,Myosin heavy chain 11;,99.3,9.4E-06,1.7E-10,99.9,63.7,444,37-521,881-1365,6z47,B,14.0,0.14,0.0,8.9,Meleagris gallopavo,76.9
+7_6yuf.A,7,6yuf.A,Structural maintenance,99.5,1.2E-07,2.1E-12,112.3,62.3,443,37-520,245-937,6yuf,A,11.0,0.11,0.0,11.2,Schizosaccharomyces pombe (strain 972 / atcc 24843),76.8
+13_6x0v.H,13,6x0v.H,Centrosome protein Cep2,99.4,1.9E-06,3.5E-11,103.3,62.0,442,1-510,23-486,6x0v,H,14.0,0.132,0.0,7.1,Homo sapiens,76.6
+148_6wg3.B,148,6wg3.B,Structural maintenance,97.4,6.1E-01,1.1E-05,55.7,59.8,442,37-519,274-906,6wg3,B,11.0,0.1,0.0,11.7,Homo sapiens,76.6
+4_6so3.B,4,6so3.B,Myosin 2 heavy chain st,99.5,1.8E-08,3.4E-13,124.0,63.7,441,37-521,1341-1798,6so3,B,16.0,0.143,0.0,10.0,Lethocerus indicus,76.4
+137_6yuf.C,137,6yuf.C,Structural maintenance,97.6,3.4E-01,6.2E-06,57.3,54.6,441,36-523,340-969,6yuf,C,11.0,0.078,0.0,7.7,Schizosaccharomyces pombe (strain 972 / atcc 24843),76.4
+26_6x0v.H,26,6x0v.H,Centrosome protein Cep2,99.3,1.3E-05,2.4E-10,96.4,61.0,441,37-521,110-571,6x0v,H,13.0,0.067,0.0,7.1,Homo sapiens,76.4
+179_6yuf.C,179,6yuf.C,Structural maintenance,96.9,1.7E+00,3.1E-05,51.6,58.7,440,27-521,142-771,6yuf,C,13.0,0.052,0.0,7.7,Schizosaccharomyces pombe (strain 972 / atcc 24843),76.3
+17_6yuf.A,17,6yuf.A,Structural maintenance,99.4,1.7E-06,3.2E-11,102.4,60.7,438,36-521,170-889,6yuf,A,11.0,0.05,0.0,11.2,Schizosaccharomyces pombe (strain 972 / atcc 24843),75.9
+11_6s6v.D,11,6s6v.D,Nuclease SbcCD subunit,99.4,3.6E-08,6.5E-13,114.6,48.5,438,37-521,313-810,6s6v,D,11.0,0.035,0.0,11.3,Escherichia coli,75.9
+8_7ju4.B,8,7ju4.B,Flagellar-associated pr,99.5,2.5E-07,4.6E-12,105.6,60.9,437,37-510,257-706,7ju4,B,11.0,0.084,0.0,11.8,Chlamydomonas reinhardtii,75.7
+31_6fsa.B,31,6fsa.B,Myosin-7; Motor protein,99.2,3.7E-05,6.8E-10,95.6,63.0,436,37-521,1425-1875,6fsa,B,12.0,0.118,0.0,11.2,Bos taurus,75.6
+30_7ju4.A,30,7ju4.A,Flagellar-associated pr,99.2,1.9E-05,3.4E-10,89.2,59.6,435,23-510,19-454,7ju4,A,12.0,0.062,0.0,7.5,Chlamydomonas reinhardtii,75.4
+126_6yvd.C,126,6yvd.C,Structural maintenance,97.7,2.5E-01,4.6E-06,58.7,56.1,434,37-510,298-940,6yvd,C,11.0,0.093,0.0,9.4,Saccharomyces cerevisiae (strain atcc 204508 / s288c),75.2
+131_6yuf.C,131,6yuf.C,Structural maintenance,97.7,2.7E-01,4.9E-06,58.1,54.6,434,36-521,391-1020,6yuf,C,13.0,0.085,0.0,7.7,Schizosaccharomyces pombe (strain 972 / atcc 24843),75.2
+6_7ju4.B,6,7ju4.B,Flagellar-associated pr,99.5,1.8E-07,3.3E-12,106.8,62.1,434,37-521,131-578,7ju4,B,11.0,0.062,0.0,11.8,Chlamydomonas reinhardtii,75.2
+81_4uxv.A,81,4uxv.A,SEPTATION RING FORMATIO,98.4,6.2E-03,1.1E-07,65.3,51.8,434,37-510,12-488,4uxv,A,10.0,0.056,0.0,11.4,Bacillus subtilis subsp. subtilis str. 168,75.2
+21_6s6v.D,21,6s6v.D,Nuclease SbcCD subunit,99.3,6.6E-07,1.2E-11,104.1,52.0,434,37-521,186-691,6s6v,D,9.0,0.031,0.0,11.3,Escherichia coli,75.2
+27_6fsa.B,27,6fsa.B,Myosin-7; Motor protein,99.3,1.2E-05,2.2E-10,99.9,61.9,433,38-510,843-1284,6fsa,B,15.0,0.149,0.0,11.2,Bos taurus,75.0
+5_6so3.B,5,6so3.B,Myosin 2 heavy chain st,99.5,2.1E-08,3.9E-13,123.5,63.6,433,37-521,1429-1876,6so3,B,9.0,0.097,0.0,10.0,Lethocerus indicus,75.0
+9_6s6v.D,9,6s6v.D,Nuclease SbcCD subunit,99.5,4.5E-09,8.3E-14,122.0,47.3,433,37-510,382-874,6s6v,D,9.0,0.009,0.0,11.3,Escherichia coli,75.0
+25_6yuf.A,25,6yuf.A,Structural maintenance,99.3,5.1E-06,9.3E-11,98.5,59.8,431,38-521,377-1059,6yuf,A,10.0,0.036,0.0,11.2,Schizosaccharomyces pombe (strain 972 / atcc 24843),74.7
+10_7ju4.B,10,7ju4.B,Flagellar-associated pr,99.5,3.0E-07,5.4E-12,105.1,61.0,430,37-510,82-522,7ju4,B,13.0,0.133,0.0,11.8,Chlamydomonas reinhardtii,74.5
+91_6yvd.D,91,6yvd.D,Structural maintenance,98.3,3.4E-02,6.2E-07,67.8,60.1,430,37-510,512-1114,6yvd,D,16.0,0.115,0.0,10.6,Saccharomyces cerevisiae (strain atcc 204508 / s288c),74.5
+22_7ju4.A,22,7ju4.A,Flagellar-associated pr,99.3,7.4E-06,1.4E-10,92.4,58.1,430,37-510,258-711,7ju4,A,14.0,0.089,0.0,7.5,Chlamydomonas reinhardtii,74.5
+140_6wg3.B,140,6wg3.B,Structural maintenance,97.5,4.2E-01,7.6E-06,57.1,61.5,430,37-521,168-781,6wg3,B,10.0,0.086,0.0,11.7,Homo sapiens,74.5
+16_6s6v.D,16,6s6v.D,Nuclease SbcCD subunit,99.4,1.6E-07,3.0E-12,109.1,51.6,430,37-521,249-747,6s6v,D,11.0,0.044,0.0,11.3,Escherichia coli,74.5
+119_6wg3.B,119,6wg3.B,Structural maintenance,97.8,1.6E-01,2.9E-06,60.6,60.3,429,37-510,225-847,6wg3,B,11.0,0.1,0.0,11.7,Homo sapiens,74.4
+19_7ju4.A,19,7ju4.A,Flagellar-associated pr,99.3,5.3E-06,9.7E-11,93.6,58.3,429,41-517,178-613,7ju4,A,10.0,0.01,0.0,7.5,Chlamydomonas reinhardtii,74.4
+157_7ju4.4,157,7ju4.4,Dynein regulatory compl,97.3,3.6E-01,6.6E-06,50.9,60.6,428,10-499,2-451,7ju4,4,12.0,0.12,0.0,10.6,Chlamydomonas reinhardtii,74.2
+29_6fsa.B,29,6fsa.B,Myosin-7; Motor protein,99.2,8.9E-06,1.6E-10,101.0,59.7,427,37-510,1488-1924,6fsa,B,14.0,0.109,0.0,11.2,Bos taurus,74.0
+20_6x0v.H,20,6x0v.H,Centrosome protein Cep2,99.3,5.4E-06,9.8E-11,99.6,60.1,417,37-510,223-678,6x0v,H,13.0,0.117,0.0,7.1,Homo sapiens,72.3
+33_6x0v.H,33,6x0v.H,Centrosome protein Cep2,99.2,4.2E-05,7.7E-10,92.1,59.6,417,38-521,158-619,6x0v,H,10.0,0.085,0.0,7.1,Homo sapiens,72.3
+37_6fsa.B,37,6fsa.B,Myosin-7; Motor protein,99.2,9.5E-05,1.7E-09,92.1,62.7,416,37-521,1379-1797,6fsa,B,15.0,0.122,0.0,11.2,Bos taurus,72.1
+41_6yuf.A,41,6yuf.A,Structural maintenance,99.1,7.4E-05,1.3E-09,88.8,54.5,416,70-521,159-774,6yuf,A,10.0,0.036,0.0,11.2,Schizosaccharomyces pombe (strain 972 / atcc 24843),72.1
+164_6yvd.C,164,6yvd.C,Structural maintenance,97.1,1.1E+00,2.0E-05,53.4,55.2,415,36-510,248-835,6yvd,C,11.0,0.105,0.0,9.4,Saccharomyces cerevisiae (strain atcc 204508 / s288c),71.9
+14_7ju4.A,14,7ju4.A,Flagellar-associated pr,99.4,1.5E-06,2.8E-11,97.9,57.7,414,37-517,118-546,7ju4,A,15.0,0.161,0.0,7.5,Chlamydomonas reinhardtii,71.8
+146_6wg3.B,146,6wg3.B,Structural maintenance,97.5,5.2E-01,9.6E-06,56.2,59.1,410,37-506,337-946,6wg3,B,13.0,0.102,0.0,11.7,Homo sapiens,71.1
+43_7kzo.X,43,7kzo.X,Outer dynein arm-dockin,99.0,1.1E-04,2.0E-09,80.9,56.9,404,1-510,39-454,7kzo,X,10.0,0.032,0.0,7.2,Chlamydomonas reinhardtii,70.0
+58_6f1u.X,58,6f1u.X,BICD family-like cargo,98.7,8.5E-04,1.5E-08,71.3,46.7,403,2-467,77-532,6f1u,X,14.0,0.101,0.0,6.6,Sus scrofa,69.8
+103_4uxv.A,103,4uxv.A,SEPTATION RING FORMATIO,98.0,3.4E-02,6.1E-07,59.7,48.4,401,37-477,88-507,4uxv,A,9.0,0.058,0.0,11.4,Bacillus subtilis subsp. subtilis str. 168,69.5
+12_6znl.Z,12,6znl.Z,Dynactin subunit 1; Dyn,99.4,3.5E-07,6.5E-12,106.9,55.9,397,2-482,181-587,6znl,Z,14.0,0.097,0.0,8.0,Sus scrofa,68.8
+15_1i84.S,15,1i84.S,SMOOTH MUSCLE MYOSIN HE,99.4,2.6E-07,4.7E-12,108.7,53.9,391,51-508,780-1172,1i84,S,13.0,0.103,0.0,9.8,Gallus gallus,67.8
+165_6f1u.X,165,6f1u.X,BICD family-like cargo,97.1,5.9E-01,1.1E-05,50.2,54.1,382,77-520,100-536,6f1u,X,13.0,0.088,0.0,6.6,Sus scrofa,66.2
+136_4uxv.A,136,4uxv.A,SEPTATION RING FORMATIO,97.6,1.7E-01,3.2E-06,54.2,46.8,381,83-521,5-416,4uxv,A,9.0,0.048,0.0,11.4,Bacillus subtilis subsp. subtilis str. 168,66.0
+236_7ju4.4,236,7ju4.4,Dynein regulatory compl,93.6,1.2E+01,2.3E-04,39.3,55.6,381,83-521,27-430,7ju4,4,9.0,-0.006,0.0,10.6,Chlamydomonas reinhardtii,66.0
+34_6z47.B,34,6z47.B,Myosin heavy chain 11;,99.2,8.3E-06,1.5E-10,100.4,54.8,377,37-476,1554-1935,6z47,B,15.0,0.154,0.0,8.9,Meleagris gallopavo,65.3
+32_6znl.Z,32,6znl.Z,Dynactin subunit 1; Dyn,99.2,1.7E-06,3.1E-11,101.4,47.8,369,96-521,216-584,6znl,Z,17.0,0.124,0.0,8.0,Sus scrofa,64.0
+24_1i84.S,24,1i84.S,SMOOTH MUSCLE MYOSIN HE,99.3,3.4E-07,6.3E-12,107.7,49.7,363,37-467,814-1176,1i84,S,15.0,0.136,0.0,9.8,Gallus gallus,62.9
+51_7kzo.Y,51,7kzo.Y,Outer dynein arm protei,98.8,1.1E-04,2.1E-09,79.0,39.7,359,6-400,2-417,7kzo,Y,10.0,0.063,0.0,10.7,Chlamydomonas reinhardtii,62.2
+64_2bsg.C,64,2bsg.C,FIBRITIN; VIRAL PROTEIN,98.6,1.5E-03,2.7E-08,68.8,38.5,357,72-472,45-455,2bsg,C,9.0,0.089,0.0,8.0,Bacteriophage t4,61.9
+195_7ju4.4,195,7ju4.4,Dynein regulatory compl,96.4,1.9E+00,3.4E-05,45.5,48.9,357,37-433,69-444,7ju4,4,10.0,0.046,0.0,10.6,Chlamydomonas reinhardtii,61.9
+112_6wg3.A,112,6wg3.A,Structural maintenance,97.9,1.1E-01,2.0E-06,60.4,46.3,353,66-473,152-506,6wg3,A,14.0,0.13,0.0,5.9,Homo sapiens,61.2
+90_7kzo.Y,90,7kzo.Y,Outer dynein arm protei,98.3,1.3E-02,2.4E-07,63.2,50.5,351,83-510,26-417,7kzo,Y,12.0,0.074,0.0,10.7,Chlamydomonas reinhardtii,60.8
+86_6yvd.C,86,6yvd.C,Structural maintenance,98.3,1.1E-02,2.0E-07,70.0,41.3,349,36-455,157-508,6yvd,C,11.0,0.073,0.0,9.4,Saccharomyces cerevisiae (strain atcc 204508 / s288c),60.5
+130_6wg3.A,130,6wg3.A,Structural maintenance,97.7,2.4E-01,4.4E-06,57.6,43.8,340,138-521,156-501,6wg3,A,12.0,0.114,0.0,5.9,Homo sapiens,58.9
+242_6h2x.A,242,6h2x.A,Chromosome partition pr,93.4,1.1E+01,2.0E-04,38.1,45.9,340,85-506,6-351,6h2x,A,12.0,0.058,0.0,6.4,Escherichia coli (strain k12),58.9
+96_6yvd.D,96,6yvd.D,Structural maintenance,98.2,5.0E-02,9.1E-07,66.4,47.3,339,65-466,336-678,6yvd,D,15.0,0.051,0.0,10.6,Saccharomyces cerevisiae (strain atcc 204508 / s288c),58.8
+65_2bsg.C,65,2bsg.C,FIBRITIN; VIRAL PROTEIN,98.6,3.7E-04,6.8E-09,73.2,34.0,339,36-403,55-454,2bsg,C,9.0,0.047,0.0,8.0,Bacteriophage t4,58.8
+181_6wg3.A,181,6wg3.A,Structural maintenance,96.9,1.6E+00,3.0E-05,51.1,45.4,330,37-406,165-497,6wg3,A,11.0,0.096,0.0,5.9,Homo sapiens,57.2
+79_2bsg.C,79,2bsg.C,FIBRITIN; VIRAL PROTEIN,98.5,4.0E-03,7.3E-08,65.6,37.7,329,127-510,43-451,2bsg,C,8.0,0.022,0.0,8.0,Bacteriophage t4,57.0
+99_7kzo.X,99,7kzo.X,Outer dynein arm-dockin,98.1,3.1E-02,5.6E-07,62.1,45.8,328,138-521,83-419,7kzo,X,10.0,0.055,0.0,7.2,Chlamydomonas reinhardtii,56.8
+139_6f1u.X,139,6f1u.X,BICD family-like cargo,97.5,2.0E-01,3.6E-06,53.7,40.9,324,38-399,164-532,6f1u,X,12.0,0.071,0.0,6.6,Sus scrofa,56.2
+89_7kzo.X,89,7kzo.X,Outer dynein arm-dockin,98.3,1.3E-02,2.3E-07,65.0,43.6,323,37-403,132-457,7kzo,X,12.0,0.026,0.0,7.2,Chlamydomonas reinhardtii,56.0
+83_6yvd.D,83,6yvd.D,Structural maintenance,98.4,1.8E-02,3.3E-07,70.1,46.9,320,133-510,340-663,6yvd,D,12.0,0.026,0.0,10.6,Saccharomyces cerevisiae (strain atcc 204508 / s288c),55.5
+38_1i84.S,38,1i84.S,SMOOTH MUSCLE MYOSIN HE,99.1,1.5E-06,2.7E-11,102.4,44.3,318,37-412,855-1172,1i84,S,17.0,0.186,0.0,9.8,Gallus gallus,55.1
+44_6znl.Z,44,6znl.Z,Dynactin subunit 1; Dyn,99.0,8.8E-06,1.6E-10,95.5,42.6,313,152-510,215-531,6znl,Z,14.0,0.138,0.0,8.0,Sus scrofa,54.2
+54_6znl.Z,54,6znl.Z,Dynactin subunit 1; Dyn,98.8,9.2E-05,1.7E-09,87.1,38.9,305,37-403,269-576,6znl,Z,16.0,0.146,0.0,8.0,Sus scrofa,52.9
+235_7kzn.B,235,7kzn.B,Flagellar outer dynein,93.6,4.9E+01,8.9E-04,46.3,37.8,304,42-400,3096-3434,7kzn,B,13.0,0.059,0.0,10.0,Chlamydomonas reinhardtii,52.7
+203_7kzn.A,203,7kzn.A,Heavy chain alpha; dyne,96.0,1.3E+01,2.4E-04,51.4,38.7,301,86-463,2940-3275,7kzn,A,13.0,0.075,0.0,9.6,Chlamydomonas reinhardtii,52.2
+170_7kzo.Y,170,7kzo.Y,Outer dynein arm protei,97.1,6.7E-01,1.2E-05,50.0,44.3,299,137-510,23-357,7kzo,Y,12.0,0.094,0.0,10.7,Chlamydomonas reinhardtii,51.8
+49_6ian.A,49,6ian.A,Intraflagellar transpor,98.8,2.0E-04,3.7E-09,71.3,39.3,298,56-406,19-322,6ian,A,13.0,0.109,0.0,10.7,Trypanosoma brucei brucei (strain 927/4 gutat10.1),51.6
+155_7kzn.A,155,7kzn.A,Heavy chain alpha; dyne,97.3,9.1E-01,1.7E-05,61.8,37.9,296,46-399,2942-3276,7kzn,A,15.0,0.115,0.0,9.6,Chlamydomonas reinhardtii,51.3
+42_1i84.S,42,1i84.S,SMOOTH MUSCLE MYOSIN HE,99.0,6.5E-06,1.2E-10,97.0,44.0,295,209-521,841-1139,1i84,S,12.0,0.085,0.0,9.8,Gallus gallus,51.1
+53_6ian.A,53,6ian.A,Intraflagellar transpor,98.8,3.0E-04,5.4E-09,70.1,39.0,295,133-470,18-318,6ian,A,12.0,0.046,0.0,10.7,Trypanosoma brucei brucei (strain 927/4 gutat10.1),51.1
+238_6zyw.A,238,6zyw.A,Dynein-1-alpha heavy ch,93.6,4.6E+01,8.5E-04,45.8,38.9,294,46-400,2580-2928,6zyw,A,15.0,0.145,0.0,8.8,Tetrahymena thermophila sb210,51.0
+198_6zyw.B,198,6zyw.B,Outer arm dynein beta h,96.1,1.2E+01,2.2E-04,51.8,36.3,293,46-400,3113-3451,6zyw,B,14.0,0.086,0.0,9.9,Tetrahymena thermophila sb210,50.8
+228_5nug.A,228,5nug.A,Cytoplasmic dynein 1 he,94.4,3.6E+01,6.6E-04,47.6,35.2,293,133-473,3187-3512,5nug,A,11.0,0.071,0.0,10.1,Homo sapiens,50.8
+196_5nug.A,196,5nug.A,Cytoplasmic dynein 1 he,96.3,9.3E+00,1.7E-04,52.9,38.4,293,46-400,3178-3507,5nug,A,11.0,0.061,0.0,10.1,Homo sapiens,50.8
+62_6ian.A,62,6ian.A,Intraflagellar transpor,98.7,6.6E-04,1.2E-08,67.6,40.7,292,216-510,8-316,6ian,A,13.0,0.1,0.0,10.7,Trypanosoma brucei brucei (strain 927/4 gutat10.1),50.6
+244_6ian.D,244,6ian.D,Intraflagellar transpor,93.2,1.4E+01,2.5E-04,38.7,36.8,289,89-454,149-454,6ian,D,10.0,0.081,0.0,6.6,Trypanosoma brucei brucei (strain 927/4 gutat10.1),50.1
+93_6yvd.C,93,6yvd.C,Structural maintenance,98.2,2.2E-02,4.0E-07,67.5,40.2,286,227-521,183-497,6yvd,C,12.0,0.084,0.0,9.4,Saccharomyces cerevisiae (strain atcc 204508 / s288c),49.6
+50_7dl2.C,50,7dl2.C,"Hamartin; TSC complex,",98.8,4.6E-05,8.3E-10,87.2,37.7,286,42-382,686-972,7dl2,C,13.0,0.076,0.0,6.5,Homo sapiens,49.6
+162_7ju4.4,162,7ju4.4,Dynein regulatory compl,97.2,4.7E-01,8.6E-06,50.0,38.3,285,37-368,127-444,7ju4,4,14.0,0.138,0.0,10.6,Chlamydomonas reinhardtii,49.4
+46_7dl2.C,46,7dl2.C,"Hamartin; TSC complex,",99.0,2.5E-05,4.6E-10,89.2,42.8,284,133-499,688-972,7dl2,C,13.0,0.089,0.0,6.5,Homo sapiens,49.2
+40_6x5z.P,40,6x5z.P,Tropomyosin alpha-1 cha,99.1,4.9E-06,9.0E-11,80.3,38.6,283,56-403,2-284,6x5z,P,15.0,0.155,0.0,12.2,Gallus gallus,49.0
+246_6ian.D,246,6ian.D,Intraflagellar transpor,92.8,1.6E+01,2.8E-04,38.3,32.0,283,219-510,157-451,6ian,D,12.0,0.089,0.0,6.6,Trypanosoma brucei brucei (strain 927/4 gutat10.1),49.0
+39_6x5z.P,39,6x5z.P,Tropomyosin alpha-1 cha,99.1,4.8E-06,8.7E-11,80.4,39.8,282,133-476,1-282,6x5z,P,13.0,0.139,0.0,12.2,Gallus gallus,48.9
+47_5nnv.D,47,5nnv.D,Chromosome partition pr,99.0,2.5E-05,4.6E-10,75.3,37.6,279,135-471,2-280,5nnv,D,9.0,0.027,0.0,12.2,Bacillus subtilis (strain 168),48.4
+35_6x5z.P,35,6x5z.P,Tropomyosin alpha-1 cha,99.2,4.8E-06,8.7E-11,80.4,43.0,278,219-521,1-281,6x5z,P,11.0,0.059,0.0,12.2,Gallus gallus,48.2
+45_5nnv.D,45,5nnv.D,Chromosome partition pr,99.0,1.7E-05,3.2E-10,76.4,37.4,277,72-409,3-279,5nnv,D,11.0,0.048,0.0,12.2,Bacillus subtilis (strain 168),48.0
+234_6zyw.C,234,6zyw.C,"Dynein heavy chain, out",93.7,4.8E+01,8.8E-04,46.4,33.3,275,154-476,3096-3455,6zyw,C,12.0,0.073,0.0,10.1,Tetrahymena thermophila sb210,47.7
+60_6jlb.D,60,6jlb.D,Lamin A/C; Nuclear lami,98.7,2.2E-04,4.1E-09,69.5,33.6,274,4-334,1-303,6jlb,D,14.0,0.137,0.0,12.1,Homo sapiens,47.5
+141_2bsg.C,141,2bsg.C,FIBRITIN; VIRAL PROTEIN,97.5,1.9E-01,3.5E-06,53.1,32.2,274,236-521,45-404,2bsg,C,11.0,0.063,0.0,8.0,Bacteriophage t4,47.5
+174_6wg3.A,174,6wg3.A,Structural maintenance,97.0,1.3E+00,2.4E-05,51.8,35.3,273,39-370,230-506,6wg3,A,14.0,0.067,0.0,5.9,Homo sapiens,47.3
+224_6zyw.B,224,6zyw.B,Outer arm dynein beta h,94.6,2.2E+01,3.9E-04,49.5,29.8,273,157-473,3111-3456,6zyw,B,12.0,0.054,0.0,9.9,Tetrahymena thermophila sb210,47.3
+36_5nnv.D,36,5nnv.D,Chromosome partition pr,99.2,3.0E-06,5.4E-11,81.8,40.9,270,219-510,7-277,5nnv,D,13.0,0.061,0.0,12.2,Bacillus subtilis (strain 168),46.8
+240_6zyw.A,240,6zyw.A,Dynein-1-alpha heavy ch,93.5,4.8E+01,8.8E-04,45.7,37.7,270,219-510,2582-2928,6zyw,A,11.0,0.058,0.0,8.8,Tetrahymena thermophila sb210,46.8
+197_7kzn.A,197,7kzn.A,Heavy chain alpha; dyne,96.2,6.1E+00,1.1E-04,54.4,32.5,268,37-344,2979-3273,7kzn,A,11.0,0.053,0.0,9.6,Chlamydomonas reinhardtii,46.4
+156_7kzn.A,156,7kzn.A,Heavy chain alpha; dyne,97.3,5.7E-01,1.0E-05,63.6,35.7,267,219-510,2944-3277,7kzn,A,14.0,0.092,0.0,9.6,Chlamydomonas reinhardtii,46.3
+173_5nug.A,173,5nug.A,Cytoplasmic dynein 1 he,97.0,1.4E+00,2.5E-05,60.5,34.9,267,219-510,3180-3507,5nug,A,7.0,0.06,0.0,10.1,Homo sapiens,46.3
+189_6zyw.C,189,6zyw.C,"Dynein heavy chain, out",96.6,4.9E+00,8.9E-05,55.4,35.2,267,219-510,3096-3447,6zyw,C,10.0,0.048,0.0,10.1,Tetrahymena thermophila sb210,46.3
+63_6f1t.x,63,6f1t.x,BICD family-like cargo,98.6,7.2E-05,1.3E-09,75.6,28.3,266,1-344,63-331,6f1t,x,16.0,0.168,0.0,7.2,Sus scrofa,46.1
+66_6f1t.X,66,6f1t.X,BICD family-like cargo,98.6,1.3E-04,2.3E-09,73.9,28.8,266,1-344,63-331,6f1t,X,16.0,0.168,0.0,7.3,Sus scrofa,46.1
+77_6jlb.D,77,6jlb.D,Lamin A/C; Nuclear lami,98.5,2.0E-03,3.6E-08,62.8,35.4,262,133-451,32-303,6jlb,D,16.0,0.149,0.0,12.1,Homo sapiens,45.4
+52_5nnv.D,52,5nnv.D,Chromosome partition pr,98.8,1.4E-04,2.6E-09,70.0,36.3,262,37-349,14-278,5nnv,D,10.0,0.082,0.0,12.2,Bacillus subtilis (strain 168),45.4
+229_6zyw.C,229,6zyw.C,"Dynein heavy chain, out",94.0,2.0E+01,3.7E-04,49.8,27.9,257,95-400,3094-3447,6zyw,C,14.0,0.06,0.0,10.1,Tetrahymena thermophila sb210,44.5
+97_6ian.A,97,6ian.A,Intraflagellar transpor,98.1,1.2E-02,2.2E-07,58.5,33.8,256,37-343,56-318,6ian,A,12.0,0.076,0.0,10.7,Trypanosoma brucei brucei (strain 927/4 gutat10.1),44.4
+59_7dl2.C,59,7dl2.C,"Hamartin; TSC complex,",98.7,3.4E-04,6.3E-09,80.2,39.7,255,252-521,686-948,7dl2,C,10.0,0.02,0.0,6.5,Homo sapiens,44.2
+55_6x5z.P,55,6x5z.P,Tropomyosin alpha-1 cha,98.7,1.5E-04,2.8E-09,69.8,34.4,253,37-344,29-284,6x5z,P,15.0,0.142,0.0,12.2,Gallus gallus,43.8
+88_5xg2.A,88,5xg2.A,Chromosome partition pr,98.3,3.7E-03,6.7E-08,59.4,32.3,252,94-398,2-255,5xg2,A,16.0,0.153,0.0,12.0,Pyrococcus yayanosii (strain ch1 / jcm 16557),43.7
+186_7kzo.Y,186,7kzo.Y,Outer dynein arm protei,96.7,1.4E+00,2.6E-05,47.4,38.3,250,244-510,23-310,7kzo,Y,11.0,0.053,0.0,10.7,Chlamydomonas reinhardtii,43.3
+193_6zyw.B,193,6zyw.B,Outer arm dynein beta h,96.4,5.8E+00,1.1E-04,54.7,34.6,249,233-510,3115-3451,6zyw,B,12.0,0.151,0.0,9.9,Tetrahymena thermophila sb210,43.2
+175_4uxv.A,175,4uxv.A,SEPTATION RING FORMATIO,97.0,8.0E-01,1.5E-05,49.1,36.6,249,242-510,42-315,4uxv,A,10.0,0.121,0.0,11.4,Bacillus subtilis subsp. subtilis str. 168,43.2
+199_6zyw.C,199,6zyw.C,"Dynein heavy chain, out",96.1,9.2E+00,1.7E-04,52.9,33.6,248,46-348,3094-3447,6zyw,C,14.0,0.103,0.0,10.1,Tetrahymena thermophila sb210,43.0
+56_6jlb.D,56,6jlb.D,Lamin A/C; Nuclear lami,98.7,3.6E-04,6.5E-09,68.1,39.3,247,226-510,32-303,6jlb,D,15.0,0.074,0.0,12.1,Homo sapiens,42.8
+78_5xg2.A,78,5xg2.A,Chromosome partition pr,98.5,1.8E-03,3.2E-08,61.5,37.4,244,230-507,2-254,5xg2,A,16.0,0.121,0.0,12.0,Pyrococcus yayanosii (strain ch1 / jcm 16557),42.3
+76_7dl2.C,76,7dl2.C,"Hamartin; TSC complex,",98.5,8.3E-04,1.5E-08,77.2,36.0,244,37-337,726-972,7dl2,C,7.0,0.023,0.0,6.5,Homo sapiens,42.3
+110_6f1u.X,110,6f1u.X,BICD family-like cargo,97.9,5.4E-02,9.8E-07,57.9,38.9,243,234-510,100-351,6f1u,X,17.0,0.142,0.0,6.6,Sus scrofa,42.1
+205_7kzn.B,205,7kzn.B,Flagellar outer dynein,95.9,1.4E+01,2.6E-04,51.1,36.1,243,233-510,3102-3434,7kzn,B,14.0,0.093,0.0,10.0,Chlamydomonas reinhardtii,42.1
+109_5xg2.A,109,5xg2.A,Chromosome partition pr,98.0,2.1E-02,3.8E-07,54.1,31.7,241,56-346,6-255,5xg2,A,10.0,0.06,0.0,12.0,Pyrococcus yayanosii (strain ch1 / jcm 16557),41.8
+70_6f1t.x,70,6f1t.x,BICD family-like cargo,98.5,2.9E-04,5.4E-09,71.3,30.1,239,234-506,100-338,6f1t,x,16.0,0.144,0.0,7.2,Sus scrofa,41.4
+72_6f1t.X,72,6f1t.X,BICD family-like cargo,98.5,3.9E-04,7.2E-09,70.4,30.6,239,234-506,100-338,6f1t,X,16.0,0.144,0.0,7.3,Sus scrofa,41.4
+104_6znm.X,104,6znm.X,BICD family-like cargo,98.0,9.4E-03,1.7E-07,62.6,28.0,235,131-451,97-335,6znm,X,12.0,0.091,0.0,5.4,Sus scrofa,40.7
+102_6f1t.X,102,6f1t.X,BICD family-like cargo,98.0,8.6E-03,1.6E-07,60.8,27.9,233,162-455,100-332,6f1t,X,13.0,0.121,0.0,7.3,Sus scrofa,40.4
+101_7kzo.X,101,7kzo.X,Outer dynein arm-dockin,98.1,3.6E-02,6.6E-07,61.5,35.9,233,241-510,79-311,7kzo,X,12.0,0.09,0.0,7.2,Chlamydomonas reinhardtii,40.4
+87_6znm.X,87,6znm.X,BICD family-like cargo,98.3,6.1E-04,1.1E-08,71.1,26.8,232,52-344,100-331,6znm,X,15.0,0.167,0.0,5.4,Sus scrofa,40.2
+80_6znm.X,80,6znm.X,BICD family-like cargo,98.4,1.4E-03,2.6E-08,68.5,32.3,231,234-492,100-331,6znm,X,16.0,0.093,0.0,5.4,Sus scrofa,40.0
+132_6f1t.x,132,6f1t.x,BICD family-like cargo,97.6,1.0E-01,1.9E-06,53.1,32.8,231,128-410,94-324,6f1t,x,12.0,0.05,0.0,7.2,Sus scrofa,40.0
+233_5nug.A,233,5nug.A,Cytoplasmic dynein 1 he,93.7,4.2E+01,7.6E-04,47.0,29.8,225,292-521,3180-3472,5nug,A,11.0,0.093,0.0,10.1,Homo sapiens,39.0
+150_4cgk.A,150,4cgk.A,SECRETED 45 KDA PROTEIN,97.4,2.5E-01,4.5E-06,50.4,31.1,219,227-474,28-248,4cgk,A,12.0,0.072,0.0,11.4,Streptococcus pneumoniae,38.0
+124_4cgk.A,124,4cgk.A,SECRETED 45 KDA PROTEIN,97.7,5.9E-02,1.1E-06,54.9,28.8,219,93-347,30-248,4cgk,A,11.0,0.057,0.0,11.4,Streptococcus pneumoniae,38.0
+178_4cgk.A,178,4cgk.A,SECRETED 45 KDA PROTEIN,96.9,6.9E-01,1.3E-05,47.1,25.9,219,156-412,29-247,4cgk,A,9.0,0.021,0.0,11.4,Streptococcus pneumoniae,38.0
+133_6tpi.A,133,6tpi.A,Murein hydrolase activa,97.6,1.0E-01,1.9E-06,52.9,29.4,215,85-343,2-216,6tpi,A,11.0,0.042,0.0,11.6,Escherichia coli (strain k12),37.3
+183_5xei.A,183,5xei.A,Chromosome partition pr,96.8,1.1E+00,2.0E-05,48.2,31.8,211,298-521,168-379,5xei,A,16.0,0.161,0.0,10.8,Pyrococcus yayanosii (strain ch1 / jcm 16557),36.6
+85_6l5j.D,85,6l5j.D,"Rootletin; centrosome,",98.3,5.9E-04,1.1E-08,63.1,25.2,211,92-346,2-212,6l5j,D,14.0,0.06,0.0,11.1,Homo sapiens,36.6
+73_4ilo.B,73,4ilo.B,CT398; hypothetical pro,98.5,1.2E-04,2.1E-09,70.2,25.9,208,326-562,13-233,4ilo,B,11.0,0.098,0.0,10.5,Chlamydia trachomatis,36.0
+69_3na7.A,69,3na7.A,HP0958; flagellar bioge,98.5,1.5E-04,2.8E-09,69.4,27.3,208,326-577,12-227,3na7,A,12.0,0.091,0.0,10.2,Helicobacter pylori,36.0
+206_3vkg.A,206,3vkg.A,"Dynein heavy chain, cyt",95.8,5.5E+00,1.0E-04,53.2,29.1,208,247-463,1898-2105,3vkg,A,11.0,0.089,0.0,9.5,Dictyostelium discoideum,36.0
+84_6l5j.D,84,6l5j.D,"Rootletin; centrosome,",98.4,2.1E-03,3.9E-08,59.3,32.2,207,227-455,1-211,6l5j,D,15.0,0.128,0.0,11.1,Homo sapiens,35.9
+143_6tpi.A,143,6tpi.A,Murein hydrolase activa,97.5,1.6E-01,2.9E-06,51.6,32.7,207,235-467,2-223,6tpi,A,11.0,0.116,0.0,11.6,Escherichia coli (strain k12),35.9
+82_6l5j.D,82,6l5j.D,"Rootletin; centrosome,",98.4,7.9E-04,1.4E-08,62.3,27.2,207,36-280,6-212,6l5j,D,12.0,0.083,0.0,11.1,Homo sapiens,35.9
+202_3vkg.A,202,3vkg.A,"Dynein heavy chain, cyt",96.0,6.2E+00,1.1E-04,52.7,30.9,207,292-510,1901-2107,3vkg,A,12.0,0.039,0.0,9.5,Dictyostelium discoideum,35.9
+211_5xei.A,211,5xei.A,Chromosome partition pr,95.5,5.0E+00,9.2E-05,43.1,32.2,206,233-475,169-383,5xei,A,13.0,0.133,0.0,10.8,Pyrococcus yayanosii (strain ch1 / jcm 16557),35.7
+232_3vkg.A,232,3vkg.A,"Dynein heavy chain, cyt",93.7,2.6E+01,4.7E-04,47.2,27.3,206,147-399,1901-2106,3vkg,A,13.0,0.1,0.0,9.5,Dictyostelium discoideum,35.7
+107_6znm.X,107,6znm.X,BICD family-like cargo,98.0,4.0E-02,7.3E-07,58.0,31.7,205,298-510,98-307,6znm,X,13.0,0.112,0.0,5.4,Sus scrofa,35.5
+219_3vkg.A,219,3vkg.A,"Dynein heavy chain, cyt",95.0,8.8E+00,1.6E-04,51.3,27.3,205,67-316,1899-2103,3vkg,A,10.0,0.084,0.0,9.5,Dictyostelium discoideum,35.5
+116_6jlb.D,116,6jlb.D,Lamin A/C; Nuclear lami,97.9,3.5E-02,6.5E-07,53.9,33.3,205,291-510,31-249,6jlb,D,10.0,0.038,0.0,12.1,Homo sapiens,35.5
+134_6f1t.x,134,6f1t.x,BICD family-like cargo,97.6,1.1E-01,2.0E-06,53.0,32.6,204,307-521,100-307,6f1t,x,12.0,0.124,0.0,7.2,Sus scrofa,35.4
+135_6f1t.X,135,6f1t.X,BICD family-like cargo,97.6,1.1E-01,2.0E-06,53.0,33.1,204,307-521,100-307,6f1t,X,12.0,0.124,0.0,7.3,Sus scrofa,35.4
+120_5xg2.A,120,5xg2.A,Chromosome partition pr,97.8,3.9E-02,7.0E-07,52.3,32.2,203,296-510,2-210,5xg2,A,12.0,0.107,0.0,12.0,Pyrococcus yayanosii (strain ch1 / jcm 16557),35.2
+115_6tpi.A,115,6tpi.A,Murein hydrolase activa,97.9,4.7E-02,8.7E-07,55.5,31.1,203,293-510,1-214,6tpi,A,7.0,0.018,0.0,11.6,Escherichia coli (strain k12),35.2
+71_5y06.A,71,5y06.A,msmeg_4306; coiled coil,98.5,2.0E-04,3.7E-09,68.8,27.9,202,326-562,33-257,5y06,A,14.0,0.167,0.0,10.1,Mycobacterium smegmatis (strain atcc 700084 / mc(2)155),35.0
+167_6tpi.A,167,6tpi.A,Murein hydrolase activa,97.1,4.5E-01,8.2E-06,48.3,26.1,202,175-402,1-216,6tpi,A,9.0,0.111,0.0,11.6,Escherichia coli (strain k12),35.0
+68_6l5j.D,68,6l5j.D,"Rootletin; centrosome,",98.5,8.2E-04,1.5E-08,62.1,32.9,202,292-508,7-212,6l5j,D,10.0,0.063,0.0,11.1,Homo sapiens,35.0
+142_4cgk.A,142,4cgk.A,SECRETED 45 KDA PROTEIN,97.5,1.6E-01,2.8E-06,51.9,31.0,201,295-510,30-242,4cgk,A,13.0,0.147,0.0,11.4,Streptococcus pneumoniae,34.8
+163_6tik.B,163,6tik.B,"Capsid protein,Putative",97.2,3.5E-01,6.4E-06,52.4,26.3,200,40-277,151-354,6tik,B,12.0,0.094,0.0,7.5,Hepatitis b virus,34.7
+217_5xei.A,217,5xei.A,Chromosome partition pr,95.0,6.7E+00,1.2E-04,42.1,26.8,200,69-341,169-368,5xei,A,12.0,0.016,0.0,10.8,Pyrococcus yayanosii (strain ch1 / jcm 16557),34.7
+154_6tik.B,154,6tik.B,"Capsid protein,Putative",97.3,2.1E-01,3.9E-06,54.0,26.8,195,91-343,160-354,6tik,B,11.0,0.146,0.0,7.5,Hepatitis b virus,33.8
+121_6tik.B,121,6tik.B,"Capsid protein,Putative",97.8,8.2E-02,1.5E-06,57.1,31.4,193,293-510,160-352,6tik,B,10.0,0.091,0.0,7.5,Hepatitis b virus,33.4
+151_6tik.B,151,6tik.B,"Capsid protein,Putative",97.3,3.8E-01,6.9E-06,52.2,30.1,191,234-453,160-354,6tik,B,10.0,0.12,0.0,7.5,Hepatitis b virus,33.1
+204_4q4g.X,204,4q4g.X,Peptidoglycan endopepti,95.9,3.2E+00,5.8E-05,43.7,23.6,191,180-392,45-235,4q4g,X,9.0,0.075,0.0,10.7,Mycobacterium tuberculosis,33.1
+190_4q4g.X,190,4q4g.X,Peptidoglycan endopepti,96.5,1.4E+00,2.5E-05,46.5,24.7,191,96-333,45-235,4q4g,X,10.0,0.013,0.0,10.7,Mycobacterium tuberculosis,33.1
+200_4q4g.X,200,4q4g.X,Peptidoglycan endopepti,96.0,2.8E+00,5.1E-05,44.1,27.6,186,239-450,45-235,4q4g,X,8.0,0.038,0.0,10.7,Mycobacterium tuberculosis,32.2
+117_2v71.A,117,2v71.A,NUCLEAR DISTRIBUTION PR,97.9,5.2E-03,9.6E-08,55.6,20.4,185,34-249,2-186,2v71,A,12.0,0.047,0.0,8.2,Rattus norvegicus,32.1
+108_6gao.B,108,6gao.B,Outer capsid protein si,98.0,7.2E-03,1.3E-07,57.1,24.4,184,357-562,3-186,6gao,B,8.0,0.073,0.0,10.5,Mammalian orthoreovirus 1 lang,31.9
+176_4q4g.X,176,4q4g.X,Peptidoglycan endopepti,96.9,7.6E-01,1.4E-05,48.4,28.3,183,298-502,45-235,4q4g,X,11.0,0.094,0.0,10.7,Mycobacterium tuberculosis,31.7
+106_2v71.A,106,2v71.A,NUCLEAR DISTRIBUTION PR,98.0,1.4E-02,2.5E-07,52.9,28.6,180,226-445,5-185,2v71,A,12.0,0.064,0.0,8.2,Rattus norvegicus,31.2
+95_2v71.A,95,2v71.A,NUCLEAR DISTRIBUTION PR,98.2,5.5E-03,1.0E-07,55.5,28.6,178,308-510,7-184,2v71,A,12.0,0.054,0.0,8.2,Rattus norvegicus,30.8
+113_2v71.A,113,2v71.A,NUCLEAR DISTRIBUTION PR,97.9,2.0E-02,3.7E-07,51.8,25.7,174,133-380,12-185,2v71,A,16.0,0.146,0.0,8.2,Rattus norvegicus,30.2
+192_3na7.A,192,3na7.A,HP0958; flagellar bioge,96.5,9.6E-01,1.8E-05,43.1,23.0,174,76-336,13-186,3na7,A,13.0,0.102,0.0,10.2,Helicobacter pylori,30.2
+169_3na7.A,169,3na7.A,HP0958; flagellar bioge,97.1,3.2E-01,5.9E-06,46.4,26.4,173,253-455,12-185,3na7,A,13.0,0.097,0.0,10.2,Helicobacter pylori,30.0
+209_4lin.K,209,4lin.K,Tail needle protein gp2,95.6,2.7E+00,5.0E-05,41.1,20.3,172,41-265,40-211,4lin,K,13.0,0.104,0.0,6.9,Bacteriophage p22,29.8
+194_5y06.A,194,5y06.A,msmeg_4306; coiled coil,96.4,1.1E+00,1.9E-05,43.0,22.9,170,89-327,33-204,5y06,A,14.0,0.148,0.0,10.1,Mycobacterium smegmatis (strain atcc 700084 / mc(2)155),29.5
+149_5y06.A,149,5y06.A,msmeg_4306; coiled coil,97.4,1.2E-01,2.2E-06,49.6,23.5,170,260-451,33-204,5y06,A,9.0,0.1,0.0,10.1,Mycobacterium smegmatis (strain atcc 700084 / mc(2)155),29.5
+161_3na7.A,161,3na7.A,HP0958; flagellar bioge,97.2,6.6E-02,1.2E-06,51.2,19.4,165,176-372,8-173,3na7,A,15.0,0.161,0.0,10.2,Helicobacter pylori,28.6
+168_4ilo.B,168,4ilo.B,CT398; hypothetical pro,97.1,8.2E-02,1.5E-06,50.5,19.0,165,176-372,9-174,4ilo,B,14.0,0.142,0.0,10.5,Chlamydia trachomatis,28.6
+152_4ilo.B,152,4ilo.B,CT398; hypothetical pro,97.3,1.6E-01,2.9E-06,48.5,24.0,164,253-446,13-176,4ilo,B,10.0,0.085,0.0,10.5,Chlamydia trachomatis,28.4
+225_5nmo.B,225,5nmo.B,Chromosome partition pr,94.6,3.2E+00,5.9E-05,36.1,16.7,162,229-403,1-167,5nmo,B,12.0,0.039,0.0,10.8,Bacillus subtilis (strain 168),28.1
+222_4ll8.B,222,4ll8.B,SWI5-dependent HO expre,94.9,3.7E+00,6.7E-05,38.3,21.7,161,255-430,6-167,4ll8,B,11.0,0.116,0.0,5.6,Saccharomyces cerevisiae,27.9
+185_4ilo.B,185,4ilo.B,CT398; hypothetical pro,96.7,5.6E-01,1.0E-05,44.7,21.1,161,76-320,14-174,4ilo,B,11.0,0.069,0.0,10.5,Chlamydia trachomatis,27.9
+223_4ll8.B,223,4ll8.B,SWI5-dependent HO expre,94.7,3.2E+00,5.8E-05,38.7,16.1,160,189-365,6-167,4ll8,B,9.0,0.051,0.0,5.6,Saccharomyces cerevisiae,27.7
+127_3o0z.A,127,3o0z.A,Rho-associated protein,97.7,3.8E-02,6.9E-07,49.0,23.5,159,222-393,4-166,3o0z,A,14.0,0.13,0.0,9.5,Homo sapiens,27.6
+138_3o0z.A,138,3o0z.A,Rho-associated protein,97.6,5.9E-02,1.1E-06,47.7,26.3,159,302-489,4-166,3o0z,A,14.0,0.127,0.0,9.5,Homo sapiens,27.6
+159_3o0z.A,159,3o0z.A,Rho-associated protein,97.2,1.1E-01,2.1E-06,45.9,19.8,159,79-275,4-166,3o0z,A,14.0,0.069,0.0,9.5,Homo sapiens,27.6
+160_5y06.A,160,5y06.A,msmeg_4306; coiled coil,97.2,7.5E-02,1.4E-06,51.0,19.9,154,219-372,41-197,5y06,A,15.0,0.154,0.0,10.1,Mycobacterium smegmatis (strain atcc 700084 / mc(2)155),26.7
+201_4gkw.A,201,4gkw.A,Spindle assembly abnorm,96.0,1.1E+00,2.0E-05,39.3,24.7,153,331-502,10-162,4gkw,A,18.0,0.18,0.0,5.7,Caenorhabditis elegans,26.5
+94_2efr.A,94,2efr.A,General control protein,98.2,2.9E-03,5.3E-08,55.3,24.7,153,333-507,1-153,2efr,A,14.0,0.169,0.0,9.7,Saccharomyces cerevisiae,26.5
+98_2efr.A,98,2efr.A,General control protein,98.1,4.9E-03,9.0E-08,53.8,24.8,153,291-455,1-153,2efr,A,16.0,0.165,0.0,9.7,Saccharomyces cerevisiae,26.5
+100_2efr.A,100,2efr.A,General control protein,98.1,3.3E-03,6.0E-08,54.9,23.6,153,225-404,1-153,2efr,A,19.0,0.132,0.0,9.7,Saccharomyces cerevisiae,26.5
+125_2efr.A,125,2efr.A,General control protein,97.7,7.6E-03,1.4E-07,52.6,18.8,152,76-265,2-153,2efr,A,15.0,0.143,0.0,9.7,Saccharomyces cerevisiae,26.3
+144_6gao.B,144,6gao.B,Outer capsid protein si,97.5,7.4E-02,1.4E-06,50.2,23.6,151,232-405,3-153,6gao,B,10.0,0.126,0.0,10.5,Mammalian orthoreovirus 1 lang,26.2
+129_6gao.B,129,6gao.B,Outer capsid protein si,97.7,4.7E-02,8.5E-07,51.5,24.7,151,298-473,3-153,6gao,B,11.0,0.114,0.0,10.5,Mammalian orthoreovirus 1 lang,26.2
+171_6gao.B,171,6gao.B,Outer capsid protein si,97.0,8.8E-02,1.6E-06,49.6,18.4,151,76-267,4-154,6gao,B,13.0,0.104,0.0,10.5,Mammalian orthoreovirus 1 lang,26.2
+191_4gkw.A,191,4gkw.A,Spindle assembly abnorm,96.5,5.5E-01,1.0E-05,41.1,19.7,150,193-376,11-160,4gkw,A,11.0,0.113,0.0,5.7,Caenorhabditis elegans,26.0
+166_3o0z.A,166,3o0z.A,Rho-associated protein,97.1,2.0E-01,3.6E-06,44.4,24.7,149,354-521,4-152,3o0z,A,15.0,0.112,0.0,9.5,Homo sapiens,25.8
+218_4gkw.A,218,4gkw.A,Spindle assembly abnorm,95.0,2.5E+00,4.6E-05,37.1,19.8,148,80-278,10-159,4gkw,A,11.0,0.104,0.0,5.7,Caenorhabditis elegans,25.6
+214_4gkw.A,214,4gkw.A,Spindle assembly abnorm,95.4,2.0E+00,3.6E-05,37.7,23.9,147,292-457,13-162,4gkw,A,17.0,0.113,0.0,5.7,Caenorhabditis elegans,25.5
+123_6gap.B,123,6gap.B,Outer capsid protein si,97.8,2.2E-02,4.0E-07,54.6,23.9,147,355-520,21-167,6gap,B,11.0,0.101,0.0,8.1,Mammalian orthoreovirus 3 dearing,25.5
+118_6gap.B,118,6gap.B,Outer capsid protein si,97.9,8.5E-03,1.5E-07,57.4,22.7,145,231-398,22-166,6gap,B,9.0,0.055,0.0,8.1,Mammalian orthoreovirus 3 dearing,25.1
+212_2ocy.A,212,2ocy.A,Rab guanine nucleotide,95.4,1.7E+00,3.2E-05,37.6,23.3,144,316-477,4-147,2ocy,A,14.0,0.151,0.0,6.7,Saccharomyces cerevisiae,25.0
+122_6gap.B,122,6gap.B,Outer capsid protein si,97.8,1.7E-02,3.2E-07,55.3,23.7,144,304-473,22-166,6gap,B,8.0,0.023,0.0,8.1,Mammalian orthoreovirus 3 dearing,25.0
+177_4lin.K,177,4lin.K,Tail needle protein gp2,96.9,4.1E-01,7.5E-06,46.7,21.9,143,294-455,69-211,4lin,K,4.0,0.05,0.0,6.9,Bacteriophage p22,24.8
+180_4lin.K,180,4lin.K,Tail needle protein gp2,96.9,3.6E-01,6.6E-06,47.1,21.2,141,230-397,71-211,4lin,K,13.0,0.168,0.0,6.9,Bacteriophage p22,24.4
+187_4lin.K,187,4lin.K,Tail needle protein gp2,96.6,8.8E-01,1.6E-05,44.5,21.7,141,355-507,71-211,4lin,K,13.0,0.158,0.0,6.9,Bacteriophage p22,24.4
+158_6gap.B,158,6gap.B,Outer capsid protein si,97.2,9.3E-02,1.7E-06,50.3,20.6,140,37-197,24-166,6gap,B,12.0,0.119,0.0,8.1,Mammalian orthoreovirus 3 dearing,24.3
+239_2e7s.H,239,2e7s.H,Rab guanine nucleotide,93.5,4.7E+00,8.6E-05,34.1,16.4,135,186-343,1-135,2e7s,H,9.0,0.082,0.0,6.7,Saccharomyces cerevisiae,23.4
+247_2d3e.A,247,2d3e.A,General control protein,92.8,5.9E+00,1.1E-04,33.4,20.1,134,354-499,1-134,2d3e,A,13.0,0.116,0.0,8.5,Saccharomyces cerevisiae,23.2
+237_4zxq.D,237,4zxq.D,Tail needle protein gp2,93.6,4.7E+00,8.6E-05,34.4,14.3,134,1-165,8-141,4zxq,D,16.0,0.098,0.0,5.7,Enterobacteria phage p22,23.2
+208_6gaj.A,208,6gaj.A,Outer capsid protein si,95.7,1.1E+00,1.9E-05,37.0,18.3,133,47-200,1-133,6gaj,A,13.0,0.122,0.0,11.8,Mammalian orthoreovirus 1 lang,23.1
+215_2e7s.H,215,2e7s.H,Rab guanine nucleotide,95.2,1.8E+00,3.3E-05,36.6,21.0,132,327-476,3-134,2e7s,H,12.0,0.124,0.0,6.7,Saccharomyces cerevisiae,22.9
+172_6gaj.A,172,6gaj.A,Outer capsid protein si,97.0,1.7E-01,3.2E-06,41.9,18.9,130,225-374,1-130,6gaj,A,15.0,0.16,0.0,11.8,Mammalian orthoreovirus 1 lang,22.5
+184_6gaj.A,184,6gaj.A,Outer capsid protein si,96.8,2.8E-01,5.0E-06,40.6,20.8,130,299-447,2-131,6gaj,A,12.0,0.129,0.0,11.8,Mammalian orthoreovirus 1 lang,22.5
+182_6gaj.A,182,6gaj.A,Outer capsid protein si,96.8,2.5E-01,4.5E-06,40.9,20.9,130,358-499,2-131,6gaj,A,9.0,0.127,0.0,11.8,Mammalian orthoreovirus 1 lang,22.5
+92_3cl3.E,92,3cl3.E,NF-kappa-B essential mo,98.2,3.1E-04,5.6E-09,57.8,17.9,127,305-435,3-130,3cl3,E,27.0,0.355,0.0,5.3,Human gammaherpesvirus 8,22.0
+231_4rfx.B,231,4rfx.B,Dynactin subunit 1; Coi,93.7,4.3E+00,7.9E-05,34.5,15.5,126,102-276,15-140,4rfx,B,11.0,0.162,0.0,5.8,Gallus gallus,21.8
+227_4rsi.B,227,4rsi.B,Structural maintenance,94.4,3.4E+00,6.2E-05,41.7,17.9,124,223-356,1-124,4rsi,B,14.0,0.108,0.0,12.2,Saccharomyces cerevisiae,21.5
+249_4rsi.B,249,4rsi.B,Structural maintenance,92.7,1.3E+01,2.4E-04,37.4,18.7,124,331-466,1-124,4rsi,B,15.0,0.101,0.0,12.2,Saccharomyces cerevisiae,21.5
+245_4rfx.B,245,4rfx.B,Dynactin subunit 1; Coi,93.0,5.7E+00,1.0E-04,33.8,18.5,122,224-373,15-140,4rfx,B,17.0,0.171,0.0,5.8,Gallus gallus,21.1
+226_4rsi.B,226,4rsi.B,Structural maintenance,94.5,4.7E+00,8.5E-05,40.7,18.9,121,289-412,1-121,4rsi,B,14.0,0.047,0.0,12.2,Saccharomyces cerevisiae,21.0
+216_4rsi.B,216,4rsi.B,Structural maintenance,95.1,2.4E+00,4.3E-05,42.9,18.7,121,376-508,1-121,4rsi,B,8.0,-0.003,0.0,12.2,Saccharomyces cerevisiae,21.0
+220_5npw.H,220,5npw.H,Autophagy-related prote,95.0,4.4E+00,8.1E-05,39.9,20.1,120,386-517,76-199,5npw,H,15.0,0.114,0.0,8.7,Homo sapiens,20.8
+207_5to5.B,207,5to5.B,Nucleoprotein TPR; TPR,95.8,1.2E+00,2.2E-05,38.0,18.1,114,40-168,24-137,5to5,B,18.0,0.147,0.0,7.3,Homo sapiens,19.8
+241_2v66.C,241,2v66.C,NUCLEAR DISTRIBUTION PR,93.4,4.0E+00,7.4E-05,33.2,16.4,110,41-165,2-111,2v66,C,13.0,0.138,0.0,6.9,Homo sapiens,19.1
+213_6bl7.A,213,6bl7.A,Protein STU2; kinetocho,95.4,1.3E+00,2.3E-05,36.0,14.8,101,358-470,4-104,6bl7,A,18.0,0.136,0.0,7.1,Saccharomyces cerevisiae,17.5
+75_6mi3.B,75,6mi3.B,NF-kB ESSENTIAL MODULAT,98.5,1.1E-05,2.1E-10,66.2,15.7,99,34-147,19-121,6mi3,B,26.0,0.398,0.0,6.1,Homo sapiens,17.2
+210_6bl7.A,210,6bl7.A,Protein STU2; kinetocho,95.6,6.3E-01,1.2E-05,37.7,12.9,93,247-349,11-103,6bl7,A,20.0,0.218,0.0,7.1,Saccharomyces cerevisiae,16.1
+248_6bl7.A,248,6bl7.A,Protein STU2; kinetocho,92.7,5.1E+00,9.3E-05,32.5,14.8,93,313-408,11-103,6bl7,A,16.0,0.139,0.0,7.1,Saccharomyces cerevisiae,16.1
+48_5b83.E,48,5b83.E,"Optineurin; UBIQUITIN,",98.9,9.8E-08,1.8E-12,75.4,14.1,92,419-510,11-102,5b83,E,100.0,1.262,0.0,6.4,Homo sapiens,15.9
+57_4bwn.A,57,4bwn.A,NF-KAPPA-B ESSENTIAL MO,98.7,7.4E-07,1.4E-11,71.6,14.1,91,416-507,20-110,4bwn,A,38.0,0.562,0.0,6.5,Homo sapiens,15.8
+74_3fx0.B,74,3fx0.B,NF-kappa-B essential mo,98.5,7.3E-06,1.3E-10,64.3,14.2,91,394-500,6-96,3fx0,B,36.0,0.533,0.0,6.8,Homo sapiens,15.8
+243_4ll7.F,243,4ll7.F,SWI5-dependent HO expre,93.3,3.6E+00,6.6E-05,32.3,14.5,90,299-391,5-94,4ll7,F,16.0,0.124,0.0,6.2,Saccharomyces cerevisiae,15.6
+67_4owf.A,67,4owf.A,NF-kappa-B essential mo,98.6,4.2E-06,7.7E-11,65.0,14.1,86,422-507,3-88,4owf,A,40.0,0.575,0.0,7.3,Mus musculus,14.9
+230_6bl7.A,230,6bl7.A,Protein STU2; kinetocho,93.9,3.0E+00,5.5E-05,33.8,12.7,85,423-510,11-95,6bl7,A,7.0,0.051,0.0,7.1,Saccharomyces cerevisiae,14.7
+153_5h07.C,153,5h07.C,TNFAIP3-interacting pro,97.3,8.6E-03,1.6E-07,46.6,12.1,82,419-503,4-85,5h07,C,24.0,0.326,0.0,6.8,Homo sapiens,14.2
+61_5eof.B,61,5eof.B,"Optineurin; OPTN, TBK1,",98.7,6.3E-07,1.2E-11,67.7,11.7,81,23-103,1-82,5eof,B,99.0,1.338,0.0,6.5,Homo sapiens,14.0
+128_3brv.D,128,3brv.D,NF-kappa-B essential mo,97.7,8.6E-04,1.6E-08,49.1,10.0,62,42-103,8-69,3brv,D,31.0,0.527,0.0,6.8,Homo sapiens,10.7
+188_6n6r.D,188,6n6r.D,TNFAIP3-interacting pro,96.6,3.2E-02,5.8E-07,41.0,8.9,56,452-510,4-59,6n6r,D,27.0,0.386,0.0,7.0,Homo sapiens,9.7
+2_6so3.B,2,6so3.B,Myosin 2 heavy chain st,99.6,1.5E-09,2.8E-14,133.4,63.8,43,466-508,1874-1916,6so3,B,9.0,0.093,0.0,10.0,Lethocerus indicus,7.5
+147_2lo4.A,147,2lo4.A,Optineurin; zinc-finger,97.4,2.9E-05,5.3E-10,51.2,-0.3,35,542-576,16-50,2lo4,A,77.0,1.316,0.0,4.0,Homo sapiens,6.1
+145_5aaz.A,145,5aaz.A,OPTINEURIN; PROTEIN BIN,97.5,3.2E-05,5.9E-10,46.6,-0.0,30,548-577,3-32,5aaz,A,100.0,1.728,0.0,6.3,Homo sapiens,5.2
+114_5aay.A,114,5aay.A,NF-KAPPA-B ESSENTIAL MO,97.9,6.0E-06,1.1E-10,49.0,1.0,29,549-577,2-30,5aay,A,59.0,1.049,0.0,6.5,Homo sapiens,5.0
+221_2e72.A,221,2e72.A,Pogo transposable eleme,94.9,1.6E-02,2.9E-07,38.7,1.3,22,554-575,14-35,2e72,A,27.0,0.723,0.0,5.3,Homo sapiens,3.8
+1_7ju4.B,1,7ju4.B,Flagellar-associated pr,99.7,2.6E-10,4.8E-15,129.9,64.5,6,1-6,1-6,7ju4,B,17.0,-0.042,0.0,11.8,Chlamydomonas reinhardtii,1.0
+3_6so3.B,3,6so3.B,Myosin 2 heavy chain st,99.6,8.5E-09,1.5E-13,127.0,63.0,1,47-47,853-853,6so3,B,0.0,0.0,0.0,10.0,Lethocerus indicus,0.2
+250_4zxq.D,250,4zxq.D,Tail needle protein gp2,92.7,6.5E+00,1.2E-04,33.6,14.6,91,231-338,51-141,4zxq,D,15.0,0.163,0.0,5.7,Enterobacteria phage p22,

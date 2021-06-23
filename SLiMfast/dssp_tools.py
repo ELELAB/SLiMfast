@@ -52,6 +52,34 @@ class DSSPParser:
     # in the FASTA-like DSSP sequence
     WHITESPACE_REPR = "-"
 
+    # Data types for each column of the final dataframe
+    DTYPES = {\
+        "RESIDUE" : "int64",
+        "CHAIN" : "object",
+        "AA" : "object",
+        "STRUCTURE" : "object",
+        "3-TURNS_HELIX" : "object",
+        "4-TURNS_HELIX" : "object",
+        "5-TURNS_HELIX" : "object",
+        "GEOMETRICAL_BEND" : "object",
+        "CHIRALITY" : "object",
+        "BETA_BRIDGE_LABEL" : "object",
+        "BP1" : "int64",
+        "BP2" : "object",
+        "ACC" : "int64",
+        "N-H-->O_1" : "object",
+        "O-->H-N_1" : "object",
+        "N-H-->O_2" : "object",
+        "O-->H-N_2" : "object",
+        "TCO" : "float64",
+        "KAPPA" : "float64",
+        "ALPHA" : "float64",
+        "PHI" : "float64",
+        "PSI" : "float64",
+        "X-CA" : "float64",
+        "Y-CA" : "float64",
+        "Z-CA" : "float64"}
+
 
     def __init__(self,
                  dssp_mapping = None,
@@ -206,8 +234,8 @@ class DSSPParser:
                 # Append a dictionary of data found on this line
                 # to the final list
                 data.append(\
-                    {"#" : line[1:5].lstrip(" "), 
-                     "RESIDUE" : residue, 
+                    {"#" : int(line[1:5].lstrip(" ")), 
+                     "RESIDUE" : int(residue), 
                      "CHAIN" : chain,
                      "AA" : aa,
                      "STRUCTURE" : line[16],
@@ -217,21 +245,21 @@ class DSSPParser:
                      "GEOMETRICAL_BEND" : line[21],
                      "CHIRALITY" : line[22],
                      "BETA_BRIDGE_LABEL" : line[23:25],
-                     "BP1" : line[25:29].lstrip(" "),
+                     "BP1" : int(line[25:29].lstrip(" ")),
                      "BP2" : line[29:34].lstrip(" ").rstrip(" "),
-                     "ACC" : line[34:38].lstrip(" "),
-                     "N-H-->O_1" : line[38:50].lstrip(" "),
-                     "O-->H-N_1" : line[50:61].lstrip(" "),
-                     "N-H-->O_2" : line[62:73].lstrip(" "),
-                     "O-->H-N_2" : line[74:85].lstrip(" "),
-                     "TCO" : line[85:91].lstrip(" "),
-                     "KAPPA" : line[91:97].lstrip(" "),
-                     "ALPHA" : line[97:103].lstrip(" "),
-                     "PHI" : line[103:109].lstrip(" "),
-                     "PSI" : line[109:115].lstrip(" "),
-                     "X-CA" : line[115:122].lstrip(" "),
-                     "Y-CA" : line[122:129].lstrip(" "),
-                     "Z-CA" : line[129:137].lstrip(" ")})
+                     "ACC" : int(line[34:38].lstrip(" ")),
+                     "N-H-->O_1" : line[38:50].lstrip(" ").rstrip(" "),
+                     "O-->H-N_1" : line[50:61].lstrip(" ").rstrip(" "),
+                     "N-H-->O_2" : line[62:73].lstrip(" ").rstrip(" "),
+                     "O-->H-N_2" : line[74:85].lstrip(" ").rstrip(" "),
+                     "TCO" : float(line[85:91].lstrip(" ")),
+                     "KAPPA" : float(line[91:97].lstrip(" ")),
+                     "ALPHA" : float(line[97:103].lstrip(" ")),
+                     "PHI" : float(line[103:109].lstrip(" ")),
+                     "PSI" : float(line[109:115].lstrip(" ")),
+                     "X-CA" : float(line[115:122].lstrip(" ")),
+                     "Y-CA" : float(line[122:129].lstrip(" ")),
+                     "Z-CA" : float(line[129:137].lstrip(" "))})
 
                 # Update the holders of the previous chain
                 # and previous residue
@@ -243,5 +271,8 @@ class DSSPParser:
             fasta[chain] = tmp_fasta
             seqdssp[chain] = tmp_seqdssp
 
-            # Return the dataframe and the two dictionaries
-            return pd.DataFrame(data), fasta, seqdssp
+            # Create the data frame
+            df = pd.DataFrame(data).set_index("#").astype(self.DTYPES)
+
+            # Return the data frame and the two dictionaries
+            return df, fasta, seqdssp

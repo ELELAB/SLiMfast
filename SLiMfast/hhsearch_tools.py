@@ -72,6 +72,28 @@ class HHsearchParser:
     # identifier)
     HIT_NUM_ID_SEP = "_"
 
+    # Data types for each column of the final dataframe
+    DTYPES = \
+        {"num" : "int64",
+         "hit" : "object",
+         "description" : "object",
+         "prob" : "float64",
+         "e_value" : "object",
+         "p_value" : "object",
+         "score" : "float64",
+         "ss" : "float64",
+         "cols" : "int64",
+         "uniprot_segments" : "object",
+         "pdb_segments" : "object",
+         "pdb_id" : "object",
+         "pdb_chain" : "object",
+         "identities" : "float64",
+         "similarity" : "float64",
+         "sum_probs" : "float64",
+         "template_neff" : "float64",
+         "organism" : "object",
+         "uniprot_coverage_percent" : "float64"}
+
 
     def __init__(self):
         """Initialize the parser.

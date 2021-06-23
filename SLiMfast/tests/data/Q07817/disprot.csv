@@ -1,0 +1,7 @@
+,region_id,start,end,term_id,term_name,term_namespace,term_ontology,ec_id,ec_name,ec_ontology,reference_id,reference_source,curator_id,curator_name,curator_orcid,date,released,cross_refs,version
+0,DP00298r001,28,80,00076,Disorder,Structural state,IDPO,00120,Nuclear magnetic resonance,IDPO,8692274,pmid,mnecci,Marco Necci,,2016-09-05T14:28:32.000Z,2016_10,PDB=1LXL,0
+1,DP00298r002,28,80,00002,Flexible linker/spacer,Disorder function,IDPO,00120,Nuclear magnetic resonance,IDPO,8692274,pmid,mnecci,Marco Necci,,2016-09-05T14:28:32.000Z,2016_10,,0
+2,DP00298r003,28,80,00076,Disorder,Structural state,IDPO,00130,Missing electron density,IDPO,8692274,pmid,mnecci,Marco Necci,,2016-09-05T14:26:28.000Z,2016_10,PDB=1R2G,0
+3,DP00298r004,28,80,00002,Flexible linker/spacer,Disorder function,IDPO,00130,Missing electron density,IDPO,8692274,pmid,mnecci,Marco Necci,,2016-09-05T14:26:28.000Z,2016_10,,0
+4,DP00298r005,28,80,00076,Disorder,Structural state,IDPO,00120,Nuclear magnetic resonance,IDPO,29507390,pmid,epapa,Elena Papaleo,0000-0002-7376-5894,2018-08-27T21:57:33.000Z,2018_11,,0
+5,DP00298r006,28,80,00025,Regulation of phosphorylation,Disorder function,IDPO,00120,Nuclear magnetic resonance,IDPO,29507390,pmid,epapa,Elena Papaleo,0000-0002-7376-5894,2018-08-27T21:57:33.000Z,2018_11,,0
