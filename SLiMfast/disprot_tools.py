@@ -66,7 +66,8 @@ class DisProtParser:
         pass
 
 
-    def get_annotations(uniprot_id,
+    def get_annotations(self,
+                        uniprot_id,
                         disprot_json_handle = None):
         """Get a dataframe containing the DisProt annotations,
         parsed directly from the data retrieved from the DisProt
@@ -77,10 +78,26 @@ class DisProtParser:
         # URL where DisProt data per UniProt ID are stored
         URL = "https://www.disprot.org/api/{:s}"
 
+        # Create an empty dictionary to store the data
+        # about all regions (will be converted into a
+        # dataframe)
+        data = {}
+
         # Get data from the server and convert the text into
         # a dictionary using JSON
         raw_data = \
             json.loads(requests.get(URL.format(uniprot_id)).text)
+
+        if "status" in raw_data.keys():
+            # If there are no annotations available yet
+            if raw_data["status"] == "on-hold":
+                # Warn the user
+                warnstr = \
+                    f"DisProt annotations for {uniprot_id} have " \
+                    f"not released yet (status: 'on-hold')."
+                logger.warning(warnstr)
+                # Return an empty dataframe
+                return pd.DataFrame()
         
         # Whether to write out the annotations to a JSON
         # file
@@ -91,11 +108,6 @@ class DisProtParser:
 
         # Get data about the disordered regions
         regions = raw_data["regions"]
-
-        # Create an empty dictionary to store the data
-        # about all regions (will be converted into a
-        # dataframe)
-        data = {}
 
         # For each region
         for num, region in enumerate(regions):
