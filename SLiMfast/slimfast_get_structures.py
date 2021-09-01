@@ -41,6 +41,11 @@ from SLiMfast import util
 
 
 
+# Get the module logger
+logger = log.getLogger(__name__)
+
+
+
 def get_args():
 
 
@@ -105,7 +110,7 @@ def get_args():
     except Exception as e:
         errstr = f"Could not parse the run configuration file " \
                  f"{configrun_file}: {e}"
-        log.error(errstr)
+        logger.exception(errstr)
         sys.exit(errstr)
 
 
@@ -141,7 +146,7 @@ def run(uniprot_id,
     except Exception as e:
         errstr = f"Could not obtain the PDB structures for " \
                  f"UniProt ID {uniprot_id}: {e}"
-        log.error(errstr)
+        logger.exception(errstr)
         sys.exit(errstr)
 
     # Specify the path to the output CSV file

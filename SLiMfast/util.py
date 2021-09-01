@@ -1167,6 +1167,10 @@ def get_disprot_annotations(uniprot_id,
     # Get the annotations
     df = parser.get_annotations(uniprot_id = uniprot_id)
 
+    # If there were no annotations, return the empty dataframe
+    if df.empty:
+        return df
+
     # Get only the portion of the dataframe regarding disordered
     # regions, and only select the columns containing the starting
     # and ending points of the regions
@@ -1195,7 +1199,8 @@ def get_disprot_annotations(uniprot_id,
                 is_disordered = True
 
         # Save information about the SLiM
-        results.append({"slim_type" : s_type,
+        results.append({"source" : "disprot",
+                        "slim_type" : s_type,
                         "slim_start" : s_start,
                         "slim_sequence" : s_seq, 
                         "slim_end" : s_end,

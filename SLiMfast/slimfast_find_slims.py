@@ -44,6 +44,11 @@ from SLiMfast import util
 
 
 
+# Get the module logger
+logger = log.getLogger(__name__)
+
+
+
 def get_args():
 
 
@@ -119,7 +124,7 @@ def get_args():
         # If something went wrong, report it and exit
         errstr = f"Could not parse the run configuration file " \
                  f"{configrun_file}: {e}"
-        log.exception(errstr)
+        logger.exception(errstr)
         sys.exit(errstr)
 
 
@@ -133,7 +138,7 @@ def get_args():
     # If something went wrong, report it and exit
     except Exception as e:
         errstr = f"Could not parse the file {input_slims_file}."
-        log.exception(errstr)
+        logger.exception(errstr)
         sys.exit(errstr)
 
     if input_protein_file is not None:
@@ -147,7 +152,7 @@ def get_args():
         # If something went wrong, report it and exit
         except Exception as e:
             errstr = f"Could not parse the file {input_protein_file}."
-            log.exception(errstr)
+            logger.exception(errstr)
             sys.exit(errstr)
 
     if input_protein_file is not None \
@@ -162,7 +167,7 @@ def get_args():
         # If something went wrong, report it and exit
         except Exception as e:
             errstr = f"Could not parse the file {input_homologs_file}."
-            log.exception(errstr)
+            logger.exception(errstr)
             sys.exit(errstr)
 
         # Try to load the alignments
@@ -172,7 +177,7 @@ def get_args():
         except Exception as e:
             errstr = \
                 f"Could not parse the file {input_alignments_file}."
-            log.exception(errstr)
+            logger.exception(errstr)
             sys.exit(errstr)
 
     elif input_protein_file is None \
@@ -181,7 +186,7 @@ def get_args():
                 f"You must provide also the CSV file containing " \
                 f"the structures of the homologs of the protein " \
                 f"of interest if you pas the alignments' JSON file."
-            log.exception(errstr)
+            logger.exception(errstr)
             sys.exit(errstr)
 
     elif input_protein_file is not None \
@@ -190,17 +195,19 @@ def get_args():
                 f"You must provide also the alignments' JSON file " \
                 f"if you pass the CSV file containing the structures " \
                 f"of the homologs of the protein of interest."
-            log.exception(errstr)
+            logger.exception(errstr)
             sys.exit(errstr)
 
     # Return dataframes, alignments, SLiM instances, output files
     # and configuration
-    return protein_df, homologs_df, alignments, slims_to_find, \
-           output_slims_protein_file, output_slims_homologs_file, \
-           output_slims_disprot_file, config_run
+    return uniprot_id, protein_df, homologs_df, alignments, \
+           slims_to_find, output_slims_protein_file, \
+           output_slims_homologs_file, output_slims_disprot_file, \
+           config_run
 
 
-def run(protein_df,
+def run(uniprot_id,
+        protein_df,
         homologs_df,
         alignments,
         slims_to_find,
@@ -250,7 +257,7 @@ def run(protein_df,
         except Exception as e:
             errstr = f"Could not find SLiMs in the PDB structures " \
                      f"of the protein of interest: {e}"
-            log.exception(errstr)
+            logger.exception(errstr)
             sys.exit(errstr)
 
         # Update the list of SLiMs still to be found
@@ -281,7 +288,7 @@ def run(protein_df,
             errstr = f"Could not find SLiMs in the PDB structures " \
                      f"of the homologs of the protein of interest: " \
                      f"{e}"
-            log.exception(errstr)
+            logger.exception(errstr)
             sys.exit(errstr)
 
         # Update the list of SLiMs still to be found
@@ -302,7 +309,7 @@ def run(protein_df,
     except Exception as e:
         errstr = \
             f"Could not get the results for the SLiMs. Exception: {e}"
-        log.exception(errstr)
+        logger.exception(errstr)
         sys.exit(errstr)
 
     # Write out the CSV files containing the dataframes (if they
@@ -311,7 +318,7 @@ def run(protein_df,
         warnstr = \
             "No SLiMs found in the structures of the protein of " \
             "interest."
-        log.warning(warnstr)
+        logger.warning(warnstr)
     else:
         results_protein_df.to_csv(\
             os.path.join(wd, output_slims_protein_file), **out_params)
@@ -320,7 +327,7 @@ def run(protein_df,
         warnstr = \
             "No SLiMs found in the structures of the homologs of " \
             "the protein of interest."
-        log.warning(warnstr)
+        logger.warning(warnstr)
     else:
         results_homologs_df.to_csv(\
             os.path.join(wd, output_slims_homologs_file), **out_params)
@@ -337,15 +344,14 @@ def run(protein_df,
             results_disprot_df = \
                 util.get_disprot_annotations(\
                     uniprot_id = uniprot_id,
-                    slims_to_find = slims_to_find,
-                    wd = wd)
+                    slims_to_find = slims_to_find)
 
         # If something went wrong, report it and exit
         except Exception as e:
             errstr = \
                 f"Could not get the DisProt annotations for the " \
                 f"SLiMs. Exception: {e}"
-            log.exception(errstr)
+            logger.exception(errstr)
             sys.exit(errstr)
 
         # Write out the CSV file containing the dataframe
@@ -353,7 +359,7 @@ def run(protein_df,
             warnstr = \
                 "No annotation found in DisProt for the SLiMs " \
                 "of interest."
-            log.warning(warnstr)
+            logger.warning(warnstr)
         else:
             results_disprot_df.to_csv(\
                 os.path.join(wd, output_slims_disprot_file), 

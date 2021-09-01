@@ -89,12 +89,25 @@ class DisProtParser:
             json.loads(requests.get(URL.format(uniprot_id)).text)
 
         if "status" in raw_data.keys():
+            
             # If there are no annotations available yet
             if raw_data["status"] == "on-hold":
+                
                 # Warn the user
                 warnstr = \
                     f"DisProt annotations for {uniprot_id} have " \
                     f"not released yet (status: 'on-hold')."
+                logger.warning(warnstr)
+                # Return an empty dataframe
+                return pd.DataFrame()
+            
+            # If annotations do not exist
+            elif raw_data["status"] == "not-exist":
+
+                # Warn the user
+                warnstr = \
+                    f"DisProt annotations for {uniprot_id} do " \
+                    f"not exist (status: 'not-exist')."
                 logger.warning(warnstr)
                 # Return an empty dataframe
                 return pd.DataFrame()

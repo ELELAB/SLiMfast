@@ -43,6 +43,11 @@ from SLiMfast import util
 
 
 
+# Get the module logger
+logger = log.getLogger(__name__)
+
+
+
 def get_args():
 
 
@@ -110,7 +115,7 @@ def get_args():
         # If something went wrong, report it and exit
         errstr = f"Could not parse the run configuration file " \
                  f"{configrun_file}: {e}"
-        log.exception(errstr)
+        logger.exception(errstr)
         sys.exit(errstr)
 
 
@@ -154,7 +159,7 @@ def run(uniprot_id,
     except Exception as e:
         errstr = f"Could not find homologs for the protein " \
                  f"of interest: {e}"
-        log.exception(errstr)
+        logger.exception(errstr)
         sys.exit(errstr)
 
 
