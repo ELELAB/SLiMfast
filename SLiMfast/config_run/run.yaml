@@ -2,7 +2,7 @@
 version: 1
 
 # Working directory (where the pipeline will be run)
-wd: "Q07817"
+wd: ""
 
 # SLiMs-related options
 slims:
