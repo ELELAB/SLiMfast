@@ -81,7 +81,7 @@ You can now install `SLiMfast`:
 python setup.py install
 ```
 
-That's it! The main `SLiMfast` executables (`slimfast_get_structures`, `slimfast_get_homologs`, `slimfast_find_slims`) should now be available.
+If the installation is successful, the main `SLiMfast` executables (`slimfast_get_structures`, `slimfast_get_homologs`, `slimfast_find_slims`) should now be available.
 
 Every time you need to run `SLiMfast` after opening a new shell, just run step 3 beforehand.
 
@@ -140,6 +140,6 @@ cd SLiMfast
 python setup.py install
 ```
 
-That's it! The main `SLiMfast` executables (`slimfast_get_structures`, `slimfast_get_homologs`, `slimfast_find_slims`) should now be available.
+If the installation is successful, the main `SLiMfast` executables (`slimfast_get_structures`, `slimfast_get_homologs`, `slimfast_find_slims`) should now be available.
 
 Every time you need to run `SLiMfast` after opening a new shell, just run step 4 beforehand.
