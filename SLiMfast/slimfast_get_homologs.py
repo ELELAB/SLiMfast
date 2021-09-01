@@ -76,8 +76,8 @@ def get_args():
     output_alignments_file = args.output_alignments_file
     configrun_file = args.configrun_file
     log_file = args.log_file
-    v = args.v
-    vv = args.vv
+    v = args.verbose
+    vv = args.verbose_debug
 
 
     #---------------------------- Logging ----------------------------#
@@ -110,7 +110,7 @@ def get_args():
         # If something went wrong, report it and exit
         errstr = f"Could not parse the run configuration file " \
                  f"{configrun_file}: {e}"
-        log.error(errstr)
+        log.exception(errstr)
         sys.exit(errstr)
 
 
@@ -125,11 +125,11 @@ def run(uniprot_id,
         config_run):
 
 
-    # Get the working directory
-    wd = config_run["wd"]
+    # Get the working directory where the pipeline will be run
+    wd = util.get_wd(config_run)
 
     # Get the configuration for the PDB structures
-    struct_params = config_run["homologs"]
+    struct_params = config_run["structures"]["homolog"]
 
     # Get the HHblits and HHsearch parameters
     hhblits_params = config_run["hhblits"]["run"]
@@ -154,14 +154,14 @@ def run(uniprot_id,
     except Exception as e:
         errstr = f"Could not find homologs for the protein " \
                  f"of interest: {e}"
-        log.error(errstr)
+        log.exception(errstr)
         sys.exit(errstr)
 
 
     # Specify the path to the output CSV file for the homologs'
     # dataframe and save it to the CSV file
     output_homologs_path = os.path.join(wd, output_homologs_file)
-    structures_df.to_csv(output_path, **struct_params["out"])
+    structures_df.to_csv(output_homologs_path, **struct_params["out"])
 
     # Specify the path to the output JSON file for the alignments
     # and save them to the JSON file

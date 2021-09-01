@@ -32,16 +32,18 @@
 from pkg_resources import resource_filename, Requirement
 
 
+# Metadata (taken from MMCIF files) retrieved for PDB IDs
+# of interest
 STRUCTURE_METADATA = [
-    # experimental method used for structure determination
+    # Experimental method used for structure determination
     ("_exptl.method",
      str, 
      "experimental_method"),
-    # resolution
+    # Resolution
     ("_refine.ls_d_res_high",
      float,
      "resolution"),
-    # deposition date
+    # Deposition date
     ("_pdbx_database_status.recvd_initial_deposition_date",
      str,
      "deposition_date"),
@@ -51,10 +53,22 @@ STRUCTURE_METADATA = [
 # UniProt segments
 SEGMENTS_SEP = ";"
 
+# Separator for numeric ranges
 RANGE_SEP = "-"
 
+# Data frame field containing PDB IDs
 PDB_ID_FIELD = "pdb_id"
+
+# Data frame field containing PDB chains
 PDB_CHAIN_FIELD = "pdb_chain"
+
+# Data frame field containing UniProt IDs
 UNP_ID_FIELD = "uniprot_id"
+
+# Data frame field containing ranges representing
+# UniProt segments 
 UNP_SEGMENTS_FIELD = "uniprot_segments"
+
+# Data frame field containing ranges representing
+# segments of PDB structures
 PDB_SEGMENTS_FIELD = "pdb_segments"

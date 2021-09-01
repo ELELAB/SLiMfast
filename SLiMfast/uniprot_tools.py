@@ -134,7 +134,7 @@ def get_pdbs_df(uniprot_id):
         # found in the PDB structure and their corresponding
         # UniProt numbering
         mappings = \
-            pdb_tools.get_uniprot_segments(pdb_id = pdb_id,
+            pdb_tools.get_protein_segments(pdb_id = pdb_id,
                                            uniprot_id = uniprot_id)
         
         # For each PDB chain and the corresponding UniProt

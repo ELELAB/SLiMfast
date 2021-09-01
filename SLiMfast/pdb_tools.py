@@ -136,7 +136,7 @@ def get_pdb_data(pdb_id, model = None):
     # line of the file should be saved or not
     save_line = True
 
-    #
+    # Previous line
     prev_line = ""
 
     # Initialize the model to 1 (since in case there is

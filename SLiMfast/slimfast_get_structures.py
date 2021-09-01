@@ -70,8 +70,8 @@ def get_args():
     output_protein_file = args.output_protein_file
     configrun_file = args.configrun_file
     log_file = args.log_file
-    v = args.v
-    vv = args.vv
+    v = args.verbose
+    vv = args.verbose_debug
 
 
     #---------------------------- Logging ----------------------------#
@@ -119,11 +119,11 @@ def run(uniprot_id,
         config_run):
 
 
-    # Get the working directory
-    wd = config_run["wd"]
+    # Get the working directory where the pipeline will be run
+    wd = util.get_wd(config_run)
 
     # Get the configuration for the PDB structures
-    struct_params = config_run["protein"]
+    struct_params = config_run["structures"]["protein"]
 
 
     #------------------ Get the structures available -----------------#

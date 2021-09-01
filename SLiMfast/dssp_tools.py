@@ -36,6 +36,11 @@ import pandas as pd
 
 
 
+# Get the module logger
+logger = log.getLogger(__name__)
+
+
+
 class DSSPParser:
 
     """Class implementing a parser for DSSP output files.
@@ -221,7 +226,7 @@ class DSSPParser:
                     warnstr = \
                         f"Missing residue at position " \
                         f"{int(prev_res)+1} chain {prev_chain}."
-                    log.warning(warnstr)
+                    logger.warning(warnstr)
                     # Go to the next line
                     continue
 

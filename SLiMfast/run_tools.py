@@ -41,25 +41,32 @@ from SLiMfast import (
 def run_process(executable,
                 options, 
                 wd, 
-                dirname, 
                 outfile = None):
     """Run a generic process."""
 
     # Make sure that the directory where to run the process exists.
     # If not, create it.
-    os.makedirs(os.path.join(wd, dirname), exist_ok = True)
+    os.makedirs(wd, exist_ok = True)
+
+    # Convert the dictionary of options into a list of arguments
+    args = \
+        [str(item) for opt_val_pair in options.items() \
+         for item in opt_val_pair]
 
     # The output of the process will be written either to
     # the standard output or to an output file
-    out = \
-        open(outfile, "w") if outfile is not None \
-        else subprocess.STDOUT
-
-    # Launch the process (redirect errors to the standard output)
-    popen = subprocess.Popen([executable] + args,
-                             stdout = out,
-                             stderr = subprocess.STDOUT,
-                             cwd = wd)
+    if outfile == "" or outfile is None:
+        # Launch the process (redirect errors to the standard output)
+        popen = subprocess.Popen([executable] + args,
+                                 stdout = subprocess.PIPE,
+                                 cwd = wd)
+    else:
+        outfile = open(outfile, "w")
+        # Launch the process (redirect errors to the standard output)
+        popen = subprocess.Popen([executable] + args,
+                                 stdout = outfile,
+                                 stderr = outfile,
+                                 cwd = wd)    
     
     # Wait for the process to complete
     popen.wait()
@@ -67,11 +74,11 @@ def run_process(executable,
     # Return the Popen attributes of interest (cannot
     # return Popen itself since it is not serializable and
     # we are launching the process with Dask)
-    return {"args" : popen.args, \
-            "stdin" : popen.stdin, \
-            "stdout" : popen.stdout, \
-            "stderr" : popen.stderr, \
-            "pid" : popen.pid, \
+    return {"args" : popen.args,
+            "stdin" : popen.stdin,
+            "stdout" : popen.stdout,
+            "stderr" : popen.stderr,
+            "pid" : popen.pid,
             "returncode" : popen.returncode}
 
 
@@ -93,8 +100,9 @@ def run_hhpred(uniprot_id,
     
     # Get the sequence corresponding to the UniProt ID and save
     # it to a FASTA file
-    uniprot_tools.write_uniprot_fasta(uniprot_id = uniprot_id,
-                                      fasta_file = uniprot_fasta)
+    uniprot_tools.write_uniprot_fasta(\
+        uniprot_id = uniprot_id,
+        fasta_file_handle = open(uniprot_fasta, "w"))
 
     # Get header and sequence from the FASTA file
     header, sequence = util.read_fasta(fasta_file = uniprot_fasta)
@@ -108,10 +116,10 @@ def run_hhpred(uniprot_id,
     hhblits_params_copy = dict(hhblits_params)
 
     # Path to the directory where HHblits will be run
-    hhblits_dirname = os.path.join(wd, hhblits_params["dirname"])
+    hhblits_dirname = os.path.join(wd, hhblits_params["wd"])
 
     # Set the path to the directory where HHblits will be run
-    hhblits_params_copy["dirname"] = hhblits_dirname
+    hhblits_params_copy["wd"] = hhblits_dirname
 
     # Set the path to the output A3M file
     uniprot_a3m = \
@@ -121,10 +129,16 @@ def run_hhpred(uniprot_id,
     # to the options of HHblits
     hhblits_params_copy["options"] = \
         {**hhblits_params["options"],
-         "-i" : uniprot_fasta, "-o3am" : uniprot_a3m}
-        
-    # Run HHblits for the generation of the query MSA
-    hhblits_process = run_process(**hhblits_params_copy)
+         "-i" : uniprot_fasta, "-oa3m" : uniprot_a3m}
+
+    # If the output file does not exist yet (no previous run
+    # has been performed)
+    if not os.path.exists(uniprot_a3m):  
+        # Run HHblits for the generation of the query MSA
+        hhblits_process = run_process(**hhblits_params_copy)
+    # If the output file exists, do not run HHblits
+    else:
+        hhblits_process = None
 
 
     #-------------------------- Run HHsearch -------------------------#
@@ -134,10 +148,10 @@ def run_hhpred(uniprot_id,
     hhsearch_params_copy = dict(hhsearch_params)
 
     # Path to the directory where HHsearch will be run
-    hhsearch_dirname = os.path.join(wd, hhsearch_params["dirname"])
+    hhsearch_dirname = os.path.join(wd, hhsearch_params["wd"])
 
     # Set the path to the directory where HHsearch will be run
-    hhsearch_params_copy["dirname"] = hhsearch_dirname
+    hhsearch_params_copy["wd"] = hhsearch_dirname
 
     # Path to the HHsearch output
     uniprot_hhsearch = \
@@ -147,11 +161,17 @@ def run_hhpred(uniprot_id,
     hhsearch_params_copy["options"] = \
         {**hhsearch_params_copy["options"],
          **{"-i" : uniprot_a3m, "-o" : uniprot_hhsearch}}
-        
-    # Search profile HHM database(s) with HHsearch
-    hhsearch_process = run_process(**hhsearch_params_copy)
 
-    return (hhblits_process, hhsearch_process), hhsearch_output
+    # If the output file does not exist yet (no previous run
+    # has been performed)   
+    if not os.path.exists(uniprot_hhsearch):
+        # Search profile HHM database(s) with HHsearch
+        hhsearch_process = run_process(**hhsearch_params_copy)
+    # If the output file exists, do not run HHsearch
+    else:
+        hhsearch_process = None
+
+    return (hhblits_process, hhsearch_process), uniprot_hhsearch
 
 
 def run_dssp(pdb_file, dssp_params, wd):
@@ -162,17 +182,29 @@ def run_dssp(pdb_file, dssp_params, wd):
     # Make a copy of the parameters set to run DSSP
     dssp_params_copy = dict(dssp_params)
 
+    # Path to the directory where DSSP will be run
+    dssp_dirname = os.path.join(wd, dssp_params["wd"])
+
+    # Add the directory where DSSP should be run
+    dssp_params_copy["wd"] = dssp_dirname
+
     # Set the path to the DSSP output file
     dssp_output = \
-        os.path.join(wd,
+        os.path.join(dssp_dirname,
                      os.path.basename(pdb_file)[:-4] + ".dssp")
                 
     # Add the PDB file as input to the options for DSSP
     dssp_params_copy["options"] = \
         {**dssp_params_copy["options"],
          **{"-i" : pdb_file, "-o" : dssp_output}}
-                
-    # Run DSSP
-    dssp_process = run_process(**dssp_params_copy)
 
+    # If the output file does not exist yet (no previous run
+    # has been performed)     
+    if not os.path.exists(dssp_output):
+        # Run DSSP
+        dssp_process = run_process(**dssp_params_copy)
+    # If the output file exists, do not run DSSP
+    else:
+        dssp_process = None
+        
     return dssp_process, dssp_output

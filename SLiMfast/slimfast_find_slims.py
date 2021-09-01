@@ -32,11 +32,12 @@
 
 
 # Standard library
-import copy
+import json
 import logging as log
 import os
 import sys
 # Third-party packages
+import pandas as pd
 import yaml
 # SLiMfast
 from SLiMfast import util
@@ -84,8 +85,8 @@ def get_args():
     output_slims_disprot_file = args.output_slims_disprot_file
     configrun_file = args.configrun_file
     log_file = args.log_file
-    v = args.v
-    vv = args.vv
+    v = args.verbose
+    vv = args.verbose_debug
 
 
     #---------------------------- Logging ----------------------------#
@@ -118,42 +119,105 @@ def get_args():
         # If something went wrong, report it and exit
         errstr = f"Could not parse the run configuration file " \
                  f"{configrun_file}: {e}"
-        log.error(errstr)
+        log.exception(errstr)
         sys.exit(errstr)
+
+
+    #-------------------------- Input files --------------------------#
+
 
     # Try to load the text file containing the SLiM instances
     try:
-        slim_instances = \
-            util.read_slim_instances(slim_file = input_slims_file)
+        slims_to_find = \
+            util.read_slims_file(slims_file = input_slims_file)
     # If something went wrong, report it and exit
     except Exception as e:
         errstr = f"Could not parse the file {input_slims_file}."
-        log.error(errstr)
+        log.exception(errstr)
         sys.exit(errstr)
 
+    if input_protein_file is not None:
+        
+        # Try to load the data frame containing the structures of
+        # the protein of interest
+        try:
+            sep = config_run["structures"]["protein"]["out"]["sep"]
+            protein_df = pd.read_csv(input_protein_file,
+                                     sep = sep)
+        # If something went wrong, report it and exit
+        except Exception as e:
+            errstr = f"Could not parse the file {input_protein_file}."
+            log.exception(errstr)
+            sys.exit(errstr)
+
+    if input_protein_file is not None \
+        and input_alignments_file is not None:
+
+        # Try to load the data frame containing the structures of
+        # the homologs of the protein of interest
+        try:
+            sep = config_run["structures"]["homolog"]["out"]["sep"]
+            homologs_df = pd.read_csv(input_homologs_file,
+                                      sep = sep)
+        # If something went wrong, report it and exit
+        except Exception as e:
+            errstr = f"Could not parse the file {input_homologs_file}."
+            log.exception(errstr)
+            sys.exit(errstr)
+
+        # Try to load the alignments
+        try:
+            alignments = json.load(open(input_alignments_file, "r"))
+        # If something went wrong, report it and exit
+        except Exception as e:
+            errstr = \
+                f"Could not parse the file {input_alignments_file}."
+            log.exception(errstr)
+            sys.exit(errstr)
+
+    elif input_protein_file is None \
+        and input_alignments_file is not None:
+            errstr = \
+                f"You must provide also the CSV file containing " \
+                f"the structures of the homologs of the protein " \
+                f"of interest if you pas the alignments' JSON file."
+            log.exception(errstr)
+            sys.exit(errstr)
+
+    elif input_protein_file is not None \
+        and input_alignments_file is None:
+            errstr = \
+                f"You must provide also the alignments' JSON file " \
+                f"if you pass the CSV file containing the structures " \
+                f"of the homologs of the protein of interest."
+            log.exception(errstr)
+            sys.exit(errstr)
 
     # Return dataframes, alignments, SLiM instances, output files
     # and configuration
-    return protein_df, homologs_df, alignments, slims_instances, \
+    return protein_df, homologs_df, alignments, slims_to_find, \
            output_slims_protein_file, output_slims_homologs_file, \
-           config_run
+           output_slims_disprot_file, config_run
 
 
 def run(protein_df,
         homologs_df,
         alignments,
-        slims_instances,
+        slims_to_find,
         output_slims_protein_file,
         output_slims_homologs_file,
+        output_slims_disprot_file,
         config_run):
  
 
-    # Get the working directory
-    wd = config_run["wd"]
+    # Get the working directory where the pipeline will be run
+    wd = util.get_wd(config_run)
 
-    # Get whether to find the core or extended SLiM in the
-    # structures
-    find_in_pdb = struct_params["structures"]["find_in_pdb"]
+    # Get the minimum length for a region to be considered
+    # disordered and the name of the directory where to store
+    # the PDB files
+    min_len_disorder = config_run["structures"]["min_len_disorder"]
+    pdb_dir = os.path.join(wd, config_run["structures"]["pdb_dir"])
 
     # Get the options for running DSSP
     dssp_params = config_run["dssp"]["run"]
@@ -161,19 +225,17 @@ def run(protein_df,
     # Get the options for processing the DSSP output
     dssp_process_params = config_run["dssp"]["processing"]
     dssp_mapping = dssp_process_params["dssp_mapping"]
-    min_len_disorder = dssp_process_params["min_len_disorder"]
     disorder_symbols = dssp_process_params["disorder_symbols"]
-    
-    # Make a copy of the original list of SLiMs to find (will
-    # be modified)
-    slims_to_find = copy.deepcopy(slims_instances)
+
+    # Get the parameters for the output data frames
+    out_params = config_run["slims"]["out"]
 
 
     #------------------- Find SLiMs in structures --------------------#
 
 
     # If there are structures available for the protein of interest
-    if protein_df:
+    if protein_df is not None:
 
         # Report the SLiMs found in each PDB structure and the SLiMs
         # still to find
@@ -182,14 +244,13 @@ def run(protein_df,
                 util.find_slims(source = "protein",
                                 structures_df = protein_df,
                                 slims_to_find = slims_to_find,
-                                find_in_pdb = find_in_pdb,
-                                wd = wd)
+                                pdb_dir = pdb_dir)
         
         # If something went wrong, report it and exit
         except Exception as e:
             errstr = f"Could not find SLiMs in the PDB structures " \
                      f"of the protein of interest: {e}"
-            log.error(errstr)
+            log.exception(errstr)
             sys.exit(errstr)
 
         # Update the list of SLiMs still to be found
@@ -201,8 +262,9 @@ def run(protein_df,
 
     # If there are no structures available for the given protein
     # or some SLiMs were not found in the available structures
-    if homologs_df and (not protein_df or \
-                        (protein_df and slims_to_find)):
+    if homologs_df is not None \
+        and (protein_df is None or \
+            (protein_df is not None and slims_to_find)):
 
         # Report the SLiMs found in each PDB structure and the SLiMs
         # still to find
@@ -210,17 +272,16 @@ def run(protein_df,
             structures_and_slims, still_to_find = \
                 util.find_slims(source = "homologs", 
                                 structures_df = homologs_df,
-                                als = alignments,
                                 slims_to_find = slims_to_find,
-                                find_in_pdb = find_in_pdb,
-                                wd = wd)
+                                pdb_dir = pdb_dir,
+                                als = alignments)
         
         # If something went wrong, report it and exit
         except Exception as e:
             errstr = f"Could not find SLiMs in the PDB structures " \
                      f"of the homologs of the protein of interest: " \
                      f"{e}"
-            log.error(errstr)
+            log.exception(errstr)
             sys.exit(errstr)
 
         # Update the list of SLiMs still to be found
@@ -231,21 +292,38 @@ def run(protein_df,
         results_protein_df, results_homologs_df = \
             util.get_results(\
                 structures_and_slims = structures_and_slims,
+                dssp_params = dssp_params,
+                dssp_mapping = dssp_mapping,
+                min_len_disorder = min_len_disorder,
+                disorder_symbols = disorder_symbols,
                 wd = wd)
     
     # If something went wrong, report it and exit
     except Exception as e:
         errstr = \
             f"Could not get the results for the SLiMs. Exception: {e}"
-        logger.error(errstr)
+        log.exception(errstr)
         sys.exit(errstr)
 
-
-    # Write out the CSV files containing the dataframes
-    results_protein_df.to_csv(output_slims_protein_file,
-                              **out_params)
-    results_homologs_df.to_csv(output_slims_homologs_file, 
-                               **out_params)
+    # Write out the CSV files containing the dataframes (if they
+    # are not empty)
+    if results_protein_df.empty:
+        warnstr = \
+            "No SLiMs found in the structures of the protein of " \
+            "interest."
+        log.warning(warnstr)
+    else:
+        results_protein_df.to_csv(\
+            os.path.join(wd, output_slims_protein_file), **out_params)
+    
+    if results_homologs_df.empty:
+        warnstr = \
+            "No SLiMs found in the structures of the homologs of " \
+            "the protein of interest."
+        log.warning(warnstr)
+    else:
+        results_homologs_df.to_csv(\
+            os.path.join(wd, output_slims_homologs_file), **out_params)
 
 
     #-------------------- Get DisProt annotations --------------------#
@@ -267,13 +345,19 @@ def run(protein_df,
             errstr = \
                 f"Could not get the DisProt annotations for the " \
                 f"SLiMs. Exception: {e}"
-            logger.error(errstr)
+            log.exception(errstr)
             sys.exit(errstr)
 
-
-    # Write out the CSV file containing the dataframe
-    results_disprot_df.to_csv(output_slims_disprot_file,
-                              **out_params)
+        # Write out the CSV file containing the dataframe
+        if results_disprot_df.empty:
+            warnstr = \
+                "No annotation found in DisProt for the SLiMs " \
+                "of interest."
+            log.warning(warnstr)
+        else:
+            results_disprot_df.to_csv(\
+                os.path.join(wd, output_slims_disprot_file), 
+                             **out_params)
 
 
 

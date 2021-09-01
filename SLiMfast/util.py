@@ -52,7 +52,8 @@ from SLiMfast import (
     dssp_tools,
     hhsearch_tools,
     pdb_tools,
-    uniprot_tools)
+    uniprot_tools,
+    run_tools)
 
 
 
@@ -211,6 +212,32 @@ def get_arguments(description,
     return args
 
 
+def get_wd(config_run):
+    """Get the directory where the pipeline will be run.
+    """
+
+    wd = config_run["wd"]
+    # If the working directory is an empty string
+    if wd == "":
+        # The working directory will be the current working
+        # directory
+        wd = os.getcwd()
+    else:
+        # If it is a directory name
+        if os.path.basename(wd) == wd:
+            # The working directory will be a new directory
+            # with that name inside the current working
+            # directory
+            wd = os.path.join(os.getcwd(), wd)
+        # If it is a directory path
+        else:
+            # Get the absolute path
+            wd = os.path.abspath(wd)
+
+    # Return the working directory
+    return wd
+
+
 
 ############################## READ FILES #############################
 
@@ -265,8 +292,10 @@ def read_slims_file(slims_file):
             if re.match(r"^\s*$", line) or line.startswith("#"):
                 continue
             else:
-                slim_instances.append(\
-                    tuple(line.rstrip("\n").split(",")))
+                s_type, s_start, s_seq, s_end = \
+                    line.rstrip("\n").split(",")
+                slim_instances.append((s_type, int(s_start),
+                                       s_seq, int(s_end)))
 
         # Return the list of SLiM instances
         return slim_instances
@@ -313,7 +342,7 @@ def add_structures_metadata(df):
 
         # Inform the user that the metadata have been collected
         # successfully
-        infostr = f"Metadata collected for PDB {pdb_id}"
+        infostr = f"Metadata collected for PDB {pdb_id}."
         logger.info(infostr)
 
     # Create a dataframe containing the metadata for each PDB
@@ -351,7 +380,7 @@ def get_structures_data_protein(uniprot_id,
             f"Could not get the available PDB structures for the " \
             f"protein with UniProt ID {uniprot_id}. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -370,7 +399,7 @@ def get_structures_data_protein(uniprot_id,
             f"for the protein with UniProt ID {uniprot_id}. " \
             f"Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -390,7 +419,7 @@ def get_structures_data_protein(uniprot_id,
             f"structures for the protein with UniProt ID " \
             f"{uniprot_id}. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -430,7 +459,7 @@ def get_structures_data_homologs(uniprot_id,
     except Exception as e:
         errstr = f"Could not complete the HHpred run. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -453,7 +482,7 @@ def get_structures_data_homologs(uniprot_id,
             f"homologs of the protein with UniProt ID " \
             f"{uniprot_id}. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -472,7 +501,7 @@ def get_structures_data_homologs(uniprot_id,
             f"of the homologs of the protein with UniProt ID " \
             f"{uniprot_id}. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -483,7 +512,7 @@ def get_structures_data_homologs(uniprot_id,
     # Try to filter the hits
     try:
         hits = hhsearch_tools.filter_hits(hits = hits,
-                                          **kwargs["filters"])
+                                          filters = kwargs["filter"])
     
     # If something went wrong, log it and raise an exception
     except Exception as e:
@@ -492,7 +521,7 @@ def get_structures_data_homologs(uniprot_id,
             f"structures for the homologs of the protein with " \
             f"UniProt ID {uniprot_id}. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -512,7 +541,7 @@ def get_structures_data_homologs(uniprot_id,
             f"structures for the homologs of the protein with " \
             f"UniProt ID {uniprot_id}. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -527,7 +556,8 @@ def get_structures_data_homologs(uniprot_id,
 
 
 def region_in_protein_segments(seq_range,
-                               uniprot_segments):
+                               uniprot_segments,
+                               pdb_segments):
     """Check if a sequence belongs at least to one UniProt
     segment, given the sequence numeric range.
     """
@@ -536,12 +566,33 @@ def region_in_protein_segments(seq_range,
     start_s, end_s = seq_range
 
     # Get the length of the sequence
-    length = len(range(start, end))
+    length = len(range(start_s, end_s))
 
-    # Get the numeric ranges of all UniProt segments passed
-    uniprot_ranges = \
-        [(int(s.split(RANGE_SEP)[0]), int(s.split(RANGE_SEP)[1])) \
-         for s in uniprot_segments.split(SEGMENTS_SEP)]
+    # Try to get the numeric ranges of all UniProt segments passed
+    try:
+        uniprot_ranges = \
+            [(int(s.split(RANGE_SEP)[0]), int(s.split(RANGE_SEP)[1])) \
+             for s in uniprot_segments.split(SEGMENTS_SEP)]
+    # If something went wrong, log the error and re-raise the exception
+    except ValueError:
+        errstr = \
+            "Could not find the UniProt segments covered by the " \
+            "PDB structure, since at least one extreme of at least " \
+            "one of the intervals defining the segments is None."
+        raise ValueError(errstr)
+
+    # Try to get the numeric ranges of all PDB segments passed
+    try:
+        pdb_ranges = \
+            [(int(s.split(RANGE_SEP)[0]), int(s.split(RANGE_SEP)[1])) \
+             for s in pdb_segments.split(SEGMENTS_SEP)]
+    # If something went wrong, log the error and re-raise the exception
+    except ValueError:
+        errstr = \
+            "Could not find the PDB segments covered by the " \
+            "PDB structure, since at least one extreme of at least " \
+            "one of the intervals defining the segments is None."
+        raise ValueError(errstr)
 
     # For each UniProt segment
     for uniprot_start, uniprot_end in uniprot_ranges:
@@ -583,7 +634,7 @@ def region_in_homolog_segments(pdb_data,
             f"Could not find the sequence {start}-{end} in the " \
             f"alignment. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -611,7 +662,7 @@ def region_in_homolog_segments(pdb_data,
             f"Could not get the missing residues for the PDB " \
             f"structure with ID {pdb_id}. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
     
@@ -632,8 +683,7 @@ def region_in_homolog_segments(pdb_data,
 def find_slims(source,
                structures_df,
                slims_to_find,
-               find_in_pdb,
-               wd,
+               pdb_dir,
                als = None):
     """Find the SLiMs in the structures of the protein
     or in those of the homologs.
@@ -647,9 +697,8 @@ def find_slims(source,
     # and the SLiMs to be checked for disorder
     structures_and_slims = []
 
-    # Create a copy of the list of SLiMs to be found
-    # (so that the original one will not be modified)
-    still_to_find = copy.deepcopy(slims_to_find)
+    # Create a set to store the SLiMs found
+    slims_found = set()
 
     for index, row in structures_df.iterrows():
 
@@ -664,6 +713,7 @@ def find_slims(source,
         pdb_id = row[PDB_ID_FIELD]
         pdb_chain = row[PDB_CHAIN_FIELD]
         uniprot_segments = row[UNP_SEGMENTS_FIELD]
+        pdb_segments = row[PDB_SEGMENTS_FIELD]
 
         if source == "homologs":
             hit_id = index
@@ -672,7 +722,7 @@ def find_slims(source,
         # yet (it can happen to encounter the same PDB
         # ID because of multiple chains than can
         # represent the protein of interest)
-        if not pdb_data[pdb_id]:
+        if not pdb_id in pdb_data_dict.keys():
 
             # Try to fetch the PDB data. Use only the first model
             # for multi-model structures
@@ -695,43 +745,33 @@ def find_slims(source,
             pdb_data_dict[pdb_id] = pdb_data
         
         # For each SLiM still not found in a structure
-        for slim in still_to_find:
+        for slim in slims_to_find:
+
+            # Ignore the SLiM if it has been found already
+            if slim in slims_found:
+                continue
 
             # Unpack the SLiM data
-            s_type, c_start, c_seq, c_end, e_start, e_seq, e_end = \
-                slim
-
-            # If it is only the core of the SLiM that needs to
-            # be in the PDB structure
-            if find_in_pdb == "core":
-                # The sequence range will be the one spanning
-                # the core motif
-                start, seq, end = c_start, c_seq, c_end
-
-            # If it is the extended SLiM that needs to be in
-            # the PDB structure
-            elif find_in_pdb == "extended":
-                # The sequence range will be the one spanning
-                # the extended motif
-                start, seq, end = e_start, e_seq, e_end
+            s_type, s_start, s_seq, s_end = slim
             
             # Try to find out if the SLiM is in the protein
             # segments covered by the PDB structure
             try:
                 slim_in_uniprot_segments = \
                     region_in_protein_segments(\
-                        seq_range = (start, end),
-                        uniprot_segments = uniprot_segments)
+                        seq_range = (s_start, s_end),
+                        uniprot_segments = uniprot_segments,
+                        pdb_segments = pdb_segments)
 
             # If something went wrong, log it and go to the next
             # SLiM
             except Exception as e:
                 warnstr = \
-                    f"Could not check if {start}-{seq}-{end} is in " \
-                    f"the segments of the UniProt sequence covered " \
-                    f"in the PDB structure with ID {pdb_id}. " \
-                    f"This SLiM will not be considered. " \
-                    f"Exception: {e}"
+                    f"Could not check if {s_start}-{s_seq}-{s_end} " \
+                    f"is in the segments of the UniProt sequence " \
+                    f"covered in the PDB structure with ID {pdb_id}. " \
+                    f"This SLiM will be ignored for " \
+                    f"this structure."
                 # Log a warning
                 logger.warning(warnstr)
                 # Go to the next SLiM
@@ -746,14 +786,13 @@ def find_slims(source,
                     # residues, since all segments with problems
                     # in the mapping have already been excluded
                     
-                    # Remove the SLiM from the list of those
-                    # to be yet found
-                    still_to_find.remove(slim)
+                    # Add the SLiM to the set of SLiMs found
+                    slims_found.add(slim)
 
                     # Add the SLiM to the list of SLiMs found in
                     # the current PDB structure
                     slims_in_pdb.append([s_type, \
-                                         (start, seq, end)])
+                                        (s_start, s_seq, s_end)])
 
                 elif source == "homologs":
                 
@@ -775,10 +814,10 @@ def find_slims(source,
                     except Exception as e:
                         warnstr = \
                             f"Could not check whether the sequence " \
-                            f"{start}-{seq}-{end} is actually in " \
-                            f"the PDB structure with ID {pdb_id}. " \
-                            f"This SLiM will be ignored. " \
-                            f"Exception: {e}"
+                            f"{s_start}-{s_seq}-{s_end} is actually " \
+                            f"in the PDB structure with ID " \
+                            f"{pdb_id}. This SLiM will be ignored " \
+                            f"for this structure."
                         # Log a warning
                         logger.warning(warnstr)
                         # Go to the next SLiM
@@ -787,9 +826,8 @@ def find_slims(source,
                     # If it is in the PDB structure
                     if slim_in_pdb_segments:
                     
-                        # Remove the SLiM from the list
-                        # of those to be yet found
-                        still_to_find.remove(slim)
+                        # Add the SLiM to the set of SLiMs found
+                        slims_found.add(slim)
 
                         # Add the SLiM and the sequence corresponding
                         # to the SLiM in the homolog to the list of
@@ -797,7 +835,7 @@ def find_slims(source,
                         slims_in_pdb.append(\
                             [s_type, \
                              (start_in_t, seq_in_t, end_in_t), \
-                             (start, seq, end)])
+                             (s_start, s_seq, s_end)])
 
         # If no SLiMs are found in the PDB structure
         if not slims_in_pdb:
@@ -805,19 +843,22 @@ def find_slims(source,
             continue
 
         # Write out the PDB file corresponding to the structure
+        os.makedirs(pdb_dir, exist_ok = True)
+        pdb_file = os.path.join(pdb_dir, f"{pdb_id}.pdb")
         with open(pdb_file, "w") as out:
-            out.write(pdb_data)
+            out.write("\n".join(pdb_data))
 
         # Add useful data to the list containing data about
         # the PDB structure and the SLiMs found in it
-        structures_and_slims.append(source, 
-                                    pdb_id,
-                                    pdb_chain,
-                                    pdb_file,
-                                    slims_in_pdb) 
+        structures_and_slims.append((source, 
+                                     pdb_id,
+                                     pdb_chain,
+                                     pdb_file,
+                                     slims_in_pdb))
 
     # Return the list of PDB structures and the associated SLiMs
-    return structures_and_slims, still_to_find
+    return structures_and_slims, \
+           [s for s in slims_to_find if s not in slims_found]
 
 
 
@@ -849,7 +890,7 @@ def get_dssp_data(pdb_file,
             f"Could not complete the DSSP run for the PDB file " \
             f"{pdb_file}. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
     
@@ -871,7 +912,7 @@ def get_dssp_data(pdb_file,
             f"Could not parse the DSSP output file for the PDB " \
             f"file {pdb_file}. Exception: {e}"
         # Log the error
-        logger.error(errstr)
+        logger.exception(errstr)
         # Re-raise the exception
         raise Exception(errstr)
 
@@ -890,9 +931,9 @@ def is_region_disordered(seq,
     """
     
     # Get the FASTA sequence of the chain of interest
-    chain_f = fasta_dict[chain]
+    chain_f = fasta_dict[pdb_chain]
     # Get the FASTA-like DSSP sequence of the chain of interest
-    chain_d = seqdssp_dict[chain]
+    chain_d = seqdssp_dict[pdb_chain]
 
     # Get all the occurrences of the sequence of interest in the
     # FASTA sequence of the chain
@@ -906,7 +947,7 @@ def is_region_disordered(seq,
         warnstr = \
             f"Sequence {seq} not found in PDB {pdb_id} " \
             f"chain {pdb_chain}."
-        log.warning(warnstr)
+        logger.warning(warnstr)
         return
     
     # If multiple occurrences of the sequence were found, return
@@ -917,7 +958,7 @@ def is_region_disordered(seq,
             f"Multiple occurrences of {seq} found in PDB {pdb_id} " \
             f"chain {pdb_chain} and no way of determining which " \
             f"one is the one of interest. Please check manually."
-        log.warning(warnstr)
+        logger.warning(warnstr)
         return
 
     # Get the starting position of the only occurrence found
@@ -962,7 +1003,7 @@ def is_region_disordered(seq,
             f"context on the left side is shorter than " \
             f"{min_len_disorder} residues. The available context " \
             f"will be considered for disorder content."
-        log.warning(warnstr)
+        logger.warning(warnstr)
         # The new starting point will be the N-terminus
         ext_start_ix = 0
 
@@ -979,7 +1020,7 @@ def is_region_disordered(seq,
             f"context on the right side is shorter than " \
             f"{min_len_disorder} residues. The available context " \
             f"will be considered for disorder content."
-        log.warning(warnstr)
+        logger.warning(warnstr)
         # The new ending point will be the N-terminus
         ext_end_ix = len(chain_d) - 1
 
@@ -995,6 +1036,10 @@ def is_region_disordered(seq,
 
 
 def get_results(structures_and_slims,
+                dssp_params,
+                dssp_mapping,
+                min_len_disorder,
+                disorder_symbols,
                 wd):
     """Get the results for the SLiMs found."""
 
@@ -1058,7 +1103,7 @@ def get_results(structures_and_slims,
             # next structure
             except Exception as e:
                 warnstr = \
-                    f"Could not check whether the SLiM with Uniprot " \
+                    f"Could not check whether the SLiM with UniProt " \
                     f"sequence {start_q}-{seq_q}-{end_q} is in a " \
                     f"disordered region in the PDB structure with " \
                     f"ID {pdb_id} ({source}), chain {pdb_chain}. " \
@@ -1072,7 +1117,10 @@ def get_results(structures_and_slims,
             # of interest
             if source == "protein":
                 # Save only information about the SLiM in the protein
-                results = {"slim_type" : slim_type,
+                results = {"source" : source,
+                           "pdb_id" : pdb_id,
+                           "pdb_chain" : pdb_chain,
+                           "slim_type" : slim_type,
                            "slim_start" : start_q,
                            "slim_sequence" : seq_q, 
                            "slim_end" : end_q,
@@ -1083,7 +1131,10 @@ def get_results(structures_and_slims,
                 # Save information about both the SLiM in the
                 # protein and its corresponding sequence in the
                 # homolog
-                results = {"slim_type" : slim_type,
+                results = {"source" : source,
+                           "pdb_id" : pdb_id,
+                           "pdb_chain" : pdb_chain,
+                           "slim_type" : slim_type,
                            "slim_start" : start_q,
                            "slim_sequence" : seq_q, 
                            "slim_end" : end_q,
@@ -1129,23 +1180,7 @@ def get_disprot_annotations(uniprot_id,
     for slim in slims_to_find:
 
         # Unpack the SLiM data
-        s_type, c_start, c_seq, c_end, e_start, e_seq, e_end = slim
-
-        # If it is only the core of the SLiM that needs to
-        # be in the PDB structure
-        if find_in_pdb == "core":
-            # The sequence range will be the one spanning
-            # the core motif
-            seq_range = (c_start, c_end)
-            seq = c_seq
-
-        # If it is the extended SLiM that needs to be in
-        # the PDB structure
-        elif find_in_pdb == "extended":
-            # The sequence range will be the one spanning
-            # the extended motif
-            seq_range = (e_start, e_end)
-            seq = e_seq
+        s_type, s_start, s_seq, s_end = slim
             
         # Try to find out if the SLiM is in one of the
         # disordered regions
@@ -1161,12 +1196,10 @@ def get_disprot_annotations(uniprot_id,
 
         # Save information about the SLiM
         results.append({"slim_type" : s_type,
-                        "slim_start" : seq_range[0],
-                        "slim_sequence" : seq, 
-                        "slim_end" : seq_range[1],
+                        "slim_start" : s_start,
+                        "slim_sequence" : s_seq, 
+                        "slim_end" : s_end,
                         "disordered_region" : str(is_disordered)})
 
     # Convert the results into a daraframe and return them
     return pd.DataFrame(results)
-
-    

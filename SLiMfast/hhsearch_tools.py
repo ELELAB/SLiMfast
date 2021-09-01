@@ -38,6 +38,11 @@ import pandas as pd
 
 
 
+# Get the module logger
+logger = log.getLogger(__name__)
+
+
+
 ############################### CLASSES ###############################
 
 
@@ -632,16 +637,16 @@ def filter_hits(hits, filters):
             cond = (hits[col] >= val)
                 
         # If it defines a maximum value
-        elif args.startswith("max_"):
+        elif arg.startswith("max_"):
             # The name of the column it refers to will be
             # after max_
             col = arg[4:]
             # Set the filtering condition
             cond = (hits[col] <= val)
 
-        # If it defines an exaxt value (the argument is the
+        # If it defines an exact value (the argument is the
         # name of a column)
-        elif arg in cols:
+        elif arg in hits.columns:
             # Set the filtering condition
             cond = (hits[arg] == val)
 
@@ -701,7 +706,7 @@ def get_aligned_region(hit_al, seq_range):
             f"{start_s} and end at position {end_s}, but the " \
             f"aligned portion of the query in this alignment " \
             f"only covers the positions {start_q}-{end_q}."
-        log.warning(warnstr)
+        logger.warning(warnstr)
         return None
 
     # Get the relative starting point of the sequence of
