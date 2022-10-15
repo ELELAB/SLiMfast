@@ -73,6 +73,7 @@ def get_args():
                               log_file = True,
                               v = True,
                               vv = True,
+                              log_to_stdout = True,
                               log_file_default = log_file_default)
 
     # Retrieve the arguments
@@ -81,6 +82,7 @@ def get_args():
     output_alignments_file = args.output_alignments_file
     configrun_file = args.configrun_file
     log_file = args.log_file
+    log_to_stdout = args.log_to_stdout 
     v = args.verbose
     vv = args.verbose_debug
 
@@ -90,19 +92,31 @@ def get_args():
 
     # Default logging level is WARNING
     level = log.WARNING
+    
     # If verbose logging required
     if v:
+        
         # Logging level will be INFO
         level = log.INFO
     # If debug logging required
     if vv:
+        
         # Logging level will be DEBUG
         level = log.DEBUG
+
+    # Create the list containing the log handlers
+    handlers = [log.FileHandler(filename = log_file, mode = "w")]
+
+    # If the user selected the option to log also to the standard
+    # output
+    if log_to_stdout:
+
+        # Add the StreamHandler to the list of handlers
+        handlers.append(log.StreamHandler(sys.stdout))
     
-    # Basic logging configuration
-    log.basicConfig(level = level, 
-                    filename = log_file, 
-                    filemode = "w")
+    # Set the basic logging configuration
+    log.basicConfig(level = level,
+                    handlers = handlers)
 
 
     #------------------------- Configuration -------------------------#
@@ -162,22 +176,38 @@ def run(uniprot_id,
         logger.exception(errstr)
         sys.exit(errstr)
 
+    # If no homologs were found (fitting the criteria provided in
+    # the configuration file)
+    if structures_df.empty:
 
-    # Specify the path to the output CSV file for the homologs'
-    # dataframe and save it to the CSV file
-    output_homologs_path = os.path.join(wd, output_homologs_file)
-    structures_df.to_csv(output_homologs_path, **struct_params["out"])
+        # Inform the user and do not generate any output file
+        warnstr = \
+            f"No structures were found matching the criteria " \
+            f"provided in the configuration file. Relaxing the " \
+            f"filtering criteria may help in getting more hits."
+        logger.warning(warnstr)
 
-    # Specify the path to the output JSON file for the alignments
-    # and save them to the JSON file
-    output_alignments_path = os.path.join(wd, output_alignments_file)
-    with open(output_alignments_path, "w") as out:
-        json.dump(als, out)
+    # If homologs were found
+    else:
 
-    # Return the homologs' dataframe, the alignments and the paths
-    # to the output files
-    return (structures_df, als), \
-           (output_homologs_path, output_alignments_path)
+        # Specify the path to the output CSV file for the homologs'
+        # dataframe and save it to the CSV file
+        output_homologs_path = \
+            os.path.join(wd, output_homologs_file)
+        structures_df.to_csv(output_homologs_path,
+                             **struct_params["out"])
+
+        # Specify the path to the output JSON file for the alignments
+        # and save them to the JSON file
+        output_alignments_path = \
+            os.path.join(wd, output_alignments_file)
+        with open(output_alignments_path, "w") as out:
+            json.dump(als, out)
+
+        # Return the homologs' dataframe, the alignments and the paths
+        # to the output files
+        return (structures_df, als), \
+               (output_homologs_path, output_alignments_path)
 
 
 

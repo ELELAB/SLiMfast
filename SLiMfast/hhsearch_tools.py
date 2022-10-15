@@ -77,7 +77,7 @@ class HHsearchParser:
     # identifier)
     HIT_NUM_ID_SEP = "_"
 
-    # Data types for each column of the final dataframe
+    # Data types for each column of the final data frame
     DTYPES = \
         {"num" : "int64",
          "hit" : "object",
@@ -103,6 +103,7 @@ class HHsearchParser:
     def __init__(self):
         """Initialize the parser.
         """
+        
         pass
 
 
@@ -116,7 +117,8 @@ class HHsearchParser:
         parse_hits = False
             
         # Boolean switch to indicate when to parse the alignments;
-        # off at the beginning since they come after the hits' table
+        # off at the beginning since the alignments come after
+        # the hits' table
         parse_als = False
 
         # Initialize the indexes of the lines where the hits'
@@ -130,6 +132,8 @@ class HHsearchParser:
             # If you encounter an empty line
             if re.match(r"^\s*$", line):
 
+                # The first empty line defines the
+                # end of the metadata section
                 if not parse_hits and not parse_als:
                     
                     # Turn on the parsing for the hits' table
@@ -338,16 +342,15 @@ class HHsearchParser:
             if ix == range_indexes[0]:
                 parse = True
 
-            # If parsing is not active, continue
+            # If parsing is not active, continue (= skip
+            # all sections all the file that do not contain
+            # the alignments)
             if not parse:
                 continue
 
-            # Ignore empty lines
-            if re.match(r"^\s*$", line):
-                continue
-
-            # If you just entered a new aligment...
-            elif line.startswith("No"):
+            # If you just entered a new aligment or you reached
+            # the end of the file
+            elif line.startswith("No") or ix == range_indexes[1]:
 
                 # If there are data from a previous hit to
                 # be stored
@@ -376,6 +379,15 @@ class HHsearchParser:
                     als[hit_id]["Q"]["end"] = end_q
                     als[hit_id]["T"]["start"] = start_t
                     als[hit_id]["T"]["end"] = end_t
+
+                    # If you have reached the end of the file,
+                    # break out of the loop (no need to run
+                    # the next lines of code in this "elif"
+                    # block since, if you end up here, it is
+                    # because you only have one entry in
+                    # your results)
+                    if ix == range_indexes[1]:
+                        break
 
                     # Re-initialize all of them to None for
                     # the next hit
@@ -442,6 +454,15 @@ class HHsearchParser:
                 sublines = []
 
                 # Continue to the next line
+                continue
+
+            # Ignore empty lines (it is put here and not
+            # at the beginning because we need not to skip
+            # the last line of the file in case there is 
+            # only one hit, since otherwise some information
+            # about the alignment will not be added to the
+            # data frame)
+            elif re.match(r"^\s*$", line):
                 continue
 
             # Split the line by spaces and get rid of empty strings
@@ -606,13 +627,13 @@ class HHsearchParser:
             hits_df = self._parse_hits(f = f,
                                        range_indexes = range_hits)
 
-            # Concatenate the dataframes containing information from
+            # Concatenate the data frames containing information from
             # the hits and alignments sections
             final_df = pd.concat([hits_df, als_df],
                                  axis = 1,
                                  sort = False)
 
-            # Return the final dataframe and the alignments themselves
+            # Return the final data frame and the alignments themselves
             return final_df, als
 
 
@@ -622,7 +643,7 @@ class HHsearchParser:
 
 
 def filter_hits(hits, filters):
-    """Filter the hits' dataframe.
+    """Filter the hits' data frame.
     """
 
     # For each filter passed
@@ -650,26 +671,26 @@ def filter_hits(hits, filters):
             # Set the filtering condition
             cond = (hits[arg] == val)
 
-        # Filter the dataframe
+        # Filter the data frame
         hits = hits[cond]
 
-    # Return the filtered dataframe
+    # Return the filtered data frame
     return hits
 
 
 def sort_hits(hits, sort_by, ascending):
-    """Sort the hits' dataframe.
+    """Sort the hits' data frame.
     """
 
     # Default to ascending sorting if no order is specified
     ascending = ascending if ascending is not None \
                 else [True]*len(sort_by)
             
-    # Sort the dataframe
+    # Sort the data frame
     hits = hits.sort_values(by = sort_by,
                             ascending = ascending)
 
-    # Return the sorted dataframe
+    # Return the sorted data frame
     return hits
 
 

@@ -151,5 +151,13 @@ class DisProtParser:
             # data for all regions
             data[num] = region_data
 
-        # Create and return the dataframe
-        return pd.DataFrame(data).T[self.DF_COLS]
+        # Create the data frame
+        df = pd.DataFrame(data).T
+
+        # Get only those columns present in the data
+        # frame before sorting them
+        columns = \
+            [col for col in self.DF_COLS if col in df.columns]
+
+        # Return the data frame with sorted columns
+        return df[columns]

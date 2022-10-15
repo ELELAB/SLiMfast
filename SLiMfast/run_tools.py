@@ -29,6 +29,7 @@
 
 
 # Standard library
+import logging as log
 import os
 import subprocess
 # SLiMfast
@@ -36,6 +37,12 @@ from SLiMfast import (
     uniprot_tools,
     util,
     )
+
+
+
+# Get the module logger
+logger = log.getLogger(__name__)
+
 
 
 def run_process(executable,
@@ -124,7 +131,7 @@ def run_hhpred(uniprot_id,
     # Set the path to the output A3M file
     uniprot_a3m = \
         os.path.join(hhblits_dirname, uniprot_id + ".a3m")
-            
+
     # Add the FASTA file as input and the A3M file as output
     # to the options of HHblits
     hhblits_params_copy["options"] = \
@@ -134,10 +141,21 @@ def run_hhpred(uniprot_id,
     # If the output file does not exist yet (no previous run
     # has been performed)
     if not os.path.exists(uniprot_a3m):  
+        
         # Run HHblits for the generation of the query MSA
         hhblits_process = run_process(**hhblits_params_copy)
+    
     # If the output file exists, do not run HHblits
     else:
+
+        # Inform the user
+        warnstr = \
+            f"The file {uniprot_a3m} was found in {hhblits_dirname}." \
+            f" SLiMfast will use it as input to HHsearch, without " \
+            f"running HHblits again."
+        logger.warning(warnstr)
+
+        # No data will be associated to the HHblits process
         hhblits_process = None
 
 
@@ -165,12 +183,24 @@ def run_hhpred(uniprot_id,
     # If the output file does not exist yet (no previous run
     # has been performed)   
     if not os.path.exists(uniprot_hhsearch):
+        
         # Search profile HHM database(s) with HHsearch
         hhsearch_process = run_process(**hhsearch_params_copy)
+    
     # If the output file exists, do not run HHsearch
     else:
+
+        # Inform the user
+        warnstr = \
+            f"The file {uniprot_hhsearch} was found in " \
+            f"{hhsearch_dirname} SLiMfast will not run HHsearch " \
+            f"again."
+        logger.warning(warnstr)
+        
+        # No data will be associated to the HHsearch process
         hhsearch_process = None
 
+    # Return data about the processes run
     return (hhblits_process, hhsearch_process), uniprot_hhsearch
 
 

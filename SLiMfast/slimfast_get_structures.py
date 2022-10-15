@@ -68,6 +68,7 @@ def get_args():
                               log_file = True,
                               v = True,
                               vv = True,
+                              log_to_stdout = True,
                               log_file_default = log_file_default)
 
     # Retrieve the arguments
@@ -75,6 +76,7 @@ def get_args():
     output_protein_file = args.output_protein_file
     configrun_file = args.configrun_file
     log_file = args.log_file
+    log_to_stdout = args.log_to_stdout
     v = args.verbose
     vv = args.verbose_debug
 
@@ -84,19 +86,32 @@ def get_args():
 
     # Default logging level is WARNING
     level = log.WARNING
+    
     # If verbose logging required
     if v:
+        
         # Logging level will be INFO
         level = log.INFO
+    
     # If debug logging required
     if vv:
+        
         # Logging level will be DEBUG
         level = log.DEBUG
     
-    # Basic logging configuration
-    log.basicConfig(level = level, 
-                    filename = log_file, 
-                    filemode = "w")
+    # Create the list containing the log handlers
+    handlers = [log.FileHandler(filename = log_file, mode = "w")]
+
+    # If the user selected the option to log also to the standard
+    # output
+    if log_to_stdout:
+
+        # Add the StreamHandler to the list of handlers
+        handlers.append(log.StreamHandler(sys.stdout))
+    
+    # Set the basic logging configuration
+    log.basicConfig(level = level,
+                    handlers = handlers)
 
 
     #------------------------- Configuration -------------------------#
@@ -112,7 +127,6 @@ def get_args():
                  f"{configrun_file}: {e}"
         logger.exception(errstr)
         sys.exit(errstr)
-
 
     # Return UniProt ID, output file and configuration
     return uniprot_id, output_protein_file, config_run
@@ -149,14 +163,29 @@ def run(uniprot_id,
         logger.exception(errstr)
         sys.exit(errstr)
 
-    # Specify the path to the output CSV file
-    output_protein_path = os.path.join(wd, output_protein_file)
+    # If no structures were found (fitting the criteria provided in
+    # the configuration file)
+    if structures_df.empty:
+        
+        # Inform the user and do not generate any output file
+        warnstr = \
+            f"No structures were found matching the criteria " \
+            f"provided in the configuration file. Relaxing the " \
+            f"filtering criteria may help in getting more hits."
+        logger.warning(warnstr)
 
-    # Save the dataframe to the output CSV file
-    structures_df.to_csv(output_protein_path, **struct_params["out"])
+    # If structures were found
+    else:
 
-    # Return the dataframe and the output CSV file
-    return structures_df, output_protein_path
+        # Specify the path to the output CSV file
+        output_protein_path = os.path.join(wd, output_protein_file)
+
+        # Save the dataframe to the output CSV file
+        structures_df.to_csv(output_protein_path,
+                             **struct_params["out"])
+
+        # Return the dataframe and the output CSV file
+        return structures_df, output_protein_path
 
 
 

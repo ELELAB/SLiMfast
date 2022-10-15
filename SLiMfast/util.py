@@ -61,6 +61,7 @@ from SLiMfast import (
 logger = log.getLogger(__name__)
 
 
+
 ############################## CONFIGURE ##############################
 
 
@@ -75,7 +76,7 @@ def get_arguments(description,
     # Create the argument parser
     parser = argparse.ArgumentParser(description = description)
     
-    # Add arguments
+    # Add the arguments
     if "uniprot_id" in kwargs.keys():
         id_help = "UniProt ID."
         parser.add_argument("-id", "--uniprot-id",
@@ -89,7 +90,7 @@ def get_arguments(description,
             "structures of the protein."
         parser.add_argument("-ip", "--input-protein-file",
                              type = str,
-                             required = True,
+                             default = None,
                              help = ip_help)
 
     if "input_homologs_file" in kwargs.keys():
@@ -98,14 +99,14 @@ def get_arguments(description,
             "structures of the homologs."
         parser.add_argument("-ih", "--input-homologs-file",
                              type = str,
-                             required = True,
+                             default = None,
                              help = ih_help)
 
     if "input_alignments_file" in kwargs.keys():
         ia_help = "Name of the input JSON alignments file."
         parser.add_argument("-ia", "--input-alignments-file",
                              type = str,
-                             required = True,
+                             default = None,
                              help = ia_help)
 
     if "input_slims_file" in kwargs.keys():
@@ -193,6 +194,13 @@ def get_arguments(description,
                             type = str,
                             default = lf_default,
                             help = lf_help)
+
+    if "log_to_stdout" in kwargs.keys():
+        ls_help = "Log also to the standard output."
+        parser.add_argument("-ls", "--log-to-stdout",
+                            action = "store_true",
+                            help = ls_help)
+    
     if "v" in kwargs.keys():
         v_help = "Verbose logging."
         parser.add_argument("-v", "--verbose",
@@ -497,9 +505,9 @@ def get_structures_data_homologs(uniprot_id,
     # If something went wrong, log it and raise an exception
     except Exception as e:
         errstr = \
-            f"Could add metadata to the available PDB structures " \
-            f"of the homologs of the protein with UniProt ID " \
-            f"{uniprot_id}. Exception: {e}"
+            f"Could not add metadata to the available PDB " \
+            f"structures of the homologs of the protein with " \
+            f"UniProt ID {uniprot_id}. Exception: {e}"
         # Log the error
         logger.exception(errstr)
         # Re-raise the exception

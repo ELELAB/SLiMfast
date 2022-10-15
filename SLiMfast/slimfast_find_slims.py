@@ -75,6 +75,7 @@ def get_args():
                               output_slims_disprot_file = True,
                               configrun_file = True,
                               log_file = True,
+                              log_to_stdout = True,
                               v = True,
                               vv = True,
                               log_file_default = log_file_default)
@@ -90,6 +91,7 @@ def get_args():
     output_slims_disprot_file = args.output_slims_disprot_file
     configrun_file = args.configrun_file
     log_file = args.log_file
+    log_to_stdout = args.log_to_stdout
     v = args.verbose
     vv = args.verbose_debug
 
@@ -99,19 +101,32 @@ def get_args():
 
     # Default logging level is WARNING
     level = log.WARNING
+    
     # If verbose logging required
     if v:
+        
         # Logging level will be INFO
         level = log.INFO
+    
     # If debug logging required
     if vv:
+        
         # Logging level will be DEBUG
         level = log.DEBUG
     
-    # Basic logging configuration
-    log.basicConfig(level = level, 
-                    filename = log_file, 
-                    filemode = "w")
+    # Create the list containing the log handlers
+    handlers = [log.FileHandler(filename = log_file, mode = "w")]
+
+    # If the user selected the option to log also to the standard
+    # output
+    if log_to_stdout:
+
+        # Add the StreamHandler to the list of handlers
+        handlers.append(log.StreamHandler(sys.stdout))
+    
+    # Set the basic logging configuration
+    log.basicConfig(level = level,
+                    handlers = handlers)
 
 
     #------------------------- Configuration -------------------------#
@@ -141,6 +156,8 @@ def get_args():
         logger.exception(errstr)
         sys.exit(errstr)
 
+    # If the CSV file with the available PDB structures of the
+    # protein of interest has been passed
     if input_protein_file is not None:
         
         # Try to load the data frame containing the structures of
@@ -155,7 +172,9 @@ def get_args():
             logger.exception(errstr)
             sys.exit(errstr)
 
-    if input_protein_file is not None \
+    # If the CSV file with the available PDB structures of the
+    # homologs has been passed
+    if input_homologs_file is not None \
         and input_alignments_file is not None:
 
         # Try to load the data frame containing the structures of
@@ -180,8 +199,12 @@ def get_args():
             logger.exception(errstr)
             sys.exit(errstr)
 
-    elif input_protein_file is None \
+    # If the CSV of the homologs has been passed but not the
+    # alignments' JSON file
+    elif input_homologs_file is None \
         and input_alignments_file is not None:
+
+            # Report it and exit
             errstr = \
                 f"You must provide also the CSV file containing " \
                 f"the structures of the homologs of the protein " \
@@ -189,8 +212,12 @@ def get_args():
             logger.exception(errstr)
             sys.exit(errstr)
 
-    elif input_protein_file is not None \
+    # If the alignments' JSON file has been passed but not the
+    # homologs' CSV file
+    elif input_homologs_file is not None \
         and input_alignments_file is None:
+
+            # Report it and exit
             errstr = \
                 f"You must provide also the alignments' JSON file " \
                 f"if you pass the CSV file containing the structures " \
@@ -198,7 +225,7 @@ def get_args():
             logger.exception(errstr)
             sys.exit(errstr)
 
-    # Return dataframes, alignments, SLiM instances, output files
+    # Return data frames, alignments, SLiM instances, output files
     # and configuration
     return uniprot_id, protein_df, homologs_df, alignments, \
            slims_to_find, output_slims_protein_file, \
