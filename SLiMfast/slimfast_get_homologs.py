@@ -8,7 +8,7 @@
 #    such data in a CSV file, and the alignments used to find the
 #    homologs in a JSON file.
 #
-#    Copyright (C) 2021 Valentina Sora 
+#    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -36,8 +36,6 @@ import json
 import logging as log
 import os
 import sys
-# Third-party packages
-import yaml
 # SLiMfast
 from SLiMfast import util
 
@@ -124,14 +122,22 @@ def get_args():
 
     # Try to load the configuration file for running
     try:
-        config_run = yaml.safe_load(open(configrun_file, "r"))
+
+        config_run = util.read_config_file(configrun_file)
+    
+    # If something went wrong, report it and exit
     except Exception as e:
-        # If something went wrong, report it and exit
-        errstr = f"Could not parse the run configuration file " \
-                 f"{configrun_file}: {e}"
+        errstr = \
+            f"Could not parse the configuration file " \
+            f"{configrun_file}: {e}"
         logger.exception(errstr)
         sys.exit(errstr)
 
+    # Inform the user about the successful parsing of the
+    # configuration file
+    infostr = \
+        f"Configuration parsed successfully from {configrun_file}."
+    logger.info(infostr)
 
     # Return UniProt ID, output files and configuration
     return uniprot_id, output_homologs_file, \
@@ -159,7 +165,7 @@ def run(uniprot_id,
 
 
     # Run the HHpred pipeline (HHblits + HHsearch) and get the
-    # resulting dataframe and alignments
+    # resulting data frame and alignments
     try:
         structures_df, als = \
             util.get_structures_data_homologs(\
@@ -169,10 +175,14 @@ def run(uniprot_id,
                 wd = wd,
                 **struct_params["df"])
     
-    # If something went wrong, report it and exit
+    # If something went wrong
     except Exception as e:
-        errstr = f"Could not find homologs for the protein " \
-                 f"of interest: {e}"
+        
+        # Report it and exit
+        errstr = \
+            f"Could not retrieve the data about the structures " \
+            f"available for the homologs of the protein with " \
+            f"UniProt ID {uniprot_id}: {e}"
         logger.exception(errstr)
         sys.exit(errstr)
 
@@ -183,19 +193,28 @@ def run(uniprot_id,
         # Inform the user and do not generate any output file
         warnstr = \
             f"No structures were found matching the criteria " \
-            f"provided in the configuration file. Relaxing the " \
-            f"filtering criteria may help in getting more hits."
+            f"provided in the configuration file for the protein " \
+            f"with UniProt ID {uniprot_id}. Relaxing the filtering " \
+            f"criteria may help in getting more hits."
         logger.warning(warnstr)
 
     # If homologs were found
     else:
 
         # Specify the path to the output CSV file for the homologs'
-        # dataframe and save it to the CSV file
+        # data frame and save it to the CSV file
         output_homologs_path = \
             os.path.join(wd, output_homologs_file)
         structures_df.to_csv(output_homologs_path,
                              **struct_params["out"])
+
+        # Inform the user that the file was successfully written
+        infostr = \
+            f"The data frame containing data about the available " \
+            f"structures of the homologs of the protein with  " \
+            f"UniProt ID {uniprot_id} has been successfully " \
+            f"written to {output_homologs_path}."
+        logger.info(infostr)
 
         # Specify the path to the output JSON file for the alignments
         # and save them to the JSON file
@@ -204,7 +223,15 @@ def run(uniprot_id,
         with open(output_alignments_path, "w") as out:
             json.dump(als, out)
 
-        # Return the homologs' dataframe, the alignments and the paths
+        # Inform the user that the file was successfully written
+        infostr = \
+            f"The alignments of the available structures of the " \
+            f"homologs of the protein with UniProt ID {uniprot_id} " \
+            f"(aligned with the protein itself) have been " \
+            f"successfully written to {output_alignments_path}."
+        logger.info(infostr)
+
+        # Return the homologs' data frame, the alignments and the paths
         # to the output files
         return (structures_df, als), \
                (output_homologs_path, output_alignments_path)

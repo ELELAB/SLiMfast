@@ -6,7 +6,7 @@
 #    Contains a class implementing a parser to parse data from 
 #    DSSP output files.
 #
-#    Copyright (C) 2021 Valentina Sora 
+#    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -48,16 +48,16 @@ class DSSPParser:
 
     # Standard mapping of the DSSP symbols to the symbols
     # that will be used in the FASTA-like DSSP sequence
-    # (default mapping is each symbol to itself)
+    # (the default mapping is each symbol to itself)
     DSSP_MAPPING = \
         {"G" : "G", "I" : "I", "H" : "H", "B" : "B",
          "S" : "S", "E" : "E", "T" : "T"}
 
-    # Rrepsentation of white spaces (= disordered residues)
+    # Representation of white spaces (= disordered residues)
     # in the FASTA-like DSSP sequence
     WHITESPACE_REPR = "-"
 
-    # Data types for each column of the final dataframe
+    # Data types for each column of the final data frame
     DTYPES = {\
         "RESIDUE" : "int64",
         "CHAIN" : "object",
@@ -103,12 +103,14 @@ class DSSPParser:
             of the DSSP sequence.
         """
 
-        # Get the mapping for DSSP symbols
+        # Get the mapping for DSSP symbols (if none provided, fall
+        # back on the default)
         dssp_mapping = \
             dssp_mapping if dssp_mapping is not None \
             else self.DSSP_MAPPING
 
-        # Get the whitespace representation
+        # Get the whitespace representation (if none provided, fall
+        # back on the default)
         whitespace_repr =  \
             whitespace_repr if whitespace_repr is not None \
             else self.WHITESPACE_REPR
@@ -121,7 +123,7 @@ class DSSPParser:
     def parse(self,
               dssp_output,
               verbose = False):
-        """Parse the output of DSSP and return a dataframe
+        """Parse the output of DSSP and return a data frame
         with the data.
 
         Parameters
@@ -138,16 +140,17 @@ class DSSPParser:
 
             # If 'verbose' has been set to True
             if verbose:
+                
                 # Raise an exception, since parsing for output files
                 # generated in verbose mode has not been implemented
                 # yet
                 errstr = \
-                    "Only parsing for non-verbose outputs has been " \
-                    "implemented so far."
+                    "Only parsing for non-verbose DSSP outputs has " \
+                    "been implemented so far."
                 raise NotImplementedError(errstr)
 
             # Create an empty list to store data from the DSSP file
-            # that will be later converted into a dataframe
+            # that will be later converted into a data frame
             data = []
 
             # Create an empty dictionary to store the FASTA sequence
@@ -182,6 +185,7 @@ class DSSPParser:
             # empty string
             prev_res = ""
 
+            # For each line in the DSSP output
             for line in f:
 
                 # Get rid of the newline delimiter
@@ -189,13 +193,16 @@ class DSSPParser:
 
                 # Start of the DSSP data
                 if line[2] == "#":
+                    
                     # Turn on the boolean switch for parsing
                     start_parse = True
+                    
                     # Skip the current line
                     continue
 
-                # If the boolean switch is off
+                # If the boolean switch for starting parsing is off
                 if not start_parse:
+                    
                     # Skip the current line
                     continue
 
@@ -206,27 +213,34 @@ class DSSPParser:
 
                 # If you reached a chain break
                 if aa == "!*":
+                    
                     # Save the FASTA-like DSSP sequence of
                     # the chain that just ended
                     seqdssp[prev_chain] = tmp_seqdssp
+                    
                     # Save the FASTA sequence of the chain
                     # that just ended
                     fasta[prev_chain] = tmp_fasta
+                    
                     # Re-initialize the temporary holders of
                     # the FASTA sequence and of the FASTA-like
                     # DSSP sequence
                     tmp_fasta = ""
                     tmp_seqdssp = ""
+                    
                     # Go to the next line
                     continue
                 
                 # If you found a missing residue
                 if aa == "!":
+                    
                     # Warn the user
                     warnstr = \
                         f"Missing residue at position " \
-                        f"{int(prev_res)+1} chain {prev_chain}."
+                        f"{int(prev_res)+1} chain {prev_chain}" \
+                        f"in {dssp_output}."
                     logger.warning(warnstr)
+                    
                     # Go to the next line
                     continue
 

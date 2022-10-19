@@ -1,4 +1,4 @@
-,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,pdb_segments,pdb_id,pdb_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
+,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
 3_1lxl.A,3,1lxl.A,"BCL-XL; APOPTOSIS, PROG",100.0,5.2E-40,6.0E-45,279.3,0.0,209,1-209,5-213,1lxl,A,100.0,1.476,176.5,6.8,Homo sapiens,89.7
 5_6zhc.DDD,5,6zhc.DDD,von Hippel-Lindau dis,100.0,7.0E-40,8.1E-45,278.4,0.0,209,1-209,5-213,6zhc,DDD,100.0,1.476,176.6,6.8,Homo sapiens,89.7
 4_6bf2.A,4,6bf2.A,Bcl-2-like protein 1; A,100.0,5.5E-40,6.3E-45,277.6,0.0,205,1-205,4-208,6bf2,A,100.0,1.473,173.9,7.0,Homo sapiens,88.0
@@ -82,8 +82,8 @@
 80_1pq1.B,80,1pq1.B,Apoptosis regulator Bcl,75.9,2.0E+00,2.3E-05,25.8,0.0,20,84-103,6-25,1pq1,B,45.0,0.74,16.5,1.7,Mus musculus,8.6
 84_2v4i.H,84,2v4i.H,GLUTAMATE N-ACETYLTRANS,32.3,4.1E+01,4.8E-04,30.0,0.0,19,130-148,116-134,2v4i,H,21.0,0.384,14.7,5.3,Streptomyces clavuligerus,8.2
 85_2yep.B,85,2yep.B,GLUTAMATE N-ACETYLTRANS,32.3,4.1E+01,4.8E-04,30.0,0.0,19,130-148,116-134,2yep,B,21.0,0.384,14.7,5.3,Streptomyces clavuligerus,8.2
+88_1vra.B,88,1vra.B,Arginine biosynthesis b,31.0,4.5E+01,5.2E-04,29.8,0.0,18,131-148,124-141,1vra,B,33.0,0.964,14.0,5.4,Bacillus halodurans,7.7
 86_3it4.B,86,3it4.B,Arginine biosynthesis b,31.2,4.4E+01,5.1E-04,29.6,0.0,18,131-148,118-135,3it4,B,33.0,0.743,13.9,5.3,Mycobacterium tuberculosis,7.7
 87_3it6.B,87,3it6.B,Arginine biosynthesis b,31.2,4.4E+01,5.1E-04,29.6,0.0,18,131-148,118-135,3it6,B,33.0,0.743,13.9,5.3,Mycobacterium tuberculosis,7.7
 79_2xa0.C,79,2xa0.C,APOPTOSIS REGULATOR BCL,78.8,1.4E+00,1.7E-05,26.6,0.0,18,83-100,5-22,2xa0,C,28.0,0.534,15.0,4.2,Homo sapiens,7.7
 81_3pk1.D,81,3pk1.D,Induced myeloid leukemi,75.6,2.1E+00,2.4E-05,26.5,0.0,18,83-100,9-26,3pk1,D,22.0,0.497,15.6,4.3,Homo sapiens,7.7
-88_1vra.B,88,1vra.B,Arginine biosynthesis b,31.0,4.5E+01,5.2E-04,29.8,0.0,18,131-148,124-141,1vra,B,33.0,0.964,14.0,5.4,Bacillus halodurans,

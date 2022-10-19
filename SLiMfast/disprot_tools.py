@@ -6,7 +6,7 @@
 #    Contains a class implementing a parser to obtain, write and parse
 #    DisProt annotations.
 #
-#    Copyright (C) 2021 Valentina Sora 
+#    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -48,7 +48,7 @@ class DisProtParser:
     """Class implementing a parser for DisProt annotations.
     """
 
-    # Columns of the dataframe for the DisProt annotaions
+    # Columns of the data frame for the DisProt annotaions
     DF_COLS = \
         ["region_id", "start", "end",
          "term_id", "term_name", "term_namespace",
@@ -69,7 +69,7 @@ class DisProtParser:
     def get_annotations(self,
                         uniprot_id,
                         disprot_json_handle = None):
-        """Get a dataframe containing the DisProt annotations,
+        """Get a data frame containing the DisProt annotations,
         parsed directly from the data retrieved from the DisProt
         database. Write a JSON file with the annotations in the
         original format, if requested.
@@ -80,7 +80,7 @@ class DisProtParser:
 
         # Create an empty dictionary to store the data
         # about all regions (will be converted into a
-        # dataframe)
+        # data frame)
         data = {}
 
         # Get data from the server and convert the text into
@@ -88,6 +88,7 @@ class DisProtParser:
         raw_data = \
             json.loads(requests.get(URL.format(uniprot_id)).text)
 
+        # If there are data about the status of the entry
         if "status" in raw_data.keys():
             
             # If there are no annotations available yet
@@ -95,10 +96,12 @@ class DisProtParser:
                 
                 # Warn the user
                 warnstr = \
-                    f"DisProt annotations for {uniprot_id} have " \
-                    f"not released yet (status: 'on-hold')."
+                    f"DisProt annotations for the protein with " \
+                    f"UniProt ID {uniprot_id} have not been " \
+                    f"released yet (status: 'on-hold')."
                 logger.warning(warnstr)
-                # Return an empty dataframe
+                
+                # Return an empty data frame
                 return pd.DataFrame()
             
             # If annotations do not exist
@@ -106,16 +109,21 @@ class DisProtParser:
 
                 # Warn the user
                 warnstr = \
-                    f"DisProt annotations for {uniprot_id} do " \
-                    f"not exist (status: 'not-exist')."
+                    f"DisProt annotations for the protein with " \
+                    f"UniProt ID {uniprot_id} do not exist " \
+                    f"(status: 'not-exist')."
                 logger.warning(warnstr)
-                # Return an empty dataframe
+                
+                # Return an empty data frame
                 return pd.DataFrame()
         
-        # Whether to write out the annotations to a JSON
-        # file
+        # If the user requested the writing of a JSON
+        # file containing the raw annotations
         if disprot_json_handle is not None:
+
+            # Open the output file
             with disprot_json_handle as out:
+                
                 # Write out text data (JSON form)
                 out.write(raw_data)
 
@@ -132,13 +140,18 @@ class DisProtParser:
             # For each data field
             for field, value in region.items():
 
-                # Ignore the HTML of the reference and the statement,
-                # since they are verbose fields
+                # If the field contains either the HTML of the
+                # reference or the statement
                 if field == "reference_html" or field == "statement":
+
+                    # Ignore it, since it is a verbose field
                     continue
 
-                # Format the cross-references to other databases
+                # If the field holds the cross-references to other
+                # databases
                 elif field == "cross_refs":
+
+                    # Format the cross-references
                     value = \
                         ":".join([f"{db['db']}={db['id']}" \
                                   for db in value])
@@ -151,7 +164,7 @@ class DisProtParser:
             # data for all regions
             data[num] = region_data
 
-        # Create the data frame
+        # Create the data frame (and transpose it)
         df = pd.DataFrame(data).T
 
         # Get only those columns present in the data

@@ -5,7 +5,7 @@
 #
 #    Unit tests.
 #
-#    Copyright (C) 2021 Valentina Sora 
+#    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 

@@ -5,7 +5,7 @@
 #
 #    Default values.
 #
-#    Copyright (C) 2021 Valentina Sora 
+#    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -32,22 +32,10 @@
 from pkg_resources import resource_filename, Requirement
 
 
-# Metadata (taken from MMCIF files) retrieved for PDB IDs
-# of interest
-STRUCTURE_METADATA = [
-    # Experimental method used for structure determination
-    ("_exptl.method",
-     str, 
-     "experimental_method"),
-    # Resolution
-    ("_refine.ls_d_res_high",
-     float,
-     "resolution"),
-    # Deposition date
-    ("_pdbx_database_status.recvd_initial_deposition_date",
-     str,
-     "deposition_date"),
-    ]
+
+# Directory where the substitution matrices are stored
+CONFIG_RUN_DIR = \
+    resource_filename(Requirement("SLiMfast"), "SLiMfast/config_run")
 
 # Separator for starting and ending points of different
 # UniProt segments
@@ -56,11 +44,11 @@ SEGMENTS_SEP = ";"
 # Separator for numeric ranges
 RANGE_SEP = "-"
 
-# Data frame field containing PDB IDs
-PDB_ID_FIELD = "pdb_id"
+# Data frame field containing structure's IDs
+STRUCT_ID_FIELD = "struct_id"
 
-# Data frame field containing PDB chains
-PDB_CHAIN_FIELD = "pdb_chain"
+# Data frame field containing structures' chains
+STRUCT_CHAIN_FIELD = "struct_chain"
 
 # Data frame field containing UniProt IDs
 UNP_ID_FIELD = "uniprot_id"
@@ -70,5 +58,5 @@ UNP_ID_FIELD = "uniprot_id"
 UNP_SEGMENTS_FIELD = "uniprot_segments"
 
 # Data frame field containing ranges representing
-# segments of PDB structures
-PDB_SEGMENTS_FIELD = "pdb_segments"
+# segments of the structures
+STRUCT_SEGMENTS_FIELD = "struct_segments"

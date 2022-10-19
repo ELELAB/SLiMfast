@@ -1,4 +1,4 @@
-,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,pdb_segments,pdb_id,pdb_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
+,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
 1_7ju4.B,1,7ju4.B,Flagellar-associated pr,99.7,2.6E-10,4.8E-15,129.9,64.5,6,1-6,1-6,7ju4,B,17.0,-0.042,0.0,11.8,Chlamydomonas reinhardtii,1.0
 2_6so3.B,2,6so3.B,Myosin 2 heavy chain st,99.6,1.5E-09,2.8E-14,133.4,63.8,43,466-508,1874-1916,6so3,B,9.0,0.093,0.0,10.0,Lethocerus indicus,7.5
 3_6so3.B,3,6so3.B,Myosin 2 heavy chain st,99.6,8.5E-09,1.5E-13,127.0,63.0,1,47-47,853-853,6so3,B,0.0,0.0,0.0,10.0,Lethocerus indicus,0.2
@@ -248,4 +248,4 @@
 247_2d3e.A,247,2d3e.A,General control protein,92.8,5.9E+00,1.1E-04,33.4,20.1,134,354-499,1-134,2d3e,A,13.0,0.116,0.0,8.5,Saccharomyces cerevisiae,23.2
 248_6bl7.A,248,6bl7.A,Protein STU2; kinetocho,92.7,5.1E+00,9.3E-05,32.5,14.8,93,313-408,11-103,6bl7,A,16.0,0.139,0.0,7.1,Saccharomyces cerevisiae,16.1
 249_4rsi.B,249,4rsi.B,Structural maintenance,92.7,1.3E+01,2.4E-04,37.4,18.7,124,331-466,1-124,4rsi,B,15.0,0.101,0.0,12.2,Saccharomyces cerevisiae,21.5
-250_4zxq.D,250,4zxq.D,Tail needle protein gp2,92.7,6.5E+00,1.2E-04,33.6,14.6,91,231-338,51-141,4zxq,D,15.0,0.163,0.0,5.7,Enterobacteria phage p22,
+250_4zxq.D,250,4zxq.D,Tail needle protein gp2,92.7,6.5E+00,1.2E-04,33.6,14.6,91,231-338,51-141,4zxq,D,15.0,0.163,0.0,5.7,Enterobacteria phage p22,15.8

@@ -1,4 +1,4 @@
-,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,pdb_segments,pdb_id,pdb_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
+,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
 4_6so3.B,4,6so3.B,Myosin 2 heavy chain st,99.5,1.8E-08,3.4E-13,124.0,63.7,441,37-521,1341-1798,6so3,B,16.0,0.143,0.0,10.0,Lethocerus indicus,76.4
 5_6so3.B,5,6so3.B,Myosin 2 heavy chain st,99.5,2.1E-08,3.9E-13,123.5,63.6,433,37-521,1429-1876,6so3,B,9.0,0.097,0.0,10.0,Lethocerus indicus,75.0
 6_7ju4.B,6,7ju4.B,Flagellar-associated pr,99.5,1.8E-07,3.3E-12,106.8,62.1,434,37-521,131-578,7ju4,B,11.0,0.062,0.0,11.8,Chlamydomonas reinhardtii,75.2
