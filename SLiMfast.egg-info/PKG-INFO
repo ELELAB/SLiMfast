@@ -1,7 +1,0 @@
-Metadata-Version: 2.1
-Name: SLiMfast
-Version: 0.0.1
-Summary: Structural filtering of putative SLiMs in a protein sequence.
-Home-page: https://github.com/ELELAB/SLiMfast
-Author: Valentina Sora, Matteo Tiberti, Elena Papaleo
-License-File: LICENSE

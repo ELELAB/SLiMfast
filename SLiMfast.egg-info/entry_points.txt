@@ -1,4 +1,0 @@
-[console_scripts]
-slimfast_find_slims = SLiMfast.slimfast_find_slims:main
-slimfast_get_homologs = SLiMfast.slimfast_get_homologs:main
-slimfast_get_structures = SLiMfast.slimfast_get_structures:main
