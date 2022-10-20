@@ -6,7 +6,7 @@
 #    Given the UniProt ID of a protein, get data about its available
 #    PDB structures and save such data in a CSV file.
 #
-#    Copyright (C) 2021 Valentina Sora 
+#    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -30,12 +30,9 @@
 
 
 # Standard library
-import argparse
 import logging as log
 import os
 import sys
-# Third-party packages
-import yaml
 # SLiMfast
 from SLiMfast import util
 
@@ -68,6 +65,7 @@ def get_args():
                               log_file = True,
                               v = True,
                               vv = True,
+                              log_to_stdout = True,
                               log_file_default = log_file_default)
 
     # Retrieve the arguments
@@ -75,6 +73,7 @@ def get_args():
     output_protein_file = args.output_protein_file
     configrun_file = args.configrun_file
     log_file = args.log_file
+    log_to_stdout = args.log_to_stdout
     v = args.verbose
     vv = args.verbose_debug
 
@@ -84,19 +83,32 @@ def get_args():
 
     # Default logging level is WARNING
     level = log.WARNING
+    
     # If verbose logging required
     if v:
+        
         # Logging level will be INFO
         level = log.INFO
+    
     # If debug logging required
     if vv:
+        
         # Logging level will be DEBUG
         level = log.DEBUG
     
-    # Basic logging configuration
-    log.basicConfig(level = level, 
-                    filename = log_file, 
-                    filemode = "w")
+    # Create the list containing the log handlers
+    handlers = [log.FileHandler(filename = log_file, mode = "w")]
+
+    # If the user selected the option to log also to the standard
+    # output
+    if log_to_stdout:
+
+        # Add the StreamHandler to the list of handlers
+        handlers.append(log.StreamHandler(sys.stdout))
+    
+    # Set the basic logging configuration
+    log.basicConfig(level = level,
+                    handlers = handlers)
 
 
     #------------------------- Configuration -------------------------#
@@ -104,15 +116,24 @@ def get_args():
 
     # Try to load the configuration file for running
     try:
-        config_run = yaml.safe_load(open(configrun_file, "r"))
+        
+        config_run = util.read_config_file(configrun_file)
 
-    # If something went wrong, report it and exit   
+    # If something went wrong 
     except Exception as e:
-        errstr = f"Could not parse the run configuration file " \
-                 f"{configrun_file}: {e}"
+        
+        # Report it and exit
+        errstr = \
+            f"Could not parse the configuration file " \
+            f"{configrun_file}: {e}"
         logger.exception(errstr)
         sys.exit(errstr)
 
+    # Inform the user about the successful parsing of the
+    # configuration file
+    infostr = \
+        f"Configuration parsed successfully from {configrun_file}."
+    logger.info(infostr)
 
     # Return UniProt ID, output file and configuration
     return uniprot_id, output_protein_file, config_run
@@ -134,29 +155,58 @@ def run(uniprot_id,
     #------------------ Get the structures available -----------------#
 
     
-    # Get all PDB structures (mapped to the correct chains)
-    # containing the protein whose sequence is represented by
-    # the UniProt ID
+    # Get all structures (mapped to the correct chains) containing
+    # the protein whose sequence is represented by the UniProt ID
     try:
-        structures_df = util.get_structures_data_protein(\
-                            uniprot_id = uniprot_id,
-                            **struct_params["df"])
+        
+        structures_df = \
+            util.get_structures_data_protein(\
+                uniprot_id = uniprot_id,
+                **struct_params["df"])
     
-    # If something went wrong, report it and exit
+    # If something went wrong
     except Exception as e:
-        errstr = f"Could not obtain the PDB structures for " \
-                 f"UniProt ID {uniprot_id}: {e}"
+
+        # Report it and exit
+        errstr = \
+            f"Could not retrieve the data about the structures " \
+            f"available for the protein with UniProt ID " \
+            f"{uniprot_id}: {e}"
         logger.exception(errstr)
         sys.exit(errstr)
 
-    # Specify the path to the output CSV file
-    output_protein_path = os.path.join(wd, output_protein_file)
+    # If no structures were found (fitting the criteria provided in
+    # the configuration file)
+    if structures_df.empty:
+        
+        # Inform the user and do not generate any output file
+        warnstr = \
+            f"No structures were found matching the criteria " \
+            f"provided in the configuration file for the protein " \
+            f"with UniProt ID {uniprot_id}. Relaxing the filtering " \
+            f"criteria may help in getting more hits."
+        logger.warning(warnstr)
 
-    # Save the dataframe to the output CSV file
-    structures_df.to_csv(output_protein_path, **struct_params["out"])
+    # If structures were found
+    else:
 
-    # Return the dataframe and the output CSV file
-    return structures_df, output_protein_path
+        # Specify the path to the output CSV file
+        output_protein_path = os.path.join(wd, output_protein_file)
+
+        # Save the data frame to the output CSV file
+        structures_df.to_csv(output_protein_path,
+                             **struct_params["out"])
+
+        # Inform the user that the file was successfully written
+        infostr = \
+            f"The data frame containing data about the available " \
+            f"structures of the protein with UniProt ID " \
+            f"{uniprot_id} has been successfully written to " \
+            f"{output_protein_path}."
+        logger.info(infostr)
+
+        # Return the data frame and the output CSV file
+        return structures_df, output_protein_path
 
 
 

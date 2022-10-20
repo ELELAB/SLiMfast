@@ -6,7 +6,7 @@
 #    Utility functions retrieving data from PDB/mmCIF files or
 #    from the PDB/PDBe database.
 #
-#    Copyright (C) 2021 Valentina Sora 
+#    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -36,8 +36,6 @@ import requests
 from tempfile import NamedTemporaryFile
 # Third-party packages
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
-# SLiMfast
-from SLiMfast.defaults import STRUCTURE_METADATA
 
 
 
@@ -46,7 +44,27 @@ logger = log.getLogger(__name__)
 
 
 
-def get_protein_segments(pdb_id, uniprot_id):
+# Metadata (taken from MMCIF files) retrieved for PDB IDs
+# of interest
+STRUCTURE_METADATA = [
+    # Method used for structure determination
+    ("_exptl.method",
+     str, 
+     "method"),
+    # Resolution
+    ("_refine.ls_d_res_high",
+     float,
+     "resolution"),
+    # Deposition date
+    ("_pdbx_database_status.recvd_initial_deposition_date",
+     str,
+     "deposition_date"),
+    ]
+
+
+
+def get_protein_segments(struct_id,
+                         uniprot_id):
     """Get which portions (segments) of a protein, identified by its
     UniProt ID, are covered in a given PDB file, given its PDB ID.
     """
@@ -57,14 +75,14 @@ def get_protein_segments(pdb_id, uniprot_id):
         "https://www.ebi.ac.uk/pdbe/api/mappings/uniprot_segments/{:s}"
 
     # Get the data from PDBe
-    response = requests.get(mapping_url.format(pdb_id))
+    response = requests.get(mapping_url.format(struct_id))
     
     # Convert to text and read the resulting dictionary through JSON
     response_text = json.loads(response.text)
 
     # Get the data about the mappings
     data = \
-        response_text[pdb_id.lower()]["UniProt"][uniprot_id]["mappings"]
+        response_text[struct_id.lower()]["UniProt"][uniprot_id]["mappings"]
     
     # Create an empty dictionary to store the mapping between
     # the PDB ID and the chains corresponding to the protein
@@ -75,57 +93,61 @@ def get_protein_segments(pdb_id, uniprot_id):
     for m in data:
 
         # Get the chain ID
-        pdb_chain = m["chain_id"]
+        struct_chain = m["chain_id"]
 
         # Get the start and end of the chain as stored in the PDB
-        pdb_start = m["start"]["author_residue_number"]
-        pdb_end = m["end"]["author_residue_number"]
+        struct_start = m["start"]["author_residue_number"]
+        struct_end = m["end"]["author_residue_number"]
 
         # Get the start and end of the chain as they would be
         # in UniProt numbering
         uniprot_start = m["unp_start"]
         uniprot_end = m["unp_end"]
 
-        if pdb_start == "null" or pdb_end == "null":
+        if struct_start == "null" or struct_end == "null":
             warnstr = \
                 f"Mapping for UniProt ID {uniprot_id} residues " \
                 f"{unp_start}-{unp_end} not available in PDB " \
-                f"{pdb_id} chain {pdb_chain}. Therefore, this " \
+                f"{struct_id} chain {struct_chain}. Therefore, this " \
                 f"segment will not be considered."
             logger.warning(warnstr)
             continue
 
         # Create a tuple of tuples to store those ranges
-        ranges = [[pdb_start, pdb_end], [uniprot_start, uniprot_end]]
+        ranges = [[struct_start, struct_end], \
+                  [uniprot_start, uniprot_end]]
 
         # If the chain ID was already encountered (i.e. the PDB
         # chain corresponds to multiple discontinuous protein
         # segments)
-        if pdb_chain in mappings.keys():
+        if struct_chain in mappings.keys():
             # Add the ranges to the mapping
-            mappings[pdb_chain].append(ranges)
+            mappings[struct_chain].append(ranges)
 
         # If it is the first time that the chain ID is encountered
         else:
             # Create a new list and add the mapping as first element
-            mappings[pdb_chain] = [ranges]
+            mappings[struct_chain] = [ranges]
 
     # Return the mappings
     return mappings
 
 
-def get_pdb_data(pdb_id, model = None):
+def get_pdb_data(struct_id,
+                 model = None):
     """Get the content of a PDB file given the PDB ID.
     """
     
     # Generic URL where PDB files for single entries
     # are found
-    pdb_url = "https://files.rcsb.org/view/{:s}.pdb"
+    struct_url = "https://files.rcsb.org/view/{:s}.pdb"
     
     # Get the data from the Protein Data Bank
-    response = requests.get(pdb_url.format(pdb_id))
+    response = requests.get(struct_url.format(struct_id))
+    
     # If something went wrong getting the data
     if not response.ok:
+        
         # Raise the corresponding error
         response.raise_for_status()
 
@@ -139,38 +161,54 @@ def get_pdb_data(pdb_id, model = None):
     # Previous line
     prev_line = ""
 
-    # Initialize the model to 1 (since in case there is
-    # no MODEL field, all lines of the only model present
-    # will be saved anyway)
-    model = 1 if model is None else model
-
+    # For each line in the data gathered
     for line in response.text.split("\n"):
 
-        # If you encounter the line specifying the model
-        if line.startswith("MODEL"):
-            # Get the model number
-            _, num = [i for i in line.split(" ") if i != ""]
-            # If it is the model of interest, save the line
-            # corresponding to info about it
-            if int(num) == model:
-                save_line = True
-            # Otherwise, signal that the line should not
-            # be saved
-            else:
-                save_line = False
+        # If no model was specified, all of them
+        # will be saved (if present)
+        if model is None:
 
-        # If you reached the end of the ATOM section
-        elif line.startswith("ENDMDL"):
-            # Start saving the lines again
-            save_line = True
-
-        # If the save-line switch is on, save the current line
-        if save_line:
-            prev_line = line
-            if prev_line.startswith("ENDMDL"):
-                continue
+            # If the line is not empty
             if line != "":
+
+                # Save the line
                 data.append(line)
+
+            # Continue
+            continue
+
+        # Otherwise
+        else:
+
+            # If you encounter the line specifying the model
+            if line.startswith("MODEL"):
+                
+                # Get the model number
+                _, num = [i for i in line.split(" ") if i != ""]
+                
+                # If it is the model of interest, save the line
+                # corresponding to info about it
+                if int(num) == model:
+                    save_line = True
+                
+                # Otherwise, signal that the line should not
+                # be saved
+                else:
+                    save_line = False
+
+            # If you reached the end of the ATOM section
+            elif line.startswith("ENDMDL"):
+                
+                # Start saving the lines again
+                save_line = True
+
+            # If the save-line switch is on, save the current line
+            if save_line:
+                prev_line = line
+                if prev_line.startswith("ENDMDL"):
+                    continue
+                if line != "":
+                    data.append(line)
 
     # Return the data retrieved
     return data
@@ -183,6 +221,7 @@ def get_missing_residues(pdb_data):
 
     # Create an empty dictionary to store the missing residues
     missing_residues = {}
+    
     # Create an empty list to store the strings represening the
     # missing residues (for logging purposes)
     missing_residues_list = []
@@ -191,6 +230,7 @@ def get_missing_residues(pdb_data):
     # missing residues' section
     parse = False
 
+    # For each line in the data
     for line in pdb_data:
 
         # If the line is a REMARK 465 record
@@ -209,6 +249,7 @@ def get_missing_residues(pdb_data):
                 # Turn on the switch for parsing the missing
                 # residues' section 
                 parse = True
+                
                 # Skip the line since there are no data on it
                 continue
 
@@ -240,7 +281,7 @@ def get_missing_residues(pdb_data):
     return missing_residues
 
 
-def get_structure_metadata(pdb_id):
+def get_structure_metadata(struct_id):
     """Get metadata associated to a structure in the PDB 
     from its mmCIF file.
     """
@@ -260,7 +301,7 @@ def get_structure_metadata(pdb_id):
     with NamedTemporaryFile("w") as tmp:
         
         # Get the mmCIF file
-        response = requests.get(mmcif_url.format(pdb_id))
+        response = requests.get(mmcif_url.format(struct_id))
         # Write the mmCIF file to the temporary file
         tmp.write(response.text)
          
@@ -278,6 +319,7 @@ def get_structure_metadata(pdb_id):
                 
                 # If the data type is not tuple
                 if datatype is not tuple:
+                    
                     # If the piece of data is available
                     if data[0] != "?":
                         # Convert it to the appropriate data type

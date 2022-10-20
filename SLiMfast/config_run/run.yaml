@@ -19,8 +19,9 @@ structures:
   # needs to be to be considered a true disordered region
   min_len_disorder: 10
 
-  #
-  pdb_dir: pdbs
+  # Name of the directory where to save the structures, if at least
+  # one SLiM of interest is found in them
+  struct_dir: pdbs
 
   # Settings for the dataframe that will contain the structures
   # of the protein of interest (if available)

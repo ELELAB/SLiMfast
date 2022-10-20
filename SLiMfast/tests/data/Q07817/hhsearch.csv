@@ -1,4 +1,4 @@
-,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,pdb_segments,pdb_id,pdb_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
+,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent
 1_3ihd.A,1,3ihd.A,Bcl-2-like protein 1; A,100.0,4.4E-40,5.1E-45,275.4,0.0,196,1-196,2-197,3ihd,A,97.0,1.45,136.1,7.3,Mus musculus,84.1
 2_3ilc.A,2,3ilc.A,Bcl-2-like protein 1; A,100.0,4.4E-40,5.1E-45,275.4,0.0,196,1-196,2-197,3ilc,A,97.0,1.45,136.8,7.3,Mus musculus,84.1
 3_1lxl.A,3,1lxl.A,"BCL-XL; APOPTOSIS, PROG",100.0,5.2E-40,6.0E-45,279.3,0.0,209,1-209,5-213,1lxl,A,100.0,1.476,176.5,6.8,Homo sapiens,89.7
@@ -86,4 +86,4 @@
 85_2yep.B,85,2yep.B,GLUTAMATE N-ACETYLTRANS,32.3,4.1E+01,4.8E-04,30.0,0.0,19,130-148,116-134,2yep,B,21.0,0.384,14.7,5.3,Streptomyces clavuligerus,8.2
 86_3it4.B,86,3it4.B,Arginine biosynthesis b,31.2,4.4E+01,5.1E-04,29.6,0.0,18,131-148,118-135,3it4,B,33.0,0.743,13.9,5.3,Mycobacterium tuberculosis,7.7
 87_3it6.B,87,3it6.B,Arginine biosynthesis b,31.2,4.4E+01,5.1E-04,29.6,0.0,18,131-148,118-135,3it6,B,33.0,0.743,13.9,5.3,Mycobacterium tuberculosis,7.7
-88_1vra.B,88,1vra.B,Arginine biosynthesis b,31.0,4.5E+01,5.2E-04,29.8,0.0,18,131-148,124-141,1vra,B,33.0,0.964,14.0,5.4,Bacillus halodurans,
+88_1vra.B,88,1vra.B,Arginine biosynthesis b,31.0,4.5E+01,5.2E-04,29.8,0.0,18,131-148,124-141,1vra,B,33.0,0.964,14.0,5.4,Bacillus halodurans,7.7

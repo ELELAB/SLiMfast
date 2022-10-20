@@ -5,7 +5,7 @@
 #
 #    Utilities to run external tools needed for the SLiMfast pipeline.
 #
-#    Copyright (C) 2021 Valentina Sora 
+#    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -29,6 +29,7 @@
 
 
 # Standard library
+import logging as log
 import os
 import subprocess
 # SLiMfast
@@ -36,6 +37,12 @@ from SLiMfast import (
     uniprot_tools,
     util,
     )
+
+
+
+# Get the module logger
+logger = log.getLogger(__name__)
+
 
 
 def run_process(executable,
@@ -53,16 +60,25 @@ def run_process(executable,
         [str(item) for opt_val_pair in options.items() \
          for item in opt_val_pair]
 
-    # The output of the process will be written either to
-    # the standard output or to an output file
+    # If no output file has been specified
     if outfile == "" or outfile is None:
-        # Launch the process (redirect errors to the standard output)
+        
+        # Launch the process (the output will be written to the
+        # standard output, and errors will be redirected
+        # to the standard output as well)
         popen = subprocess.Popen([executable] + args,
                                  stdout = subprocess.PIPE,
                                  cwd = wd)
+    
+    # If an output file has been specified
     else:
+
+        # Open the file
         outfile = open(outfile, "w")
-        # Launch the process (redirect errors to the standard output)
+
+        # Launch the process (the output will be written to the
+        # output file, and errors will be redirected to the
+        # output file as well)
         popen = subprocess.Popen([executable] + args,
                                  stdout = outfile,
                                  stderr = outfile,
@@ -73,7 +89,7 @@ def run_process(executable,
     
     # Return the Popen attributes of interest (cannot
     # return Popen itself since it is not serializable and
-    # we are launching the process with Dask)
+    # we may launch the process with Dask in the future)
     return {"args" : popen.args,
             "stdin" : popen.stdin,
             "stdout" : popen.stdout,
@@ -115,7 +131,7 @@ def run_hhpred(uniprot_id,
     # (so that the original dictionary is not modified)
     hhblits_params_copy = dict(hhblits_params)
 
-    # Path to the directory where HHblits will be run
+    # Set the path to the directory where HHblits will be run
     hhblits_dirname = os.path.join(wd, hhblits_params["wd"])
 
     # Set the path to the directory where HHblits will be run
@@ -124,7 +140,7 @@ def run_hhpred(uniprot_id,
     # Set the path to the output A3M file
     uniprot_a3m = \
         os.path.join(hhblits_dirname, uniprot_id + ".a3m")
-            
+
     # Add the FASTA file as input and the A3M file as output
     # to the options of HHblits
     hhblits_params_copy["options"] = \
@@ -133,11 +149,29 @@ def run_hhpred(uniprot_id,
 
     # If the output file does not exist yet (no previous run
     # has been performed)
-    if not os.path.exists(uniprot_a3m):  
+    if not os.path.exists(uniprot_a3m):
+
+        # Inform the user that HHblits is about to be run
+        infostr = \
+            f"Running HHblits for the protein with UniProt ID " \
+            f"{uniprot_id}..."
+        logger.info(infostr)
+        
         # Run HHblits for the generation of the query MSA
         hhblits_process = run_process(**hhblits_params_copy)
+    
     # If the output file exists, do not run HHblits
     else:
+
+        # Inform the user
+        warnstr = \
+            f"The file {uniprot_a3m} was found in {hhblits_dirname}." \
+            f" SLiMfast will use it as input to HHsearch, without " \
+            f"running HHblits again."
+        logger.warning(warnstr)
+
+        # No data will be associated with the HHblits process in this
+        # case, since HHblits was not run
         hhblits_process = None
 
 
@@ -147,7 +181,7 @@ def run_hhpred(uniprot_id,
     # Make a copy of the parameters set to run HHsearch
     hhsearch_params_copy = dict(hhsearch_params)
 
-    # Path to the directory where HHsearch will be run
+    # Set the path to the directory where HHsearch will be run
     hhsearch_dirname = os.path.join(wd, hhsearch_params["wd"])
 
     # Set the path to the directory where HHsearch will be run
@@ -165,16 +199,37 @@ def run_hhpred(uniprot_id,
     # If the output file does not exist yet (no previous run
     # has been performed)   
     if not os.path.exists(uniprot_hhsearch):
+
+        # Inform the user that HHsearch is about to be run
+        infostr = \
+            f"Running HHsearch for the protein with UniProt ID " \
+            f"{uniprot_id}..."
+        logger.info(infostr)
+        
         # Search profile HHM database(s) with HHsearch
         hhsearch_process = run_process(**hhsearch_params_copy)
+    
     # If the output file exists, do not run HHsearch
     else:
+
+        # Inform the user
+        warnstr = \
+            f"The file {uniprot_hhsearch} was found in " \
+            f"{hhsearch_dirname}. SLiMfast will not run HHsearch " \
+            f"again."
+        logger.warning(warnstr)
+        
+        # No data will be associated with the HHsearch process,
+        # since HHsearch was not run
         hhsearch_process = None
 
+    # Return data about the processes run
     return (hhblits_process, hhsearch_process), uniprot_hhsearch
 
 
-def run_dssp(pdb_file, dssp_params, wd):
+def run_dssp(pdb_file,
+             dssp_params,
+             wd):
     """Run DSSP to extract secondary structure information
     from a PDB file.
     """
@@ -201,10 +256,28 @@ def run_dssp(pdb_file, dssp_params, wd):
     # If the output file does not exist yet (no previous run
     # has been performed)     
     if not os.path.exists(dssp_output):
+
+        # Inform the user that DSSP is about to be run
+        infostr = \
+            f"Running DSSP on the PDB file {pdb_file}..."
+        logger.info(infostr)
+        
         # Run DSSP
         dssp_process = run_process(**dssp_params_copy)
+    
     # If the output file exists, do not run DSSP
     else:
+
+        # Inform the user
+        warnstr = \
+            f"The file {dssp_output} was found in " \
+            f"{dssp_dirname}. SLiMfast will not run DSSP " \
+            f"again."
+        logger.warning(warnstr)
+
+        # No data will be associated with the DSSP process,
+        # since DSSP was not run
         dssp_process = None
-        
+
+    # Return data about the process run
     return dssp_process, dssp_output

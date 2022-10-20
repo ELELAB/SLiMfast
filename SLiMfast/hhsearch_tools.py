@@ -7,7 +7,7 @@
 #    HHsearch output files and utility functions to manipulate
 #    such data.
 #
-#    Copyright (C) 2021 Valentina Sora 
+#    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -56,17 +56,19 @@ class HHsearchParser:
     SCI_FMT = "{:,.1E}"
 
     # Column names for the hits' table
-    COLNAMES_HITS = ["num", "hit", "description", "prob",
-                     "e_value", "p_value", "score", "ss", "cols",
-                      "uniprot_segments", "pdb_segments"]
+    COLNAMES_HITS = \
+        ["num", "hit", "description", "prob", "e_value", "p_value",
+         "score", "ss", "cols", "uniprot_segments", 
+         "struct_segments"]
 
     # Column names for the data retrieved from the aligments
-    COLNAMES_ALS = ["identities", "similarity", "sum_probs",
-                    "template_neff", "organism"]
+    COLNAMES_ALS = \
+        ["identities", "similarity", "sum_probs", "template_neff",
+         "organism"]
 
     # Column names for the additional columns that will
     # contain PDB ID and chain
-    COLNAMES_PDB = ["pdb_id", "pdb_chain"]
+    COLNAMES_STRUCT = ["struct_id", "struct_chain"]
 
     # Column name for the additional column that will
     # contain information about the sequence coverage
@@ -77,7 +79,7 @@ class HHsearchParser:
     # identifier)
     HIT_NUM_ID_SEP = "_"
 
-    # Data types for each column of the final dataframe
+    # Data types for each column of the final data frame
     DTYPES = \
         {"num" : "int64",
          "hit" : "object",
@@ -89,9 +91,9 @@ class HHsearchParser:
          "ss" : "float64",
          "cols" : "int64",
          "uniprot_segments" : "object",
-         "pdb_segments" : "object",
-         "pdb_id" : "object",
-         "pdb_chain" : "object",
+         "struct_segments" : "object",
+         "struct_id" : "object",
+         "struct_chain" : "object",
          "identities" : "float64",
          "similarity" : "float64",
          "sum_probs" : "float64",
@@ -103,10 +105,12 @@ class HHsearchParser:
     def __init__(self):
         """Initialize the parser.
         """
+        
         pass
 
 
-    def _get_section_indexes(self, f):
+    def _get_section_indexes(self,
+                             f):
         """Get the indexes of the hits' and alignments' sections.
         """
 
@@ -116,7 +120,8 @@ class HHsearchParser:
         parse_hits = False
             
         # Boolean switch to indicate when to parse the alignments;
-        # off at the beginning since they come after the hits' table
+        # off at the beginning since the alignments come after
+        # the hits' table
         parse_als = False
 
         # Initialize the indexes of the lines where the hits'
@@ -130,6 +135,8 @@ class HHsearchParser:
             # If you encounter an empty line
             if re.match(r"^\s*$", line):
 
+                # The first empty line defines the
+                # end of the metadata section
                 if not parse_hits and not parse_als:
                     
                     # Turn on the parsing for the hits' table
@@ -169,7 +176,9 @@ class HHsearchParser:
         return (start_hits_ix, end_hits_ix), (end_hits_ix+1, ix)
 
 
-    def _parse_hits(self, f, range_indexes):
+    def _parse_hits(self,
+                    f,
+                    range_indexes):
         """Parse the hits' section.
         """
 
@@ -189,18 +198,22 @@ class HHsearchParser:
         # For each line
         for i, line in enumerate(f):
 
-            # If you reached the beginning of the hits' section,
-            # start parsing
+            # If you reached the beginning of the hits' section
             if i == start_ix + 1:
+
+                # Turn on the switch for parsing
                 parse = True
 
-            # If you reached the end of the hits' section,
-            # exit from the loop
+            # If you reached the end of the hits' section
             elif i == end_ix:
+
+                # Exit from the loop
                 break
 
-            # If parsing is not active, continue
+            # If the parsing switch is not active
             if not parse:
+
+                # Continue
                 continue
 
             # Split the line with whitespaces and take all
@@ -226,7 +239,7 @@ class HHsearchParser:
                      "ss" : float(line[-4]),
                      "cols" : int(line[-3]),
                      "uniprot_segments" : line[-2],
-                     "pdb_segments" : line[-1].split("(")[0]})
+                     "struct_segments" : line[-1].split("(")[0]})
 
             # If the PDB segments are stored in the second-to-last
             # element of the line
@@ -242,7 +255,7 @@ class HHsearchParser:
                      "ss" : float(line[-5]),
                      "cols" : int(line[-4]),
                      "uniprot_segments" : line[-3],
-                     "pdb_segments" : line[-2]})
+                     "struct_segments" : line[-2]})
 
         # Convert the dictionary containing the hits into a data frame
         hits_df = pd.DataFrame(data)
@@ -251,7 +264,7 @@ class HHsearchParser:
         hits_df.columns = self.COLNAMES_HITS
 
         # Add two columns storing just the PDB ID and the chain
-        hits_df[self.COLNAMES_PDB] = \
+        hits_df[self.COLNAMES_STRUCT] = \
             hits_df["hit"].str.split(".", 1, expand = True)
 
         # Row names are composed by both the hit number and the
@@ -264,7 +277,9 @@ class HHsearchParser:
         return hits_df
 
 
-    def _parse_als(self, f, range_indexes):
+    def _parse_als(self,
+                   f,
+                   range_indexes):
         """Parse the alignment sections and returns a dictionary of
         dictionaries containing the strings corresponding to
         each alignment. Having the following alignment in a file
@@ -338,16 +353,21 @@ class HHsearchParser:
             if ix == range_indexes[0]:
                 parse = True
 
-            # If parsing is not active, continue
+            # If parsing is not active, continue (= skip
+            # all sections all the file that do not contain
+            # the alignments)
             if not parse:
                 continue
 
             # Ignore empty lines
-            if re.match(r"^\s*$", line):
+            elif re.match(r"^\s*$", line) \
+            and (not ix == range_indexes[1]):
                 continue
 
-            # If you just entered a new aligment...
-            elif line.startswith("No"):
+            # If you just entered a new aligment or you reached
+            # the end of the file
+            elif line.startswith("No") \
+            or (ix == range_indexes[1] and re.match(r"^\s*$", line)):
 
                 # If there are data from a previous hit to
                 # be stored
@@ -377,6 +397,15 @@ class HHsearchParser:
                     als[hit_id]["T"]["start"] = start_t
                     als[hit_id]["T"]["end"] = end_t
 
+                    # If you have reached the end of the file,
+                    # break out of the loop (no need to run
+                    # the next lines of code in this "elif"
+                    # block since, if you end up here, it is
+                    # because you only have one entry in
+                    # your results)
+                    if ix == range_indexes[1] and re.match(r"^\s*$", line):
+                        break
+
                     # Re-initialize all of them to None for
                     # the next hit
                     start_q = None
@@ -387,8 +416,6 @@ class HHsearchParser:
                 # Get the corresponding HHpred hit number
                 hit_num = int(line.rstrip("\n").lstrip("No "))
 
-                # Go to the next line
-                continue
                     
             # If it is the first line of metadata about the alignment
             elif line.startswith(">"):
@@ -408,7 +435,6 @@ class HHsearchParser:
                 # (first letter of the genus) must be uppercase
                 org = org[0].upper() + org[1:]
 
-                continue
 
             # If it is the second line of metadata about the alignment
             elif line.startswith("Probab"):
@@ -441,142 +467,143 @@ class HHsearchParser:
                 # Reset the sub-lines of the alignment
                 sublines = []
 
-                # Continue to the next line
-                continue
 
-            # Split the line by spaces and get rid of empty strings
-            line = [item for item in line.rstrip("\n").split(" ") \
-                    if item != ""]
-                    
-            # If the line starts with 'Q' or 'T', we are
-            # parsing data about the query and the template
-            if line[0] == "Q" or line[0] == "T":
-                
-                # The section (e.g. 'Q', 'T') is the first item
-
-                # The subsection (e.g. 'ss_pred', 'Consensus')
-                # is the second item
-
-                # The sequence is the third item
-
-                sec, subsec, seq = line[0:3]
-
-                # If the subsection is storing the aligned
-                # portion of the query
-                if subsec == "sp":
-                    # The subsection will be called 'query'
-                    subsec = "query"
-                # If the subsection is storing the aligned
-                # portion of the template
-                elif subsec[:4].lower() == hit_name[:4]:
-                    # The subsection will be called 'template'
-                    subsec = "template"
-
-                # The third item is the residue counter in lines
-                # that have them
-                if seq.isdigit():
-
-                    # If the section regards the query sequence
-                    if sec == "Q":
-                        # If no record of starting point for the
-                        # query sequence was found so far (i.e.
-                        # we are parsing the first portion of
-                        # the alignment, where the start of the
-                        # current portion is the start of the
-                        # whole aligned portion), save the
-                        # starting point
-                        if start_q is None:
-                            start_q = int(line[2])
-
-                        # Save the ending point of the current
-                        # portion of the query sequence (will
-                        # be the ending point of the whole aligned
-                        # portion only if the alignment is not
-                        # split on multiple lines)  
-                        end_q = int(line[4])
-
-                        # If no info about the percent of the full UniProt
-                        # query sequence covered by the current alignment
-                        # has been saved yet
-
-                        if num_res is None:
-                            # Get the total number of residues of the
-                            # UniProt query sequence
-                            num_res = int(line[5].lstrip("(").rstrip(")"))
-
-                    # If the section regards the template sequence
-                    elif sec == "T":
-                        # If no record of starting point for the
-                        # template sequence was found so far (i.e.
-                        # we are parsing the first portion of
-                        # the alignment, where the start of the
-                        # current portion is the start of the
-                        # whole aligned portion), save the
-                        # starting point
-                        if start_t is None:
-                            start_t = int(line[2])
-
-                        # Save the ending point of the current
-                        # portion of the template sequence (will
-                        # be the ending point of the whole aligned
-                        # portion only if the alignment is not
-                        # split on multiple lines)
-                        end_t = int(line[4])
-
-                    # The sequence is the fourth item
-                    seq = line[3]
-
-                        
-                # If it is the first time we are parsing that
-                # sub-line (sub-lines are splitted across
-                # multiple chuncks), add a new string for
-                # the data
-                if not subsec in als[hit_id][sec].keys():
-                    als[hit_id][sec][subsec] = seq
-
-                # ...otherwise, update the old one
-                else:
-                    als[hit_id][sec][subsec] += seq
-
-
-            # If the line regards the confidence of the alignment
-            elif line[0] == "Confidence":
-
-                # Name of the section
-                sec = "confidence"
-
-                # The sequence is the second item
-                seq = line[1]
-
-                # if it is the first time we are parsing the
-                # quality sub-line, add a new string for it
-                if len(als[hit_id][sec]) == 0:
-                    als[hit_id][sec] = seq
-
-                # ... otherwise, update the old one
-                else:
-                    als[hit_id][sec] += seq
-
-
-            # If the line does not start with either 'Q' or 
-            # 'T' or 'Confidence', we are parsing a line
-            # sorting the alignment quality
             else:
 
-                # Name of the section
-                sec = "quality"
+                # Split the line by spaces and get rid of empty strings
+                line = [item for item in line.rstrip("\n").split(" ") \
+                        if item != ""]
+                        
+                # If the line starts with 'Q' or 'T', we are
+                # parsing data about the query and the template
+                if line[0] == "Q" or line[0] == "T":
+                    
+                    # The section (e.g. 'Q', 'T') is the first item
 
-                # The sequence is the first item
-                seq = line[0]
+                    # The subsection (e.g. 'ss_pred', 'Consensus')
+                    # is the second item
 
-                # if it is the first time we are parsing the
-                # quality sub-line, add a new string for it
-                if len(als[hit_id][sec]) == 0:
-                    als[hit_id][sec] = seq
+                    # The sequence is the third item
 
-                # ... otherwise, update the old one
+                    sec, subsec, seq = line[0:3]
+
+                    # If the subsection is storing the aligned
+                    # portion of the query
+                    if subsec == "sp":
+                        # The subsection will be called 'query'
+                        subsec = "query"
+                    # If the subsection is storing the aligned
+                    # portion of the template
+                    elif subsec[:4].lower() == hit_name[:4]:
+                        # The subsection will be called 'template'
+                        subsec = "template"
+
+                    # The third item is the residue counter in lines
+                    # that have them
+                    if seq.isdigit():
+
+                        # If the section regards the query sequence
+                        if sec == "Q":
+                            # If no record of starting point for the
+                            # query sequence was found so far (i.e.
+                            # we are parsing the first portion of
+                            # the alignment, where the start of the
+                            # current portion is the start of the
+                            # whole aligned portion), save the
+                            # starting point
+                            if start_q is None:
+                                start_q = int(line[2])
+
+                            # Save the ending point of the current
+                            # portion of the query sequence (will
+                            # be the ending point of the whole aligned
+                            # portion only if the alignment is not
+                            # split on multiple lines)  
+                            end_q = int(line[4])
+
+                            # If no info about the percent of the full UniProt
+                            # query sequence covered by the current alignment
+                            # has been saved yet
+
+                            if num_res is None:
+                                # Get the total number of residues of the
+                                # UniProt query sequence
+                                num_res = int(line[5].lstrip("(").rstrip(")"))
+
+                        # If the section regards the template sequence
+                        elif sec == "T":
+                            # If no record of starting point for the
+                            # template sequence was found so far (i.e.
+                            # we are parsing the first portion of
+                            # the alignment, where the start of the
+                            # current portion is the start of the
+                            # whole aligned portion), save the
+                            # starting point
+                            if start_t is None:
+                                start_t = int(line[2])
+
+                            # Save the ending point of the current
+                            # portion of the template sequence (will
+                            # be the ending point of the whole aligned
+                            # portion only if the alignment is not
+                            # split on multiple lines)
+                            end_t = int(line[4])
+
+                        # The sequence is the fourth item
+                        seq = line[3]
+
+                            
+                    # If it is the first time we are parsing that
+                    # sub-line (sub-lines are splitted across
+                    # multiple chuncks), add a new string for
+                    # the data
+                    if not subsec in als[hit_id][sec].keys():
+                        als[hit_id][sec][subsec] = seq
+
+                    # ...otherwise, update the old one
+                    else:
+                        als[hit_id][sec][subsec] += seq
+
+
+                # If the line regards the confidence of the alignment
+                elif line[0] == "Confidence":
+
+                    # Name of the section
+                    sec = "confidence"
+
+                    # The sequence is the second item
+                    seq = line[1]
+
+                    # if it is the first time we are parsing the
+                    # quality sub-line, add a new string for it
+                    if len(als[hit_id][sec]) == 0:
+                        als[hit_id][sec] = seq
+
+                    # ... otherwise, update the old one
+                    else:
+                        als[hit_id][sec] += seq
+
+
+                # If the line does not start with either 'Q' or 
+                # 'T' or 'Confidence', we are parsing a line
+                # sorting the alignment quality
                 else:
-                    als[hit_id][sec] += seq
+
+                    # Name of the section
+                    sec = "quality"
+
+                    # The sequence is the first item
+                    seq = line[0]
+
+                    # if it is the first time we are parsing the
+                    # quality sub-line, add a new string for it
+                    if len(als[hit_id][sec]) == 0:
+                        als[hit_id][sec] = seq
+
+                    # ... otherwise, update the old one
+                    else:
+                        als[hit_id][sec] += seq
+                        
 
         # Convert the additional info found in the alignments
         # to a dataframe
@@ -587,10 +614,12 @@ class HHsearchParser:
         return als, als_df
 
 
-    def parse(self, hhsearch_output):
+    def parse(self,
+              hhsearch_output):
         """Parse the HHpred output file.
         """
 
+        # Open the HHsearch output file
         with open(hhsearch_output, "r") as f:
 
             # Get the indexes of the starting end ending
@@ -606,13 +635,20 @@ class HHsearchParser:
             hits_df = self._parse_hits(f = f,
                                        range_indexes = range_hits)
 
-            # Concatenate the dataframes containing information from
+            # Concatenate the data frames containing information from
             # the hits and alignments sections
             final_df = pd.concat([hits_df, als_df],
                                  axis = 1,
                                  sort = False)
 
-            # Return the final dataframe and the alignments themselves
+            # Inform the user that the HHsearch file has been
+            # successfully parsed
+            infostr = \
+                f"The HHsearch output file {hhsearch_output} has " \
+                f"been successfully parsed."
+            logger.info(infostr)
+
+            # Return the final data frame and the alignments themselves
             return final_df, als
 
 
@@ -621,8 +657,9 @@ class HHsearchParser:
 
 
 
-def filter_hits(hits, filters):
-    """Filter the hits' dataframe.
+def filter_hits(hits,
+                filters):
+    """Filter the hits' data frame.
     """
 
     # For each filter passed
@@ -650,30 +687,33 @@ def filter_hits(hits, filters):
             # Set the filtering condition
             cond = (hits[arg] == val)
 
-        # Filter the dataframe
+        # Filter the data frame
         hits = hits[cond]
 
-    # Return the filtered dataframe
+    # Return the filtered data frame
     return hits
 
 
-def sort_hits(hits, sort_by, ascending):
-    """Sort the hits' dataframe.
+def sort_hits(hits,
+              sort_by,
+              ascending):
+    """Sort the hits' data frame.
     """
 
     # Default to ascending sorting if no order is specified
     ascending = ascending if ascending is not None \
                 else [True]*len(sort_by)
             
-    # Sort the dataframe
+    # Sort the data frame
     hits = hits.sort_values(by = sort_by,
                             ascending = ascending)
 
-    # Return the sorted dataframe
+    # Return the sorted data frame
     return hits
 
 
-def get_aligned_region(hit_al, seq_range):
+def get_aligned_region(hit_al,
+                       seq_range):
     """Given a range of positions in the UniProt sequence,
     get the aligned portion in the alignment.
     """
@@ -729,6 +769,7 @@ def get_aligned_region(hit_al, seq_range):
     # If the aligned portion of the template is identical
     # to the sequence of interest
     if aligned_s == seq_q[rel_start_s:rel_end_s]:
+        
         # Return the aligned portion of the template, its
         # starting and ending points and 'True' to indicate
         # it perfectly matches the sequence of interest
@@ -737,6 +778,7 @@ def get_aligned_region(hit_al, seq_range):
     # If the aligned portion of the template does not match
     # the sequence of interest
     else:
+        
         # Return the aligned portion of the template, its
         # starting and ending points and 'False' to indicate
         # it does not match the sequence of interest
