@@ -1,12 +1,9 @@
-# Version of the configuration file
-version: 1
-
 # Working directory (where the pipeline will be run)
 wd: ""
 
 # SLiMs-related options
 slims:
-  # Options to be used in writing the output dataframes
+  # Options to be used in writing the output data frames
   # containing the SLiMs
   out:
     sep: ","
@@ -23,19 +20,21 @@ structures:
   # one SLiM of interest is found in them
   struct_dir: pdbs
 
-  # Settings for the dataframe that will contain the structures
+  # Settings for the data frame that will contain the structures
   # of the protein of interest (if available)
   protein:
     
-    # Dataframe settins
+    # Data frame settins
     df:
       
-      # Sort the dataframe
+      # Sort the data frame
       sort:
+        
         # Sorting criteria (will be applied in order)
         sort_by:
           - "resolution"
           - "deposition_date"
+        
         # Whether, for each sorting criterion, to sort in ascending
         # order (if False, descending order will be used)
         ascending:
@@ -48,20 +47,55 @@ structures:
       index: False
       date_format: "%Y/%m/%d"
 
-  # Settings for the dataframe that will contain the structures
+  # Settings for the data frame containing the AlphaFold
+  # structures
+  alphafold:
+
+    # Data frame settings
+    df:
+
+      # Sort the data frame
+      sort:
+        
+        # Sorting criteria (will be applied in order)
+        sort_by:
+          - "struct_version"
+
+        # Whether, for each sorting criterion, to sort in ascending
+        # order (if False, descending order will be used)
+        ascending:
+          - False
+    
+      # Filter the data frame
+      filter:
+        
+        # Only the last version of the AlphaFold structure
+        # will be kept (you can also pass an integer
+        # specifying the version, or "first")
+        version: "last"
+
+    # Output CSV settings (will be passed to DataFrame.to_csv())
+    out:
+      sep: ","
+      index: False
+      date_format: "%Y/%m/%d"
+
+  # Settings for the data frame that will contain the structures
   # of the homologs found for the protein of interest (if needed)
   homolog:
     
-    # Dataframe settings
+    # Data frame settings
     df:
       
-      # Sort the dataframe
+      # Sort the data frame
       sort:
+        
         # Sorting criteria (will be applied in order)
         sort_by:
           - "identities"
           - "resolution"
           - "deposition_date"
+        
         # Whether, for each sorting criterion, to sort in ascending
         # order (if False, descending order will be used)
         ascending:
@@ -69,14 +103,17 @@ structures:
           - True
           - False
     
-      # Filter the dataframe
+      # Filter the data frame
       filter:
+        
         # Only homologs covering a portion of the protein of
         # interest higher than this threshold will be kept
         min_identities: 30
+        
         # Only homologs covering a portion of the protein of
         # interest higher than this threshold will be kept
         min_uniprot_coverage_percent: 20
+        
         # Only proteins from humans will be kept
         organism: "Homo sapiens"
 
@@ -92,35 +129,45 @@ structures:
 
     # prob, e_value, p_value, score, identities, similarity,
     # sum_probs, template_neff, organism, coverage,
-    # coverage_percent, experimental_method, resolution,
+    # coverage_percent, method, resolution,
     # deposition_date
 
 # HHblits settings
 hhblits:
+  
   # Run options
   run:
+    
     # Path to the executable
     executable: "/usr/local/hh-suite/build/bin/hhblits"
+    
     # Name of the directory where to run HHblits (if it is an empty
     # string, it will be run in the pipeline working directory)
     wd: ""
+    
     # Name of the output file where the log of the run will be stored
     outfile: "hhblits.log"
+    
     # HHblits options
     options:
       -d: "/data/databases/hh-suite-20210225/UniRef30_2020_06"
 
 # HHsearch settings
 hhsearch:
+  
   # Run options
   run:
+    
     # Path to the executable
     executable: "/usr/local/hh-suite/build/bin/hhsearch"
+    
     # Name of the directory where to run HHsearch (if it is an empty
     # string, it will be run in the pipeline working directory)
     wd: ""
+    
     # Name of the output file where the log of the run will be stored
     outfile: "hhsearch.log"
+    
     # HHsearch options
     options:
 
@@ -135,29 +182,40 @@ hhsearch:
       # one per line. 
       # Multiple dbs, HMMs, or pal files with -d ’<db1> <db2>...’
       -d: "/data/databases/hh-suite-20210225/pdb70"
+      
       # Write results in standard format to this output file
       -o: "hhsearch_output.txt"
+      
       # Maximum number of query/template sequences displayed
       # (default: 1)
       -seq: 1
+      
       # Minimum probability in summary and alignment list (default: 20)
       -p: 20
+      
       # Maximum number of lines in summary hit list (default: 500)
       -Z: 250
+      
       # Minimum number of lines in summary hit list (default: 10)
       -z: 1
+      
       # Maximum number of alignments in alignment list (default: 500)
       -B: 250
+      
       # Minimum number of alignments in alignment list (default: 10)
       -b: 1
+      
       # Max length of database string to be printed in the HHR
       # (standard format) file
       -dbstrlen: 10000
+      
       # Do NOT realign displayed hits with MAC algorithm
       # (default: realign)
       -norealign: True
+      
       # Use local alignment mode for searching/ranking
       -loc: True
+      
       # Amino acid score (tja: template HMM at column j) (default: 1)
       # 0 = log2 Sum(tja*qia/pa) (pa: aa background frequencies)
       # 1 = log2 Sum(tja*qia/pqa) (pqa = 1/2*(pa+ta) )
@@ -165,13 +223,16 @@ hhsearch:
       # 3 = log2 Sum(tja*qia/qa) (qa: av. aa freqs in query)
       # 5 = local amino acid composition correction
       -sc: 1
+      
       # Secondary structure score (default: 2)
       # 0 = no ss scoring﻿
       # 1,2 = ss scoring after or during alignment
       # 3,4 = ss scoring after or during alignment, predicted vs. predicted
       -ssm: 2
+      
       # Context file for computing context-specific pseudocounts
       -contxt: "/usr/local/hh-suite/data/context_data.crf"
+      
       # Max number of HMM columns (default: 15002)
       -maxres: 32000
 
@@ -180,17 +241,21 @@ dssp:
   
   # Run options
   run:
+    
     # Path to the executable
     executable: "/usr/local/dssp-3.0.10/bin/mkdssp"
+    
     # Name of the directory where to run DSSP for each PDB structure
     # (if it is an empty string, it will be run in the pipeline 
     # working directory)
     wd: "dssp"
+    
     # DSSP options (empty dictionary if no option is passed)
     options: {}
   
   # Processing options for the DSSP output
   processing:
+    
     # Mapping of DSSP symbols to custom symbols
     dssp_mapping:
       G: "H"
@@ -200,10 +265,12 @@ dssp:
       S: "-"
       E: "E"
       T: "-"
+    
     # How to represent unstructures residues (represented by
     # whitespaces in DSSP outputs) in the FASTA-like DSSP
     # sequence
     whitespace_repr: "-"
+    
     # Which symbols of the DSSP mapping represent disordered residues
     disorder_symbols:
       - "-"

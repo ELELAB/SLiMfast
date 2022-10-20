@@ -3,7 +3,7 @@
 
 #    pdb_tools.py
 #
-#    Utility functions retrieving data from PDB/mmCIF files or
+#    Utility functions to retrieve data from PDB/mmCIF files or
 #    from the PDB/PDBe database.
 #
 #    Copyright (C) 2022 Valentina Sora 
@@ -302,6 +302,7 @@ def get_structure_metadata(struct_id):
         
         # Get the mmCIF file
         response = requests.get(mmcif_url.format(struct_id))
+        
         # Write the mmCIF file to the temporary file
         tmp.write(response.text)
          
@@ -322,23 +323,32 @@ def get_structure_metadata(struct_id):
                     
                     # If the piece of data is available
                     if data[0] != "?":
+                        
                         # Convert it to the appropriate data type
                         data = str(datatype(data[0]))
+                    
+                    # Otherwise
                     else:
+
+                        # Data will be None
                         data = None
                 
                 # If the data type is tuple   
                 else:
+                    
                     # Join the pieces of data in a string,
                     # separated by a semicolon
                     data = \
                         ":".join(datatype(\
                             [item for item in data if item != "?"]))        
+            
+            # Otherwise
             else:
+                
                 # The field is not present
                 data = None
 
-            # Append data to the list
+            # Add data to the dictionary
             metadata[col] = data
 
         # Return the dictionary of metadata

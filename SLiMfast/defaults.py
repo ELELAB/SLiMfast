@@ -33,22 +33,39 @@ from pkg_resources import resource_filename, Requirement
 
 
 
+# Data frame field containing a structure's AlphaFold ID
+ALPHAFOLD_ID_FIELD = "alphafold_id"
+
 # Directory where the substitution matrices are stored
 CONFIG_RUN_DIR = \
     resource_filename(Requirement("SLiMfast"), "SLiMfast/config_run")
+
+# Separator for numeric ranges
+RANGE_SEP = "-"
 
 # Separator for starting and ending points of different
 # UniProt segments
 SEGMENTS_SEP = ";"
 
-# Separator for numeric ranges
-RANGE_SEP = "-"
+# Data frame field containing the structures' chains
+STRUCT_CHAIN_FIELD = "struct_chain"
 
-# Data frame field containing structure's IDs
+# Data frame field containing the fragment number of
+# a structure from the AlphaFold Protein Structure
+# Database
+STRUCT_FRAGMENT_FIELD = "struct_fragment"
+
+# Data frame field containing the structures' IDs
 STRUCT_ID_FIELD = "struct_id"
 
-# Data frame field containing structures' chains
-STRUCT_CHAIN_FIELD = "struct_chain"
+# Data frame field containing ranges representing
+# segments of the structures
+STRUCT_SEGMENTS_FIELD = "struct_segments"
+
+# Data frame field containing the version of
+# a structure from the AlphaFold Protein Structure
+# Database
+STRUCT_VERSION_FIELD = "struct_version" 
 
 # Data frame field containing UniProt IDs
 UNP_ID_FIELD = "uniprot_id"
@@ -57,6 +74,3 @@ UNP_ID_FIELD = "uniprot_id"
 # UniProt segments 
 UNP_SEGMENTS_FIELD = "uniprot_segments"
 
-# Data frame field containing ranges representing
-# segments of the structures
-STRUCT_SEGMENTS_FIELD = "struct_segments"

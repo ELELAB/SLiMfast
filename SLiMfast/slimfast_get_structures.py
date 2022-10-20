@@ -4,7 +4,8 @@
 #    slimfast_get_structures.py
 #
 #    Given the UniProt ID of a protein, get data about its available
-#    PDB structures and save such data in a CSV file.
+#    structures in the Protein Data Bank and save such data
+#    in a CSV file.
 #
 #    Copyright (C) 2022 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
@@ -52,7 +53,8 @@ def get_args():
     # Set the script description
     description = \
         "\nGiven the UniProt ID of a protein, get data about its " \
-        "available PDB structures and save such data in a CSV file.\n"
+        "available structures in the Protein Data Bank and save " \
+        "the data in a CSV file.\n"
 
     # Set the default name for the log file
     log_file_default = "slimfast_get_structures.log"
@@ -148,7 +150,8 @@ def run(uniprot_id,
     # Get the working directory where the pipeline will be run
     wd = util.get_wd(config_run)
 
-    # Get the configuration for the PDB structures
+    # Get the configuration for the structures of the protein of
+    # interest to be found in the Protein Data Bank
     struct_params = config_run["structures"]["protein"]
 
 
@@ -157,6 +160,7 @@ def run(uniprot_id,
     
     # Get all structures (mapped to the correct chains) containing
     # the protein whose sequence is represented by the UniProt ID
+    # in the Protein Data Bank
     try:
         
         structures_df = \
@@ -170,8 +174,8 @@ def run(uniprot_id,
         # Report it and exit
         errstr = \
             f"Could not retrieve the data about the structures " \
-            f"available for the protein with UniProt ID " \
-            f"{uniprot_id}: {e}"
+            f"available in the Protein Data Bank for the protein " \
+            f"with UniProt ID {uniprot_id}: {e}"
         logger.exception(errstr)
         sys.exit(errstr)
 
@@ -181,10 +185,8 @@ def run(uniprot_id,
         
         # Inform the user and do not generate any output file
         warnstr = \
-            f"No structures were found matching the criteria " \
-            f"provided in the configuration file for the protein " \
-            f"with UniProt ID {uniprot_id}. Relaxing the filtering " \
-            f"criteria may help in getting more hits."
+            f"No structures were found in the Protein Data Bank " \
+            f"for the protein with UniProt ID {uniprot_id}."
         logger.warning(warnstr)
 
     # If structures were found
@@ -199,10 +201,10 @@ def run(uniprot_id,
 
         # Inform the user that the file was successfully written
         infostr = \
-            f"The data frame containing data about the available " \
-            f"structures of the protein with UniProt ID " \
-            f"{uniprot_id} has been successfully written to " \
-            f"{output_protein_path}."
+            f"The data frame containing data about the structures " \
+            f"of the protein with UniProt ID {uniprot_id} found " \
+            f"in the Protein Data Bank has been successfully " \
+            f"written to {output_protein_path}."
         logger.info(infostr)
 
         # Return the data frame and the output CSV file
