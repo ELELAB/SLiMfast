@@ -1,15 +1,32 @@
+
+#------------------------------ General ------------------------------#
+
+
+
 # Working directory (where the pipeline will be run)
 wd: ""
 
+
 # SLiMs-related options
 slims:
+  
   # Options to be used in writing the output data frames
   # containing the SLiMs
   out:
+
+    # Field separator
     sep: ","
+
+    # Whether to write the data frame's index
     index: False
 
-# Settings to be used for the PDB structures found
+
+
+#---------------------------- Structures -----------------------------#
+
+
+
+# Settings to be used for the structures
 structures:
 
   # Minimum length (in number of residues) that a disordered region
@@ -18,13 +35,18 @@ structures:
 
   # Name of the directory where to save the structures, if at least
   # one SLiM of interest is found in them
-  struct_dir: pdbs
+  struct_dir: structures
+
+
+  #-------------- Structures of the protein in the PDB ---------------#
+
 
   # Settings for the data frame that will contain the structures
-  # of the protein of interest (if available)
+  # of the protein of interest (if available) and for the output
+  # file that will contain the data frame
   protein:
     
-    # Data frame settins
+    # Data frame settings
     df:
       
       # Sort the data frame
@@ -43,12 +65,23 @@ structures:
     
     # Output CSV settings (will be passed to DataFrame.to_csv())
     out:
+
+      # Field separator
       sep: ","
+
+      # Whether to write the data frame's index
       index: False
+
+      # How to format dates (for example, for the deposition date
+      # of a structure)
       date_format: "%Y/%m/%d"
 
-  # Settings for the data frame containing the AlphaFold
-  # structures
+
+  #--------- Structures of the protein in the AlphaFold DB ----------#
+
+
+  # Settings for the data frame containing the AlphaFold structures
+  # and for the output file that will contain the data frame
   alphafold:
 
     # Data frame settings
@@ -69,19 +102,32 @@ structures:
       # Filter the data frame
       filter:
         
-        # Only the last version of the AlphaFold structure
-        # will be kept (you can also pass an integer
-        # specifying the version, or "first")
-        version: "last"
+        # Which version(s) of the structure to keep in the
+        # data frame
+        struct_version_in:
+          - 2
+          - 3
 
     # Output CSV settings (will be passed to DataFrame.to_csv())
     out:
+
+      # Field separator
       sep: ","
+
+      # Whether to write the data frame's index
       index: False
+
+      # How to format dates (for example, for the deposition date
+      # of a structure)
       date_format: "%Y/%m/%d"
 
+
+  #-------------- Structures of the homologs in the PDB --------------#
+
+
   # Settings for the data frame that will contain the structures
-  # of the homologs found for the protein of interest (if needed)
+  # of the homologs found for the protein of interest and for the
+  # output file that will contain the data frame
   homolog:
     
     # Data frame settings
@@ -119,8 +165,15 @@ structures:
 
     # Output CSV settings (will be passed to DataFrame.to_csv())
     out:
+
+      # Field separator
       sep: ","
-      index: True
+
+      # Whether to write the data frame's index
+      index: False
+
+      # How to format dates (for example, for the deposition date
+      # of a structure)
       date_format: "%Y/%m/%d"
 
     # Other available filters (can represent an exact value or a
@@ -132,6 +185,12 @@ structures:
     # coverage_percent, method, resolution,
     # deposition_date
 
+
+
+#-------------------------- HHpred pipeline --------------------------#
+
+
+
 # HHblits settings
 hhblits:
   
@@ -142,8 +201,8 @@ hhblits:
     executable: "/usr/local/hh-suite/build/bin/hhblits"
     
     # Name of the directory where to run HHblits (if it is an empty
-    # string, it will be run in the pipeline working directory)
-    wd: ""
+    # string, it will be run in the pipeline's working directory)
+    wd: "hhpred"
     
     # Name of the output file where the log of the run will be stored
     outfile: "hhblits.log"
@@ -151,6 +210,7 @@ hhblits:
     # HHblits options
     options:
       -d: "/data/databases/hh-suite-20210225/UniRef30_2020_06"
+
 
 # HHsearch settings
 hhsearch:
@@ -162,8 +222,8 @@ hhsearch:
     executable: "/usr/local/hh-suite/build/bin/hhsearch"
     
     # Name of the directory where to run HHsearch (if it is an empty
-    # string, it will be run in the pipeline working directory)
-    wd: ""
+    # string, it will be run in the pipeline's working directory)
+    wd: "hhpred"
     
     # Name of the output file where the log of the run will be stored
     outfile: "hhsearch.log"
@@ -182,9 +242,6 @@ hhsearch:
       # one per line. 
       # Multiple dbs, HMMs, or pal files with -d ’<db1> <db2>...’
       -d: "/data/databases/hh-suite-20210225/pdb70"
-      
-      # Write results in standard format to this output file
-      -o: "hhsearch_output.txt"
       
       # Maximum number of query/template sequences displayed
       # (default: 1)
@@ -236,6 +293,12 @@ hhsearch:
       # Max number of HMM columns (default: 15002)
       -maxres: 32000
 
+
+
+#------------------------------- DSSP --------------------------------#
+
+
+
 # DSSP settings
 dssp:
   
@@ -246,7 +309,7 @@ dssp:
     executable: "/usr/local/dssp-3.0.10/bin/mkdssp"
     
     # Name of the directory where to run DSSP for each PDB structure
-    # (if it is an empty string, it will be run in the pipeline 
+    # (if it is an empty string, it will be run in the pipeline's
     # working directory)
     wd: "dssp"
     

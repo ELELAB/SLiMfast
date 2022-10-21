@@ -42,6 +42,7 @@ import yaml
 from SLiMfast.defaults import (
     ALPHAFOLD_ID_FIELD,
     CONFIG_RUN_DIR,
+    HIT_ID_FIELD,
     RANGE_SEP,
     SEGMENTS_SEP,
     STRUCT_CHAIN_FIELD,
@@ -53,6 +54,7 @@ from SLiMfast.defaults import (
     UNP_SEGMENTS_FIELD)
 from SLiMfast import (
     alphafold_tools,
+    dataframe_tools,
     disprot_tools,
     dssp_tools,
     hhsearch_tools,
@@ -118,7 +120,7 @@ def get_arguments(description,
     if "input_alphafold_file" in kwargs.keys():
         ia_help = \
             "Input CSV file containing the structures of the " \
-            "protein of interest found in the Alphafold Protein " \
+            "protein of interest found in the AlphaFold Protein " \
             "Structure Database."
         parser.add_argument("-ia", "--input-alphafold-file",
                              type = str,
@@ -174,11 +176,11 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_get_structures
     if "output_protein_file" in kwargs.keys():
-        op_default = "protein.csv"
+        op_default = "structures.csv"
         op_help = \
             f"Name of the output CSV file containing the structures " \
             f"of the protein of interest found in the Protein Data " \
-            f"Bank. Default is '{op_default}'."
+            f"Bank. The default is '{op_default}'."
         parser.add_argument("-op", "--output-protein-file",
                              type = str,
                              default = op_default,
@@ -193,7 +195,7 @@ def get_arguments(description,
         oa_help = \
             f"Name of the output CSV file containing the structures " \
             f"of the protein of interest found in the AlphaFold " \
-            f"Protein Structure Database. Default is " \
+            f"Protein Structure Database. The default is " \
             f"'{oa_default}'."
         parser.add_argument("-oa", "--output-alphafold-file",
                              type = str,
@@ -209,7 +211,7 @@ def get_arguments(description,
         oh_help = \
             f"Name of the output CSV file containing the structures " \
             f"of the homologs of the protein of interest found in " \
-            f"the Protein Data Bank. Default is '{oh_default}'."
+            f"the Protein Data Bank. The default is '{oh_default}'."
         parser.add_argument("-oh", "--output-homologs-file",
                              type = str,
                              default = oh_default,
@@ -226,7 +228,7 @@ def get_arguments(description,
             f"alignments between each of the structures of the " \
             f"homologs of the protein of interest found in the " \
             f"Protein Data Bank and the protein itself. " \
-            f"Default is '{oal_default}'."
+            f"The default is '{oal_default}'."
         parser.add_argument("-oal", "--output-alignments-file",
                              type = str,
                              default = oal_default,
@@ -241,7 +243,7 @@ def get_arguments(description,
         osp_help = \
             f"Name of the output CSV file containing the SLiMs " \
             f"found in the structures of the protein of interest " \
-            f"found in the Protein Data Bank. Default is " \
+            f"found in the Protein Data Bank. The default is " \
             f"'{osp_default}'."
         parser.add_argument("-osp", "--output-slims-protein-file",
                              type = str,
@@ -259,7 +261,7 @@ def get_arguments(description,
             f"Name of the output CSV file containing the SLiMs " \
             f"found in the structures of the protein of interest " \
             f"found in the AlphaFold Protein Structure Database. " \
-            f"Default is '{osa_default}'."
+            f"The default is '{osa_default}'."
         parser.add_argument("-osa", "--output-slims-alphafold-file",
                              type = str,
                              default = osa_default,
@@ -274,9 +276,9 @@ def get_arguments(description,
         osh_default = "slims_homologs.csv"
         osh_help = \
             f"Name of the output CSV file containing the SLiMs " \
-            f"found in the available structures of the homologs " \
-            f"of the protein of interest found in the Protein Data "\
-            f"Bank. Default is '{osh_default}'."
+            f"found in the structures of the homologs of the " \
+            f"protein of interest found in the Protein Data "\
+            f"Bank. The default is '{osh_default}'."
         parser.add_argument("-osh", "--output-slims-homologs-file",
                              type = str,
                              default = osh_default,
@@ -292,7 +294,7 @@ def get_arguments(description,
             f"Name of the output CSV file containing the SLiMs not " \
             f"found in the structures available either for the protein " \
             f"of interest or for the homologs, but annotated as " \
-            f"disordered in DisProt. Default is '{osd_default}'."
+            f"disordered in DisProt. The default is '{osd_default}'."
         parser.add_argument("-osd", "--output-slims-disprot-file",
                              type = str,
                              default = osd_default,
@@ -323,7 +325,7 @@ def get_arguments(description,
     # - slimfast_find_slims
     if "log_file" in kwargs.keys():
         lf_default = log_file_default
-        lf_help = f"Name of the log file. Default is {lf_default}."
+        lf_help = f"Name of the log file. The default is {lf_default}."
         parser.add_argument("-lf", "--log-file",
                             type = str,
                             default = lf_default,
@@ -794,7 +796,7 @@ def get_structures_data_protein(uniprot_id,
         raise Exception(errstr)
 
 
-    #----------------------- Sort the datarame -----------------------#
+    #---------------------- Sort the data frame ----------------------#
 
 
     # Try to sort the dataframe according to the given criteria
@@ -895,7 +897,39 @@ def get_structures_data_alphafold(uniprot_id,
         raise Exception(errstr)
 
 
-    #----------------------- Sort the datarame -----------------------#
+    #---------------------- Filter the data frame --------------------#
+
+
+    # Try to filter the data frame
+    try:
+        
+        df = dataframe_tools.filter_df(df = df,
+                                       filters = kwargs["filter"])
+
+        # Inform the user that the data frame was successfully
+        # filtered
+        infostr = \
+            f"The data frame of the structures of the protein " \
+            f"with UniProt ID {uniprot_id} found in the AlphaFold " \
+            f"Protein Structure Database has been successfully " \
+            f"filtered."
+        logger.info(infostr)
+
+    # If something went wrong
+    except Exception as e:
+
+        # Log the error
+        errstr = \
+            f"Could not filter the data frame of the structures " \
+            f"of the protein with UniProt ID {uniprot_id} found in " \
+            f"the AlphaFold Protein Structure Database. Exception: {e}"
+        logger.exception(errstr)
+        
+        # Re-raise the exception
+        raise Exception(errstr)
+
+
+    #---------------------- Sort the data frame ----------------------#
 
 
     # Try to sort the dataframe according to the given criteria
@@ -943,7 +977,7 @@ def get_structures_data_homologs(uniprot_id,
                                  wd,
                                  **kwargs):
     """Get the data regarding the structures of the homologs of
-    the protein of interest.
+    the protein of interest in the Protein Data Bank.
     """
 
 
@@ -953,6 +987,7 @@ def get_structures_data_homologs(uniprot_id,
     # Inform the user that the HHpred pipeline is about to run
     infostr = \
         "Preparing to run the HHpred pipeline (HHpred + HHsearch)..."
+    logger.info(infostr)
 
     # Try to run the HHpred pipeline
     try:
@@ -989,9 +1024,9 @@ def get_structures_data_homologs(uniprot_id,
         # Inform the user that the IDs of the available structures
         # for the homologs were successfully retrieved
         infostr = \
-            f"The IDs of the available PDB structures for the " \
-            f"homologs of the protein with UniProt ID {uniprot_id} " \
-            f"have been successfully retrieved."
+            f"The IDs of the structures of the homologs of the " \
+            f"protein with UniProt ID {uniprot_id} in the Protein " \
+            f"Data Bank have been successfully retrieved."
         logger.info(infostr)
 
     # If something went wrong
@@ -999,13 +1034,18 @@ def get_structures_data_homologs(uniprot_id,
 
         # Log the error
         errstr = \
-            f"Could not get the available structures of the " \
-            f"homologs of the protein with UniProt ID " \
-            f"{uniprot_id}. Exception: {e}"
+            f"Could not get the structures of the homologs of the " \
+            f"protein with UniProt ID {uniprot_id} found in the " \
+            f"Protein Data Bank. Exception: {e}"
         logger.exception(errstr)
         
         # Re-raise the exception
         raise Exception(errstr)
+
+    # Convert the index of the data frame into one of the columns
+    # storing the unique IDs of the hits
+    hits = hits.reset_index()
+    hits = hits.rename(columns = {"index" : HIT_ID_FIELD})
 
 
     #------------------------ Add the metadata -----------------------#
@@ -1022,30 +1062,36 @@ def get_structures_data_homologs(uniprot_id,
 
         # Log the error
         errstr = \
-            f"Could not add metadata to the available " \
-            f"structures of the homologs of the protein with " \
-            f"UniProt ID {uniprot_id}. Exception: {e}"
+            f"Could not add metadata to the structures of the " \
+            f"homologs of the protein with UniProt ID {uniprot_id} " \
+            f"found in the Protein Data Bank. Exception: {e}"
         logger.exception(errstr)
         
         # Re-raise the exception
         raise Exception(errstr)
 
 
-    #---------------------- Filter the dataframe ---------------------#
+    #---------------------- Filter the data frame --------------------#
 
 
     # Try to filter the hits
     try:
         
-        hits = hhsearch_tools.filter_hits(hits = hits,
-                                          filters = kwargs["filter"])
+        hits = dataframe_tools.filter_df(df = hits,
+                                         filters = kwargs["filter"])
+
+        # Only keep the hits in the filtered data frame in the
+        # alignments
+        als = \
+            {hit : data for hit, data in als.items() \
+             if hit in hits[HIT_ID_FIELD].tolist()}
 
         # Inform the user that the data frame was successfully
         # filtered
         infostr = \
-            f"The data frame of the available structures of the " \
-            f"homologs of the protein with UniProt ID {uniprot_id}" \
-            f"has been successfully filtered."
+            f"The data frame of the structures of the homologs of " \
+            f"protein with UniProt ID {uniprot_id} found in the " \
+            f"Protein Data Bank has been successfully filtered."
         logger.info(infostr)
     
     # If something went wrong
@@ -1053,9 +1099,10 @@ def get_structures_data_homologs(uniprot_id,
 
         # Log the error
         errstr = \
-            f"Could not filter the data frame of the available " \
-            f"structures of the homologs of the protein with " \
-            f"UniProt ID {uniprot_id}. Exception: {e}"
+            f"Could not filter the data frame of the structures " \
+            f"of the homologs of the protein with UniProt ID " \
+            f"{uniprot_id} found in the Protein Data Bank. " \
+            f"Exception: {e}"
         logger.exception(errstr)
         
         # Re-raise the exception
@@ -1068,15 +1115,16 @@ def get_structures_data_homologs(uniprot_id,
     # Try to sort the hits
     try:
         
-        hits = hhsearch_tools.sort_hits(hits = hits, 
-                                        **kwargs["sort"])
+        hits = \
+            hits.sort_values(by = kwargs["sort"]["sort_by"], 
+                             ascending = kwargs["sort"]["ascending"])
 
         # Inform the user that the data frame was successfully
         # sorted
         infostr = \
-            f"The data frame of the available structures of the " \
-            f"homologs of the protein with UniProt ID {uniprot_id}" \
-            f"has been successfully sorted."
+            f"The data frame of the structures of the homologs of " \
+            f"the protein with UniProt ID {uniprot_id} found in the " \
+            f"Protein Data Bank has been successfully sorted."
         logger.info(infostr)
     
     # If something went wrong
@@ -1084,9 +1132,10 @@ def get_structures_data_homologs(uniprot_id,
 
         # Log the error
         errstr = \
-            f"Could not sort the data frame of the available " \
-            f"structures of the homologs of the protein with " \
-            f"UniProt ID {uniprot_id}. Exception: {e}"
+            f"Could not sort the data frame of the structures of " \
+            f"the homologs of the protein with UniProt ID " \
+            f"{uniprot_id} found in the Protein Data Bank. " \
+            f"Exception: {e}"
         logger.exception(errstr)
         
         # Re-raise the exception
@@ -1094,10 +1143,11 @@ def get_structures_data_homologs(uniprot_id,
 
     infostr = \
         f"All data for the structures the homologs of the protein " \
-        f"with {uniprot_id} have been successfully collected."
+        f"with {uniprot_id} found in the Protein Data Bank " \
+        f"have been successfully collected."
     logger.info(infostr)
 
-    # Return the data fame containing the data about the homologs
+    # Return the data frame containing the data about the homologs
     # and the dictionary of alignments
     return hits, als
 
@@ -1279,14 +1329,18 @@ def find_slims(source,
     # For each row in the data frame (= structure)
     for index, row in structures_df.iterrows():
 
+        # If no SLiMs are left to search
+        if set(slims_to_find) == set(slims_found):
+
+            # Exit the loop
+            break
+
         # Create an empty list to store the SLiMs
         # found in each structure
         slims_in_struct = []
 
-        # Get PDB ID, chain, the segments of the protein
-        # of interest covered by the structure and
-        # the ID of the hit of HHsearch corresponding
-        # to the current row of the data frame
+        # Get the structure ID, chain, the segments of the protein
+        # of interest covered by the structure
         struct_id = row[STRUCT_ID_FIELD]
         struct_chain = row[STRUCT_CHAIN_FIELD]
         uniprot_segments = row[UNP_SEGMENTS_FIELD]
@@ -1303,34 +1357,72 @@ def find_slims(source,
         # chains than can represent the protein of interest)
         if not struct_id in struct_data_dict.keys():
 
-            # Try to fetch the structure's data. Use only the first
-            # model for multi-model structures
-            try:
-                
-                struct_data = \
-                    pdb_tools.get_pdb_data(struct_id = struct_id,
-                                           model = 1)
+            # If the structure comes from the Protein Data Bank
+            if source in ("protein", "homologs"):
 
-                # Inform the user that data for the current structure
-                # were successfully retrieved
-                infostr = \
-                    f"Data for the structure with ID {struct_id} " \
-                    f"have been successfully retrieved for the " \
-                    f"Protein Data Bank."
-                logger.info(infostr)
-            
-            # If something went wrong
-            except Exception as e:
+                # Try to fetch the structure's data. Use only the first
+                # model for multi-model structures
+                try:
+                    
+                    struct_data = \
+                        pdb_tools.get_pdb_data(struct_id = struct_id,
+                                               model = 1)
 
-                # Log a warning
-                warnstr = \
-                    f"Could not fetch data for the structure " \
-                    f"with ID {struct_id}. This structure will be " \
-                    f"ignored. Exception: {e}"
-                logger.warning(warnstr)
+                    # Inform the user that data for the current structure
+                    # were successfully retrieved
+                    infostr = \
+                        f"Data for the structure with ID {struct_id} " \
+                        f"have been successfully retrieved for the " \
+                        f"Protein Data Bank."
+                    logger.info(infostr)
                 
-                # Go to the next structure
-                continue
+                # If something went wrong
+                except Exception as e:
+
+                    # Log a warning
+                    warnstr = \
+                        f"Could not fetch data for the structure " \
+                        f"with ID {struct_id} from the Protein Data " \
+                        f"Bank. This structure will be ignored. " \
+                        f"Exception: {e}"
+                    logger.warning(warnstr)
+                    
+                    # Go to the next structure
+                    continue
+
+            # If the structure comes from the AlphaFold Protein
+            # Structure Database
+            elif source == "alphafold":
+
+                # Try to fetch the structure's data.
+                try:
+                    
+                    struct_data = \
+                        alphafold_tools.get_alphafold_data(\
+                            struct_id = struct_id)
+
+                    # Inform the user that data for the current structure
+                    # were successfully retrieved
+                    infostr = \
+                        f"Data for the structure with ID {struct_id} " \
+                        f"have been successfully retrieved for the " \
+                        f"AlphaFold Protein Structure Database."
+                    logger.info(infostr)
+                
+                # If something went wrong
+                except Exception as e:
+
+                    # Log a warning
+                    warnstr = \
+                        f"Could not fetch data for the structure " \
+                        f"with ID {struct_id} from the AlphaFold " \
+                        f"Protein Structure Database. This " \
+                        f"structure will be ignored. " \
+                        f"Exception: {e}"
+                    logger.warning(warnstr)
+                    
+                    # Go to the next structure
+                    continue
 
             # Add data to the dictionary of structures' data
             struct_data_dict[struct_id] = struct_data
@@ -1375,7 +1467,7 @@ def find_slims(source,
             if slim_in_uniprot_segments:
 
                 # If the structure is of the protein of interest
-                if source == "protein":
+                if source in ("protein", "alphafold"):
                     
                     # No need to check the structure for missing
                     # residues, since all segments with problems
@@ -1702,7 +1794,8 @@ def get_results(structures_and_slims,
     """Get the results for the SLiMs found."""
 
     # Create a dictionary to store the SLiMs found and annotated
-    slims_results = {"protein" : [], "homologs" : []}
+    slims_results = \
+        {"protein" : [], "alphafold" : [], "homologs" : []}
 
     # For each structure and SLiMs found in it
     for source, struct_id, struct_chain, pdb_file, slims_in_struct \
@@ -1721,7 +1814,7 @@ def get_results(structures_and_slims,
 
             # Log a warning
             warnstr = \
-                f"Could not get DSSP data for the PDB structure " \
+                f"Could not get DSSP data for the structure " \
                 f"with ID {struct_id}. This structure will be " \
                 f"ignored. Exception: {e}"
             logger.warning(warnstr)
@@ -1734,7 +1827,7 @@ def get_results(structures_and_slims,
     
             # If the SLiM comes from a structure of the protein
             # of interest
-            if source == "protein":
+            if source in ("protein", "alphafold"):
                 
                 # Data will only be about the SLiM in the protein
                 slim_type, (start, seq, end) = slim_data
@@ -1752,6 +1845,7 @@ def get_results(structures_and_slims,
 
             # Try to check if the SLiM is in a disordered region
             try:
+                
                 is_disordered = \
                     is_region_disordered(\
                         seq = seq,
@@ -1779,7 +1873,7 @@ def get_results(structures_and_slims,
 
             # If the SLiM comes from a structure of the protein
             # of interest
-            if source == "protein":
+            if source in ("protein", "alphafold"):
                 
                 # Save only information about the SLiM in the protein
                 results = {"source" : source,
@@ -1812,12 +1906,15 @@ def get_results(structures_and_slims,
             # Add the SLiM to results
             slims_results[source].append(results)
 
-    # Get the results' dataframes
+    # Get the results' data frames
     results_protein_df = pd.DataFrame(slims_results["protein"])
+    results_alphafold_df = pd.DataFrame(slims_results["alphafold"])
     results_homologs_df = pd.DataFrame(slims_results["homologs"])
 
-    # Return the results' dataframes
-    return results_protein_df, results_homologs_df
+    # Return the results' data frames
+    return results_protein_df, \
+           results_alphafold_df, \
+           results_homologs_df
 
 
 def get_disprot_annotations(uniprot_id,

@@ -104,19 +104,64 @@ STRUCTURE_METADATA = [
 
 
 
-def get_alphafold_data(uniprot_id):
+def get_alphafold_data(uniprot_id = None,
+                       struct_id = None):
     """Get the PDB structure(s) associated to a specific
-    UniProt ID in the AlphaFold Protein Structure Database.
+    UniProt ID in the AlphaFold Protein Structure Database,
+    or a specific structure from the database.
     """
+
+    # Check if either the UniProt ID or the structure ID have
+    # been passed
+    if uniprot_id is None and struct_id is None:
+
+        # Raise an error
+        errstr = \
+            "You must provide either the UniProt ID (to find " \
+            "all structures associated with it in the AlphaFold " \
+            "Protein Structure Database) or the specific structure " \
+            "ID (i.e., AF-P10415-F1-model_v3)."
+        raise ValueError(errstr)
 
     # Generic string representing the ID of the
     # structures deposited in AlphaFoldDB
     struct_id_fmt = "AF-{:s}-F{:d}-model_v{:d}"
+
+    # If the structure ID has been specified
+    if struct_id is not None:
+
+        # This will become the string to be used to
+        # find the structure in the database
+        struct_id_fmt = struct_id 
     
     # Generic URL where AlphaFoldDB PDB files are found
     struct_url = \
         f"https://www.alphafold.ebi.ac.uk/files/" \
         f"{struct_id_fmt}.pdb"
+
+
+    #-------------------- Structure ID specified ---------------------#
+
+
+    # If the structure ID was specified
+    if struct_id is not None:
+
+        # Try to get the data from the AlphaFold Protein Structure
+        # Database
+        response = requests.get(struct_url)
+
+        # If something went wrong
+        if not response.ok:
+
+            # Re-raise the exception
+            response.raise_for_status()
+
+        # Return the data
+        return [l for l in response.text.split("\n")]
+
+
+    #------------------ Structure ID not specified -------------------#
+
 
     # Create an empty dictionary to store the structures
     alphafold_data = {}

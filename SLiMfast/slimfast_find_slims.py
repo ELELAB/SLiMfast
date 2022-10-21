@@ -66,10 +66,12 @@ def get_args():
     args = util.get_arguments(description = description,
                               uniprot_id = True,
                               input_protein_file = True,
+                              input_alphafold_file = True,
                               input_homologs_file = True,
                               input_alignments_file = True,
                               input_slims_file = True,
                               output_slims_protein_file = True,
+                              output_slims_alphafold_file = True,
                               output_slims_homologs_file = True,
                               output_slims_disprot_file = True,
                               configrun_file = True,
@@ -82,10 +84,12 @@ def get_args():
     # Retrieve the arguments
     uniprot_id = args.uniprot_id
     input_protein_file = args.input_protein_file
+    input_alphafold_file = args.input_alphafold_file
     input_homologs_file = args.input_homologs_file
     input_alignments_file = args.input_alignments_file
     input_slims_file = args.input_slims_file
     output_slims_protein_file = args.output_slims_protein_file
+    output_slims_alphafold_file = args.output_slims_alphafold_file
     output_slims_homologs_file = args.output_slims_homologs_file
     output_slims_disprot_file = args.output_slims_disprot_file
     configrun_file = args.configrun_file
@@ -153,7 +157,7 @@ def get_args():
     logger.info(infostr)
 
 
-    #-------------------------- Input files --------------------------#
+    #-------------------------- Input SLiMs --------------------------#
 
 
     # Try to load the text file containing the SLiM instances
@@ -176,12 +180,15 @@ def get_args():
         logger.exception(errstr)
         sys.exit(errstr)
 
-    # If the CSV file with the available structures of the
-    # protein of interest has been passed
+
+    #--------- Input structures of the protein from the PDB ----------#
+
+
+    # If the CSV file with the structures of the protein of interest
+    # found in the Protein Data Bank has been passed
     if input_protein_file is not None:
         
-        # Try to load the data frame containing the structures of
-        # the protein of interest
+        # Try loading the data frame
         try:
             
             sep = config_run["structures"]["protein"]["out"]["sep"]
@@ -189,12 +196,11 @@ def get_args():
                                      sep = sep)
 
             # Inform the user of the successful parsing of the file
-            # containing the available structures of the protein of
-            # interest
             infostr = \
-                f"Data about the available structures of the " \
-                f"protein with UniProt ID {uniprot_id} have been " \
-                f"successfully retrieved from {input_protein_file}."
+                f"Data about the structures of the protein with " \
+                f"UniProt ID {uniprot_id} found in the Protein Data " \
+                f"Bank have been successfully retrieved from " \
+                f"{input_protein_file}."
             logger.info(infostr)
         
         # If something went wrong
@@ -205,13 +211,63 @@ def get_args():
             logger.exception(errstr)
             sys.exit(errstr)
 
-    # If the CSV file with the available PDB structures of the
-    # homologs has been passed
+    # If the file has not been passed
+    else:
+
+        # The corresponding data frame will be empty
+        protein_df = pd.DataFrame()
+
+
+    #----- Input structures of the protein from the AlphaFold DB -----#
+
+
+    # If the CSV file with the structures of the protein of interest
+    # found in the AlphaFold Protein Structure Database has been passed
+    if input_alphafold_file is not None:
+        
+        # Try loading the data frame
+        try:
+            
+            sep = config_run["structures"]["alphafold"]["out"]["sep"]
+            alphafold_df = pd.read_csv(input_alphafold_file,
+                                       sep = sep)
+
+            # Inform the user of the successful parsing of the file
+            infostr = \
+                f"Data about the structures of the protein with " \
+                f"UniProt ID {uniprot_id} found in the AlphaFold " \
+                f"Protein Structure Database have been successfully " \
+                f"retrieved from {input_alphafold_file}."
+            logger.info(infostr)
+        
+        # If something went wrong
+        except Exception as e:
+
+            # Report it and exit
+            errstr = \
+                f"Could not parse the file {input_alphafold_file}."
+            logger.exception(errstr)
+            sys.exit(errstr)
+
+
+    # If the file has not been passed
+    else:
+
+        # The corresponding data frame will be empty
+        alphafold_df = pd.DataFrame()
+
+
+    #--------- Input structures of the homologs from the PDB ---------#
+    #----------------- and corresponding alignments ------------------#
+
+
+    # If the CSV file with the structures of the homologs of
+    # the protein of interest found in the Protein Data Bank
+    # has been passed
     if input_homologs_file is not None \
         and input_alignments_file is not None:
 
-        # Try to load the data frame containing the structures of
-        # the homologs of the protein of interest
+        # Try loading the data frame
         try:
             
             sep = config_run["structures"]["homolog"]["out"]["sep"]
@@ -219,8 +275,6 @@ def get_args():
                                       sep = sep)
 
             # Inform the user of the successful parsing of the file
-            # containing the available structures of the homologs of
-            # the protein of interest
             infostr = \
                 f"Data about the available structures of the " \
                 f"homologs of the protein with UniProt ID {uniprot_id} " \
@@ -242,8 +296,6 @@ def get_args():
             alignments = json.load(open(input_alignments_file, "r"))
 
             # Inform the user of the successful parsing of the file
-            # containing the alignments of the homologs to the
-            # protein of interest
             infostr = \
                 f"Data about the alignments of the homologs to the " \
                 f"protein with UniProt ID {uniprot_id} have been " \
@@ -289,20 +341,31 @@ def get_args():
             logger.exception(errstr)
             sys.exit(errstr)
 
+    # If neither the CSV nor the alignments were passed
+    elif input_homologs_file is None \
+        and input_alignments_file is None:
+
+        # The corresponding data frame/dictionary will be empty
+        homologs_df = pd.DataFrame()
+        alignments = {}
+
+
     # Return data frames, alignments, SLiM instances, output files
     # and configuration
-    return uniprot_id, protein_df, homologs_df, alignments, \
-           slims_to_find, output_slims_protein_file, \
-           output_slims_homologs_file, output_slims_disprot_file, \
-           config_run
+    return uniprot_id, protein_df, alphafold_df, homologs_df, \
+           alignments, slims_to_find, output_slims_protein_file, \
+           output_slims_alphafold_file, output_slims_homologs_file, \
+           output_slims_disprot_file, config_run
 
 
 def run(uniprot_id,
         protein_df,
+        alphafold_df,
         homologs_df,
         alignments,
         slims_to_find,
         output_slims_protein_file,
+        output_slims_alphafold_file,
         output_slims_homologs_file,
         output_slims_disprot_file,
         config_run):
@@ -329,16 +392,18 @@ def run(uniprot_id,
     # Get the parameters for the output data frames
     out_params = config_run["slims"]["out"]
 
+    # Create an empty list to store the structures and the SLiMs
+    # found in them
     structures_and_slims = []
 
 
-    #------------------- Find SLiMs in structures --------------------#
+    #------------ Find SLiMs in structures from the PDB --------------#
 
 
     # If there are structures available for the protein of interest
     if protein_df is not None:
 
-        # Report the SLiMs found in each PDB structure and the SLiMs
+        # Report the SLiMs found in each structure and the SLiMs
         # still to find
         try:
             
@@ -364,11 +429,48 @@ def run(uniprot_id,
         slims_to_find = still_to_find
 
 
+    #----------- Find SLiMs in structures from AlphaFoldDB -----------#
+
+
+    # If there are still SLiMs to find and the user has passed
+    # the data frame with the structures found in the AlphaFold
+    # Protein Structure Database for the protein of interest
+    if slims_to_find and alphafold_df is not None:
+
+        # Report the SLiMs found in each structure and the SLiMs
+        # still to find
+        try:
+            
+            structures_and_slims_alpha, still_to_find = \
+                util.find_slims(source = "alphafold", 
+                                structures_df = alphafold_df,
+                                slims_to_find = slims_to_find,
+                                struct_dir = struct_dir)
+
+            structures_and_slims.extend(structures_and_slims_alpha)
+        
+        # If something went wrong
+        except Exception as e:
+            
+            # Report it and exit
+            errstr = \
+                f"Could not search for the SLiMs in the structures " \
+                f"of the protein with UniProt ID {uniprot_id} " \
+                f"found in the AlphaFold Protein Structure " \
+                f"Database: {e}"
+            logger.exception(errstr)
+            sys.exit(errstr)
+
+        # Update the list of SLiMs still to be found
+        slims_to_find = still_to_find
+
+
     #-------------------- Find SLiMs in homologs ---------------------#
 
 
-    # If there are no structures available for the given protein
-    # or some SLiMs were not found in the available structures
+    # If there are still SLiMs to find and the user has passed
+    # the data frame with the structures of the homologs of the
+    # protein of interest found in the Protein Data Bank
     if homologs_df is not None and slims_to_find:
 
         # Report the SLiMs found in each structure and the SLiMs
@@ -398,17 +500,22 @@ def run(uniprot_id,
         # Update the list of SLiMs still to be found
         slims_to_find = still_to_find
 
+
+    #---------------------- Combine the results ----------------------#
+
+
     # Try to get the results
     try:
 
-        results_protein_df, results_homologs_df = \
-            util.get_results(\
-                structures_and_slims = structures_and_slims,
-                dssp_params = dssp_params,
-                dssp_mapping = dssp_mapping,
-                min_len_disorder = min_len_disorder,
-                disorder_symbols = disorder_symbols,
-                wd = wd)
+        results_protein_df, results_alphafold_df, \
+            results_homologs_df = \
+                util.get_results(\
+                    structures_and_slims = structures_and_slims,
+                    dssp_params = dssp_params,
+                    dssp_mapping = dssp_mapping,
+                    min_len_disorder = min_len_disorder,
+                    disorder_symbols = disorder_symbols,
+                    wd = wd)
     
     # If something went wrong
     except Exception as e:
@@ -420,58 +527,107 @@ def run(uniprot_id,
         logger.exception(errstr)
         sys.exit(errstr)
 
-    # If no SLiMs were found in the structures of the protein of
-    # interest, and the original data frame had available
-    # structures for the protein of interest
-    if results_protein_df.empty and (not protein_df.empty):
 
-        # Inform the user of it
-        warnstr = \
-            f"No SLiMs found in the structures of the protein with " \
-            f"UniProt ID {uniprot_id}."
-        logger.warning(warnstr)
+    #----------- Write the output file for the structures ------------#
+    #---------------- of the protein found in the PDB ----------------#
+
+
+    # If no SLiMs were found in the structures of the protein of
+    # interest found in the Protein Data Bank
+    if results_protein_df.empty:
+
+        # If a data frame of structures was passed
+        if not protein_df.empty:
+
+            # Inform the user of it
+            warnstr = \
+                f"No SLiMs found in the structures of the protein " \
+                f"with UniProt ID {uniprot_id} found in the " \
+                f"Protein Data Bank."
+            logger.warning(warnstr)
 
     # Otherwise
     else:
 
-        # Write out the SLiMs found in the structures of the protein
-        # of interest
+        # Write out the SLiMs found in the structures
         results_protein_df.to_csv(\
             os.path.join(wd, output_slims_protein_file), **out_params)
 
         # Inform the user of the successful writing of the output file
         infostr = \
             f"The SLiMs found in the structures of the protein with " \
-            f"UniProt ID {uniprot_id} have been successfully " \
-            f"written to {output_slims_protein_file}."
+            f"UniProt ID {uniprot_id} found in the Protein Data " \
+            f"Bank have been successfully written to " \
+            f"{output_slims_protein_file}."
         logger.info(infostr)
-    
-    # If no SLiMs were found in the structures of the homologs of the
-    # protein of interest, and the original data frame had available
-    # structures for the homologs, and no SLiMs were found in the
-    # available structures of the protein
-    if results_homologs_df.empty and (not homologs_df.empty) \
-    and results_protein_df.empty:
 
-        # Inform the user of it
-        warnstr = \
-            f"No SLiMs found in the structures of the homologs of " \
-            f"the protein with UniProt ID {uniprot_id}."
-        logger.warning(warnstr)
+
+    #----------- Write the output file for the structures ------------#
+    #------------ of the protein found in the AlphaFoldDB ------------#
+
+
+    # If no SLiMs were found in the structures of the protein of
+    # interest found in the AlphaFold Protein Structure Database
+    if results_alphafold_df.empty:
+
+        # If a data frame of structures was passed
+        if not alphafold_df.empty:
+
+            # Inform the user of it
+            warnstr = \
+                f"No SLiMs found in the structures of the protein " \
+                f"with UniProt ID {uniprot_id} found in the " \
+                f"AlphaFold Protein Structure Database."
+            logger.warning(warnstr)
 
     # Otherwise
     else:
 
-        # Write out the SLiMs found in the structures of the homologs
-        # of the protein of interest
+        # Write out the SLiMs found in the structures
+        results_alphafold_df.to_csv(\
+            os.path.join(wd, output_slims_alphafold_file),
+                         **out_params)
+
+        # Inform the user of the successful writing of the output file
+        infostr = \
+            f"The SLiMs found in the structures of the protein with " \
+            f"UniProt ID {uniprot_id} found in the AlphaFold "\
+            f"Protein Structure Database have been successfully " \
+            f"written to {output_slims_alphafold_file}."
+        logger.info(infostr)
+
+
+    #----------- Write the output file for the structures ------------#
+    #--------------- of the homologs found in the PDB ----------------#
+
+    
+    # If no SLiMs were found in the structures of the homologs of the
+    # protein of interest
+    if results_homologs_df.empty:
+
+        # If a data frame of structures was passed
+        if not homologs_df.empty:
+
+            # Inform the user of it
+            warnstr = \
+                f"No SLiMs found in the structures of the homologs " \
+                f"of the protein with UniProt ID {uniprot_id} " \
+                f"found in the Protein Data Bank."
+            logger.warning(warnstr)
+
+    # Otherwise
+    else:
+
+        # Write out the SLiMs found in the structures
         results_homologs_df.to_csv(\
             os.path.join(wd, output_slims_homologs_file), **out_params)
 
         # Inform the user of the successful writing of the output file
         infostr = \
             f"The SLiMs found in the structures of the homologs of " \
-            f"the protein with UniProt ID {uniprot_id} have been " \
-            f"successfully written to {output_slims_protein_file}."
+            f"the protein with UniProt ID {uniprot_id} found in the " \
+            f"Protein Data Bank have been successfully written to " \
+            f"to {output_slims_protein_file}."
         logger.info(infostr)
 
 

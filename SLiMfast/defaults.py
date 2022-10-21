@@ -40,6 +40,10 @@ ALPHAFOLD_ID_FIELD = "alphafold_id"
 CONFIG_RUN_DIR = \
     resource_filename(Requirement("SLiMfast"), "SLiMfast/config_run")
 
+# Data frame field containing the unique hit identifier
+# for the homologs
+HIT_ID_FIELD = "hit_id"
+
 # Separator for numeric ranges
 RANGE_SEP = "-"
 
