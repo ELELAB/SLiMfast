@@ -42,8 +42,11 @@ import yaml
 from SLiMfast.defaults import (
     ALPHAFOLD_ID_FIELD,
     CONFIG_RUN_DIR,
+    DEPOSITION_DATE_FIELD,
     HIT_ID_FIELD,
+    METHOD_FIELD,
     RANGE_SEP,
+    RESOLUTION_FIELD,
     SEGMENTS_SEP,
     STRUCT_CHAIN_FIELD,
     STRUCT_FRAGMENT_FIELD,
@@ -51,6 +54,7 @@ from SLiMfast.defaults import (
     STRUCT_SEGMENTS_FIELD,
     STRUCT_VERSION_FIELD,
     UNP_ID_FIELD,
+    UNP_ISOFORM_FIELD,
     UNP_SEGMENTS_FIELD)
 from SLiMfast import (
     alphafold_tools,
@@ -165,7 +169,8 @@ def get_arguments(description,
     # - slimfast_find_slims
     if "input_slims_file" in kwargs.keys():
         is_help = \
-            "SLiMs in the UniProt sequence of the protein of interest."
+            "Input CSV file containing the SLiMs in the UniProt " \
+            "sequence of the protein of interest."
         parser.add_argument("-is", "--input-slims-file",
                             type = str,
                             required = True,
@@ -239,7 +244,7 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_find_slims
     if "output_slims_protein_file" in kwargs.keys():
-        osp_default = "slims_protein.csv"
+        osp_default = "slims_structures.csv"
         osp_help = \
             f"Name of the output CSV file containing the SLiMs " \
             f"found in the structures of the protein of interest " \
@@ -742,6 +747,12 @@ def get_structures_data_protein(uniprot_id,
     protein in the Protein Data Bank.
     """
 
+    # Sorted column names for the final data frame
+    COLNAMES = \
+        [STRUCT_ID_FIELD, STRUCT_CHAIN_FIELD, STRUCT_SEGMENTS_FIELD,
+         UNP_ID_FIELD, UNP_SEGMENTS_FIELD, METHOD_FIELD,
+         RESOLUTION_FIELD, DEPOSITION_DATE_FIELD]
+
 
     #------------------ Get the available structures -----------------#
 
@@ -833,6 +844,9 @@ def get_structures_data_protein(uniprot_id,
         f"have been successfully collected."
     logger.info(infostr)
 
+    # Sort the columns
+    df = df.reindex(columns = COLNAMES)
+
     # Return the data frame
     return df
 
@@ -842,6 +856,13 @@ def get_structures_data_alphafold(uniprot_id,
     """Get the data regarding the available structures of the
     protein in the AlphaFold Protein Structure Database.
     """
+
+    # Sorted column names for the final data frame
+    COLNAMES = \
+        [STRUCT_ID_FIELD, STRUCT_CHAIN_FIELD, STRUCT_SEGMENTS_FIELD,
+         STRUCT_VERSION_FIELD, STRUCT_FRAGMENT_FIELD,
+         UNP_ID_FIELD, UNP_SEGMENTS_FIELD, UNP_ISOFORM_FIELD, 
+         ALPHAFOLD_ID_FIELD, DEPOSITION_DATE_FIELD]
 
 
     #------------------ Get the available structures -----------------#
@@ -966,6 +987,9 @@ def get_structures_data_alphafold(uniprot_id,
         f"UniProt ID {uniprot_id} found in the AlphaFold Protein " \
         f"Structure Database have been successfully collected."
     logger.info(infostr)
+
+    # Sort the columns
+    df = df.reindex(columns = COLNAMES)
 
     # Return the data frame
     return df
@@ -1358,7 +1382,7 @@ def find_slims(source,
         if not struct_id in struct_data_dict.keys():
 
             # If the structure comes from the Protein Data Bank
-            if source in ("protein", "homologs"):
+            if source in ("structures", "homologs"):
 
                 # Try to fetch the structure's data. Use only the first
                 # model for multi-model structures
@@ -1467,7 +1491,7 @@ def find_slims(source,
             if slim_in_uniprot_segments:
 
                 # If the structure is of the protein of interest
-                if source in ("protein", "alphafold"):
+                if source in ("structures", "alphafold"):
                     
                     # No need to check the structure for missing
                     # residues, since all segments with problems
@@ -1795,7 +1819,7 @@ def get_results(structures_and_slims,
 
     # Create a dictionary to store the SLiMs found and annotated
     slims_results = \
-        {"protein" : [], "alphafold" : [], "homologs" : []}
+        {"structures" : [], "alphafold" : [], "homologs" : []}
 
     # For each structure and SLiMs found in it
     for source, struct_id, struct_chain, pdb_file, slims_in_struct \
@@ -1827,10 +1851,10 @@ def get_results(structures_and_slims,
     
             # If the SLiM comes from a structure of the protein
             # of interest
-            if source in ("protein", "alphafold"):
+            if source in ("structures", "alphafold"):
                 
                 # Data will only be about the SLiM in the protein
-                slim_type, (start, seq, end) = slim_data
+                slim_name, (start, seq, end) = slim_data
                 start_q, seq_q, end_q = start, seq, end
                 
             # If the SLiM comes from a structure of a homolog
@@ -1840,7 +1864,7 @@ def get_results(structures_and_slims,
                 # and about its corresponding sequence in the
                 # homolog ("_q" stands for "query", therefore the
                 # protein of interest)
-                slim_type, (start, seq, end), \
+                slim_name, (start, seq, end), \
                     (start_q, seq_q, end_q) = slim_data
 
             # Try to check if the SLiM is in a disordered region
@@ -1873,13 +1897,13 @@ def get_results(structures_and_slims,
 
             # If the SLiM comes from a structure of the protein
             # of interest
-            if source in ("protein", "alphafold"):
+            if source in ("structures", "alphafold"):
                 
                 # Save only information about the SLiM in the protein
                 results = {"source" : source,
                            "struct_id" : struct_id,
                            "struct_chain" : struct_chain,
-                           "slim_type" : slim_type,
+                           "slim_name" : slim_name,
                            "slim_start" : start_q,
                            "slim_sequence" : seq_q, 
                            "slim_end" : end_q,
@@ -1894,7 +1918,7 @@ def get_results(structures_and_slims,
                 results = {"source" : source,
                            "struct_id" : struct_id,
                            "struct_chain" : struct_chain,
-                           "slim_type" : slim_type,
+                           "slim_name" : slim_name,
                            "slim_start" : start_q,
                            "slim_sequence" : seq_q, 
                            "slim_end" : end_q,
@@ -1907,7 +1931,7 @@ def get_results(structures_and_slims,
             slims_results[source].append(results)
 
     # Get the results' data frames
-    results_protein_df = pd.DataFrame(slims_results["protein"])
+    results_protein_df = pd.DataFrame(slims_results["structures"])
     results_alphafold_df = pd.DataFrame(slims_results["alphafold"])
     results_homologs_df = pd.DataFrame(slims_results["homologs"])
 

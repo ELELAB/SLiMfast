@@ -47,6 +47,17 @@ HIT_ID_FIELD = "hit_id"
 # Separator for numeric ranges
 RANGE_SEP = "-"
 
+# Data frame field containing the deposition date
+DEPOSITION_DATE_FIELD = "deposition_date"
+
+# Data frame field containing the method used to obtain
+# the structure
+METHOD_FIELD = "method"
+
+# Data frame field containing the resolution of the
+# structure (if applicable)
+RESOLUTION_FIELD = "resolution"
+
 # Separator for starting and ending points of different
 # UniProt segments
 SEGMENTS_SEP = ";"
@@ -73,6 +84,9 @@ STRUCT_VERSION_FIELD = "struct_version"
 
 # Data frame field containing UniProt IDs
 UNP_ID_FIELD = "uniprot_id"
+
+# data frame field containing the UniProt isoform
+UNP_ISOFORM_FIELD = "uniprot_isoform"
 
 # Data frame field containing ranges representing
 # UniProt segments 

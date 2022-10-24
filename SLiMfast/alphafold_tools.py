@@ -39,10 +39,12 @@ from Bio.PDB.MMCIF2Dict import MMCIF2Dict
 # SLiMfast
 from SLiMfast.defaults import (
     ALPHAFOLD_ID_FIELD,
+    DEPOSITION_DATE_FIELD,
     RANGE_SEP,
     STRUCT_CHAIN_FIELD,
     STRUCT_ID_FIELD,
     STRUCT_SEGMENTS_FIELD,
+    UNP_ISOFORM_FIELD,
     UNP_SEGMENTS_FIELD,
     )
 
@@ -56,15 +58,8 @@ logger = log.getLogger(__name__)
 # Metadata (taken from MMCIF files) retrieved for AlphaFold
 # IDs of interest
 STRUCTURE_METADATA = [
-    # Database name
-    ("_database_2.database_id",
-     str,
-     "db_name"),
-    # Pipeline used to generate the model
-    ("_ma_model_list.model_group_name",
-     str,
-     "model_group_name"),
-    # Begin of the sequence covered by the structure
+    
+    # Beginning of the sequence covered by the structure
     # in the UniProt numbering
     ("_ma_target_ref_db_details.seq_db_align_begin",
      int,
@@ -95,11 +90,11 @@ STRUCTURE_METADATA = [
     # UniProt isoform
     ("_ma_target_ref_db_details.seq_db_align_isoform",
      str,
-     "uniprot_isoform"),
+     UNP_ISOFORM_FIELD),
     # Deposition date
     ("_pdbx_database_status.recvd_initial_deposition_date",
      str,
-     "deposition_date"),
+     DEPOSITION_DATE_FIELD),
     ]
 
 

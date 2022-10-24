@@ -408,7 +408,7 @@ def run(uniprot_id,
         try:
             
             structures_and_slims_prot, still_to_find = \
-                util.find_slims(source = "protein",
+                util.find_slims(source = "structures",
                                 structures_df = protein_df,
                                 slims_to_find = slims_to_find,
                                 struct_dir = struct_dir)
