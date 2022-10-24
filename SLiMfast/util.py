@@ -240,7 +240,7 @@ def get_arguments(description,
                              help = oal_help)
 
     # Output CSV file containing the SLiMs found in the structures
-    # of the protein of interest found in the Protein Data Bank
+    # of the protein of interest found in the Protein Data Bank.
     # Taken by:
     # - slimfast_find_slims
     if "output_slims_protein_file" in kwargs.keys():
@@ -257,7 +257,7 @@ def get_arguments(description,
 
     # Output CSV file containing the SLiMs found in the structures
     # of the protein of interest found in the AlphaFold Protein
-    # Structure Database
+    # Structure Database.
     # Taken by:
     # - slimfast_find_slims
     if "output_slims_alphafold_file" in kwargs.keys():
@@ -274,7 +274,7 @@ def get_arguments(description,
 
     # Output CSV file containing the SLiMs found in the structures
     # of the homolgs of the protein of interest found in the Protein
-    # Data Bank
+    # Data Bank.
     # Taken by:
     # - slimfast_find_slims
     if "output_slims_homologs_file" in kwargs.keys():
@@ -290,7 +290,7 @@ def get_arguments(description,
                              help = osh_help)
 
     # Output CSV file containing the SLiMs not found in the structures
-    # and annotated through DisProt
+    # and annotated through DisProt.
     # Taken by:
     # - slimfast_find_slims
     if "output_slims_disprot_file" in kwargs.keys():
@@ -305,7 +305,7 @@ def get_arguments(description,
                              default = osd_default,
                              help = osd_help)
 
-    # YAML configuration file
+    # YAML configuration file.
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
@@ -322,7 +322,7 @@ def get_arguments(description,
                             required = True,
                             help = cr_help)
 
-    # Name of the log file
+    # Name of the log file.
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
@@ -336,7 +336,7 @@ def get_arguments(description,
                             default = lf_default,
                             help = lf_help)
 
-    # Whether to log also to the standard output
+    # Whether to log also to the standard output.
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
@@ -348,7 +348,7 @@ def get_arguments(description,
                             action = "store_true",
                             help = ls_help)
     
-    # Whether to enable verbose (INFO level) logging
+    # Whether to enable verbose (INFO level) logging.
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
@@ -360,7 +360,7 @@ def get_arguments(description,
                             action = "store_true",
                             help = v_help)
 
-    # Whether to enable verbose (DEBUG level) logging
+    # Whether to enable verbose (DEBUG level) logging.
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
@@ -533,13 +533,6 @@ def get_structures_df(uniprot_id):
 
     # Get the PDB IDs corresponding to the given UniProt ID
     pdbs = uniprot_tools.get_pdbs(uniprot_id = uniprot_id)
-
-    # If no matching PDB structures were found for the
-    # UniProt ID
-    if not pdbs:
-        
-        # Return an empty data frame
-        return pd.DataFrame()
     
     # For each PDB ID corresponding to the given UniProt ID
     for struct_id in pdbs:
@@ -574,6 +567,13 @@ def get_structures_df(uniprot_id):
                          STRUCT_SEGMENTS_FIELD : struct_segments_joined,
                          UNP_ID_FIELD : uniprot_id,
                          UNP_SEGMENTS_FIELD : unp_segments_joined})
+
+    # If no matching PDB structures were found for the
+    # UniProt ID
+    if not data:
+        
+        # Return an empty data frame
+        return pd.DataFrame()
 
     # Create a data frame from the data
     df = pd.DataFrame(data)
@@ -728,6 +728,7 @@ def add_structures_metadata(df,
         # Return the updated data frame
         return updated_df
 
+
     # Otherwise
     else:
 
@@ -782,6 +783,12 @@ def get_structures_data_protein(uniprot_id,
         
         # Re-raise the exception
         raise Exception(errstr)
+
+    # If no structures were found
+    if df.empty:
+
+        # Return the empty data frame
+        return df
 
 
     #------------------------ Add the metadata -----------------------#
