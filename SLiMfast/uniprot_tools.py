@@ -91,10 +91,6 @@ def get_pdbs(uniprot_id):
 
     # Get the data for the entry associated to the given ID
     response = requests.get(UNP_URL.format(uniprot_id))
-
-    # Empty dictionary to store PDB IDs and chains associated
-    # to the entry
-    pdbs = []
     
     # For each line in the text file
     for line in response.text.split("\n"):
@@ -117,7 +113,7 @@ def get_pdbs(uniprot_id):
             # Add the PDB ID, together with all chains that
             # represent the entity and the portion of the
             # chain they cover
-            pdbs.append(struct_id)
+            yield struct_id
 
     # Inform the user about the successful creation of the
     # data frame with the available PDB structures
@@ -126,6 +122,3 @@ def get_pdbs(uniprot_id):
         f"for the protein with UniProt ID {uniprot_id} has been " \
         f"successfully created."
     logger.info(infostr)
-
-    # Return the PDB IDs and chains associated to the UniProt ID
-    return pdbs
