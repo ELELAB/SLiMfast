@@ -55,9 +55,10 @@ def get_args():
     # Set the script description
     description = \
         "\nGiven the UniProt ID of a protein, find its homologs, " \
-        "get data about the available PDB structures of the " \
-        "homologs and save such data in a CSV file, and the " \
-        "alignments used to find the homologs in a JSON file.\n"
+        "get data about the structures of the homologs in the " \
+        "in the Protein Data Bank and save the data in a CSV file. " \
+        "Save the alignments used to find the homologs in a JSON " \
+        "file.\n"
 
     # Set the default name of the log file
     log_file_default = "slimfast_get_homologs.log"
@@ -181,8 +182,8 @@ def run(uniprot_id,
         # Report it and exit
         errstr = \
             f"Could not retrieve the data about the structures " \
-            f"available for the homologs of the protein with " \
-            f"UniProt ID {uniprot_id}: {e}"
+            f"available in the Protein Data Bank for the homologs " \
+            f"of the protein with UniProt ID {uniprot_id}: {e}"
         logger.exception(errstr)
         sys.exit(errstr)
 
@@ -192,10 +193,11 @@ def run(uniprot_id,
 
         # Inform the user and do not generate any output file
         warnstr = \
-            f"No structures were found matching the criteria " \
-            f"provided in the configuration file for the protein " \
-            f"with UniProt ID {uniprot_id}. Relaxing the filtering " \
-            f"criteria may help in getting more hits."
+            f"No structures were found in the Protein Data Bank " \
+            f"matching the criteria provided in the configuration " \
+            f"file for the protein with UniProt ID {uniprot_id}. " \
+            f"Relaxing the filtering criteria may help in getting " \
+            f"more hits."
         logger.warning(warnstr)
 
     # If homologs were found
@@ -210,10 +212,10 @@ def run(uniprot_id,
 
         # Inform the user that the file was successfully written
         infostr = \
-            f"The data frame containing data about the available " \
-            f"structures of the homologs of the protein with  " \
-            f"UniProt ID {uniprot_id} has been successfully " \
-            f"written to {output_homologs_path}."
+            f"The data frame containing data about the structures " \
+            f"of the homologs of the protein with UniProt ID " \
+            f"{uniprot_id} found in the Protein Data Bank has been " \
+            f"successfully written to {output_homologs_path}."
         logger.info(infostr)
 
         # Specify the path to the output JSON file for the alignments
@@ -225,10 +227,11 @@ def run(uniprot_id,
 
         # Inform the user that the file was successfully written
         infostr = \
-            f"The alignments of the available structures of the " \
-            f"homologs of the protein with UniProt ID {uniprot_id} " \
-            f"(aligned with the protein itself) have been " \
-            f"successfully written to {output_alignments_path}."
+            f"The alignments of the structures of the homologs of " \
+            f"the protein with UniProt ID {uniprot_id} " \
+            f"(aligned with the protein itself) found in the " \
+            f"Protein Data Bank have been successfully written " \
+            f"to {output_alignments_path}."
         logger.info(infostr)
 
         # Return the homologs' data frame, the alignments and the paths

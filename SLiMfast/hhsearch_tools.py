@@ -35,6 +35,14 @@ import logging as log
 import re
 # Third-party packages
 import pandas as pd
+# SLiMfast
+from SLiMfast.defaults import (
+    HIT_ID_FIELD,
+    STRUCT_CHAIN_FIELD,
+    STRUCT_ID_FIELD,
+    STRUCT_SEGMENTS_FIELD,
+    UNP_SEGMENTS_FIELD,
+    )
 
 
 
@@ -57,9 +65,9 @@ class HHsearchParser:
 
     # Column names for the hits' table
     COLNAMES_HITS = \
-        ["num", "hit", "description", "prob", "e_value", "p_value",
-         "score", "ss", "cols", "uniprot_segments", 
-         "struct_segments"]
+        ["num", "hit", "description", "prob", "e_value",
+         "p_value", "score", "ss", "cols", UNP_SEGMENTS_FIELD, 
+         STRUCT_SEGMENTS_FIELD]
 
     # Column names for the data retrieved from the aligments
     COLNAMES_ALS = \
@@ -68,7 +76,7 @@ class HHsearchParser:
 
     # Column names for the additional columns that will
     # contain PDB ID and chain
-    COLNAMES_STRUCT = ["struct_id", "struct_chain"]
+    COLNAMES_STRUCT = [STRUCT_ID_FIELD, STRUCT_CHAIN_FIELD]
 
     # Column name for the additional column that will
     # contain information about the sequence coverage
@@ -90,16 +98,16 @@ class HHsearchParser:
          "score" : "float64",
          "ss" : "float64",
          "cols" : "int64",
-         "uniprot_segments" : "object",
-         "struct_segments" : "object",
-         "struct_id" : "object",
-         "struct_chain" : "object",
+         UNP_SEGMENTS_FIELD : "object",
+         STRUCT_SEGMENTS_FIELD : "object",
+         STRUCT_ID_FIELD : "object",
+         STRUCT_CHAIN_FIELD : "object",
          "identities" : "float64",
          "similarity" : "float64",
          "sum_probs" : "float64",
          "template_neff" : "float64",
          "organism" : "object",
-         "uniprot_coverage_percent" : "float64"}
+         COLNAME_COV : "float64"}
 
 
     def __init__(self):
@@ -238,8 +246,8 @@ class HHsearchParser:
                      "score" : float(line[-5]),
                      "ss" : float(line[-4]),
                      "cols" : int(line[-3]),
-                     "uniprot_segments" : line[-2],
-                     "struct_segments" : line[-1].split("(")[0]})
+                     UNP_SEGMENTS_FIELD : line[-2],
+                     STRUCT_SEGMENTS_FIELD : line[-1].split("(")[0]})
 
             # If the PDB segments are stored in the second-to-last
             # element of the line
@@ -254,8 +262,8 @@ class HHsearchParser:
                      "score" : float(line[-6]),
                      "ss" : float(line[-5]),
                      "cols" : int(line[-4]),
-                     "uniprot_segments" : line[-3],
-                     "struct_segments" : line[-2]})
+                     UNP_SEGMENTS_FIELD : line[-3],
+                     STRUCT_SEGMENTS_FIELD : line[-2]})
 
         # Convert the dictionary containing the hits into a data frame
         hits_df = pd.DataFrame(data)
@@ -655,61 +663,6 @@ class HHsearchParser:
 
 ########################## UTILITY FUNCTIONS ##########################
 
-
-
-def filter_hits(hits,
-                filters):
-    """Filter the hits' data frame.
-    """
-
-    # For each filter passed
-    for arg, val in filters.items():
-                
-        # If it defines a minimum value
-        if arg.startswith("min_"):
-            # The name of the column it refers to will be
-            # after min_
-            col = arg[4:]
-            # Set the filtering condition
-            cond = (hits[col] >= val)
-                
-        # If it defines a maximum value
-        elif arg.startswith("max_"):
-            # The name of the column it refers to will be
-            # after max_
-            col = arg[4:]
-            # Set the filtering condition
-            cond = (hits[col] <= val)
-
-        # If it defines an exact value (the argument is the
-        # name of a column)
-        elif arg in hits.columns:
-            # Set the filtering condition
-            cond = (hits[arg] == val)
-
-        # Filter the data frame
-        hits = hits[cond]
-
-    # Return the filtered data frame
-    return hits
-
-
-def sort_hits(hits,
-              sort_by,
-              ascending):
-    """Sort the hits' data frame.
-    """
-
-    # Default to ascending sorting if no order is specified
-    ascending = ascending if ascending is not None \
-                else [True]*len(sort_by)
-            
-    # Sort the data frame
-    hits = hits.sort_values(by = sort_by,
-                            ascending = ascending)
-
-    # Return the sorted data frame
-    return hits
 
 
 def get_aligned_region(hit_al,

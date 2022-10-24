@@ -3,7 +3,7 @@
 
 #    pdb_tools.py
 #
-#    Utility functions retrieving data from PDB/mmCIF files or
+#    Utility functions to retrieve data from PDB/mmCIF files or
 #    from the PDB/PDBe database.
 #
 #    Copyright (C) 2022 Valentina Sora 
@@ -36,6 +36,12 @@ import requests
 from tempfile import NamedTemporaryFile
 # Third-party packages
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
+# SLiMfast
+from .defaults import (
+    DEPOSITION_DATE_FIELD,
+    METHOD_FIELD,
+    RESOLUTION_FIELD,
+    )
 
 
 
@@ -50,15 +56,15 @@ STRUCTURE_METADATA = [
     # Method used for structure determination
     ("_exptl.method",
      str, 
-     "method"),
+     METHOD_FIELD),
     # Resolution
     ("_refine.ls_d_res_high",
      float,
-     "resolution"),
+     RESOLUTION_FIELD),
     # Deposition date
     ("_pdbx_database_status.recvd_initial_deposition_date",
      str,
-     "deposition_date"),
+     DEPOSITION_DATE_FIELD),
     ]
 
 
@@ -96,8 +102,8 @@ def get_protein_segments(struct_id,
         struct_chain = m["chain_id"]
 
         # Get the start and end of the chain as stored in the PDB
-        struct_start = m["start"]["author_residue_number"]
-        struct_end = m["end"]["author_residue_number"]
+        struct_start = m["start"]["residue_number"]
+        struct_end = m["end"]["residue_number"]
 
         # Get the start and end of the chain as they would be
         # in UniProt numbering
@@ -302,6 +308,7 @@ def get_structure_metadata(struct_id):
         
         # Get the mmCIF file
         response = requests.get(mmcif_url.format(struct_id))
+        
         # Write the mmCIF file to the temporary file
         tmp.write(response.text)
          
@@ -322,23 +329,32 @@ def get_structure_metadata(struct_id):
                     
                     # If the piece of data is available
                     if data[0] != "?":
+                        
                         # Convert it to the appropriate data type
                         data = str(datatype(data[0]))
+                    
+                    # Otherwise
                     else:
+
+                        # Data will be None
                         data = None
                 
                 # If the data type is tuple   
                 else:
+                    
                     # Join the pieces of data in a string,
                     # separated by a semicolon
                     data = \
                         ":".join(datatype(\
                             [item for item in data if item != "?"]))        
+            
+            # Otherwise
             else:
+                
                 # The field is not present
                 data = None
 
-            # Append data to the list
+            # Add data to the dictionary
             metadata[col] = data
 
         # Return the dictionary of metadata
