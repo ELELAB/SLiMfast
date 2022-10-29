@@ -45,6 +45,15 @@ from SLiMfast.defaults import (
     DEPOSITION_DATE_FIELD,
     HIT_ID_FIELD,
     METHOD_FIELD,
+    NPROC_DEFAULT,
+    OUTPUT_PROTEIN_FILE,
+    OUTPUT_ALPHAFOLD_FILE,
+    OUTPUT_HOMOLOGS_FILE,
+    OUTPUT_ALIGNMENTS_FILE,
+    OUTPUT_SLIMS_PROTEIN_FILE,
+    OUTPUT_SLIMS_ALPHAFOLD_FILE,
+    OUTPUT_SLIMS_HOMOLOGS_FILE,
+    OUTPUT_SLIMS_DISPROT_FILE,
     RANGE_SEP,
     RESOLUTION_FIELD,
     SEGMENTS_SEP,
@@ -99,6 +108,61 @@ def get_arguments(description,
                              type = str,
                              required = True,
                              help = id_help)
+
+    # Whether to run slimfast_get_structures as part of the
+    # pipeline.
+    # Taken by:
+    # - slimfast_run_pipeline
+    if "do_get_structures" in kwargs.keys():
+        dgs_help = "Run slimfast_get_structures."
+        parser.add_argument("-dgs", "--do-get-structures",
+                            action = "store_true",
+                            help = dgs_help)
+
+    # Whether to run slimfast_get_alphafold as part of the
+    # pipeline.
+    # Taken by:
+    # - slimfast_run_pipeline
+    if "do_get_alphafold" in kwargs.keys():
+        dga_help = "Run slimfast_get_alphafold."
+        parser.add_argument("-dga", "--do-get-alphafold",
+                            action = "store_true",
+                            help = dga_help)
+
+    # Whether to run slimfast_get_homologs as part of the
+    # pipeline.
+    # Taken by:
+    # - slimfast_run_pipeline
+    if "do_get_homologs" in kwargs.keys():
+        dgh_help = "Run slimfast_get_homologs."
+        parser.add_argument("-dgh", "--do-get-homologs",
+                            action = "store_true",
+                            help = dgh_help)
+
+    # Whether to run slimfast_find_slims as part of the
+    # pipeline.
+    # Taken by:
+    # - slimfast_run_pipeline
+    if "do_find_slims" in kwargs.keys():
+        dfs_help = "Run slimfast_find_slims."
+        parser.add_argument("-dfs", "--do-find-slims",
+                            action = "store_true",
+                            help = dfs_help)
+
+    # CSV file containing the UniProt IDs of the proteins of
+    # interest and the associated SLiMs to be found in their
+    # sequences.
+    # Taken by:
+    # - slimfast_run_pipeline
+    if "input_ids_slims_file" in kwargs.keys():
+        ids_help = \
+            "Input CSV file containing the UniProt IDs of the " \
+            "proteins of interest and the SLiMs to be found " \
+            "in their sequences."
+        parser.add_argument("-ids", "--input-ids-slims-file",
+                             type = str,
+                             required = True,
+                             help = ids_help)
 
     # CSV file containing the structures of the protein of interest
     # found in the Protein Data Bank.
@@ -181,14 +245,13 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_get_structures
     if "output_protein_file" in kwargs.keys():
-        op_default = "structures.csv"
         op_help = \
             f"Name of the output CSV file containing the structures " \
             f"of the protein of interest found in the Protein Data " \
-            f"Bank. The default is '{op_default}'."
+            f"Bank. The default is '{OUTPUT_PROTEIN_FILE}'."
         parser.add_argument("-op", "--output-protein-file",
                              type = str,
-                             default = op_default,
+                             default = OUTPUT_PROTEIN_FILE,
                              help = op_help)
 
     # CSV file containing the structures of the protein of interest
@@ -196,15 +259,14 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_get_alphafold
     if "output_alphafold_file" in kwargs.keys():
-        oa_default = "alphafold.csv"
         oa_help = \
             f"Name of the output CSV file containing the structures " \
             f"of the protein of interest found in the AlphaFold " \
             f"Protein Structure Database. The default is " \
-            f"'{oa_default}'."
+            f"'{OUTPUT_ALPHAFOLD_FILE}'."
         parser.add_argument("-oa", "--output-alphafold-file",
                              type = str,
-                             default = oa_default,
+                             default = OUTPUT_ALPHAFOLD_FILE,
                              help = oa_help)
 
     # CSV file containing the structures of the homologs of the
@@ -212,14 +274,14 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_get_homologs
     if "output_homologs_file" in kwargs.keys():
-        oh_default = "homologs.csv"
         oh_help = \
             f"Name of the output CSV file containing the structures " \
             f"of the homologs of the protein of interest found in " \
-            f"the Protein Data Bank. The default is '{oh_default}'."
+            f"the Protein Data Bank. The default is " \
+            f"'{OUTPUT_HOMOLOGS_FILE}'."
         parser.add_argument("-oh", "--output-homologs-file",
                              type = str,
-                             default = oh_default,
+                             default = OUTPUT_HOMOLOGS_FILE,
                              help = oh_help)
 
     # JSON file containing the alignments between the homologs'
@@ -227,16 +289,15 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_get_homologs
     if "output_alignments_file" in kwargs.keys():
-        oal_default = "alignments.json"
         oal_help = \
             f"Name of the output JSON file containing the " \
             f"alignments between each of the structures of the " \
             f"homologs of the protein of interest found in the " \
             f"Protein Data Bank and the protein itself. " \
-            f"The default is '{oal_default}'."
+            f"The default is '{OUTPUT_ALIGNMENTS_FILE}'."
         parser.add_argument("-oal", "--output-alignments-file",
                              type = str,
-                             default = oal_default,
+                             default = OUTPUT_ALIGNMENTS_FILE,
                              help = oal_help)
 
     # Output CSV file containing the SLiMs found in the structures
@@ -244,15 +305,14 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_find_slims
     if "output_slims_protein_file" in kwargs.keys():
-        osp_default = "slims_structures.csv"
         osp_help = \
             f"Name of the output CSV file containing the SLiMs " \
             f"found in the structures of the protein of interest " \
             f"found in the Protein Data Bank. The default is " \
-            f"'{osp_default}'."
+            f"'{OUTPUT_SLIMS_PROTEIN_FILE}'."
         parser.add_argument("-osp", "--output-slims-protein-file",
                              type = str,
-                             default = osp_default,
+                             default = OUTPUT_SLIMS_PROTEIN_FILE,
                              help = osp_help)
 
     # Output CSV file containing the SLiMs found in the structures
@@ -261,15 +321,14 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_find_slims
     if "output_slims_alphafold_file" in kwargs.keys():
-        osa_default = "slims_alphafold.csv"
         osa_help = \
             f"Name of the output CSV file containing the SLiMs " \
             f"found in the structures of the protein of interest " \
             f"found in the AlphaFold Protein Structure Database. " \
-            f"The default is '{osa_default}'."
+            f"The default is '{OUTPUT_SLIMS_ALPHAFOLD_FILE}'."
         parser.add_argument("-osa", "--output-slims-alphafold-file",
                              type = str,
-                             default = osa_default,
+                             default = OUTPUT_SLIMS_ALPHAFOLD_FILE,
                              help = osa_help)
 
     # Output CSV file containing the SLiMs found in the structures
@@ -278,15 +337,14 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_find_slims
     if "output_slims_homologs_file" in kwargs.keys():
-        osh_default = "slims_homologs.csv"
         osh_help = \
             f"Name of the output CSV file containing the SLiMs " \
             f"found in the structures of the homologs of the " \
             f"protein of interest found in the Protein Data "\
-            f"Bank. The default is '{osh_default}'."
+            f"Bank. The default is '{OUTPUT_SLIMS_HOMOLOGS_FILE}'."
         parser.add_argument("-osh", "--output-slims-homologs-file",
                              type = str,
-                             default = osh_default,
+                             default = OUTPUT_SLIMS_HOMOLOGS_FILE,
                              help = osh_help)
 
     # Output CSV file containing the SLiMs not found in the structures
@@ -294,15 +352,15 @@ def get_arguments(description,
     # Taken by:
     # - slimfast_find_slims
     if "output_slims_disprot_file" in kwargs.keys():
-        osd_default = "slims_disprot.csv"
         osd_help = \
             f"Name of the output CSV file containing the SLiMs not " \
             f"found in the structures available either for the protein " \
             f"of interest or for the homologs, but annotated as " \
-            f"disordered in DisProt. The default is '{osd_default}'."
+            f"disordered in DisProt. The default is " \
+            f"'{OUTPUT_SLIMS_DISPROT_FILE}'."
         parser.add_argument("-osd", "--output-slims-disprot-file",
                              type = str,
-                             default = osd_default,
+                             default = OUTPUT_SLIMS_DISPROT_FILE,
                              help = osd_help)
 
     # YAML configuration file.
@@ -372,6 +430,18 @@ def get_arguments(description,
                             action = "store_true",
                             help = vv_help)
 
+    # How many cores to use when running.
+    # Taken by:
+    # - slimfast_run_pipeline
+    if "nproc" in kwargs.keys():
+        n_help = \
+            f"Number of processes (cores) to use when running. " \
+            f"The default is {NPROC_DEFAULT} process(es)."
+        parser.add_argument("-n", "--nproc",
+                            type = int,
+                            default = NPROC_DEFAULT,
+                            help = n_help)
+
     # Parse the command line arguments
     args = parser.parse_args()
 
@@ -412,6 +482,14 @@ def get_wd(config_run):
 
     # Return the working directory
     return wd
+
+
+def get_abspath(path):
+    """Given a path, return its absolute path. Return
+    None if the path given is None.
+    """
+
+    return os.path.abspath(path) if path is not None else path
 
 
 
@@ -516,6 +594,53 @@ def read_config_file(config_file):
     return yaml.safe_load(open(config_file, "r"))
 
 
+def read_ids_slims_file(ids_slims_file):
+    """Get the UniProt IDs of the proteins of interest and
+    associated SLiMs.
+    """
+
+    # Read in the CSV file as a data frame
+    df = pd.read_csv(ids_slims_file,
+                     sep = ",")
+
+    # If there are less than the expected five columns
+    # in the data frame
+    if len(df.columns) < 5:
+
+        # If there is only one column and it contains the
+        # UniProt IDs (which can happen when the SLiM search
+        # is not requested as part of the pipeline)
+        if len(df.columns) == 1 \
+        and UNP_ID_FIELD in df.columns.tolist():
+
+            # Return a data frame mapping the UniProt IDs
+            # to None values
+            return {k : None for k in df[UNP_ID_FIELD]}
+
+        # Otherwise
+        else:
+
+            # Inform the user that there is something wrong
+            # with the file and raise an exception
+            errstr = \
+                f"The file {ids_slims_file} contains less than " \
+                f"the expected five columns. The only case in which " \
+                f"this is accepted is when the data frame only " \
+                f"contains the column '{UNP_ID_FIELD}' with the " \
+                f"UniProt IDs of the proteins of interest."
+            raise ValueError(errstr)
+
+    # Convert the data frame into a dictionary keyed on the
+    # unique UniProt IDs (SLiMs for the same IDs are, therefore,
+    # grouped)
+    d = df.groupby(UNP_ID_FIELD).agg(\
+            lambda x: x.tolist()).to_dict("index")
+
+    # Return a dictionary where keys are the UniProt IDs and values
+    # are data frames containing the SLiMs for each UniProt ID
+    return {k : pd.DataFrame(v) for k, v in d.items()}
+
+
 
 ############################ GET STRUCTURES ###########################
 
@@ -578,14 +703,6 @@ def get_structures_df(uniprot_id):
     # Create a data frame from the data
     df = pd.DataFrame(data)
 
-    # Inform the user about having added data about the segments
-    # to the data frame
-    infostr = \
-        f"Data about the protein segments covered by the UniProt " \
-        f"sequence and each of the structures have been " \
-        f"added to the data frame."
-    logger.info(infostr)
-
     # Return the data frame
     return df
 
@@ -622,13 +739,6 @@ def get_alphafold_df(uniprot_id):
 
     # Create a data frame from the data
     df = pd.DataFrame(data)
-
-    # Inform the user about having successfully retrieved the stuctures
-    infostr = \
-        f"All available structures of the protein with UniProt ID " \
-        f"{uniprot_id} have been successfully retrieved from " \
-        f"the Alphafold Protein Structure Database."
-    logger.info(infostr)
 
     # Return the data frame
     return df
@@ -742,447 +852,6 @@ def add_structures_metadata(df,
         return df
 
 
-def get_structures_data_protein(uniprot_id,
-                                **kwargs):
-    """Get the data regarding the available structures of the
-    protein in the Protein Data Bank.
-    """
-
-    # Sorted column names for the final data frame
-    COLNAMES = \
-        [STRUCT_ID_FIELD, STRUCT_CHAIN_FIELD, STRUCT_SEGMENTS_FIELD,
-         UNP_ID_FIELD, UNP_SEGMENTS_FIELD, METHOD_FIELD,
-         RESOLUTION_FIELD, DEPOSITION_DATE_FIELD]
-
-
-    #------------------ Get the available structures -----------------#
-
-
-    # Try to get the data frame of available structures
-    try:
-        
-        df = get_structures_df(uniprot_id = uniprot_id)
-
-        # Inform the user that the IDs of the available structures
-        # of the protein were successfully retrieved
-        infostr = \
-            f"The IDs of the available structures of the protein " \
-            f"with UniProt ID {uniprot_id} have been successfully " \
-            f"retrieved from the Protein Data Bank."
-        logger.info(infostr)
-    
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not get the IDs of the structures available in " \
-            f"the Protein Data Bank for the protein with UniProt ID " \
-            f"{uniprot_id}. Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-    # If no structures were found
-    if df.empty:
-
-        # Return the empty data frame
-        return df
-
-
-    #------------------------ Add the metadata -----------------------#
-
-
-    # Try to add metadata for the structures
-    try:
-        
-        df = add_structures_metadata(df = df,
-                                     source = "pdb")
-    
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not add metadata to the structures found for " \
-            f"the protein with UniProt ID {uniprot_id} in the " \
-            f"Protein Data Bank. Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-
-    #---------------------- Sort the data frame ----------------------#
-
-
-    # Try to sort the dataframe according to the given criteria
-    try:
-
-        df = df.sort_values(by = kwargs["sort"]["sort_by"], 
-                            ascending = kwargs["sort"]["ascending"])
-
-        # Inform the user that the data frame was successfully
-        # sorted
-        infostr = \
-            f"The data frame of the structures of the protein " \
-            f"with UniProt ID {uniprot_id} found in the Protein " \
-            f"Data Bank has been successfully sorted."
-        logger.info(infostr)
- 
-     # If something went wrong 
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not sort the data frame of the structures of " \
-            f"the protein with UniProt ID {uniprot_id} found in " \
-            f"the Protein Data Bank. Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-    # Inform the user that all data were successfully collected
-    infostr = \
-        f"All data for the structures of the protein with " \
-        f"UniProt ID {uniprot_id} found in the Protein Data Bank " \
-        f"have been successfully collected."
-    logger.info(infostr)
-
-    # Sort the columns
-    df = df.reindex(columns = COLNAMES)
-
-    # Return the data frame
-    return df
-
-
-def get_structures_data_alphafold(uniprot_id,
-                                  **kwargs):
-    """Get the data regarding the available structures of the
-    protein in the AlphaFold Protein Structure Database.
-    """
-
-    # Sorted column names for the final data frame
-    COLNAMES = \
-        [STRUCT_ID_FIELD, STRUCT_CHAIN_FIELD, STRUCT_SEGMENTS_FIELD,
-         STRUCT_VERSION_FIELD, STRUCT_FRAGMENT_FIELD,
-         UNP_ID_FIELD, UNP_SEGMENTS_FIELD, UNP_ISOFORM_FIELD, 
-         ALPHAFOLD_ID_FIELD, DEPOSITION_DATE_FIELD]
-
-
-    #------------------ Get the available structures -----------------#
-
-
-    # Try to get the data frame of available structures
-    try:
-        
-        df = get_alphafold_df(uniprot_id = uniprot_id)
-
-        # Inform the user that the IDs of the available structures
-        # of the protein were successfully retrieved
-        infostr = \
-            f"The IDs of the available structures of the protein " \
-            f"with UniProt ID {uniprot_id} have been successfully " \
-            f"retrieved from the AlphaFold Protein Structure Database."
-        logger.info(infostr)
-    
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not get the IDs of the structures available in " \
-            f"the AlphaFold Protein Structure Database for the " \
-            f"protein with UniProt ID {uniprot_id}. Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-
-    #------------------------ Add the metadata -----------------------#
-
-
-    # Try to add metadata for the structures
-    try:
-        
-        df = add_structures_metadata(df = df,
-                                     source = "alphafold")
-    
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not add metadata to the structures found for " \
-            f"the protein with UniProt ID {uniprot_id} in the " \
-            f"AlphaFold Protein Structure Database. Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-
-    #---------------------- Filter the data frame --------------------#
-
-
-    # Try to filter the data frame
-    try:
-        
-        df = dataframe_tools.filter_df(df = df,
-                                       filters = kwargs["filter"])
-
-        # Inform the user that the data frame was successfully
-        # filtered
-        infostr = \
-            f"The data frame of the structures of the protein " \
-            f"with UniProt ID {uniprot_id} found in the AlphaFold " \
-            f"Protein Structure Database has been successfully " \
-            f"filtered."
-        logger.info(infostr)
-
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not filter the data frame of the structures " \
-            f"of the protein with UniProt ID {uniprot_id} found in " \
-            f"the AlphaFold Protein Structure Database. Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-
-    #---------------------- Sort the data frame ----------------------#
-
-
-    # Try to sort the dataframe according to the given criteria
-    try:
-
-        df = df.sort_values(by = kwargs["sort"]["sort_by"], 
-                            ascending = kwargs["sort"]["ascending"])
-
-        # Inform the user that the data frame was successfully
-        # sorted
-        infostr = \
-            f"The data frame of the structures of the protein " \
-            f"with UniProt ID {uniprot_id} found in the AlphaFold " \
-            f"Protein Structure Database has been successfully sorted."
-        logger.info(infostr)
- 
-     # If something went wrong 
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not sort the data frame of the structures of " \
-            f"the protein with UniProt ID {uniprot_id} found in " \
-            f"the AlphaFold Protein Structure Database. " \
-            f"Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-    # Inform the user that all data were successfully collected
-    infostr = \
-        f"All data for the structures of the protein with " \
-        f"UniProt ID {uniprot_id} found in the AlphaFold Protein " \
-        f"Structure Database have been successfully collected."
-    logger.info(infostr)
-
-    # Sort the columns
-    df = df.reindex(columns = COLNAMES)
-
-    # Return the data frame
-    return df
-
-
-def get_structures_data_homologs(uniprot_id,
-                                 hhblits_params,
-                                 hhsearch_params,
-                                 wd,
-                                 **kwargs):
-    """Get the data regarding the structures of the homologs of
-    the protein of interest in the Protein Data Bank.
-    """
-
-
-    #--------------------------- Run HHpred --------------------------#
-
-
-    # Inform the user that the HHpred pipeline is about to run
-    infostr = \
-        "Preparing to run the HHpred pipeline (HHpred + HHsearch)..."
-    logger.info(infostr)
-
-    # Try to run the HHpred pipeline
-    try:
-        
-        _, hhsearch_output = \
-            run_tools.run_hhpred(uniprot_id = uniprot_id,
-                                 hhblits_params = hhblits_params,
-                                 hhsearch_params = hhsearch_params,
-                                 wd = wd)
-
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = f"Could not complete the HHpred run. Exception: {e}"
-        logger.exception(errstr)
-
-        # Re-raise the exception
-        raise Exception(errstr)
-
-
-    #------------------ Get the homologs' structures -----------------#
-
-
-    # Create the parser to parse the HHsearch output
-    parser = hhsearch_tools.HHsearchParser()
-
-    # Try to parse the HHsearch output to get the list of homologs
-    # of the protein of interest and their associated data
-    try:
-        
-        hits, als = parser.parse(hhsearch_output = hhsearch_output)
-
-        # Inform the user that the IDs of the available structures
-        # for the homologs were successfully retrieved
-        infostr = \
-            f"The IDs of the structures of the homologs of the " \
-            f"protein with UniProt ID {uniprot_id} in the Protein " \
-            f"Data Bank have been successfully retrieved."
-        logger.info(infostr)
-
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not get the structures of the homologs of the " \
-            f"protein with UniProt ID {uniprot_id} found in the " \
-            f"Protein Data Bank. Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-    # Convert the index of the data frame into one of the columns
-    # storing the unique IDs of the hits
-    hits = hits.reset_index()
-    hits = hits.rename(columns = {"index" : HIT_ID_FIELD})
-
-
-    #------------------------ Add the metadata -----------------------#
-
-
-    # Try to add structures' metadata
-    try:
-        
-        hits = add_structures_metadata(df = hits,
-                                       source = "pdb")
-    
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not add metadata to the structures of the " \
-            f"homologs of the protein with UniProt ID {uniprot_id} " \
-            f"found in the Protein Data Bank. Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-
-    #---------------------- Filter the data frame --------------------#
-
-
-    # Try to filter the hits
-    try:
-        
-        hits = dataframe_tools.filter_df(df = hits,
-                                         filters = kwargs["filter"])
-
-        # Only keep the hits in the filtered data frame in the
-        # alignments
-        als = \
-            {hit : data for hit, data in als.items() \
-             if hit in hits[HIT_ID_FIELD].tolist()}
-
-        # Inform the user that the data frame was successfully
-        # filtered
-        infostr = \
-            f"The data frame of the structures of the homologs of " \
-            f"protein with UniProt ID {uniprot_id} found in the " \
-            f"Protein Data Bank has been successfully filtered."
-        logger.info(infostr)
-    
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not filter the data frame of the structures " \
-            f"of the homologs of the protein with UniProt ID " \
-            f"{uniprot_id} found in the Protein Data Bank. " \
-            f"Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-
-    #----------------------- Sort the datarame -----------------------#
-
-
-    # Try to sort the hits
-    try:
-        
-        hits = \
-            hits.sort_values(by = kwargs["sort"]["sort_by"], 
-                             ascending = kwargs["sort"]["ascending"])
-
-        # Inform the user that the data frame was successfully
-        # sorted
-        infostr = \
-            f"The data frame of the structures of the homologs of " \
-            f"the protein with UniProt ID {uniprot_id} found in the " \
-            f"Protein Data Bank has been successfully sorted."
-        logger.info(infostr)
-    
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not sort the data frame of the structures of " \
-            f"the homologs of the protein with UniProt ID " \
-            f"{uniprot_id} found in the Protein Data Bank. " \
-            f"Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-    infostr = \
-        f"All data for the structures the homologs of the protein " \
-        f"with {uniprot_id} found in the Protein Data Bank " \
-        f"have been successfully collected."
-    logger.info(infostr)
-
-    # Return the data frame containing the data about the homologs
-    # and the dictionary of alignments
-    return hits, als
-
-
 
 ############################## FIND SLIMS #############################
 
@@ -1282,7 +951,6 @@ def region_in_homolog_segments(pdb_data,
         errstr = \
             f"Could not find the sequence {start}-{end} in the " \
             f"alignment. Exception: {e}"
-        logger.exception(errstr)
         
         # Re-raise the exception
         raise Exception(errstr)
@@ -1314,7 +982,6 @@ def region_in_homolog_segments(pdb_data,
         errstr = \
             f"Could not get the missing residues for the PDB " \
             f"structure with ID {struct_id}. Exception: {e}"
-        logger.exception(errstr)
         
         # Re-raise the exception
         raise Exception(errstr)

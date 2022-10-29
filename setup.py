@@ -62,11 +62,14 @@ entry_points = \
         ["slimfast_get_structures = SLiMfast.slimfast_get_structures:main",
          "slimfast_get_alphafold = SLiMfast.slimfast_get_alphafold:main",
          "slimfast_get_homologs = SLiMfast.slimfast_get_homologs:main",
-         "slimfast_find_slims = SLiMfast.slimfast_find_slims:main"], \
+         "slimfast_find_slims = SLiMfast.slimfast_find_slims:main",
+         "slimfast_run_pipeline = SLiMfast.slimfast_run_pipeline:main"], \
     }
 
 # Dependencies required
 install_requires = ["biopython",
+                    "dask",
+                    "distributed",
                     "pandas",
                     "pytest",
                     "pyyaml",

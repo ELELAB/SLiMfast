@@ -33,12 +33,81 @@ from pkg_resources import resource_filename, Requirement
 
 
 
-# Data frame field containing a structure's AlphaFold ID
-ALPHAFOLD_ID_FIELD = "alphafold_id"
+#----------------------------- Processes -----------------------------#
+
+
+# Default number of processes (cores) to be used when running
+# slimfast_run_pipeline
+NPROC_DEFAULT = 1
+
+
+#------------------------ Configuration files ------------------------#
+
 
 # Directory where the substitution matrices are stored
 CONFIG_RUN_DIR = \
     resource_filename(Requirement("SLiMfast"), "SLiMfast/config_run")
+
+
+#------------------------ Input/output files -------------------------#
+
+
+# Name of the output CSV file produced by slimfast_get_structures
+OUTPUT_PROTEIN_FILE = "structures.csv"
+
+# Name of the output CSV file produced by slimfast_get_alphafold
+OUTPUT_ALPHAFOLD_FILE = "alphafold.csv"
+
+# Name of the output CSV file produced by slimfast_get_homologs
+OUTPUT_HOMOLOGS_FILE = "homologs.csv"
+
+# Name of the output JSON file produced by slimfast_get_homologs
+OUTPUT_ALIGNMENTS_FILE = "alignments.json"
+
+# Name of the output CSV file produced by slimfast_find_slims
+# containing the SLiMs found in the structures of the protein of
+# interest found in the Protein Data Bank
+OUTPUT_SLIMS_PROTEIN_FILE = "slims_structures.csv"
+
+# Name of the output CSV file produced by slimfast_find_slims
+# containing the SLiMs found in the structures of the protein of
+# interest found in the AlphaFold Protein Structure Database
+OUTPUT_SLIMS_ALPHAFOLD_FILE = "slims_alphafold.csv"
+
+# Name of the output CSV file produced by slimfast_find_slims
+# containing the SLiMs found in the structures of the homologs of
+# the protein of interest found in the Protein Data Bank
+OUTPUT_SLIMS_HOMOLOGS_FILE = "slims_homologs.csv"
+
+# Name of the output CSV file produced by slimfast_find_slims
+# containing the SLiMs annotated through DisProt
+OUTPUT_SLIMS_DISPROT_FILE = "slims_disprot.csv"
+
+
+#----------------------------- Log files -----------------------------#
+
+
+# Name of the log file for slimfast_get_structures
+LOG_GET_STRUCTURES_FILE = "slimfast_get_structures.log"
+
+# Name of the log file for slimfast_get_alphafold
+LOG_GET_ALPHAFOLD_FILE = "slimfast_get_alphafold.log"
+
+# Name of the log file for slimfast_get_homologs
+LOG_GET_HOMOLOGS_FILE = "slimfast_get_homologs.log"
+
+# Name of the log file for slimfast_find_slims
+LOG_FIND_SLIMS_FILE = "slimfast_find_slims.log"
+
+# Name of the log file for slimfast_run_pipeline
+LOG_RUN_PIPELINE_FILE = "slimfast_run_pipeline.log"
+
+
+#------------------------- Data frame fields -------------------------#
+
+
+# Data frame field containing a structure's AlphaFold ID
+ALPHAFOLD_ID_FIELD = "alphafold_id"
 
 # Data frame field containing the unique hit identifier
 # for the homologs
