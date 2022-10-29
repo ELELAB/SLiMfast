@@ -39,7 +39,8 @@ import sys
 # Third-party packages
 import pandas as pd
 # SLiMfast
-from SLiMfast import util
+from . import util
+from .defaults import LOG_FIND_SLIMS_FILE
 
 
 
@@ -59,27 +60,25 @@ def get_args():
         "\nFind SLiMs in structures and check if they are in " \
         "disordered regions.\n"
 
-    # Set the default name for the log file
-    log_file_default = "slimfast_find_slims.log"
-
     # Add relevant arguments to the argument parser and return them
-    args = util.get_arguments(description = description,
-                              uniprot_id = True,
-                              input_protein_file = True,
-                              input_alphafold_file = True,
-                              input_homologs_file = True,
-                              input_alignments_file = True,
-                              input_slims_file = True,
-                              output_slims_protein_file = True,
-                              output_slims_alphafold_file = True,
-                              output_slims_homologs_file = True,
-                              output_slims_disprot_file = True,
-                              configrun_file = True,
-                              log_file = True,
-                              log_to_stdout = True,
-                              v = True,
-                              vv = True,
-                              log_file_default = log_file_default)
+    args = \
+        util.get_arguments(description = description,
+                           uniprot_id = True,
+                           input_protein_file = True,
+                           input_alphafold_file = True,
+                           input_homologs_file = True,
+                           input_alignments_file = True,
+                           input_slims_file = True,
+                           output_slims_protein_file = True,
+                           output_slims_alphafold_file = True,
+                           output_slims_homologs_file = True,
+                           output_slims_disprot_file = True,
+                           configrun_file = True,
+                           log_file = True,
+                           log_to_stdout = True,
+                           v = True,
+                           vv = True,
+                           log_file_default = LOG_FIND_SLIMS_FILE)
 
     # Retrieve the arguments
     uniprot_id = args.uniprot_id
@@ -401,7 +400,7 @@ def run(uniprot_id,
 
 
     # If there are structures available for the protein of interest
-    if protein_df is not None:
+    if not protein_df.empty:
 
         # Report the SLiMs found in each structure and the SLiMs
         # still to find
@@ -413,6 +412,8 @@ def run(uniprot_id,
                                 slims_to_find = slims_to_find,
                                 struct_dir = struct_dir)
 
+            # Add the structures and the SLiMs found in them
+            # to the list
             structures_and_slims.extend(structures_and_slims_prot)
         
         # If something went wrong
@@ -435,7 +436,7 @@ def run(uniprot_id,
     # If there are still SLiMs to find and the user has passed
     # the data frame with the structures found in the AlphaFold
     # Protein Structure Database for the protein of interest
-    if slims_to_find and alphafold_df is not None:
+    if slims_to_find and not alphafold_df.empty:
 
         # Report the SLiMs found in each structure and the SLiMs
         # still to find
@@ -447,6 +448,8 @@ def run(uniprot_id,
                                 slims_to_find = slims_to_find,
                                 struct_dir = struct_dir)
 
+            # Add the structures and the SLiMs found in them
+            # to the list
             structures_and_slims.extend(structures_and_slims_alpha)
         
         # If something went wrong
@@ -471,7 +474,7 @@ def run(uniprot_id,
     # If there are still SLiMs to find and the user has passed
     # the data frame with the structures of the homologs of the
     # protein of interest found in the Protein Data Bank
-    if homologs_df is not None and slims_to_find:
+    if slims_to_find and not homologs_df.empty:
 
         # Report the SLiMs found in each structure and the SLiMs
         # still to find
@@ -484,6 +487,8 @@ def run(uniprot_id,
                                 struct_dir = struct_dir,
                                 als = alignments)
 
+            # Add the structures and the SLiMs found in them
+            # to the list
             structures_and_slims.extend(structures_and_slims_hom)
         
         # If something went wrong

@@ -48,7 +48,8 @@ logger = log.getLogger(__name__)
 def run_process(executable,
                 options, 
                 wd, 
-                outfile = None):
+                outfile = None,
+                **kwargs):
     """Run a generic process."""
 
     # Make sure that the directory where to run the process exists.
@@ -56,9 +57,31 @@ def run_process(executable,
     os.makedirs(wd, exist_ok = True)
 
     # Convert the dictionary of options into a list of arguments
-    args = \
-        [str(item) for opt_val_pair in options.items() \
-         for item in opt_val_pair]
+
+    # Create an empty list of arguments
+    args = []
+
+    # For each option, value pair
+    for opt, val in options.items():
+
+        # If the value is True
+        if val is True:
+
+            # Simply append the option (it is a flag without value)
+            args.append(str(opt))
+
+        # If the value is None
+        elif val == None:
+
+            # Skip the pair altogether
+            continue
+
+        # Otherwise
+        else:
+
+            # Append both the option and its value to the list
+            # of arguments
+            args.extend([str(opt), str(val)])
 
     # If no output file has been specified
     if outfile == "" or outfile is None:
@@ -91,9 +114,6 @@ def run_process(executable,
     # return Popen itself since it is not serializable and
     # we may launch the process with Dask in the future)
     return {"args" : popen.args,
-            "stdin" : popen.stdin,
-            "stdout" : popen.stdout,
-            "stderr" : popen.stderr,
             "pid" : popen.pid,
             "returncode" : popen.returncode}
 
@@ -236,7 +256,7 @@ def update_hhsearch_params(hhsearch_params,
     # Set the path to the log file
     hhsearch_params_copy["outfile"] = hhsearch_log
 
-    # Add the A3M file as input
+    # Add the A3M file as input and the output
     hhsearch_params_copy["options"].update(\
         {"-i" : uniprot_a3m, "-o" : uniprot_hhsearch})
 

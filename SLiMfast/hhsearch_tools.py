@@ -500,6 +500,7 @@ class HHsearchParser:
                     if subsec == "sp":
                         # The subsection will be called 'query'
                         subsec = "query"
+                    
                     # If the subsection is storing the aligned
                     # portion of the template
                     elif subsec[:4].lower() == hit_name[:4]:
@@ -648,13 +649,6 @@ class HHsearchParser:
             final_df = pd.concat([hits_df, als_df],
                                  axis = 1,
                                  sort = False)
-
-            # Inform the user that the HHsearch file has been
-            # successfully parsed
-            infostr = \
-                f"The HHsearch output file {hhsearch_output} has " \
-                f"been successfully parsed."
-            logger.info(infostr)
 
             # Return the final data frame and the alignments themselves
             return final_df, als

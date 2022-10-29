@@ -35,7 +35,18 @@ import logging as log
 import os
 import sys
 # SLiMfast
-from SLiMfast import util
+from . import util
+from .defaults import (
+    DEPOSITION_DATE_FIELD,
+    LOG_GET_STRUCTURES_FILE,
+    METHOD_FIELD,
+    RESOLUTION_FIELD,
+    STRUCT_CHAIN_FIELD,
+    STRUCT_ID_FIELD,
+    STRUCT_SEGMENTS_FIELD,
+    UNP_ID_FIELD,
+    UNP_SEGMENTS_FIELD,
+    )
 
 
 
@@ -56,19 +67,17 @@ def get_args():
         "available structures in the Protein Data Bank and save " \
         "the data in a CSV file.\n"
 
-    # Set the default name for the log file
-    log_file_default = "slimfast_get_structures.log"
-
     # Add relevant arguments to the argument parser and return them
-    args = util.get_arguments(description = description,
-                              uniprot_id = True,
-                              output_protein_file = True,
-                              configrun_file = True,
-                              log_file = True,
-                              v = True,
-                              vv = True,
-                              log_to_stdout = True,
-                              log_file_default = log_file_default)
+    args = \
+        util.get_arguments(description = description,
+                           uniprot_id = True,
+                           output_protein_file = True,
+                           configrun_file = True,
+                           log_file = True,
+                           v = True,
+                           vv = True,
+                           log_to_stdout = True,
+                           log_file_default = LOG_GET_STRUCTURES_FILE)
 
     # Retrieve the arguments
     uniprot_id = args.uniprot_id
@@ -154,64 +163,159 @@ def run(uniprot_id,
     # interest to be found in the Protein Data Bank
     struct_params = config_run["structures"]["protein"]
 
+    # Sorted column names for the final data frame
+    COLNAMES = \
+        [STRUCT_ID_FIELD, STRUCT_CHAIN_FIELD, STRUCT_SEGMENTS_FIELD,
+         UNP_ID_FIELD, UNP_SEGMENTS_FIELD, METHOD_FIELD,
+         RESOLUTION_FIELD, DEPOSITION_DATE_FIELD]
 
-    #------------------ Get the structures available -----------------#
 
-    
-    # Get all structures (mapped to the correct chains) containing
-    # the protein whose sequence is represented by the UniProt ID
-    # in the Protein Data Bank
+    #------------------ Get the available structures -----------------#
+
+
+    # Try to get the data frame of available structures
     try:
         
-        structures_df = \
-            util.get_structures_data_protein(\
-                uniprot_id = uniprot_id,
-                **struct_params["df"])
+        df = util.get_structures_df(uniprot_id = uniprot_id)
+
+        # Inform the user that the IDs of the available structures
+        # of the protein were successfully retrieved
+        infostr = \
+            f"The IDs of the available structures of the protein " \
+            f"with UniProt ID {uniprot_id} have been successfully " \
+            f"retrieved from the Protein Data Bank."
+        logger.info(infostr)
     
     # If something went wrong
     except Exception as e:
 
-        # Report it and exit
+        # Log the error
         errstr = \
-            f"Could not retrieve the data about the structures " \
-            f"available in the Protein Data Bank for the protein " \
-            f"with UniProt ID {uniprot_id}: {e}"
+            f"Could not get the IDs of the structures available in " \
+            f"the Protein Data Bank for the protein with UniProt ID " \
+            f"{uniprot_id}. Exception: {e}"
         logger.exception(errstr)
-        sys.exit(errstr)
-
-    # If no structures were found (fitting the criteria provided in
-    # the configuration file)
-    if structures_df.empty:
         
+        # Re-raise the exception
+        raise Exception(errstr)
+    
+    # If no structures were found
+    if df.empty:
+
         # Inform the user and do not generate any output file
         warnstr = \
             f"No structures were found in the Protein Data Bank " \
             f"for the protein with UniProt ID {uniprot_id}."
         logger.warning(warnstr)
 
-    # If structures were found
-    else:
+        # Return
+        return None, None
 
-        # Specify the path to the output CSV file
-        output_protein_path = os.path.join(wd, output_protein_file)
 
-        # Save the data frame to the output CSV file
-        structures_df.to_csv(output_protein_path,
-                             **struct_params["out"])
+    #------------------------ Add the metadata -----------------------#
 
-        # Inform the user that the file was successfully written
+
+    # Try to add metadata for the structures
+    try:
+        
+        df = util.add_structures_metadata(df = df,
+                                          source = "pdb")
+    
+    # If something went wrong
+    except Exception as e:
+
+        # Log the error
+        errstr = \
+            f"Could not add metadata to the structures found for " \
+            f"the protein with UniProt ID {uniprot_id} in the " \
+            f"Protein Data Bank. Exception: {e}"
+        logger.exception(errstr)
+
+        # Re-raise the exception
+        raise Exception(errstr)
+
+
+    #---------------------- Sort the data frame ----------------------#
+
+
+    # Try to sort the dataframe according to the given criteria
+    try:
+
+        df = df.sort_values(\
+            by = struct_params["df"]["sort"]["sort_by"], 
+            ascending = struct_params["df"]["sort"]["ascending"])
+
+        # Inform the user that the data frame was successfully
+        # sorted
         infostr = \
-            f"The data frame containing data about the structures " \
-            f"of the protein with UniProt ID {uniprot_id} found " \
-            f"in the Protein Data Bank has been successfully " \
-            f"written to {output_protein_path}."
+            f"The data frame of the structures of the protein " \
+            f"with UniProt ID {uniprot_id} found in the Protein " \
+            f"Data Bank has been successfully sorted."
         logger.info(infostr)
+ 
+     # If something went wrong
+    except Exception as e:
 
-        # Return the data frame and the output CSV file
-        return structures_df, output_protein_path
+        # Log the error
+        errstr = \
+            f"Could not sort the data frame of the structures of " \
+            f"the protein with UniProt ID {uniprot_id} found in " \
+            f"the Protein Data Bank. Exception: {e}"
+        logger.exception(errstr)
+
+        # Re-raise the exception
+        raise Exception(errstr)
+
+    # Inform the user that all data were successfully collected
+    infostr = \
+        f"All data for the structures of the protein with " \
+        f"UniProt ID {uniprot_id} found in the Protein Data Bank " \
+        f"have been successfully collected."
+    logger.info(infostr)
+
+
+    #----------------------- Sort the columns ------------------------#
+
+
+    # Sort the columns
+    df = df.reindex(columns = COLNAMES)
+
+
+    #----------------------- Write the CSV file ----------------------#
+
+
+    # Specify the path to the output CSV file
+    output_protein_path = os.path.join(wd, output_protein_file)
+
+    # Save the data frame to the output CSV file
+    df.to_csv(output_protein_path,
+              **struct_params["out"])
+
+    # Inform the user that the file was successfully written
+    infostr = \
+        f"The data frame containing data about the structures " \
+        f"of the protein with UniProt ID {uniprot_id} found " \
+        f"in the Protein Data Bank has been successfully " \
+        f"written to {output_protein_path}."
+    logger.info(infostr)
+
+    # Return the data frame and the output CSV file
+    return df, output_protein_path
 
 
 
 def main():
-    args = get_args()
-    run(*args)
+
+    # Try to run
+    try:
+
+        args = get_args()
+        run(*args)
+
+    # If something went wrong, report and exit
+    except Exception as e:
+
+        errstr = \
+            f"Could not run slimfast_get_structures. Exception: {e}"
+        logger.exception(errstr)
+        sys.exit(errstr)

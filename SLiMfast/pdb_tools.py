@@ -82,7 +82,22 @@ def get_protein_segments(struct_id,
 
     # Get the data from PDBe
     response = requests.get(mapping_url.format(struct_id))
-    
+
+    # If something went wrong getting the data
+    if not response.ok:
+        
+        # Inform the user that something went wrong
+        errstr = \
+            f"Could not get the PDBe mapping between PDB structure " \
+            f"and UniProt segments for the structure with ID " \
+            f"{struct_id} for the protein with UniProt ID " \
+            f"{uniprot_id}. Error code when retrieving the data " \
+            f"from the PDBe server: {response.status_code}."
+        logger.exception(errstr)
+
+        # Raise an error
+        raise ValueError(errstr)
+
     # Convert to text and read the resulting dictionary through JSON
     response_text = json.loads(response.text)
 
@@ -110,6 +125,7 @@ def get_protein_segments(struct_id,
         uniprot_start = m["unp_start"]
         uniprot_end = m["unp_end"]
 
+        # If no mapping was available
         if struct_start == "null" or struct_end == "null":
             warnstr = \
                 f"Mapping for UniProt ID {uniprot_id} residues " \
@@ -127,11 +143,13 @@ def get_protein_segments(struct_id,
         # chain corresponds to multiple discontinuous protein
         # segments)
         if struct_chain in mappings.keys():
+            
             # Add the ranges to the mapping
             mappings[struct_chain].append(ranges)
 
         # If it is the first time that the chain ID is encountered
         else:
+            
             # Create a new list and add the mapping as first element
             mappings[struct_chain] = [ranges]
 
@@ -154,8 +172,16 @@ def get_pdb_data(struct_id,
     # If something went wrong getting the data
     if not response.ok:
         
-        # Raise the corresponding error
-        response.raise_for_status()
+        # Inform the user that something went wrong
+        errstr = \
+            f"Could not get the data for the structure with ID " \
+            f"{struct_id} from the Protein Data Bank. Error code " \
+            f"when retrieving the data from the PDB server: " \
+            f"{response.status_code}."
+        logger.exception(errstr)
+
+        # Raise an error
+        raise Exception(errstr)
 
     # Create an empty list with the lines to be kept
     data = []
@@ -276,12 +302,6 @@ def get_missing_residues(pdb_data):
                 # missing residues
                 missing_residues_list.append(\
                     f"{chain}-{resname}{resnum}")
-
-    # Inform the user about the missing residues
-    infostr = \
-        f"The following residues are missing: " \
-        f"{', '.join(missing_residues_list)}."
-    logger.info(infostr)
 
     # Return the dictionary of missing residues
     return missing_residues

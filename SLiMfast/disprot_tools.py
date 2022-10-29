@@ -174,3 +174,4 @@ class DisProtParser:
 
         # Return the data frame with sorted columns
         return df[columns]
+        

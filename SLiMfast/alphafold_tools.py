@@ -31,7 +31,6 @@
 # Standard library
 import itertools
 import json
-import logging as log
 import requests
 from tempfile import NamedTemporaryFile
 # Third-party packages
@@ -47,11 +46,6 @@ from SLiMfast.defaults import (
     UNP_ISOFORM_FIELD,
     UNP_SEGMENTS_FIELD,
     )
-
-
-
-# Get the module logger
-logger = log.getLogger(__name__)
 
 
 
