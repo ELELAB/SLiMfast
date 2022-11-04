@@ -38,19 +38,20 @@ import dask
 from distributed import (
     Client,
     LocalCluster
-)
+    )
 # SLiMfast
-from .run_tools import run_process
-from . import util
-from .slimfast_get_structures import run as run_get_structures
-from .slimfast_get_alphafold import run as run_get_alphafold
-from .slimfast_get_homologs import run as run_get_homologs
+from .argparse_tools import get_arguments
 from .defaults import (
+    INPUT_SLIMS_FILE,
+    INPUT_SLIMS_FILE_OPTS,
     LOG_GET_STRUCTURES_FILE,
     LOG_GET_ALPHAFOLD_FILE,
     LOG_GET_HOMOLOGS_FILE,
     LOG_FIND_SLIMS_FILE,
-    LOG_RUN_PIPELINE_FILE)
+    LOG_RUN_PIPELINE_FILE,
+    )
+from .run_tools import run_pipeline_step
+from . import util
 
 
 
@@ -62,8 +63,10 @@ logger = log.getLogger(__name__)
 def run():
 
 
+
     #------------------------ Argument parser ------------------------#
     
+
 
     # Set the script description
     description = \
@@ -71,27 +74,28 @@ def run():
         "for multiple UniProt IDs.\n"
 
     # Add relevant arguments to the argument parser and return them
-    args = util.get_arguments(description = description,
-                              input_ids_slims_file = True,
-                              do_get_structures = True,
-                              do_get_alphafold = True,
-                              do_get_homologs = True,
-                              do_find_slims = True,
-                              output_protein_file = True,
-                              output_alphafold_file = True,
-                              output_homologs_file = True,
-                              output_alignments_file = True,
-                              output_slims_protein_file = True,
-                              output_slims_alphafold_file = True,
-                              output_slims_homologs_file = True,
-                              output_slims_disprot_file = True,
-                              configrun_file = True,
-                              log_file = True,
-                              log_to_stdout = True,
-                              v = True,
-                              vv = True,
-                              log_file_default = LOG_RUN_PIPELINE_FILE,
-                              nproc = True)
+    args = get_arguments(\
+                description = description,
+                input_ids_slims_file = True,
+                do_get_structures = True,
+                do_get_alphafold = True,
+                do_get_homologs = True,
+                do_find_slims = True,
+                output_protein_file = True,
+                output_alphafold_file = True,
+                output_homologs_file = True,
+                output_alignments_file = True,
+                output_slims_protein_file = True,
+                output_slims_alphafold_file = True,
+                output_slims_homologs_file = True,
+                output_slims_disprot_file = True,
+                configrun_file = True,
+                log_file = True,
+                log_to_stdout = True,
+                v = True,
+                vv = True,
+                log_file_default = LOG_RUN_PIPELINE_FILE,
+                nproc = True)
 
     # Retrieve the arguments
     input_ids_slims_file = args.input_ids_slims_file
@@ -115,24 +119,26 @@ def run():
     nproc = args.nproc
 
 
+
     #---------------------------- Logging ----------------------------#
+
 
 
     # Default logging level is WARNING
     level = log.WARNING
-    
+
     # If verbose logging required
     if v:
-        
+
         # Logging level will be INFO
         level = log.INFO
-    
+
     # If debug logging required
     if vv:
-        
+
         # Logging level will be DEBUG
         level = log.DEBUG
-    
+
     # Create the list containing the log handlers
     handlers = [log.FileHandler(filename = log_file, mode = "w")]
 
@@ -142,13 +148,15 @@ def run():
 
         # Add the StreamHandler to the list of handlers
         handlers.append(log.StreamHandler(sys.stdout))
-    
+
     # Set the basic logging configuration
     log.basicConfig(level = level,
                     handlers = handlers)
 
 
+
     #------------------------- Configuration -------------------------#
+
 
 
     # Try to load the configuration file for running
@@ -176,12 +184,14 @@ def run():
     wd = util.get_abspath(config_run["wd"])
 
 
+
     #---------------------- Cluster and client -----------------------#
+
 
 
     # Create the local cluster
     cluster = LocalCluster(n_workers = nproc,
-                           silence_logs = level,
+                           silence_logs = log.CRITICAL,
                            processes = True,
                            threads_per_worker = 1)
     
@@ -189,7 +199,9 @@ def run():
     client = Client(cluster)
 
 
+
     #------------------ Input UniProt IDs and SLiMs ------------------#
+
 
 
     # Try to parse the CSV file containing the UniProt IDs and
@@ -217,20 +229,35 @@ def run():
     logger.info(infostr)
 
 
+
     #------------------------------ Run ------------------------------#
 
+
+
+    # Inform the user that the run is starting
+    logger.info("Running...")
 
     # Create a list of futures to be gathered in the end
     futures = []
 
+
     # For each UniProt ID and associated SLiMs
     for uniprot_id, slims_to_find in ids_slims.items():
+
 
         # Create a directory with the UniProt ID inside the
         # working directory, where the results for the current
         # protein will be stored
         curr_wd = os.path.join(wd, uniprot_id)
         os.makedirs(curr_wd, exist_ok = True)
+
+        # Initialize the input files for slimfast_get_structures,
+        # slimfast_get_alphafold, slimfast_get_homologs to None
+        protein_file = None
+        alphafold_file = None
+        homologs_file = None
+        alignments_file = None
+
 
         # If the user requested the search for structures of the
         # protein of interest in the Protein Data Bank
@@ -240,6 +267,7 @@ def run():
             # slimfast_get_structures/slimfast_find_slims
             protein_file = f"{uniprot_id}_{output_protein_file}"
 
+
         # If the user requested the search for structures of the
         # protein of interest in the AlphaFold Protein Structure
         # Database
@@ -248,6 +276,7 @@ def run():
             # Set the name of the output/input file for
             # slimfast_get_alphafold/slimfast_find_slims
             alphafold_file = f"{uniprot_id}_{output_alphafold_file}"
+
 
         # If the user requested the search for structures of the
         # homologs of the protein of interest in the Protein Data
@@ -259,8 +288,18 @@ def run():
             homologs_file = f"{uniprot_id}_{output_homologs_file}"
             alignments_file = f"{uniprot_id}_{output_alignments_file}"
 
+
         # If the user requested the SLiMs' search
         if do_find_slims:
+
+            # Set the path to the SLiMs' input file
+            slims_input_file = \
+                os.path.join(curr_wd, 
+                             f"{uniprot_id}_{INPUT_SLIMS_FILE}")
+
+            # Write the SLiMs' input file
+            slims_to_find.to_csv(slims_input_file,
+                                 **INPUT_SLIMS_FILE_OPTS)
 
             # Set the names of the output files
             slims_protein_file = \
@@ -272,56 +311,55 @@ def run():
             slims_disprot_file = \
                 f"{uniprot_id}_{output_slims_disprot_file}"
 
-            # Create a list of temporary futures that will serve
+            # Create a dictionary of temporary futures that will serve
             # as dependencies for slimfast_find_slims, if needed
-            tmp_futures = []
+            tmp_futures = {}
 
 
         # If the user requested the search for structures of the
         # protein of interest in the Protein Data Bank
         if do_get_structures:
 
-            # Set the executable
-            executable = "slimfast_get_structures"
-
-            # Get the name of the log file
-            log_file = f"{uniprot_id}_{LOG_GET_STRUCTURES_FILE}"
-
-            # Set the options
-            options = \
-                {"--uniprot-id" : uniprot_id,
-                 "--output-protein-file" : protein_file,
-                 "--configrun-file" : configrun_file,
-                 "--log-file" : log_file}
-
-            # If verbose logging mode has been requested 
-            if v:
-
-                # Update the options
-                options.update({"-v" : True})
-
-            # If debug mode has been requested
-            if vv:
-
-                # Update the options
-                options.update({"-vv" : True})
-
             # Launch the process
-            process = \
-                client.submit(run_process,
-                              executable = executable,
-                              options = options, 
-                              wd = curr_wd)
+            output_files = \
+                client.submit(\
+                    run_pipeline_step,
+                    step = "get_structures",
+                    wd = curr_wd,
+                    uniprot_id = uniprot_id,
+                    input_files = None,
+                    output_files = [protein_file],
+                    configrun_file = configrun_file,
+                    log_file = LOG_GET_STRUCTURES_FILE,
+                    v = v,
+                    vv = vv)
 
-            # Append it to the list of futures
-            futures.append(process)
+            # FOR FUTURE REFERENCE: the if/else block here is needed
+            # because appending to the 'futures' list in any case
+            # (i.e., whether 'do_find_slims' is True or False)
+            # results in Dask throwing an error when 'do_find_slims'
+            # is True. It is possible this happens because dask
+            # tries to gather futures which have already completed
+            # (since, for each UniProt ID, slimfast_get_structures
+            # needs to complete before slimfast_find_slims is run,
+            # if both are requested, meaning the future representing
+            # the slimfast_get_structures process has already completed
+            # by the end of the program).
 
             # If slimfast_find_slims will be run
             if do_find_slims:
 
-                # Add it also to the list storing the
+                # Add the future to the dictionary storing the
                 # futures slimfast_find_slims depends on
-                tmp_futures.append(process)
+                tmp_futures["gs"] = output_files
+
+            # Otherwise
+            else:
+                
+                # Add the future to the list of futures that will
+                # be gathered in the end
+                futures.append(output_files)
+
 
 
         # If the user requested the search for structures of the
@@ -329,47 +367,45 @@ def run():
         # Database
         if do_get_alphafold:
 
-            # Set the executable
-            executable = "slimfast_get_alphafold"
-
-            # Get the name of the log file
-            log_file = f"{uniprot_id}_{LOG_GET_ALPHAFOLD_FILE}"
-
-            # Set the options
-            options = \
-                {"--uniprot-id" : uniprot_id,
-                 "--output-alphafold-file" : alphafold_file,
-                 "--configrun-file" : configrun_file,
-                 "--log-file" : log_file}
-
-            # If verbose logging mode has been requested 
-            if v:
-
-                # Update the options
-                options.update({"-v" : True})
-
-            # If debug mode has been requested
-            if vv:
-
-                # Update the options
-                options.update({"-vv" : True})
-
             # Launch the process
-            process = \
-                client.submit(run_process,
-                              executable = executable,
-                              options = options, 
-                              wd = curr_wd)
+            output_files = \
+                client.submit(\
+                    run_pipeline_step,
+                    step = "get_alphafold",
+                    wd = curr_wd,
+                    uniprot_id = uniprot_id,
+                    input_files = None,
+                    output_files = [alphafold_file],
+                    configrun_file = configrun_file,
+                    log_file = LOG_GET_ALPHAFOLD_FILE,
+                    v = v,
+                    vv = vv)
 
-            # Append it to the list of futures
-            futures.append(process)
+            # FOR FUTURE REFERENCE: the if/else block here is needed
+            # because appending to the 'futures' list in any case
+            # (i.e., whether 'do_find_slims' is True or False)
+            # results in Dask throwing an error when 'do_find_slims'
+            # is True. It is possible this happens because dask
+            # tries to gather futures which have already completed
+            # (since, for each UniProt ID, slimfast_get_alphafold
+            # needs to complete before slimfast_find_slims is run,
+            # if both are requested, meaning the future representing
+            # the slimfast_get_alphafold process has already completed
+            # by the end of the program).
 
             # If slimfast_find_slims will be run
             if do_find_slims:
 
-                # Add it also to the list storing the
+                # Add the future to the dictionary storing the
                 # futures slimfast_find_slims depends on
-                tmp_futures.append(process)
+                tmp_futures["ga"] = output_files
+
+            # Otherwise
+            else:
+                
+                # Add the future to the list of futures that will
+                # be gathered in the end
+                futures.append(output_files)
 
 
         # If the user requested the search for structures of the
@@ -377,93 +413,84 @@ def run():
         # Bank
         if do_get_homologs:
 
-            # Set the executable
-            executable = "slimfast_get_homologs"
-
-            # Get the name of the log file
-            log_file = f"{uniprot_id}_{LOG_GET_HOMOLOGS_FILE}"
-
-            # Set the options
-            options = \
-                {"--uniprot-id" : uniprot_id,
-                 "--output-homologs-file" : homologs_file,
-                 "--output-alignments-file" : alignments_file,
-                 "--configrun-file" : configrun_file,
-                 "--log-file" : log_file}
-
-            # If verbose logging mode has been requested 
-            if v:
-
-                # Update the options
-                options.update({"-v" : True})
-
-            # If debug mode has been requested
-            if vv:
-
-                # Update the options
-                options.update({"-vv" : True})
-
             # Launch the process
-            process = \
-                client.submit(run_process,
-                              executable = executable,
-                              options = options, 
-                              wd = curr_wd)
+            output_files = \
+                client.submit(\
+                    run_pipeline_step,
+                    step = "get_homologs",
+                    wd = curr_wd,
+                    uniprot_id = uniprot_id,
+                    input_files = None,
+                    output_files = [homologs_file, alignments_file],
+                    configrun_file = configrun_file,
+                    log_file = LOG_GET_HOMOLOGS_FILE,
+                    v = v,
+                    vv = vv)
 
-            # Append it to the list of futures
-            futures.append(process)
+            # FOR FUTURE REFERENCE: the if/else block here is needed
+            # because appending to the 'futures' list in any case
+            # (i.e., whether 'do_find_slims' is True or False)
+            # results in Dask throwing an error when 'do_find_slims'
+            # is True. It is possible this happens because dask
+            # tries to gather futures which have already completed
+            # (since, for each UniProt ID, slimfast_get_homologs
+            # needs to complete before slimfast_find_slims is run,
+            # if both are requested, meaning the future representing
+            # the slimfast_get_homologs process has already completed
+            # by the end of the program).
 
             # If slimfast_find_slims will be run
             if do_find_slims:
 
-                # Add it also to the list storing the
+                # Add the future to the dictionary storing the
                 # futures slimfast_find_slims depends on
-                tmp_futures.append(process)
+                tmp_futures["gh"] = output_files
 
-    """
+            # Otherwise
+            else:
+                
+                # Add the futures to the list of futures that will
+                # be gathered in the end
+                futures.append(output_files)
+
+
         # If the user requested the SLiMs' search
         if do_find_slims:
 
-            # Set the executable
-            executable = "slimfast_find_slims"
+            # Get the input files
+            input_files = \
+                client.submit(\
+                     util.get_items,
+                        d = tmp_futures,
+                        keys = ["gs", "ga", "gh"],
+                        expected_num_values = [1, 1, 2],
+                        insert_first = [slims_input_file])
 
-            # Get the name of the log file
-            log_file = f"{uniprot_id}_{LOG_FIND_SLIMS_FILE}"
-
-            # Set the options
-            options = \
-                {"--uniprot-id", uniprot_id,
-                 "--input-protein-file", protein_file,
-                 "--input-alphafold-file", alphafold_file,
-                 "--input-homologs-file", homologs_file,
-                 "--input-alignments-file", alignments_file,
-                 "--output-slims-protein-file", slims_protein_file,
-                 "--output-slims-alphafold-file", slims_alphafold_file,
-                 "--output-slims-homologs-file", slims_homologs_file,
-                 "--output-slims-disprot-file", slims_disprot_file,
-                 "--configrun-file", configrun_file,
-                 "--log-file", log_file}
-
-            # If verbose logging mode has been requested 
-            if v:
-
-                # Update the options
-                options.update({"-v", True})
-
-            # If debug mode has been requested
-            if vv:
-
-                # Update the options
-                options.update({"-vv", True})
+            # Get the output files for slimfast_find_slims
+            output_files = \
+                [slims_protein_file, slims_alphafold_file,
+                 slims_homologs_file, slims_disprot_file]
 
             # Launch the process
-            client.submit(run_process,
-                          executable = executable,
-                          options = options, 
-                          wd = curr_wd, 
-                          wait_on = tmp_futures)
-    """
-    # Gather the remaining futures before exiting
+            output_files = \
+                client.submit(\
+                    run_pipeline_step,
+                    step = "find_slims",
+                    wd = curr_wd,
+                    uniprot_id = uniprot_id,
+                    input_files = input_files,
+                    output_files = output_files,
+                    configrun_file = configrun_file,
+                    log_file = LOG_FIND_SLIMS_FILE,
+                    v = v,
+                    vv = vv)
+
+            # Add the future to the list of futures that will
+            # be gathered in the end
+            futures.append(output_files)
+
+
+    # Gather the remaining futures
     client.gather(futures)
 
 
@@ -482,6 +509,4 @@ def main():
             f"Could not run slimfast_run_pipeline. Exception: {e}"
         logger.exception(errstr)
         sys.exit(errstr)
-
-
 
