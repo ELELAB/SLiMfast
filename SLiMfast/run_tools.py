@@ -320,7 +320,17 @@ def update_hhblits_params(hhblits_params,
             new_val = os.path.join(hhblits_dirname, val)
 
             # Add it to the updated dictionary of parameters
-            hhblits_params_copy.update({opt : new_val})
+            hhblits_params_copy["options"].update({opt : new_val})
+
+    # If the option -o has not been passed
+    if "-o" not in list(hhblits_params_copy["options"].keys()):
+
+        # Pass it and give the correct path to the file,
+        # otherwise the file willbe written anyway, but in
+        # the wrong location
+        hhblits_params_copy["options"].update(\
+            {"-o" : os.path.join(hhblits_dirname,
+                                 uniprot_id + "_hhblits.hhr")})
 
     # Set the path to the output A3M file
     uniprot_a3m = \
@@ -391,7 +401,7 @@ def update_hhsearch_params(hhsearch_params,
             new_val = os.path.join(hhsearch_dirname, val)
 
             # Add it to the updated dictionary of parameters
-            hhsearch_params_copy.update({opt : new_val})
+            hhsearch_params_copy["options"].update({opt : new_val})
 
     # Path to the HHsearch output
     uniprot_hhsearch = \
