@@ -1,0 +1,2 @@
+hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
+1_1pq1.B,1,1pq1.B,Apoptosis regulator Bcl,88.9,2.1E-01,2.4E-06,32.7,0.0,21,101-125,3-23,1pq1,B,48.0,0.879,0.0,1.7,Mus musculus,12.5,X-RAY DIFFRACTION,1.65,2003-06-17

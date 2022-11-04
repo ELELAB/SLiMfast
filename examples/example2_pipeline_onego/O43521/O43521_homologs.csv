@@ -1,0 +1,9 @@
+hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
+1_1pq1.B,1,1pq1.B,Apoptosis regulator Bcl,99.2,1.1E-14,1.2E-19,94.3,0.0,31,141-171,1-31,1pq1,B,77.0,1.21,28.9,1.7,Mus musculus,15.7,X-RAY DIFFRACTION,1.65,2003-06-17
+39_6zhc.DDD,39,6zhc.DDD,von Hippel-Lindau dis,22.3,8.2E+01,9.4E-04,28.7,0.0,20,144-163,86-105,6zhc,DDD,45.0,0.708,0.0,6.8,Homo sapiens,10.1,X-RAY DIFFRACTION,1.92,2020-06-22
+45_6bf2.A,45,6bf2.A,Bcl-2-like protein 1; A,21.2,8.9E+01,1.0E-03,28.2,0.0,20,144-163,85-104,6bf2,A,45.0,0.708,0.0,7.0,Homo sapiens,10.1,SOLUTION NMR,,2017-10-25
+42_1lxl.A,42,1lxl.A,"BCL-XL; APOPTOSIS, PROG",21.9,8.4E+01,9.8E-04,28.6,0.0,21,143-163,85-105,1lxl,A,43.0,0.637,0.0,6.8,Homo sapiens,10.6,SOLUTION NMR,,1996-04-04
+48_3ilc.A,48,3ilc.A,Bcl-2-like protein 1; A,21.1,8.9E+01,1.0E-03,27.7,0.0,20,144-163,83-102,3ilc,A,40.0,0.542,0.0,7.3,Mus musculus,10.1,X-RAY DIFFRACTION,1.64,2009-08-07
+47_3ihd.A,47,3ihd.A,Bcl-2-like protein 1; A,21.1,8.9E+01,1.0E-03,27.7,0.0,20,144-163,83-102,3ihd,A,40.0,0.542,0.0,7.3,Mus musculus,10.1,X-RAY DIFFRACTION,1.88,2009-07-30
+33_6qgg.A,33,6qgg.A,Induced myeloid leukemi,23.2,7.6E+01,8.8E-04,27.2,0.0,21,143-163,40-60,6qgg,A,33.0,0.559,0.0,7.9,Homo sapiens,10.6,X-RAY DIFFRACTION,1.5,2019-01-11
+34_6qgh.A,34,6qgh.A,Induced myeloid leukemi,23.2,7.6E+01,8.8E-04,27.2,0.0,21,143-163,40-60,6qgh,A,33.0,0.559,0.0,7.9,Homo sapiens,10.6,X-RAY DIFFRACTION,2.0,2019-01-11
