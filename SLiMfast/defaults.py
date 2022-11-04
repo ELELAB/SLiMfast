@@ -52,6 +52,11 @@ CONFIG_RUN_DIR = \
 #------------------------ Input/output files -------------------------#
 
 
+# Name of the input file containing the SLiMs of interest for a
+# given protein (it is automatically created by slimfast_run_pipeline
+# from the input CSV file)
+INPUT_SLIMS_FILE = "slims.csv"
+
 # Name of the output CSV file produced by slimfast_get_structures
 OUTPUT_PROTEIN_FILE = "structures.csv"
 
@@ -82,6 +87,11 @@ OUTPUT_SLIMS_HOMOLOGS_FILE = "slims_homologs.csv"
 # Name of the output CSV file produced by slimfast_find_slims
 # containing the SLiMs annotated through DisProt
 OUTPUT_SLIMS_DISPROT_FILE = "slims_disprot.csv"
+
+# Format options when writing the input SLiMs' file (passed to
+# pandas.DataFrame.to_csv)
+INPUT_SLIMS_FILE_OPTS = \
+    {"sep" : ",", "index" : False, "header" : False}
 
 
 #----------------------------- Log files -----------------------------#

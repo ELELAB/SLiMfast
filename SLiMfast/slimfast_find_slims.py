@@ -39,21 +39,22 @@ import sys
 # Third-party packages
 import pandas as pd
 # SLiMfast
-from . import util
+from .argparse_tools import get_arguments
 from .defaults import LOG_FIND_SLIMS_FILE
-
+from . import util
 
 
 # Get the module logger
 logger = log.getLogger(__name__)
 
 
+def run():
 
-def get_args():
 
 
     #------------------------ Argument parser ------------------------#
     
+
 
     # Set the script description
     description = \
@@ -62,23 +63,24 @@ def get_args():
 
     # Add relevant arguments to the argument parser and return them
     args = \
-        util.get_arguments(description = description,
-                           uniprot_id = True,
-                           input_protein_file = True,
-                           input_alphafold_file = True,
-                           input_homologs_file = True,
-                           input_alignments_file = True,
-                           input_slims_file = True,
-                           output_slims_protein_file = True,
-                           output_slims_alphafold_file = True,
-                           output_slims_homologs_file = True,
-                           output_slims_disprot_file = True,
-                           configrun_file = True,
-                           log_file = True,
-                           log_to_stdout = True,
-                           v = True,
-                           vv = True,
-                           log_file_default = LOG_FIND_SLIMS_FILE)
+        get_arguments(\
+            description = description,
+            uniprot_id = True,
+            input_protein_file = True,
+            input_alphafold_file = True,
+            input_homologs_file = True,
+            input_alignments_file = True,
+            input_slims_file = True,
+            output_slims_protein_file = True,
+            output_slims_alphafold_file = True,
+            output_slims_homologs_file = True,
+            output_slims_disprot_file = True,
+            configrun_file = True,
+            log_file = True,
+            log_to_stdout = True,
+            v = True,
+            vv = True,
+            log_file_default = LOG_FIND_SLIMS_FILE)
 
     # Retrieve the arguments
     uniprot_id = args.uniprot_id
@@ -98,24 +100,26 @@ def get_args():
     vv = args.verbose_debug
 
 
+
     #---------------------------- Logging ----------------------------#
+
 
 
     # Default logging level is WARNING
     level = log.WARNING
-    
+
     # If verbose logging required
     if v:
-        
+
         # Logging level will be INFO
         level = log.INFO
-    
+
     # If debug logging required
     if vv:
-        
+
         # Logging level will be DEBUG
         level = log.DEBUG
-    
+
     # Create the list containing the log handlers
     handlers = [log.FileHandler(filename = log_file, mode = "w")]
 
@@ -125,13 +129,15 @@ def get_args():
 
         # Add the StreamHandler to the list of handlers
         handlers.append(log.StreamHandler(sys.stdout))
-    
+
     # Set the basic logging configuration
     log.basicConfig(level = level,
                     handlers = handlers)
 
 
+
     #------------------------- Configuration -------------------------#
+
 
 
     # Try to load the configuration file for running
@@ -156,7 +162,9 @@ def get_args():
     logger.info(infostr)
 
 
+
     #-------------------------- Input SLiMs --------------------------#
+
 
 
     # Try to load the text file containing the SLiM instances
@@ -180,7 +188,9 @@ def get_args():
         sys.exit(errstr)
 
 
+
     #--------- Input structures of the protein from the PDB ----------#
+
 
 
     # If the CSV file with the structures of the protein of interest
@@ -217,7 +227,9 @@ def get_args():
         protein_df = pd.DataFrame()
 
 
+
     #----- Input structures of the protein from the AlphaFold DB -----#
+
 
 
     # If the CSV file with the structures of the protein of interest
@@ -256,8 +268,10 @@ def get_args():
         alphafold_df = pd.DataFrame()
 
 
+
     #--------- Input structures of the homologs from the PDB ---------#
     #----------------- and corresponding alignments ------------------#
+
 
 
     # If the CSV file with the structures of the homologs of
@@ -349,26 +363,10 @@ def get_args():
         alignments = {}
 
 
-    # Return data frames, alignments, SLiM instances, output files
-    # and configuration
-    return uniprot_id, protein_df, alphafold_df, homologs_df, \
-           alignments, slims_to_find, output_slims_protein_file, \
-           output_slims_alphafold_file, output_slims_homologs_file, \
-           output_slims_disprot_file, config_run
+
+    #------------------------------ Run ------------------------------#
 
 
-def run(uniprot_id,
-        protein_df,
-        alphafold_df,
-        homologs_df,
-        alignments,
-        slims_to_find,
-        output_slims_protein_file,
-        output_slims_alphafold_file,
-        output_slims_homologs_file,
-        output_slims_disprot_file,
-        config_run):
- 
 
     # Get the working directory where the pipeline will be run
     wd = util.get_wd(config_run)
@@ -396,7 +394,9 @@ def run(uniprot_id,
     structures_and_slims = []
 
 
+
     #------------ Find SLiMs in structures from the PDB --------------#
+
 
 
     # If there are structures available for the protein of interest
@@ -430,7 +430,9 @@ def run(uniprot_id,
         slims_to_find = still_to_find
 
 
+
     #----------- Find SLiMs in structures from AlphaFoldDB -----------#
+
 
 
     # If there are still SLiMs to find and the user has passed
@@ -468,7 +470,9 @@ def run(uniprot_id,
         slims_to_find = still_to_find
 
 
+
     #-------------------- Find SLiMs in homologs ---------------------#
+
 
 
     # If there are still SLiMs to find and the user has passed
@@ -506,7 +510,9 @@ def run(uniprot_id,
         slims_to_find = still_to_find
 
 
+
     #---------------------- Combine the results ----------------------#
+
 
 
     # Try to get the results
@@ -533,8 +539,10 @@ def run(uniprot_id,
         sys.exit(errstr)
 
 
+
     #----------- Write the output file for the structures ------------#
     #---------------- of the protein found in the PDB ----------------#
+
 
 
     # If no SLiMs were found in the structures of the protein of
@@ -567,8 +575,10 @@ def run(uniprot_id,
         logger.info(infostr)
 
 
+
     #----------- Write the output file for the structures ------------#
     #------------ of the protein found in the AlphaFoldDB ------------#
+
 
 
     # If no SLiMs were found in the structures of the protein of
@@ -602,10 +612,12 @@ def run(uniprot_id,
         logger.info(infostr)
 
 
+
     #----------- Write the output file for the structures ------------#
     #--------------- of the homologs found in the PDB ----------------#
 
     
+
     # If no SLiMs were found in the structures of the homologs of the
     # protein of interest
     if results_homologs_df.empty:
@@ -632,11 +644,13 @@ def run(uniprot_id,
             f"The SLiMs found in the structures of the homologs of " \
             f"the protein with UniProt ID {uniprot_id} found in the " \
             f"Protein Data Bank have been successfully written to " \
-            f"to {output_slims_protein_file}."
+            f"to {output_slims_homologs_file}."
         logger.info(infostr)
 
 
+
     #-------------------- Get DisProt annotations --------------------#
+
 
 
     # If there are still SLiMs that were not annotated
@@ -682,11 +696,22 @@ def run(uniprot_id,
             infostr = \
                 f"The SLiMs annotated through DisProt for the " \
                 f"protein with UniProt ID {uniprot_id} have been " \
-                f"successfully written to {output_slims_protein_file}."
+                f"successfully written to {output_slims_disprot_file}."
             logger.info(infostr)
 
 
 
 def main():
-    args = get_args()
-    run(*args)
+    
+    # Try to run
+    try:
+
+        run()
+
+    # If something went wrong, report and exit
+    except Exception as e:
+
+        errstr = \
+            f"Could not run slimfast_find_slims. Exception: {e}"
+        logger.exception(errstr)
+        sys.exit(errstr)

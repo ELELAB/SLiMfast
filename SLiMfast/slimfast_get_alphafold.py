@@ -35,6 +35,7 @@ import logging as log
 import os
 import sys
 # SLiMfast
+from .argparse_tools import get_arguments
 from . import dataframe_tools
 from . import util
 from .defaults import (
@@ -58,10 +59,12 @@ logger = log.getLogger(__name__)
 
 
 
-def get_args():
+def run():
+
 
 
     #------------------------ Argument parser ------------------------#
+
 
     
     # Set the script description
@@ -72,15 +75,16 @@ def get_args():
 
     # Add relevant arguments to the argument parser and return them
     args = \
-        util.get_arguments(description = description,
-                           uniprot_id = True,
-                           output_alphafold_file = True,
-                           configrun_file = True,
-                           log_file = True,
-                           v = True,
-                           vv = True,
-                           log_to_stdout = True,
-                           log_file_default = LOG_GET_ALPHAFOLD_FILE)
+        get_arguments(\
+            description = description,
+            uniprot_id = True,
+            output_alphafold_file = True,
+            configrun_file = True,
+            log_file = True,
+            v = True,
+            vv = True,
+            log_to_stdout = True,
+            log_file_default = LOG_GET_ALPHAFOLD_FILE)
 
     # Retrieve the arguments
     uniprot_id = args.uniprot_id
@@ -92,24 +96,26 @@ def get_args():
     vv = args.verbose_debug
 
 
+
     #---------------------------- Logging ----------------------------#
+
 
 
     # Default logging level is WARNING
     level = log.WARNING
-    
+
     # If verbose logging required
     if v:
-        
+
         # Logging level will be INFO
         level = log.INFO
-    
+
     # If debug logging required
     if vv:
-        
+
         # Logging level will be DEBUG
         level = log.DEBUG
-    
+
     # Create the list containing the log handlers
     handlers = [log.FileHandler(filename = log_file, mode = "w")]
 
@@ -119,13 +125,15 @@ def get_args():
 
         # Add the StreamHandler to the list of handlers
         handlers.append(log.StreamHandler(sys.stdout))
-    
+
     # Set the basic logging configuration
     log.basicConfig(level = level,
                     handlers = handlers)
 
 
+
     #------------------------- Configuration -------------------------#
+
 
 
     # Try to load the configuration file for running
@@ -149,13 +157,10 @@ def get_args():
         f"Configuration parsed successfully from {configrun_file}."
     logger.info(infostr)
 
-    # Return UniProt ID, output file and configuration
-    return uniprot_id, output_alphafold_file, config_run
 
 
-def run(uniprot_id, 
-        output_alphafold_file,
-        config_run):
+    #------------------------------ Run ------------------------------#
+
 
 
     # Get the working directory where the pipeline will be run
@@ -166,7 +171,9 @@ def run(uniprot_id,
     struct_params = config_run["structures"]["alphafold"]
 
 
+
     #------------------ Get the structures available -----------------#
+
 
 
     # Sorted column names for the final data frame
@@ -177,7 +184,9 @@ def run(uniprot_id,
          ALPHAFOLD_ID_FIELD, DEPOSITION_DATE_FIELD]
 
 
+
     #------------------ Get the available structures -----------------#
+
 
 
     # Try to get the data frame of available structures
@@ -217,10 +226,12 @@ def run(uniprot_id,
         logger.warning(warnstr)
 
         # Return
-        return None, None
+        return
+
 
 
     #------------------------ Add the metadata -----------------------#
+
 
 
     # Try to add metadata for the structures
@@ -243,7 +254,9 @@ def run(uniprot_id,
         raise Exception(errstr)
 
 
+
     #---------------------- Filter the data frame --------------------#
+
 
 
     # Try to filter the data frame
@@ -287,10 +300,12 @@ def run(uniprot_id,
         logger.warning(warnstr)
 
         # Return
-        return None, None
+        return
+
 
 
     #---------------------- Sort the data frame ----------------------#
+
 
 
     # Try to sort the dataframe according to the given criteria
@@ -330,14 +345,18 @@ def run(uniprot_id,
     logger.info(infostr)
 
 
+
     #----------------------- Sort the columns ------------------------#
+
 
 
     # Sort the columns
     df = df.reindex(columns = COLNAMES)
 
 
+
     #----------------------- Write the CSV file ----------------------#
+
 
 
     # Specify the path to the output CSV file
@@ -355,18 +374,14 @@ def run(uniprot_id,
         f"successfully written to {output_alphafold_path}."
     logger.info(infostr)
 
-    # Return the data frame and the output CSV file
-    return df, output_alphafold_path
-
 
 
 def main():
-    
+
     # Try to run
     try:
 
-        args = get_args()
-        run(*args)
+        run()
 
     # If something went wrong, report and exit
     except Exception as e:
@@ -375,3 +390,4 @@ def main():
             f"Could not run slimfast_get_alphafold. Exception: {e}"
         logger.exception(errstr)
         sys.exit(errstr)
+

@@ -105,6 +105,7 @@ structures:
         # Which version(s) of the structure to keep in the
         # data frame
         struct_version_in:
+          - 1
           - 2
           - 3
 

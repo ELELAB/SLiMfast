@@ -48,8 +48,7 @@ logger = log.getLogger(__name__)
 def run_process(executable,
                 options, 
                 wd, 
-                outfile = None,
-                **kwargs):
+                outfile = None):
     """Run a generic process."""
 
     # Make sure that the directory where to run the process exists.
@@ -118,6 +117,155 @@ def run_process(executable,
             "returncode" : popen.returncode}
 
 
+def run_pipeline_step(step,
+                      wd,
+                      uniprot_id,
+                      input_files,
+                      output_files,
+                      configrun_file,
+                      log_file,
+                      v,
+                      vv):
+    """Run a step of the SLiMfast pipeline.
+    """
+
+    # Get the name of the log file
+    log_file = f"{uniprot_id}_{log_file}"
+
+    # Set the common options
+    options = \
+        {"--uniprot-id" : uniprot_id,
+         "--configrun-file" : configrun_file,
+         "--log-file" : log_file}
+
+    # If verbose logging mode has been requested 
+    if v:
+
+        # Update the options
+        options.update({"-v" : True})
+
+    # If debug mode has been requested
+    if vv:
+
+        # Update the options
+        options.update({"-vv" : True})
+
+    # If the step consists in running slimfast_get_structures
+    if step == "get_structures":
+
+        # Set the executable
+        executable = "slimfast_get_structures"
+
+        # Update the options
+        options.update(\
+            {"--output-protein-file" : output_files[0]})
+
+    # If the step consists in running slimfast_get_alphafold
+    elif step == "get_alphafold":
+
+        # Set the executable
+        executable = "slimfast_get_alphafold"
+
+        # Update the options
+        options.update(\
+            {"--output-alphafold-file" : output_files[0]})
+
+    # If the step consists in running slimfast_get_homologs
+    elif step == "get_homologs":
+
+        # Set the executable
+        executable = "slimfast_get_homologs"
+
+        # Update the options
+        options.update(\
+            {"--output-homologs-file" : output_files[0],
+             "--output-alignments-file" : output_files[1]})
+
+    # If the step consists in running slimfast_find_slims
+    elif step == "find_slims":
+
+        # Get the executable
+        executable = "slimfast_find_slims"
+
+        # Unpack the input files
+        slims_input_file, protein_file, alphafold_file, \
+            homologs_file, alignments_file = input_files
+
+        # Unpack the output files
+        slims_protein_file, slims_alphafold_file, \
+            slims_homologs_file, slims_disprot_file = output_files
+
+        # Add the SLiMs' input file
+        options.update({"--input-slims-file" : slims_input_file})
+
+        # If the file containing the structures of the protein
+        # of interest found in the Protein Data Bank is not None
+        if protein_file is not None:
+
+            # Get the full path of the file
+            protein_file = os.path.join(wd, protein_file)
+
+            # If the file exists
+            if os.path.exists(protein_file):
+
+                # Add the corresponding options
+                options.update(\
+                    {"--input-protein-file" : \
+                        protein_file,
+                     "--output-slims-protein-file" : \
+                        slims_protein_file})
+
+        # If the file containing the structures of the protein
+        # of interest found in the AlphaFold Protein Structure
+        # Database is not None
+        if alphafold_file is not None:
+
+            # Get the full path of the file
+            alphafold_file = os.path.join(wd, alphafold_file)
+
+            # If the file exists
+            if os.path.exists(alphafold_file):
+
+                # Add the corresponding options
+                options.update(\
+                    {"--input-alphafold-file" : \
+                        alphafold_file,
+                     "--output-slims-alphafold-file" : \
+                        slims_alphafold_file})
+
+        # If the file containing the structures of the homologs
+        # of the protein of interest found in the Protein Data
+        # Bank and the file containing the alignments
+        # are not None
+        if homologs_file is not None and alignments_file is not None:
+
+            # Get the full path of the files
+            homologs_file = os.path.join(wd, homologs_file)
+            alignments_file = os.path.join(wd, alignments_file)
+
+            # If the files exists
+            if os.path.exists(homologs_file) \
+            and os.path.exists(alignments_file):
+
+                # Add the corresponding options
+                options.update(\
+                    {"--input-homologs-file" : \
+                        homologs_file,
+                     "--input-alignments-file" : \
+                        alignments_file,
+                     "--output-slims-homologs-file" : \
+                        slims_homologs_file})
+
+    # Launch the process
+    process = \
+        run_process(executable = executable,
+                    options = options, 
+                    wd = wd)
+
+    # Return the output files
+    return output_files
+
+
 def update_hhblits_params(hhblits_params,
                           wd,
                           uniprot_fasta,
@@ -172,7 +320,17 @@ def update_hhblits_params(hhblits_params,
             new_val = os.path.join(hhblits_dirname, val)
 
             # Add it to the updated dictionary of parameters
-            hhblits_params_copy.update({opt : new_val})
+            hhblits_params_copy["options"].update({opt : new_val})
+
+    # If the option -o has not been passed
+    if "-o" not in list(hhblits_params_copy["options"].keys()):
+
+        # Pass it and give the correct path to the file,
+        # otherwise the file willbe written anyway, but in
+        # the wrong location
+        hhblits_params_copy["options"].update(\
+            {"-o" : os.path.join(hhblits_dirname,
+                                 uniprot_id + "_hhblits.hhr")})
 
     # Set the path to the output A3M file
     uniprot_a3m = \
@@ -243,7 +401,7 @@ def update_hhsearch_params(hhsearch_params,
             new_val = os.path.join(hhsearch_dirname, val)
 
             # Add it to the updated dictionary of parameters
-            hhsearch_params_copy.update({opt : new_val})
+            hhsearch_params_copy["options"].update({opt : new_val})
 
     # Path to the HHsearch output
     uniprot_hhsearch = \

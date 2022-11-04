@@ -273,7 +273,9 @@ class HHsearchParser:
 
         # Add two columns storing just the PDB ID and the chain
         hits_df[self.COLNAMES_STRUCT] = \
-            hits_df["hit"].str.split(".", 1, expand = True)
+            hits_df["hit"].str.split(pat = ".",
+                                     n = 1,
+                                     expand = True)
 
         # Row names are composed by both the hit number and the
         # PDB ID (with chain) to both ensure their uniqueness and

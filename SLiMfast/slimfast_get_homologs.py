@@ -37,6 +37,7 @@ import logging as log
 import os
 import sys
 # SLiMfast
+from .argparse_tools import get_arguments
 from . import (
     dataframe_tools,
     hhsearch_tools,
@@ -55,11 +56,13 @@ logger = log.getLogger(__name__)
 
 
 
-def get_args():
+def run():
+
 
 
     #------------------------ Argument parser ------------------------#
-    
+
+
 
     # Set the script description
     description = \
@@ -71,16 +74,17 @@ def get_args():
 
     # Add relevant arguments to the argument parser and return them
     args = \
-        util.get_arguments(description = description,
-                           uniprot_id = True,
-                           output_homologs_file = True,
-                           output_alignments_file = True,
-                           configrun_file = True,
-                           log_file = True,
-                           v = True,
-                           vv = True,
-                           log_to_stdout = True,
-                           log_file_default = LOG_GET_HOMOLOGS_FILE)
+        get_arguments(\
+            description = description,
+            uniprot_id = True,
+            output_homologs_file = True,
+            output_alignments_file = True,
+            configrun_file = True,
+            log_file = True,
+            v = True,
+            vv = True,
+            log_to_stdout = True,
+            log_file_default = LOG_GET_HOMOLOGS_FILE)
 
     # Retrieve the arguments
     uniprot_id = args.uniprot_id
@@ -93,20 +97,23 @@ def get_args():
     vv = args.verbose_debug
 
 
+
     #---------------------------- Logging ----------------------------#
+
 
 
     # Default logging level is WARNING
     level = log.WARNING
-    
+
     # If verbose logging required
     if v:
-        
+
         # Logging level will be INFO
         level = log.INFO
+
     # If debug logging required
     if vv:
-        
+
         # Logging level will be DEBUG
         level = log.DEBUG
 
@@ -119,13 +126,15 @@ def get_args():
 
         # Add the StreamHandler to the list of handlers
         handlers.append(log.StreamHandler(sys.stdout))
-    
+
     # Set the basic logging configuration
     log.basicConfig(level = level,
                     handlers = handlers)
 
 
+
     #------------------------- Configuration -------------------------#
+
 
 
     # Try to load the configuration file for running
@@ -147,15 +156,10 @@ def get_args():
         f"Configuration parsed successfully from {configrun_file}."
     logger.info(infostr)
 
-    # Return UniProt ID, output files and configuration
-    return uniprot_id, output_homologs_file, \
-           output_alignments_file, config_run
 
 
-def run(uniprot_id,
-        output_homologs_file,
-        output_alignments_file,
-        config_run):
+    #------------------------------ Run ------------------------------#
+
 
 
     # Get the working directory where the pipeline will be run
@@ -169,7 +173,9 @@ def run(uniprot_id,
     hhsearch_params = config_run["hhsearch"]["run"]
 
 
+
     #--------------------------- Run HHpred --------------------------#
+
 
 
     # Inform the user that the HHpred pipeline is about to run
@@ -197,7 +203,9 @@ def run(uniprot_id,
         raise Exception(errstr)
 
 
+
     #------------------ Get the homologs' structures -----------------#
+
 
 
     # Create the parser to parse the HHsearch output
@@ -236,7 +244,9 @@ def run(uniprot_id,
     df = df.rename(columns = {"index" : HIT_ID_FIELD})
 
 
+
     #------------------------ Add the metadata -----------------------#
+
 
 
     # Try to add structures' metadata
@@ -259,7 +269,9 @@ def run(uniprot_id,
         raise Exception(errstr)
 
 
+
     #---------------------- Filter the data frame --------------------#
+
 
 
     # Try to filter the hits
@@ -298,7 +310,9 @@ def run(uniprot_id,
         raise Exception(errstr)
 
 
+
     #----------------------- Sort the datarame -----------------------#
+
 
 
     # Try to sort the hits
@@ -350,7 +364,12 @@ def run(uniprot_id,
         logger.warning(warnstr)
 
         # Return
-        return (None, None), (None, None)
+        return
+
+
+
+    #----------------------- Write the CSV file ----------------------#
+
 
 
     # Specify the path to the output CSV file for the homologs'
@@ -368,6 +387,12 @@ def run(uniprot_id,
         f"successfully written to {output_homologs_path}."
     logger.info(infostr)
 
+
+
+    #---------------------- Write the JSON file ----------------------#
+
+
+
     # Specify the path to the output JSON file for the alignments
     # and save them to the JSON file
     output_alignments_path = \
@@ -384,20 +409,14 @@ def run(uniprot_id,
         f"to {output_alignments_path}."
     logger.info(infostr)
 
-    # Return the homologs' data frame, the alignments and the paths
-    # to the output files
-    return (df, als), \
-           (output_homologs_path, output_alignments_path)
-
 
 
 def main():
-    
+
     # Try to run
     try:
 
-        args = get_args()
-        run(*args)
+        run()
 
     # If something went wrong, report and exit
     except Exception as e:

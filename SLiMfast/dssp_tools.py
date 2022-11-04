@@ -237,7 +237,7 @@ class DSSPParser:
                     # Warn the user
                     warnstr = \
                         f"Missing residue at position " \
-                        f"{int(prev_res)+1} chain {prev_chain}" \
+                        f"{int(prev_res)+1} chain {prev_chain} " \
                         f"in {dssp_output}."
                     logger.warning(warnstr)
                     
