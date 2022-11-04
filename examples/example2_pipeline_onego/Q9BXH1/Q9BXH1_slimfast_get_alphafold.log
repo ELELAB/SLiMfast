@@ -1,0 +1,3 @@
+INFO:SLiMfast.slimfast_get_alphafold:Configuration parsed successfully from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/run_example2.yaml.
+INFO:SLiMfast.slimfast_get_alphafold:The IDs of the available structures of the protein with UniProt ID Q9BXH1 have been successfully retrieved from the AlphaFold Protein Structure Database.
+WARNING:SLiMfast.slimfast_get_alphafold:No structures were found in the AlphaFold Protein Structure Database for the protein with UniProt ID Q9BXH1.

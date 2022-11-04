@@ -1,0 +1,734 @@
+Query         sp|O43521|B2L11_HUMAN Bcl-2-like protein 11 OS=Homo sapiens OX=9606 GN=BCL2L11 PE=1 SV=1
+Match_columns 198
+No_of_seqs    178 out of 216
+Neff          3.57549
+Searched_HMMs 86434
+Date          Fri Nov  4 21:14:50 2022
+Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/O43521/hhpred/O43521.a3m -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/O43521/hhpred/O43521.hhr 
+
+ No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
+  1 1PQ1_B Apoptosis regulator Bcl  99.2 1.1E-14 1.2E-19   94.3   0.0   31  141-171     1-31  (33)
+  2 3QBR_B SJCHGC06286 protein, Bc  91.0   0.093 1.1E-06   35.1   0.0   16  148-163    12-27  (34)
+  3 5FMK_B BCL-XL, BCL-2 HOMOLOGOU  91.0   0.093 1.1E-06   35.1   0.0   16  148-163    12-27  (34)
+  4 2XA0_C APOPTOSIS REGULATOR BCL  81.3       1 1.2E-05   29.9   0.0   14  148-161     8-21  (31)
+  5 3PK1_D Induced myeloid leukemi  80.4     1.2 1.3E-05   30.1   0.0   14  148-161    12-25  (34)
+  6 2M5I_A BH3-interacting domain   47.0      17  0.0002   30.5   0.0   14  148-161    26-39  (135)
+  7 5UA5_A 5-HL, Uncharacterized p  44.2      20 0.00023   30.2   0.0   19  145-163    41-59  (153)
+  8 6TZC_B Maltose/maltodextrin-bi  44.1      20 0.00023   30.2   0.0   19  145-163    36-54  (154)
+  9 2BID_A HUMAN PRO-APOPTOTIC PRO  43.1      21 0.00025   32.6   0.0   15  147-161    87-101 (197)
+ 10 1DDB_A PRO-APOPTOTIC MOLECULE   39.0      27 0.00032   32.0   0.0   14  148-161    86-99  (195)
+ 11 5W5Z_A 3C10 Fab' light chain,   35.8      33 0.00038   29.1   0.0   21  143-163    23-43  (163)
+ 12 5VX1_A Bcl-2 homologous antago  31.3      44 0.00051   28.0   0.0   21  143-163    53-73  (170)
+ 13 6L8V_B Apoptosis regulator BAX  30.4      47 0.00054   24.9   0.0   16  148-163    12-27  (81)
+ 14 6HJL_E Bcl-2-like protein 1, A  30.2      47 0.00055   26.6   0.0   16  148-163    29-44  (138)
+ 15 2O2M_A Apoptosis regulator Bcl  29.9      48 0.00055   26.9   0.0   16  148-163    35-50  (145)
+ 16 5VWV_A Bcl-2 homologous antago  28.4      53 0.00061   27.5   0.0   16  148-163    58-73  (170)
+ 17 2O2F_A Solution structure of t  26.8      59 0.00068   26.3   0.0   16  148-163    27-42  (138)
+ 18 6V4M_A BCL-2; BCL-2, helical b  26.7      60 0.00069   27.7   0.0   16  148-163    50-65  (174)
+ 19 6GL8_A Bcl-2-like protein 1,Ap  26.3      61 0.00071   27.6   0.0   16  148-163    59-74  (172)
+ 20 6FBX_A BCL2-like 10, BCL2-anta  26.2      62 0.00071   26.5   0.0   16  148-163    35-50  (152)
+ 21 4WMU_A MBP-MCL1; Apoptosis, pr  26.1      62 0.00072   30.4   0.0   41  123-163   378-421 (518)
+ 22 6RJP_A Bcl-2-related protein A  25.7      64 0.00074   27.6   0.0   20  144-163    51-70  (171)
+ 23 2O21_A Apoptosis regulator Bcl  24.6      69  0.0008   26.9   0.0   16  148-163    50-65  (164)
+ 24 2W3L_B APOPTOSIS REGULATOR BCL  24.3      70 0.00081   26.2   0.0   16  148-163    31-46  (144)
+ 25 4ZII_A Apoptosis Regulator Bax  24.1      71 0.00083   27.1   0.0   16  148-163    59-74  (170)
+ 26 5JNO_A BEN domain-containing p  24.1      72 0.00083   27.0   0.0   52  111-168    59-110 (112)
+ 27 5W63_A Apoptosis regulator bax  24.0      72 0.00084   27.5   0.0   16  148-163    58-73  (189)
+ 28 2KUA_A Bcl-2-like protein 10;   23.9      72 0.00084   27.3   0.0   21  143-163    38-58  (170)
+ 29 6CKV_A Bcl-2-related ovarian k  23.8      73 0.00084   26.3   0.0   21  143-163    42-62  (158)
+ 30 5WOS_A CNPV058 bcl-2 like prot  23.6      74 0.00086   26.3   0.0   16  148-163    45-60  (148)
+ 31 5TZP_A Bcl-2-like protein FPV0  23.5      75 0.00086   26.6   0.0   16  148-163    45-60  (148)
+ 32 5W60_A Apoptosis regulator BAX  23.3      76 0.00088   27.7   0.0   16  148-163    59-74  (194)
+ 33 6QGG_A Induced myeloid leukemi  23.2      76 0.00088   27.2   0.0   21  143-163    40-60  (177)
+ 34 6QGH_A Induced myeloid leukemi  23.2      76 0.00088   27.2   0.0   21  143-163    40-60  (177)
+ 35 6UXQ_D Bcl-2 homologous antago  23.0      77  0.0009   23.8   0.0   16  148-163    11-26  (85)
+ 36 6UXQ_A Bcl-2 homologous antago  23.0      77  0.0009   23.8   0.0   16  148-163    11-26  (85)
+ 37 4ZIG_A Apoptosis Regulator Bax  23.0      78  0.0009   26.8   0.0   16  148-163    59-74  (168)
+ 38 4ZIE_A Apoptosis Regulator Bax  22.4      81 0.00094   26.6   0.0   16  148-163    59-74  (168)
+ 39 6ZHC_DDD von Hippel-Lindau dis  22.3      82 0.00094   28.7   0.0   20  144-163    86-105 (221)
+ 40 5WDD_B Bcl-2-related ovarian k  22.3      82 0.00095   26.3   0.0   16  148-163    54-69  (168)
+ 41 4WMX_A MBP fused to MCL1; Apop  22.3      82 0.00095   29.6   0.0   41  123-163   378-421 (518)
+ 42 1LXL_A BCL-XL; APOPTOSIS, PROG  21.9      84 0.00098   28.6   0.0   21  143-163    85-105 (221)
+ 43 3QBR_A SJCHGC06286 protein, Bc  21.3      88   0.001   27.1   0.0   16  148-163    61-76  (179)
+ 44 3SP7_A Bcl-2-like protein 1; B  21.3      89   0.001   26.5   0.0   16  148-163    49-64  (172)
+ 45 6BF2_A Bcl-2-like protein 1; A  21.2      89   0.001   28.2   0.0   20  144-163    85-104 (212)
+ 46 5C3F_A Induced myeloid leukemi  21.2      89   0.001   25.8   0.0   20  144-163    34-53  (156)
+ 47 3IHD_A Bcl-2-like protein 1; A  21.1      89   0.001   27.7   0.0   20  144-163    83-102 (197)
+ 48 3ILC_A Bcl-2-like protein 1; A  21.1      89   0.001   27.7   0.0   20  144-163    83-102 (197)
+ 49 5UUK_A Bcl-2-related protein A  21.1      89   0.001   25.7   0.0   20  144-163    30-49  (152)
+ 50 5UUL_A Bcl-2-related protein A  21.1      89   0.001   25.7   0.0   20  144-163    30-49  (152)
+ 51 2ROC_A Induced myeloid leukemi  20.3      95  0.0011   25.8   0.0   22  142-163    38-59  (162)
+ 52 6EB6_A Apoptosis regulator BAX  20.3      96  0.0011   27.1   0.0   16  148-163    59-74  (192)
+
+No 1
+>1PQ1_B Apoptosis regulator Bcl-X, BCL2-like protein; Bcl-xl/Bim, APOPTOSIS; 1.65A {Mus musculus}
+Probab=99.21  E-value=1.1e-14  Score=94.30  Aligned_cols=31  Identities=77%  Similarity=1.210  Sum_probs=28.9  Template_Neff=1.700
+
+Q sp|O43521|B2L1  141 DMRPEIWIAQELRRIGDEFNAYYARRVFLNN  171 (198)
+Q Consensus       141 dm~~e~~iaqELRRIGDefN~~y~rr~~~~~  171 (198)
+                      ||+||+||||||||||||||++|++|+++++
+T Consensus         1 dm~pE~~IaqELrRIGDEFN~~y~rr~~~~~   31 (33)
+T 1PQ1_B            1 DLRPEIRIAQELRRIGDEFNETYTRRVFAND   31 (33)
+T ss_dssp             CCCHHHHHHHHHHHHHHHHHHHHHHHHHHHT
+T ss_pred             CCCHHHHHHHHHHHHHHHHHHHhHHHhhhhc
+Confidence            6999999999999999999999999998754
+
+
+No 2
+>3QBR_B SJCHGC06286 protein, Bcl-2 homologous antagonist/killer; helical bundle, Bcl-2-like fold, APOPTOSIS; HET: NHE; 2.601A {Schistosoma japonicum}
+Probab=91.05  E-value=0.093  Score=35.13  Aligned_cols=16  Identities=38%  Similarity=0.750  Sum_probs=0.0  Template_Neff=4.500
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      |++.|+.||||+|+-|
+T Consensus        12 vg~~La~IGDdin~ry   27 (34)
+T 3QBR_B           12 VGRQLAIIGDDINRRY   27 (34)
+T ss_dssp             HHHHHHHHHHHHHHHT
+T ss_pred             HHHHHHHHhHHHHHHh
+
+
+No 3
+>5FMK_B BCL-XL, BCL-2 HOMOLOGOUS ANTAGONIST/KILLER; BCL-XL, BAK, BH3 DOMAIN, APOPTOSIS; HET: GOL; 1.731A {HOMO SAPIENS}
+Probab=91.05  E-value=0.093  Score=35.13  Aligned_cols=16  Identities=38%  Similarity=0.750  Sum_probs=0.0  Template_Neff=4.500
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      |++.|+.||||+|+-|
+T Consensus        12 vg~~La~IGDdin~ry   27 (34)
+T 5FMK_B           12 VGRQLAIIGDDINRRY   27 (34)
+T ss_pred             HHHHHHHHhHHHHHHc
+
+
+No 4
+>2XA0_C APOPTOSIS REGULATOR BCL-2, APOPTOSIS REGULATOR; APOPTOSIS, CELL DEATH; 2.7A {HOMO SAPIENS}
+Probab=81.32  E-value=1  Score=29.86  Aligned_cols=14  Identities=50%  Similarity=0.956  Sum_probs=0.0  Template_Neff=4.200
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNA  161 (198)
+Q Consensus       148 iaqELRRIGDefN~  161 (198)
+                      +++.|++||||.|.
+T Consensus         8 l~~~L~~IgDeLd~   21 (31)
+T 2XA0_C            8 LSECLRRIGDELDS   21 (31)
+T ss_dssp             HHHHHHHHHHHHHH
+T ss_pred             HHHHHHHHHHHHhh
+
+
+No 5
+>3PK1_D Induced myeloid leukemia cell differentiation; Bcl-2 family fold, Regulation of; HET: CD; 2.486A {Homo sapiens}
+Probab=80.36  E-value=1.2  Score=30.13  Aligned_cols=14  Identities=43%  Similarity=0.909  Sum_probs=0.0  Template_Neff=4.300
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNA  161 (198)
+Q Consensus       148 iaqELRRIGDefN~  161 (198)
+                      +++.|++||||.|.
+T Consensus        12 l~~~L~~IgDeLd~   25 (34)
+T 3PK1_D           12 LSECLKRIGDELDS   25 (34)
+T ss_dssp             HHHHHHHHHHHHHH
+T ss_pred             HHHHHHHHHHHhhh
+
+
+No 6
+>2M5I_A BH3-interacting domain death agonist; tBid, apoptosis, membrane protein, LPPG; NMR {Homo sapiens}
+Probab=47.02  E-value=17  Score=30.52  Aligned_cols=14  Identities=36%  Similarity=0.738  Sum_probs=0.0  Template_Neff=6.700
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNA  161 (198)
+Q Consensus       148 iaqELRRIGDefN~  161 (198)
+                      |+..||+|||++|.
+T Consensus        26 ia~~Lr~iGDele~   39 (135)
+T 2M5I_A           26 IARHLAQVGDSMDR   39 (135)
+T ss_dssp             HHHHHHHHHHGGGS
+T ss_pred             HHHHHHHHHHHHHh
+
+
+No 7
+>5UA5_A 5-HL, Uncharacterized protein; Apoptosis, Bcl-2; 2.5A {African swine fever virus}
+Probab=44.17  E-value=20  Score=30.19  Aligned_cols=19  Identities=16%  Similarity=0.058  Sum_probs=0.0  Template_Neff=7.500
+
+Q sp|O43521|B2L1  145 EIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       145 e~~iaqELRRIGDefN~~y  163 (198)
+                      +..|++.||+||||+|+.+
+T Consensus        41 ~~~ia~~Lr~iGDel~~~~   59 (153)
+T 5UA5_A           41 QQQIKKILTYYDECLNKQV   59 (153)
+T ss_dssp             HHHHHHHHHHHHHHHHHHC
+T ss_pred             HHHHHHHHHHHHHHHHHHh
+
+
+No 8
+>6TZC_B Maltose/maltodextrin-binding periplasmic protein, Bcl-2-like protein; Apoptosis, Autophagy, Bcl-2 virus, STRUCTURAL; HET: MAL; 2.41A {Escherichia coli (strain K12)}
+Probab=44.06  E-value=20  Score=30.20  Aligned_cols=19  Identities=16%  Similarity=0.058  Sum_probs=0.0  Template_Neff=7.500
+
+Q sp|O43521|B2L1  145 EIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       145 e~~iaqELRRIGDefN~~y  163 (198)
+                      +..|++.||+|||++|+.+
+T Consensus        36 ~~~ia~~Lr~igDel~~~~   54 (154)
+T 6TZC_B           36 QQQIKKILTYYDECLNKQV   54 (154)
+T ss_dssp             HHHHHHHHHHHHHHHHHHC
+T ss_pred             HHHHHHHHHHHHHHHHHHh
+
+
+No 9
+>2BID_A HUMAN PRO-APOPTOTIC PROTEIN BID; PROGRAMMED CELL DEATH, APOPTOSIS REGULATION; NMR {Homo sapiens} SCOP: f.1.4.1
+Probab=43.13  E-value=21  Score=32.62  Aligned_cols=15  Identities=33%  Similarity=0.610  Sum_probs=0.0  Template_Neff=5.000
+
+Q sp|O43521|B2L1  147 WIAQELRRIGDEFNA  161 (198)
+Q Consensus       147 ~iaqELRRIGDefN~  161 (198)
+                      .||..|++|||++|+
+T Consensus        87 ~IA~~Lr~IGDqln~  101 (197)
+T 2BID_A           87 NIARHLAQVGDSMDR  101 (197)
+T ss_dssp             HHHHHHHHHHHHHHT
+T ss_pred             HHHHHHHHHHHHhcc
+
+
+No 10
+>1DDB_A PRO-APOPTOTIC MOLECULE BID; APOPTOSIS, PROGRAMMED CELL DEATH, BCL-2; NMR {Mus musculus} SCOP: f.1.4.1
+Probab=39.01  E-value=27  Score=32.03  Aligned_cols=14  Identities=50%  Similarity=0.835  Sum_probs=0.0  Template_Neff=4.700
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNA  161 (198)
+Q Consensus       148 iaqELRRIGDefN~  161 (198)
+                      ||..||.|||.||.
+T Consensus        86 IA~rLr~IGDqln~   99 (195)
+T 1DDB_A           86 IARHLAQIGDEMDH   99 (195)
+T ss_dssp             HHHHHHHHHHHHGG
+T ss_pred             HHHHHHHHHHhccc
+
+
+No 11
+>5W5Z_A 3C10 Fab' light chain, 3C10; Fab, BAX activation, unfolding, APOPTOSIS; HET: PG4, PGE, EDO, MES; 1.997A {Rattus norvegicus}
+Probab=35.76  E-value=33  Score=29.09  Aligned_cols=21  Identities=29%  Similarity=0.539  Sum_probs=0.0  Template_Neff=7.700
+
+Q sp|O43521|B2L1  143 RPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       143 ~~e~~iaqELRRIGDefN~~y  163 (198)
+                      .....+++.||+|||||++.+
+T Consensus        23 ~~~~~v~~~Lr~igdel~~~~   43 (163)
+T 5W5Z_A           23 ASTKKLSESLKRIGDELDSNM   43 (163)
+T ss_pred             CChHHHHHHHHHHHHHHHHHH
+
+
+No 12
+>5VX1_A Bcl-2 homologous antagonist/killer; Apoptosis, Bcl-2 Family, Mutant; 1.224A {Homo sapiens}
+Probab=31.28  E-value=44  Score=28.00  Aligned_cols=21  Identities=29%  Similarity=0.425  Sum_probs=0.0  Template_Neff=8.500
+
+Q sp|O43521|B2L1  143 RPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       143 ~~e~~iaqELRRIGDefN~~y  163 (198)
+                      .....|+..||+|||||++.|
+T Consensus        53 ~~~~~i~~~Lr~igdel~~~~   73 (170)
+T 5VX1_A           53 STMGQVGRQLAIIGDDINRRY   73 (170)
+T ss_dssp             SHHHHHHHHHHTCCCHHHHHH
+T ss_pred             ChHHHHHHHHHHHHHHHHHHC
+
+
+No 13
+>6L8V_B Apoptosis regulator BAX; Bax, membrane-bound, stability, core-domain, dimer; NMR {Homo sapiens}
+Probab=30.37  E-value=47  Score=24.92  Aligned_cols=16  Identities=38%  Similarity=0.829  Sum_probs=0.0  Template_Neff=7.800
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|+|||+..|
+T Consensus        12 ~~~~Lr~i~~~~~~~~   27 (81)
+T 6L8V_B           12 LSESLKRIGDELDSNM   27 (81)
+T ss_dssp             HHHHHHHHHHHHHTCH
+T ss_pred             HHHHHHHHHHHHHHch
+
+
+No 14
+>6HJL_E Bcl-2-like protein 1, Affimer ADB13; Affimer, PROTEIN BINDING; 2.2A {Homo sapiens}
+Probab=30.19  E-value=47  Score=26.63  Aligned_cols=16  Identities=50%  Similarity=0.860  Sum_probs=0.0  Template_Neff=8.800
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      |+..||+||||+++.|
+T Consensus        29 i~~~Lr~~gd~~~~~~   44 (138)
+T 6HJL_E           29 VKQALREAGDEFELRY   44 (138)
+T ss_dssp             HHHHHHHHHHHHHHHT
+T ss_pred             HHHHHHHHHHHHHHHh
+
+
+No 15
+>2O2M_A Apoptosis regulator Bcl-X; apoptosis, complex, bcl; HET: LI0; NMR {Homo sapiens}
+Probab=29.94  E-value=48  Score=26.90  Aligned_cols=16  Identities=50%  Similarity=0.860  Sum_probs=0.0  Template_Neff=8.700
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||+..+
+T Consensus        35 i~~~Lr~igd~l~~~~   50 (145)
+T 2O2M_A           35 VKQALREAGDEFELRY   50 (145)
+T ss_dssp             HHHHHHHHHHHHHHHT
+T ss_pred             HHHHHHHHHHHHHHHh
+
+
+No 16
+>5VWV_A Bcl-2 homologous antagonist/killer, Bcl-2-like protein; Apoptosis, Bcl-2 Family, Activator; HET: GOL, EDO; 1.897A {Homo sapiens}
+Probab=28.41  E-value=53  Score=27.54  Aligned_cols=16  Identities=38%  Similarity=0.750  Sum_probs=0.0  Template_Neff=8.500
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      |+..||+|||+|++.|
+T Consensus        58 i~~~Lr~igd~l~~~~   73 (170)
+T 5VWV_A           58 VGRQLAIIGDDINRRY   73 (170)
+T ss_dssp             HHHHHHHHHHHHHHTT
+T ss_pred             HHHHHHHHHHHHHHHC
+
+
+No 17
+>2O2F_A Solution structure of the anti-apoptotic; apoptosis, complex, bcl; HET: LI0; NMR {Homo sapiens}
+Probab=26.78  E-value=59  Score=26.32  Aligned_cols=16  Identities=38%  Similarity=0.777  Sum_probs=0.0  Template_Neff=8.500
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||+..|
+T Consensus        27 v~~~Lr~lgdel~~~~   42 (138)
+T 2O2F_A           27 VHLTLRQAGDDFSRRY   42 (138)
+T ss_pred             HHHHHHHHHHHHHHHh
+
+
+No 18
+>6V4M_A BCL-2; BCL-2, helical bundle, APOPTOSIS; 1.599A {Trichuris suis}
+Probab=26.66  E-value=60  Score=27.71  Aligned_cols=16  Identities=13%  Similarity=0.299  Sum_probs=0.0  Template_Neff=8.000
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||++.|
+T Consensus        50 i~~~Lr~lgdele~~~   65 (174)
+T 6V4M_A           50 LCDAMFLMCDLFERKF   65 (174)
+T ss_dssp             HHHHHHHHHHHHHHHS
+T ss_pred             HHHHHHHHHHHHHHHh
+
+
+No 19
+>6GL8_A Bcl-2-like protein 1,Apoptosis regulator Bcl-2; APOPTOSIS-INHIBITOR COMPLEX, BCL-2, BH3-mimetics, APOPTOSIS; HET: F3Q; 1.4A {Homo sapiens}
+Probab=26.33  E-value=61  Score=27.60  Aligned_cols=16  Identities=38%  Similarity=0.818  Sum_probs=0.0  Template_Neff=8.000
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||++.|
+T Consensus        59 i~~~Lr~lgdele~~~   74 (172)
+T 6GL8_A           59 VHKTLREAGDDFSRRY   74 (172)
+T ss_dssp             HHHHHHHHHHHHHHHT
+T ss_pred             HHHHHHHHHHHHHHHc
+
+
+No 20
+>6FBX_A BCL2-like 10, BCL2-antagonist of cell; Bcl-2 family, pro-survival protein, APOPTOSIS; 1.639A {Danio rerio}
+Probab=26.20  E-value=62  Score=26.51  Aligned_cols=16  Identities=19%  Similarity=0.289  Sum_probs=0.0  Template_Neff=8.700
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||++||||+..|
+T Consensus        35 i~~~Lr~~gde~~~~~   50 (152)
+T 6FBX_A           35 SAEAMRYLAKEMEQQH   50 (152)
+T ss_pred             HHHHHHHHHHHHHHHh
+
+
+No 21
+>4WMU_A MBP-MCL1; Apoptosis, protein-protein interaction; HET: 19H, EDO, FMT, MAL; 1.55A {Escherichia coli}
+Probab=26.06  E-value=62  Score=30.39  Aligned_cols=41  Identities=22%  Similarity=0.205  Sum_probs=0.0  Template_Neff=10.600
+
+Q sp|O43521|B2L1  123 AFNHYLSAMASMRQ---AEPADMRPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       123 a~~H~L~~Mas~~~---~~~~dm~~e~~iaqELRRIGDefN~~y  163 (198)
+                      .+.||+..-+....   .......++..|++.||+|||+|+..+
+T Consensus       378 ~~~~y~~~~~~~~~~~~~~~~~~~~~~~~~~~lr~~~~~~~~~~  421 (518)
+T 4WMU_A          378 IISRYLREQATGAADTAPMGASGATSRKALETLRRVGDGVQRNH  421 (518)
+T ss_dssp             HHHHHHHHHHHSSCCCSCCCTTHHHHHHHHHHHHHHHHHHHHHT
+T ss_pred             HHHHHHHHHhcccccCCCCCCCChhhHHHHHHHHHHHHHHHHHc
+
+
+No 22
+>6RJP_A Bcl-2-related protein A1, LYS-ILE-ALA-GLU-ALA-LEU-ARG-ARG-ILE-GLY-ASP-ALA-PHE-ASN-ALA-ALA-TYR; protein-protein interactions, stapled alpha helix; HET: AIB, LV8; 2.57A {Homo sapiens}
+Probab=25.70  E-value=64  Score=27.60  Aligned_cols=20  Identities=5%  Similarity=-0.090  Sum_probs=0.0  Template_Neff=7.800
+
+Q sp|O43521|B2L1  144 PEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       144 ~e~~iaqELRRIGDefN~~y  163 (198)
+                      +...++..||+|||||++.|
+T Consensus        51 ~~~~v~~~Lr~igdel~~~~   70 (171)
+T 6RJP_A           51 GPSKTSRVLQNVAFSVQKEV   70 (171)
+T ss_dssp             SSCHHHHHHHHHHHHHHHHH
+T ss_pred             ChhHHHHHHHHHHHHHHHHh
+
+
+No 23
+>2O21_A Apoptosis regulator Bcl-2; apoptosis, complex, bcl; HET: 43B; NMR {Homo sapiens} SCOP: f.1.4.1
+Probab=24.62  E-value=69  Score=26.87  Aligned_cols=16  Identities=38%  Similarity=0.777  Sum_probs=0.0  Template_Neff=8.300
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||++.|
+T Consensus        50 i~~~Lr~lgdel~~~~   65 (164)
+T 2O21_A           50 VHLTLRQAGDDFSRRY   65 (164)
+T ss_dssp             HHHHHHHHHHHHHHHC
+T ss_pred             HHHHHHHHHHHHHHHc
+
+
+No 24
+>2W3L_B APOPTOSIS REGULATOR BCL-2; APOPTOSIS; HET: DRO; 2.1A {HOMO SAPIENS}
+Probab=24.34  E-value=70  Score=26.17  Aligned_cols=16  Identities=38%  Similarity=0.818  Sum_probs=0.0  Template_Neff=8.400
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      +++.|++|||+|+..+
+T Consensus        31 ~~~~L~~igd~l~~~~   46 (144)
+T 2W3L_B           31 VHKTLREAGDDFSRRY   46 (144)
+T ss_dssp             HHHHHHHHHHHHHHHT
+T ss_pred             HHHHHHHHHHHHHHHc
+
+
+No 25
+>4ZII_A Apoptosis Regulator Bax, BH3-interacting domain; Bax, Apoptosis, BH3 domain, Structural; HET: EDO; 2.191A {Homo sapiens}
+Probab=24.11  E-value=71  Score=27.08  Aligned_cols=16  Identities=38%  Similarity=0.829  Sum_probs=0.0  Template_Neff=8.100
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||++.+
+T Consensus        59 v~~~Lr~~gdel~~~~   74 (170)
+T 4ZII_A           59 LSESLKRIGDELDSNM   74 (170)
+T ss_dssp             HHHHHHHHHHHHHTCH
+T ss_pred             HHHHHHHHHHHHHhcH
+
+
+No 26
+>5JNO_A BEN domain-containing protein 3, DNA; Ultra fine chromatin bridges, sister; 2.2A {Homo sapiens}
+Probab=24.08  E-value=72  Score=27.03  Aligned_cols=52  Identities=21%  Similarity=0.397  Sum_probs=0.0  Template_Neff=4.800
+
+Q sp|O43521|B2L1  111 DKSTQTPSPPCQAFNHYLSAMASMRQAEPADMRPEIWIAQELRRIGDEFNAYYARRVF  168 (198)
+Q Consensus       111 DKsTQTPSP~cQa~~H~L~~Mas~~~~~~~dm~~e~~iaqELRRIGDefN~~y~rr~~  168 (198)
+                      .+..+.++-.-|.|.||...+.      +..-..+.|..+.+.+|.|.+|+....+..
+T Consensus        59 ~~K~~LDp~rLqlIR~Yve~~y------P~vk~e~vW~~ecv~~ine~l~r~~~~~~~  110 (112)
+T 5JNO_A           59 AAKRKLESLHLQLIRNYVEVYY------PSVKDTAVWQAECLPQLNDFFSRFWAQREM  110 (112)
+T ss_dssp             ---CCCCHHHHHHHHHHHHHHC------GGGGSHHHCCCCCHHHHHHHHHHHHHHHHH
+T ss_pred             HHHhhccHHHHHHHHHHHHHhc------ccCCChHHHHHhhHHHHHHHHHHHHHhhhc
+
+
+No 27
+>5W63_A Apoptosis regulator bax; BAX, monomer, catfish, APOPTOSIS; HET: EDO, SO4; 2.436A {Ictalurus punctatus}
+Probab=23.95  E-value=72  Score=27.53  Aligned_cols=16  Identities=44%  Similarity=0.677  Sum_probs=0.0  Template_Neff=8.100
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||++.+
+T Consensus        58 v~~~Lr~igdele~~~   73 (189)
+T 5W63_A           58 LAQYLQQIGDELDNNV   73 (189)
+T ss_dssp             HHHHHHHHHHHHHTCH
+T ss_pred             HHHHHHHHHHHHhccH
+
+
+No 28
+>2KUA_A Bcl-2-like protein 10; Boo, Diva, Bcl-2, apoptosis, BH3-only; NMR {Mus musculus}
+Probab=23.94  E-value=72  Score=27.33  Aligned_cols=21  Identities=19%  Similarity=0.120  Sum_probs=0.0  Template_Neff=7.700
+
+Q sp|O43521|B2L1  143 RPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       143 ~~e~~iaqELRRIGDefN~~y  163 (198)
+                      .+...++..||+|||||++.|
+T Consensus        38 ~~~~~v~~~Lr~igde~~~~~   58 (170)
+T 2KUA_A           38 PPTSVEAALLRSVTRQIQQEH   58 (170)
+T ss_dssp             CCSSHHHHHHHHHHHHHHHHH
+T ss_pred             CCCcHHHHHHHHHHHHHHHHH
+
+
+No 29
+>6CKV_A Bcl-2-related ovarian killer protein; APOPTOSIS; NMR {Homo sapiens}
+Probab=23.83  E-value=73  Score=26.35  Aligned_cols=21  Identities=29%  Similarity=0.279  Sum_probs=0.0  Template_Neff=8.600
+
+Q sp|O43521|B2L1  143 RPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       143 ~~e~~iaqELRRIGDefN~~y  163 (198)
+                      .....|+..||+|||+|+..|
+T Consensus        42 ~~~~~i~~~Lr~~gd~l~~~~   62 (158)
+T 6CKV_A           42 GRLAEVAAVLLRLGDELEMIR   62 (158)
+T ss_dssp             HHHHHHHHHHHHHHHHHHHHC
+T ss_pred             ccHHHHHHHHHHHHHHHHHHC
+
+
+No 30
+>5WOS_A CNPV058 bcl-2 like protein, Bcl-2-like; Avipoxvirus, apoptosis, Bcl-2, Bim, VIRAL; 2.45A {Canarypox virus}
+Probab=23.62  E-value=74  Score=26.31  Aligned_cols=16  Identities=6%  Similarity=-0.141  Sum_probs=0.0  Template_Neff=8.200
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||+++..+
+T Consensus        45 ~~~~Lr~igd~~~~~~   60 (148)
+T 5WOS_A           45 TYIIVKNMCDIILRDN   60 (148)
+T ss_dssp             HHHHHHHHHHHHHHHH
+T ss_pred             HHHHHHHHHHHHHHHC
+
+
+No 31
+>5TZP_A Bcl-2-like protein FPV039, Bik; Bcl-2, apoptosis, fowlpox, poxvirus, BH3-only; HET: EDO, SO4; 1.35A {Fowlpox virus (strain NVSL)}
+Probab=23.50  E-value=75  Score=26.56  Aligned_cols=16  Identities=6%  Similarity=-0.151  Sum_probs=0.0  Template_Neff=7.800
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||++.+
+T Consensus        45 ~~~~Lr~~gdel~~~~   60 (148)
+T 5TZP_A           45 SYDVLKAACKSVIKTN   60 (148)
+T ss_dssp             HHHHHHHHHHHHHHHH
+T ss_pred             HHHHHHHHHHHHHHHc
+
+
+No 32
+>5W60_A Apoptosis regulator BAX; BAX, inactive monomer, APOPTOSIS; 1.803A {Homo sapiens}
+Probab=23.30  E-value=76  Score=27.73  Aligned_cols=16  Identities=38%  Similarity=0.829  Sum_probs=0.0  Template_Neff=7.800
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      +++.||+|+|||++.+
+T Consensus        59 v~~~Lr~igdel~~~~   74 (194)
+T 5W60_A           59 LSESLKRIGDELDSNM   74 (194)
+T ss_dssp             HHHHHHHHHHHHHTCH
+T ss_pred             HHHHHHHHHHHHHhhH
+
+
+No 33
+>6QGG_A Induced myeloid leukemia cell differentiation; APOPTOSIS, BCL2, ABT-737; HET: J1H; 1.5A {Homo sapiens}
+Probab=23.23  E-value=76  Score=27.24  Aligned_cols=21  Identities=33%  Similarity=0.559  Sum_probs=0.0  Template_Neff=7.900
+
+Q sp|O43521|B2L1  143 RPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       143 ~~e~~iaqELRRIGDefN~~y  163 (198)
+                      .+...|+..||+|||+|+..|
+T Consensus        40 ~~~~~i~~~Lr~lgdel~~~~   60 (177)
+T 6QGG_A           40 TESEVVHQTLRQAGDDFSLRY   60 (177)
+T ss_dssp             ---CHHHHHHHHHHHHHHHHS
+T ss_pred             CChHHHHHHHHHHHHHHHHHC
+
+
+No 34
+>6QGH_A Induced myeloid leukemia cell differentiation; APOPTOSIS, BCL2, ABT-263, drug design; HET: 1XJ; 2.0A {Homo sapiens}
+Probab=23.23  E-value=76  Score=27.24  Aligned_cols=21  Identities=33%  Similarity=0.559  Sum_probs=0.0  Template_Neff=7.900
+
+Q sp|O43521|B2L1  143 RPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       143 ~~e~~iaqELRRIGDefN~~y  163 (198)
+                      .+...|+..||+|||+|+..|
+T Consensus        40 ~~~~~i~~~Lr~lgdel~~~~   60 (177)
+T 6QGH_A           40 TESEVVHQTLRQAGDDFSLRY   60 (177)
+T ss_dssp             -------CCHHHHHHHHHHHT
+T ss_pred             CChHHHHHHHHHHHHHHHHHC
+
+
+No 35
+>6UXQ_D Bcl-2 homologous antagonist/killer; Pore-forming Protein, APOPTOSIS; HET: C8E, SO4, LBN, EDO; 1.696A {Homo sapiens}
+Probab=23.00  E-value=77  Score=23.85  Aligned_cols=16  Identities=38%  Similarity=0.750  Sum_probs=0.0  Template_Neff=8.000
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|+|||.+.|
+T Consensus        11 ~~~~Lr~i~~e~e~~~   26 (85)
+T 6UXQ_D           11 VGRQLAIIGDDINRRY   26 (85)
+T ss_dssp             HHHHHHHHHHHHHHHH
+T ss_pred             HHHHHHHHHHHHHHHc
+
+
+No 36
+>6UXQ_A Bcl-2 homologous antagonist/killer; Pore-forming Protein, APOPTOSIS; HET: EDO, SO4, C8E, LBN; 1.696A {Homo sapiens}
+Probab=23.00  E-value=77  Score=23.85  Aligned_cols=16  Identities=38%  Similarity=0.750  Sum_probs=0.0  Template_Neff=8.000
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|+|||.+.|
+T Consensus        11 ~~~~Lr~i~~e~e~~~   26 (85)
+T 6UXQ_A           11 VGRQLAIIGDDINRRY   26 (85)
+T ss_dssp             HHHHHHHHHHHHHHHH
+T ss_pred             HHHHHHHHHHHHHHHc
+
+
+No 37
+>4ZIG_A Apoptosis Regulator Bax, BH3-interacting domain; Bax, Apoptosis, BH3 domain, Structural; 2.2A {Homo sapiens}
+Probab=22.97  E-value=78  Score=26.75  Aligned_cols=16  Identities=38%  Similarity=0.829  Sum_probs=0.0  Template_Neff=8.200
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||++.+
+T Consensus        59 v~~~Lr~~gdel~~~~   74 (168)
+T 4ZIG_A           59 LSESLKRIGDELDSNM   74 (168)
+T ss_dssp             HHHHHHHHHHHHHHCH
+T ss_pred             HHHHHHHHHHHHHhhH
+
+
+No 38
+>4ZIE_A Apoptosis Regulator Bax, Bcl-2-like protein; Bax, Apoptosis, BH3 domain, Structural; HET: EDO; 1.797A {Homo sapiens}
+Probab=22.42  E-value=81  Score=26.65  Aligned_cols=16  Identities=38%  Similarity=0.829  Sum_probs=0.0  Template_Neff=8.200
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||++.+
+T Consensus        59 v~~~Lr~igdel~~~~   74 (168)
+T 4ZIE_A           59 LSESLKRIGDELDSNM   74 (168)
+T ss_dssp             HHHHHHHHHHHHHTCH
+T ss_pred             HHHHHHHHHHHHHhcH
+
+
+No 39
+>6ZHC_DDD von Hippel-Lindau disease tumor suppressor; PROTAC complex, targeted degradation, ubiquitin; HET: EDO, QL8, GOL, IOD; 1.92A {Homo sapiens}
+Probab=22.31  E-value=82  Score=28.72  Aligned_cols=20  Identities=45%  Similarity=0.708  Sum_probs=0.0  Template_Neff=6.800
+
+Q sp|O43521|B2L1  144 PEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       144 ~e~~iaqELRRIGDefN~~y  163 (198)
+                      +...|+..||+|||||+..|
+T Consensus        86 ~~~~v~~~LR~lgdele~~~  105 (221)
+T 6ZHC_DDD         86 PMAAVKQALREAGDEFELRY  105 (221)
+T ss_pred             CHHHHHHHHHHHHHHHHHHH
+
+
+No 40
+>5WDD_B Bcl-2-related ovarian killer protein; Bcl-2, Apoptosis, Pro-apoptotic, Cell death; HET: EDO; 1.799A {Gallus gallus}
+Probab=22.27  E-value=82  Score=26.33  Aligned_cols=16  Identities=31%  Similarity=0.495  Sum_probs=0.0  Template_Neff=8.600
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+++|||++.|
+T Consensus        54 i~~~Lr~~gdel~~~~   69 (168)
+T 5WDD_B           54 VSAILLRLGDELEYIR   69 (168)
+T ss_dssp             HHHHHHHHHTTHHHHS
+T ss_pred             HHHHHHHHHHHHHHHC
+
+
+No 41
+>4WMX_A MBP fused to MCL1; Apoptosis, protein-protein interaction; HET: FMT, GLC, 3R7; 2.0A {Escherichia coli}
+Probab=22.27  E-value=82  Score=29.64  Aligned_cols=41  Identities=22%  Similarity=0.205  Sum_probs=0.0  Template_Neff=10.600
+
+Q sp|O43521|B2L1  123 AFNHYLSAMASMRQ---AEPADMRPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       123 a~~H~L~~Mas~~~---~~~~dm~~e~~iaqELRRIGDefN~~y  163 (198)
+                      .+.|||..-+....   .......++..|++.||+|||+++..+
+T Consensus       378 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~l~~~~~~~~~~~  421 (518)
+T 4WMX_A          378 IISRYLREQATGAADTAPMGASGATSRKALETLRRVGDGVQRNH  421 (518)
+T ss_dssp             HHHHHHHHHHHSSCCCSCCCTTHHHHHHHHHHHHHHHHHHHHHT
+T ss_pred             HHHHHHHHHhcccccCCCCCCCChhhHHHHHHHHHHHHHHHHHc
+
+
+No 42
+>1LXL_A BCL-XL; APOPTOSIS, PROGRAMMED CELL DEATH, BCL-2; NMR {Homo sapiens} SCOP: f.1.4.1
+Probab=21.89  E-value=84  Score=28.63  Aligned_cols=21  Identities=43%  Similarity=0.637  Sum_probs=0.0  Template_Neff=6.800
+
+Q sp|O43521|B2L1  143 RPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       143 ~~e~~iaqELRRIGDefN~~y  163 (198)
+                      .+...|+..||+|||||+..|
+T Consensus        85 ~~~~~v~~~LR~lgdele~~~  105 (221)
+T 1LXL_A           85 IPMAAVKQALREAGDEFELRY  105 (221)
+T ss_dssp             CCSTHHHHHHHHHHHTTSSSC
+T ss_pred             CCHHHHHHHHHHHHHHHHHHC
+
+
+No 43
+>3QBR_A SJCHGC06286 protein, Bcl-2 homologous antagonist/killer; helical bundle, Bcl-2-like fold, APOPTOSIS; HET: NHE; 2.601A {Schistosoma japonicum}
+Probab=21.29  E-value=88  Score=27.11  Aligned_cols=16  Identities=25%  Similarity=0.503  Sum_probs=0.0  Template_Neff=7.600
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..|++|+|+|++.|
+T Consensus        61 ~~~~L~~~~d~le~~~   76 (179)
+T 3QBR_A           61 IIHSLLQLVGDFNQRF   76 (179)
+T ss_dssp             HHHHHHHHHHHHHHHH
+T ss_pred             HHHHHHHHHHHHHHHh
+
+
+No 44
+>3SP7_A Bcl-2-like protein 1; Bcl-2-like protein, APOPTOSIS REGULATOR-INHIBITOR complex; HET: 03B, ACT; 1.4A {Homo sapiens}
+Probab=21.25  E-value=89  Score=26.53  Aligned_cols=16  Identities=50%  Similarity=0.860  Sum_probs=0.0  Template_Neff=8.200
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||+|+..|
+T Consensus        49 i~~~Lr~lgd~~e~~~   64 (172)
+T 3SP7_A           49 VKQALREAGDEFELRY   64 (172)
+T ss_dssp             HHHHHHHHHHHHHHHH
+T ss_pred             HHHHHHHHHHHHHHHh
+
+
+No 45
+>6BF2_A Bcl-2-like protein 1; APOPTOSIS; NMR {Homo sapiens}
+Probab=21.22  E-value=89  Score=28.20  Aligned_cols=20  Identities=45%  Similarity=0.708  Sum_probs=0.0  Template_Neff=7.000
+
+Q sp|O43521|B2L1  144 PEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       144 ~e~~iaqELRRIGDefN~~y  163 (198)
+                      +...|+..||+|||||+..|
+T Consensus        85 ~~~~v~~~LR~igdele~~~  104 (212)
+T 6BF2_A           85 PMAAVKQALREAGDEFELRY  104 (212)
+T ss_dssp             TTTSSTTTTTTTTTTHHHHS
+T ss_pred             CHHHHHHHHHHHHHHHHHHH
+
+
+No 46
+>5C3F_A Induced myeloid leukemia cell differentiation; Complex, Bcl-2 Family, BH3, Stapled; HET: NLE, GOL; 1.43A {Homo sapiens}
+Probab=21.16  E-value=89  Score=25.79  Aligned_cols=20  Identities=25%  Similarity=0.295  Sum_probs=0.0  Template_Neff=8.600
+
+Q sp|O43521|B2L1  144 PEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       144 ~e~~iaqELRRIGDefN~~y  163 (198)
+                      ....++..||++||||+..|
+T Consensus        34 ~~~~i~~~Lr~~gd~~~~~~   53 (156)
+T 5C3F_A           34 TSRKALETLRRVGDGVQRNH   53 (156)
+T ss_dssp             HHHHHHHHHHHHHHHHHHHT
+T ss_pred             hHHHHHHHHHHHHHHHHHHh
+
+
+No 47
+>3IHD_A Bcl-2-like protein 1; Apoptosis, BH3 domain, Bcl-2, Membrane; 1.88A {Mus musculus}
+Probab=21.14  E-value=89  Score=27.69  Aligned_cols=20  Identities=40%  Similarity=0.542  Sum_probs=0.0  Template_Neff=7.300
+
+Q sp|O43521|B2L1  144 PEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       144 ~e~~iaqELRRIGDefN~~y  163 (198)
+                      ++..|+..||+|||||.+.|
+T Consensus        83 ~~~~i~~~LR~igdele~~~  102 (197)
+T 3IHD_A           83 PMAAVKQALREAGDEFELRA  102 (197)
+T ss_dssp             CHHHHHHHHHHHHHHHHHHH
+T ss_pred             CHHHHHHHHHHHHHHHHHHH
+
+
+No 48
+>3ILC_A Bcl-2-like protein 1; Apoptosis, BH3 domain, Bcl-2, Membrane; 1.64A {Mus musculus}
+Probab=21.14  E-value=89  Score=27.69  Aligned_cols=20  Identities=40%  Similarity=0.542  Sum_probs=0.0  Template_Neff=7.300
+
+Q sp|O43521|B2L1  144 PEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       144 ~e~~iaqELRRIGDefN~~y  163 (198)
+                      ++..|+..||+|||||.+.|
+T Consensus        83 ~~~~i~~~LR~igdele~~~  102 (197)
+T 3ILC_A           83 PMAAVKQALREAGDEFELRA  102 (197)
+T ss_dssp             CHHHHHHHHHHHHHHHHHHH
+T ss_pred             CHHHHHHHHHHHHHHHHHHH
+
+
+No 49
+>5UUK_A Bcl-2-related protein A1, Bfl-1-specific selected; Apoptosis Regulatory Proteins, Peptide Library; HET: SO4; 1.199A {Homo sapiens}
+Probab=21.12  E-value=89  Score=25.75  Aligned_cols=20  Identities=5%  Similarity=-0.090  Sum_probs=0.0  Template_Neff=8.500
+
+Q sp|O43521|B2L1  144 PEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       144 ~e~~iaqELRRIGDefN~~y  163 (198)
+                      +...++..||+|||||+..|
+T Consensus        30 ~~~~v~~~L~~~~d~l~~~~   49 (152)
+T 5UUK_A           30 GPSKTSRVLQNVAFSVQKEV   49 (152)
+T ss_dssp             CSCHHHHHHHHHHHHHHHHH
+T ss_pred             CccHHHHHHHHHHHHHHHHH
+
+
+No 50
+>5UUL_A Bcl-2-related protein A1, Bcl-2-binding component; Apoptosis Regulatory Proteins, Protein Binding; 1.33A {Homo sapiens}
+Probab=21.12  E-value=89  Score=25.75  Aligned_cols=20  Identities=5%  Similarity=-0.090  Sum_probs=0.0  Template_Neff=8.500
+
+Q sp|O43521|B2L1  144 PEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       144 ~e~~iaqELRRIGDefN~~y  163 (198)
+                      +...++..||+|||||+..|
+T Consensus        30 ~~~~v~~~L~~~~d~l~~~~   49 (152)
+T 5UUL_A           30 GPSKTSRVLQNVAFSVQKEV   49 (152)
+T ss_dssp             CSCHHHHHHHHHHHHHHHHH
+T ss_pred             CccHHHHHHHHHHHHHHHHH
+
+
+No 51
+>2ROC_A Induced myeloid leukemia cell differentiation; Mcl-1, Bcl-2, apoptosis, Puma, BH3-only; NMR {Mus musculus} SCOP: f.1.4.1
+Probab=20.34  E-value=95  Score=25.80  Aligned_cols=22  Identities=23%  Similarity=0.223  Sum_probs=0.0  Template_Neff=8.600
+
+Q sp|O43521|B2L1  142 MRPEIWIAQELRRIGDEFNAYY  163 (198)
+Q Consensus       142 m~~e~~iaqELRRIGDefN~~y  163 (198)
+                      ...+..++..||.+||||+..|
+T Consensus        38 ~~~~~~i~~~Lr~~gd~~~~~~   59 (162)
+T 2ROC_A           38 GAAGRRALETLRRVGDGVQRNH   59 (162)
+T ss_dssp             CHHHHHHHHHHHHHHHHHHHHT
+T ss_pred             cHHHHHHHHHHHHHHHHHHHHh
+
+
+No 52
+>6EB6_A Apoptosis regulator BAX; BAX, inactive monomer, APOPTOSIS; HET: FMT; 2.023A {Homo sapiens}
+Probab=20.30  E-value=96  Score=27.09  Aligned_cols=16  Identities=38%  Similarity=0.762  Sum_probs=0.0  Template_Neff=7.800
+
+Q sp|O43521|B2L1  148 IAQELRRIGDEFNAYY  163 (198)
+Q Consensus       148 iaqELRRIGDefN~~y  163 (198)
+                      ++..||+|||||++.+
+T Consensus        59 v~~~Lr~igdel~~~~   74 (192)
+T 6EB6_A           59 LSECLKRIGDELDSNM   74 (192)
+T ss_dssp             HHHHHHHHHHHHHTCH
+T ss_pred             HHHHHHHHHHHHHhch
+
+

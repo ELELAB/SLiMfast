@@ -1,0 +1,33 @@
+INFO:SLiMfast.slimfast_find_slims:The configuration has been successfully parsed from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/run_example2.yaml.
+INFO:SLiMfast.slimfast_find_slims:The SLiM instances have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/Q14457_slims.csv.
+INFO:SLiMfast.slimfast_find_slims:Data about the structures of the protein with UniProt ID Q14457 found in the Protein Data Bank have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/Q14457_structures.csv.
+INFO:SLiMfast.slimfast_find_slims:Data about the structures of the protein with UniProt ID Q14457 found in the AlphaFold Protein Structure Database have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/Q14457_alphafold.csv.
+INFO:SLiMfast.slimfast_find_slims:Data about the available structures of the homologs of the protein with UniProt ID Q14457 have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/Q14457_homologs.csv.
+INFO:SLiMfast.slimfast_find_slims:Data about the alignments of the homologs to the protein with UniProt ID Q14457 have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/Q14457_alignments.json.
+INFO:SLiMfast.util:Data for the structure with ID 6HOI have been successfully retrieved for the Protein Data Bank.
+INFO:SLiMfast.util:No SLiMs found in the structure with ID 6HOI.
+INFO:SLiMfast.util:No SLiMs found in the structure with ID 6HOI.
+INFO:SLiMfast.util:Data for the structure with ID 5HHE have been successfully retrieved for the Protein Data Bank.
+INFO:SLiMfast.util:No SLiMs found in the structure with ID 5HHE.
+INFO:SLiMfast.util:No SLiMs found in the structure with ID 5HHE.
+INFO:SLiMfast.util:Data for the structure with ID 6HOJ have been successfully retrieved for the Protein Data Bank.
+INFO:SLiMfast.util:No SLiMs found in the structure with ID 6HOJ.
+INFO:SLiMfast.util:No SLiMs found in the structure with ID 6HOJ.
+INFO:SLiMfast.util:No SLiMs found in the structure with ID 6HOJ.
+INFO:SLiMfast.util:Data for the structure with ID 4DDP have been successfully retrieved for the Protein Data Bank.
+INFO:SLiMfast.util:No SLiMs found in the structure with ID 4DDP.
+INFO:SLiMfast.util:Data for the structure with ID 6HOK have been successfully retrieved for the Protein Data Bank.
+INFO:SLiMfast.util:No SLiMs found in the structure with ID 6HOK.
+INFO:SLiMfast.util:Data for the structure with ID 5VAU have been successfully retrieved for the Protein Data Bank.
+INFO:SLiMfast.util:The following SLiMs have been found in the structure with ID 5VAU: BH3_108-TMENLSRRLKVTGDLF-123.
+INFO:SLiMfast.util:The structure with ID 5VAU has been written successfully to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/structures/5VAU.pdb.
+INFO:SLiMfast.run_tools:Running DSSP on the PDB file /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/structures/5VAU.pdb...
+WARNING:SLiMfast.dssp_tools:Missing residue at position 33 chain A in /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/dssp/5VAU.dssp.
+WARNING:SLiMfast.dssp_tools:Missing residue at position 32 chain B in /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/dssp/5VAU.dssp.
+WARNING:SLiMfast.dssp_tools:Missing residue at position 33 chain C in /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/dssp/5VAU.dssp.
+WARNING:SLiMfast.dssp_tools:Missing residue at position 33 chain D in /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/dssp/5VAU.dssp.
+INFO:SLiMfast.util:Data in the DSSP output /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/dssp/5VAU.dssp have been parsed successfully.
+WARNING:SLiMfast.util:Sequence TMENLSRRLKVTGDLF not found in PDB 5VAU chain E.
+INFO:SLiMfast.slimfast_find_slims:The SLiMs found in the structures of the protein with UniProt ID Q14457 found in the Protein Data Bank have been successfully written to Q14457_slims_structures.csv.
+WARNING:SLiMfast.slimfast_find_slims:No SLiMs found in the structures of the protein with UniProt ID Q14457 found in the AlphaFold Protein Structure Database.
+WARNING:SLiMfast.slimfast_find_slims:No SLiMs found in the structures of the homologs of the protein with UniProt ID Q14457 found in the Protein Data Bank.

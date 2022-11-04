@@ -1,0 +1,5 @@
+hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
+2_5uuk.A,2,5uuk.A,Bcl-2-related protein A,100.0,1.4E-34,1.6E-39,209.9,0.0,149,1-150,2-151,5uuk,A,99.0,1.52,138.6,8.5,Homo sapiens,85.1,X-RAY DIFFRACTION,1.199,2017-02-17
+3_5uul.A,3,5uul.A,Bcl-2-related protein A,100.0,1.4E-34,1.6E-39,209.9,0.0,149,1-150,2-151,5uul,A,99.0,1.52,138.7,8.5,Homo sapiens,85.1,X-RAY DIFFRACTION,1.33,2017-02-17
+1_6rjp.A,1,6rjp.A,Bcl-2-related protein A,100.0,9.9E-35,1.1E-39,214.5,0.0,148,1-149,23-171,6rjp,A,99.0,1.513,137.2,7.8,Homo sapiens,84.6,X-RAY DIFFRACTION,2.57,2019-04-29
+87_1vra.B,87,1vra.B,Arginine biosynthesis b,58.3,8.4E+00,9.7E-05,30.8,0.0,19,78-97,123-141,1vra,B,32.0,0.861,0.0,5.4,Bacillus halodurans,10.9,X-RAY DIFFRACTION,2.0,2005-02-17

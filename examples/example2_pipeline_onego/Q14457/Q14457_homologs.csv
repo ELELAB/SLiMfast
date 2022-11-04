@@ -1,0 +1,8 @@
+hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
+2_4ddp.A,2,4ddp.A,"Beclin-1; Beclin 1, ECD",100.0,6.4E-58,7.4E-63,437.0,0.0,209,242-450,2-210,4ddp,A,100.0,1.565,184.3,7.2,Homo sapiens,46.4,X-RAY DIFFRACTION,1.547,2012-01-19
+7_5hhe.A,7,5hhe.A,Beclin-1; autophagy reg,98.5,1.9E-10,2.2E-15,97.1,0.0,89,178-266,4-92,5hhe,A,99.0,1.215,0.0,7.6,Homo sapiens,19.8,X-RAY DIFFRACTION,1.46,2016-01-10
+11_5yr0.A,11,5yr0.A,Beta-lactamase (E.C.3.5,93.4,2.2E-02,2.5E-07,43.1,0.0,48,178-225,3-50,5yr0,A,96.0,1.145,0.0,4.0,Mus musculus,10.7,X-RAY DIFFRACTION,1.9,2017-11-08
+5_5k7b.A,5,5k7b.A,Beclin-2; Coiled-coil D,98.8,8.2E-12,9.5E-17,106.4,0.0,91,178-268,8-98,5k7b,A,55.0,0.767,0.0,7.4,Homo sapiens,20.2,X-RAY DIFFRACTION,2.3,2016-05-25
+6_5k7b.B,6,5k7b.B,Beclin-2; Coiled-coil D,98.8,8.2E-12,9.5E-17,106.4,0.0,91,178-268,8-98,5k7b,B,55.0,0.767,0.0,7.4,Homo sapiens,20.2,X-RAY DIFFRACTION,2.3,2016-05-25
+3_3vp7.A,3,3vp7.A,Vacuolar protein sortin,100.0,6.4E-53,7.4E-58,405.5,0.0,173,267-448,1-219,3vp7,A,38.0,0.658,151.8,7.2,Saccharomyces cerevisiae,38.4,X-RAY DIFFRACTION,2.3,2012-02-28
+1_5dfz.D,1,5dfz.D,Vacuolar protein sortin,100.0,1.4E-86,1.6E-91,710.2,0.0,330,110-448,155-538,5dfz,D,33.0,0.566,305.0,6.1,Saccharomyces cerevisiae (strain atcc 204508 / s288c),73.3,X-RAY DIFFRACTION,4.4,2015-08-27

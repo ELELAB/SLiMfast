@@ -1,0 +1,12 @@
+INFO:SLiMfast.slimfast_find_slims:The configuration has been successfully parsed from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/run_example2.yaml.
+INFO:SLiMfast.slimfast_find_slims:The SLiM instances have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/Q9BXH1_slims.csv.
+INFO:SLiMfast.slimfast_find_slims:Data about the structures of the protein with UniProt ID Q9BXH1 found in the Protein Data Bank have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/Q9BXH1_structures.csv.
+INFO:SLiMfast.slimfast_find_slims:Data about the available structures of the homologs of the protein with UniProt ID Q9BXH1 have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/Q9BXH1_homologs.csv.
+INFO:SLiMfast.slimfast_find_slims:Data about the alignments of the homologs to the protein with UniProt ID Q9BXH1 have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/Q9BXH1_alignments.json.
+INFO:SLiMfast.util:Data for the structure with ID 5UUL have been successfully retrieved for the Protein Data Bank.
+INFO:SLiMfast.util:The following SLiMs have been found in the structure with ID 5UUL: BH3_137-IGAQLRRMADDL-148.
+INFO:SLiMfast.util:The structure with ID 5UUL has been written successfully to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/structures/5UUL.pdb.
+INFO:SLiMfast.run_tools:Running DSSP on the PDB file /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/structures/5UUL.pdb...
+INFO:SLiMfast.util:Data in the DSSP output /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/dssp/5UUL.dssp have been parsed successfully.
+INFO:SLiMfast.slimfast_find_slims:The SLiMs found in the structures of the protein with UniProt ID Q9BXH1 found in the Protein Data Bank have been successfully written to Q9BXH1_slims_structures.csv.
+WARNING:SLiMfast.slimfast_find_slims:No SLiMs found in the structures of the homologs of the protein with UniProt ID Q9BXH1 found in the Protein Data Bank.

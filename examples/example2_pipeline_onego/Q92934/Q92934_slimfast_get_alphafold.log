@@ -1,0 +1,10 @@
+INFO:SLiMfast.slimfast_get_alphafold:Configuration parsed successfully from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/run_example2.yaml.
+INFO:SLiMfast.slimfast_get_alphafold:The IDs of the available structures of the protein with UniProt ID Q92934 have been successfully retrieved from the AlphaFold Protein Structure Database.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID AF-Q92934-F1-model_v1.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID AF-Q92934-F1-model_v2.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID AF-Q92934-F1-model_v3.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID AF-Q92934-F1-model_v4.
+INFO:SLiMfast.slimfast_get_alphafold:The data frame of the structures of the protein with UniProt ID Q92934 found in the AlphaFold Protein Structure Database has been successfully filtered.
+INFO:SLiMfast.slimfast_get_alphafold:The data frame of the structures of the protein with UniProt ID Q92934 found in the AlphaFold Protein Structure Database has been successfully sorted.
+INFO:SLiMfast.slimfast_get_alphafold:All data for the structures of the protein with UniProt ID Q92934 found in the AlphaFold Protein Structure Database have been successfully collected.
+INFO:SLiMfast.slimfast_get_alphafold:The data frame containing data about the structures of the protein with UniProt ID Q92934 found in the AlphaFold Protein Structure Database has been successfully written to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/Q92934_alphafold.csv.

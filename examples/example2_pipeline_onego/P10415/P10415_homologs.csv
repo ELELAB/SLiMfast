@@ -1,0 +1,26 @@
+hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
+1_5jsn.A,1,5jsn.A,Apoptosis regulator Bcl,100.0,1.6E-40,1.8E-45,284.2,0.0,206,1-206,1-206,5jsn,A,100.0,1.602,139.4,6.7,Homo sapiens,86.2,X-RAY DIFFRACTION,2.1,2016-05-09
+11_2o2f.A,11,2o2f.A,Solution structure of t,99.9,7.2E-32,8.4E-37,215.5,0.0,138,8-204,1-138,2o2f,A,99.0,1.622,0.0,8.5,Homo sapiens,57.7,SOLUTION NMR,,2006-11-29
+9_2w3l.B,9,2w3l.B,APOPTOSIS REGULATOR BCL,99.9,1.1E-32,1.2E-37,221.9,0.0,143,9-205,1-143,2w3l,B,94.0,1.538,0.0,8.4,Homo sapiens,59.8,X-RAY DIFFRACTION,2.1,2008-11-13
+8_2o21.A,8,2o21.A,Apoptosis regulator Bcl,99.9,5.7E-33,6.6E-38,228.2,0.0,164,3-207,1-164,2o21,A,90.0,1.449,0.0,8.3,Homo sapiens,68.6,SOLUTION NMR,,2006-11-29
+7_6gl8.A,7,6gl8.A,"Bcl-2-like protein 1,Ap",100.0,2.7E-33,3.2E-38,232.0,0.0,159,6-205,13-171,6gl8,A,88.0,1.417,0.0,8.0,Homo sapiens,66.5,X-RAY DIFFRACTION,1.4,2018-05-23
+14_6qgg.A,14,6qgg.A,Induced myeloid leukemi,99.9,1.8E-31,2.1E-36,222.3,0.0,159,7-207,1-159,6qgg,A,79.0,1.222,0.0,7.9,Homo sapiens,66.5,X-RAY DIFFRACTION,1.5,2019-01-11
+15_6qgh.A,15,6qgh.A,Induced myeloid leukemi,99.9,1.8E-31,2.1E-36,222.3,0.0,159,7-207,1-159,6qgh,A,79.0,1.222,0.0,7.9,Homo sapiens,66.5,X-RAY DIFFRACTION,2.0,2019-01-11
+13_6hjl.E,13,6hjl.E,"Bcl-2-like protein 1, A",99.9,1.0E-31,1.2E-36,214.3,0.0,138,8-202,1-138,6hjl,E,62.0,1.152,0.0,8.8,Homo sapiens,57.7,X-RAY DIFFRACTION,2.2,2018-09-04
+10_2o2m.A,10,2o2m.A,Apoptosis regulator Bcl,99.9,3.1E-32,3.6E-37,219.1,0.0,145,8-203,1-145,2o2m,A,59.0,1.069,0.0,8.7,Homo sapiens,60.7,SOLUTION NMR,,2006-11-30
+19_2lp8.A,19,2lp8.A,Bcl-2-like protein 1/BA,99.9,3.7E-31,4.3E-36,221.9,0.0,158,7-205,1-158,2lp8,A,56.0,1.012,0.0,7.8,Homo sapiens,66.1,SOLUTION NMR,,2012-02-03
+12_3sp7.A,12,3sp7.A,Bcl-2-like protein 1; B,99.9,9.5E-32,1.1E-36,222.7,0.0,168,4-212,1-168,3sp7,A,52.0,0.926,0.0,8.2,Homo sapiens,70.3,X-RAY DIFFRACTION,1.4,2011-07-01
+5_6zhc.DDD,5,6zhc.DDD,von Hippel-Lindau dis,100.0,2.3E-37,2.7E-42,265.8,0.0,188,3-205,1-202,6zhc,DDD,49.0,0.838,0.0,6.8,Homo sapiens,78.7,X-RAY DIFFRACTION,1.92,2020-06-22
+6_6bf2.A,6,6bf2.A,Bcl-2-like protein 1; A,100.0,9.4E-37,1.1E-41,260.7,0.0,191,7-205,4-201,6bf2,A,47.0,0.81,0.0,7.0,Homo sapiens,79.9,SOLUTION NMR,,2017-10-25
+4_3ilc.A,4,3ilc.A,Bcl-2-like protein 1; A,100.0,2.0E-37,2.3E-42,262.1,0.0,193,7-203,2-197,3ilc,A,46.0,0.787,0.0,7.3,Mus musculus,80.8,X-RAY DIFFRACTION,1.64,2009-08-07
+3_3ihd.A,3,3ihd.A,Bcl-2-like protein 1; A,100.0,2.0E-37,2.3E-42,262.1,0.0,189,7-203,2-197,3ihd,A,46.0,0.777,135.5,7.3,Mus musculus,79.1,X-RAY DIFFRACTION,1.88,2009-07-30
+22_1mk3.A,22,1mk3.A,Apoptosis regulator Bcl,99.9,1.1E-30,1.3E-35,217.7,0.0,151,9-209,7-157,1mk3,A,46.0,0.919,0.0,7.7,Homo sapiens,63.2,SOLUTION NMR,,2002-08-28
+2_1lxl.A,2,1lxl.A,"BCL-XL; APOPTOSIS, PROG",100.0,1.5E-37,1.8E-42,266.9,0.0,197,3-207,1-204,1lxl,A,45.0,0.753,146.4,6.8,Homo sapiens,82.4,SOLUTION NMR,,1996-04-04
+18_4cim.A,18,4cim.A,BCL-2-LIKE PROTEIN 2; A,99.9,3.5E-31,4.0E-36,217.4,0.0,158,2-209,1-158,4cim,A,44.0,0.879,0.0,8.4,Homo sapiens,66.1,X-RAY DIFFRACTION,1.5,2013-12-12
+16_4k5a.A,16,4k5a.A,"Bcl-2-like protein 2, D",99.9,2.8E-31,3.2E-36,222.5,0.0,167,2-218,12-182,4k5a,A,43.0,0.863,0.0,7.8,Bos taurus,69.9,X-RAY DIFFRACTION,1.5,2013-04-14
+78_5fmk.B,78,5fmk.B,"BCL-XL, BCL-2 HOMOLOGOU",93.6,1.7E-02,2.0E-07,35.8,0.0,24,92-115,11-34,5fmk,B,42.0,0.657,0.0,4.5,Homo sapiens,10.0,X-RAY DIFFRACTION,1.731,2015-11-06
+77_3qbr.B,77,3qbr.B,"SJCHGC06286 protein, Bc",93.6,1.7E-02,2.0E-07,35.8,0.0,24,92-115,11-34,3qbr,B,42.0,0.657,0.0,4.5,Schistosoma japonicum,10.0,X-RAY DIFFRACTION,2.601,2011-01-13
+67_6uxq.A,67,6uxq.A,Bcl-2 homologous antago,99.6,5.2E-19,6.0E-24,130.6,0.0,85,83-167,1-85,6uxq,A,33.0,0.565,0.0,8.0,Homo sapiens,35.6,X-RAY DIFFRACTION,1.696,2019-11-07
+68_6uxq.D,68,6uxq.D,Bcl-2 homologous antago,99.6,5.2E-19,6.0E-24,130.6,0.0,85,83-167,1-85,6uxq,D,33.0,0.565,0.0,8.0,Homo sapiens,35.6,X-RAY DIFFRACTION,1.696,2019-11-07
+71_4u2v.C,71,4u2v.C,"GFP-Bak; Apoptosis, Bak",99.2,1.2E-14,1.4E-19,131.8,0.0,77,90-166,236-312,4u2v,C,32.0,0.569,0.0,6.0,Aequorea victoria,32.2,X-RAY DIFFRACTION,2.3,2014-07-18
+70_5ktg.A,70,5ktg.A,Green fluorescent prote,99.2,5.5E-15,6.4E-20,133.7,0.0,82,84-165,228-309,5ktg,A,30.0,0.533,0.0,6.1,Aequorea victoria,34.3,X-RAY DIFFRACTION,2.802,2016-07-11

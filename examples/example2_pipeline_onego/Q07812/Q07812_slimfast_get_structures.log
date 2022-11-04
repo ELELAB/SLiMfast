@@ -1,0 +1,35 @@
+INFO:SLiMfast.slimfast_get_structures:Configuration parsed successfully from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/run_example2.yaml.
+INFO:SLiMfast.uniprot_tools:The data frame containing the available structures for the protein with UniProt ID Q07812 has been successfully created.
+INFO:SLiMfast.slimfast_get_structures:The IDs of the available structures of the protein with UniProt ID Q07812 have been successfully retrieved from the Protein Data Bank.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 1F16.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2G5B.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2K7W.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2LR1.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 3PK1.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 3PL7.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4BD2.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4BD6.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4BD7.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4BD8.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4BDU.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4S0O.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4S0P.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4UF2.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4ZIE.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4ZIF.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4ZIG.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4ZIH.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4ZII.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5W5X.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5W5Z.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5W60.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5W61.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6EB6.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6L8V.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6L95.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6TRR.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6XY6.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 7ADT.
+INFO:SLiMfast.slimfast_get_structures:The data frame of the structures of the protein with UniProt ID Q07812 found in the Protein Data Bank has been successfully sorted.
+INFO:SLiMfast.slimfast_get_structures:All data for the structures of the protein with UniProt ID Q07812 found in the Protein Data Bank have been successfully collected.
+INFO:SLiMfast.slimfast_get_structures:The data frame containing data about the structures of the protein with UniProt ID Q07812 found in the Protein Data Bank has been successfully written to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q07812/Q07812_structures.csv.

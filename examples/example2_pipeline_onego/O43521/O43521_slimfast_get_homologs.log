@@ -1,0 +1,62 @@
+INFO:SLiMfast.slimfast_get_homologs:Configuration parsed successfully from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/run_example2.yaml.
+INFO:SLiMfast.slimfast_get_homologs:Preparing to run the HHpred pipeline (HHpred + HHsearch)...
+INFO:SLiMfast.uniprot_tools:The FASTA sequence for the protein with ID O43521 has been successfully retrieved from the UniProt database.
+INFO:SLiMfast.uniprot_tools:The FASTA sequence for the protein with UniProt ID O43521 has been successfully written to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/O43521/O43521.fasta.
+INFO:SLiMfast.run_tools:Running HHblits for the protein with UniProt ID O43521...
+INFO:SLiMfast.run_tools:Running HHsearch for the protein with UniProt ID O43521...
+INFO:SLiMfast.slimfast_get_homologs:The IDs of the structures of the homologs of the protein with UniProt ID O43521 in the Protein Data Bank have been successfully retrieved.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 1pq1.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 3qbr.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5fmk.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2xa0.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 3pk1.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2m5i.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5ua5.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6tzc.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2bid.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 1ddb.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5w5z.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5vx1.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6l8v.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6hjl.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2o2m.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5vwv.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2o2f.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6v4m.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6gl8.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6fbx.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4wmu.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6rjp.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2o21.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2w3l.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4zii.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5jno.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5w63.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2kua.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6ckv.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5wos.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5tzp.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5w60.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6qgg.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6qgh.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6uxq.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4zig.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4zie.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6zhc.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5wdd.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 4wmx.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 1lxl.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 3sp7.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6bf2.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5c3f.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 3ihd.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 3ilc.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5uuk.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 5uul.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 2roc.
+INFO:SLiMfast.util:Metadata successfully collected for the structure with ID 6eb6.
+INFO:SLiMfast.slimfast_get_homologs:The data frame of the structures of the homologs of protein with UniProt ID O43521 found in the Protein Data Bank has been successfully filtered.
+INFO:SLiMfast.slimfast_get_homologs:The data frame of the structures of the homologs of the protein with UniProt ID O43521 found in the Protein Data Bank has been successfully sorted.
+INFO:SLiMfast.slimfast_get_homologs:All data for the structures the homologs of the protein with O43521 found in the Protein Data Bank have been successfully collected.
+INFO:SLiMfast.slimfast_get_homologs:The data frame containing data about the structures of the homologs of the protein with UniProt ID O43521 found in the Protein Data Bank has been successfully written to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/O43521/O43521_homologs.csv.
+INFO:SLiMfast.slimfast_get_homologs:The alignments of the structures of the homologs of the protein with UniProt ID O43521 (aligned with the protein itself) found in the Protein Data Bank have been successfully written to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/O43521/O43521_alignments.json.
