@@ -1039,7 +1039,7 @@ def is_region_disordered(seq,
     
     # Get the FASTA sequence of the chain of interest
     chain_f = fasta_dict[struct_chain]
-    
+
     # Get the FASTA-like DSSP sequence of the chain of interest
     chain_d = seqdssp_dict[struct_chain]
 
@@ -1071,13 +1071,19 @@ def is_region_disordered(seq,
         return
 
     # Get the starting position of the only occurrence found
-    start_ix = occur[0][2]
+    start_ix = occur[0][0] - 1
     
     # Get the ending position of the only occurrence found
     end_ix = start_ix+len(seq)
 
     # Get the FASTA-like DSSP sequence of the occurrence
-    seq_seqddsp = chain_d[start_ix:end_ix]
+    seq_seqdssp = chain_d[start_ix:end_ix]
+
+    # Log the sequence we are working with now
+    infostr = \
+        f"Now working with sequence {start_ix+1}-{seq}-{end_ix} " \
+        f"(DSSP sequence: {seq_seqdssp})..."
+    logger.info(infostr)
 
     # We want to be sure that the occurrence is found in
     # a disordered region at least min_len_disorder residues
@@ -1104,7 +1110,8 @@ def is_region_disordered(seq,
 
     # Try to extend the sequence on the left side
     try:
-        ext_seq_seqddsp = chain_d[ext_start_ix]
+        
+        _ext_seq_seqdssp = chain_d[ext_start_ix]
     
     # If there are not enough residues to extend the sequence
     # on the left side by the required number of residues,
@@ -1125,7 +1132,8 @@ def is_region_disordered(seq,
 
     # Try to extend the sequence on the right side
     try:
-        ext_seq_seqddsp = chain_d[ext_end_ix]
+        
+        _ext_seq_seqdssp = chain_d[ext_end_ix]
     
     # If there are not enough residues to extend the sequence
     # on the right side by the required number of residues,
@@ -1144,11 +1152,22 @@ def is_region_disordered(seq,
         # The new ending point will be the N-terminus
         ext_end_ix = len(chain_d) - 1
 
-    # Get the extended sequence
-    ext_seq = chain_d[ext_start_ix:ext_end_ix]
+    # Get the extended FASTA sequence
+    ext_seq = chain_f[ext_start_ix:ext_end_ix]
+
+    # Get the extended DSSP sequence
+    ext_seq_seqdssp = chain_d[ext_start_ix:ext_end_ix]
+    
+    # Log the extended sequence
+    infostr = \
+        f"Extended sequence (if 'min_len_disorder' > " \
+        f"length_of_sequence): " \
+        f"{ext_start_ix+1}-{ext_seq}-{ext_end_ix}. " \
+        f"(DSSP sequence: {ext_seq_seqdssp})."
+    logger.info(infostr)
 
     # If all residues in the extended sequence are disordered
-    if set(ext_seq).issubset(set(disorder_symbols)):
+    if set(ext_seq_seqdssp).issubset(set(disorder_symbols)):
 
         # Return True (the region is disordered)
         return True

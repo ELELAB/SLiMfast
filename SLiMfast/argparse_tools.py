@@ -253,9 +253,9 @@ def get_arguments(description,
         oal_help = \
             f"Name of the output JSON file containing the " \
             f"alignments between each of the structures of the " \
-            f"homologs of the protein of interest found in the " \
-            f"Protein Data Bank and the protein itself. " \
-            f"The default is '{OUTPUT_ALIGNMENTS_FILE}'."
+            f"homologs found in the Protein Data Bank and the " \
+            f"protein of interest. The default is " \
+            f"'{OUTPUT_ALIGNMENTS_FILE}'."
         parser.add_argument("-oal", "--output-alignments-file",
                              type = str,
                              default = OUTPUT_ALIGNMENTS_FILE,
@@ -349,7 +349,8 @@ def get_arguments(description,
     # - slimfast_find_slims
     if "log_file" in kwargs.keys():
         lf_default = log_file_default
-        lf_help = f"Name of the log file. The default is {lf_default}."
+        lf_help = \
+            f"Name of the log file. The default is '{lf_default}'."
         parser.add_argument("-lf", "--log-file",
                             type = str,
                             default = lf_default,
