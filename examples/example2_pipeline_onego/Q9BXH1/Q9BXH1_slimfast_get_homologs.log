@@ -1,0 +1,17 @@
+2024-04-17,21:06:INFO:root:The configuration was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/run_pipeline.yaml'.
+2024-04-17,21:06:INFO:root:Preparing to run the HHpred pipeline (HHblits + HHsearch)...
+2024-04-17,21:06:INFO:SLiMfast.uniprot_tools:The FASTA sequence for the protein with ID 'Q9BXH1' was successfully retrieved from the UniProt database.
+2024-04-17,21:06:INFO:SLiMfast.uniprot_tools:The FASTA sequence for the protein with UniProt ID 'Q9BXH1' was successfully saved to '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q9BXH1/Q9BXH1.fasta'.
+2024-04-17,21:06:INFO:SLiMfast.run_tools:Running HHblits for the protein with UniProt ID 'Q9BXH1'...
+2024-04-17,21:09:INFO:SLiMfast.run_tools:Running HHsearch for the protein with UniProt ID 'Q9BXH1'...
+2024-04-17,21:09:INFO:root:The HHpred run completed successfully.
+2024-04-17,21:09:INFO:root:The data frame containing data about the structures of the homologs of the protein of interest available in the Protein Data Bank was successfully created.
+2024-04-17,21:10:INFO:SLiMfast.util:The metadata for the structure with ID '3qbr' were successfully collected.
+2024-04-17,21:10:INFO:SLiMfast.util:The metadata for the structure with ID '5fmk' were successfully collected.
+2024-04-17,21:10:INFO:SLiMfast.util:The metadata for the structure with ID '1pq1' were successfully collected.
+2024-04-17,21:10:INFO:SLiMfast.util:The metadata for the structure with ID '1qcr' were successfully collected.
+2024-04-17,21:10:INFO:SLiMfast.util:The metadata for the structure with ID '3pk1' were successfully collected.
+2024-04-17,21:10:INFO:SLiMfast.util:The metadata for the structure with ID '2xa0' were successfully collected.
+2024-04-17,21:10:INFO:root:Metadata were successfully added to the data frame.
+2024-04-17,21:10:INFO:root:The data frame was successfully filtered.
+2024-04-17,21:10:WARNING:root:No structures were left in the data frame after filtering.

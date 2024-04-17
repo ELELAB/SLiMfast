@@ -1,0 +1,4 @@
+hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
+2_4ddp.A,2,4ddp.A,"Beclin-1; Beclin 1, ECD",100.0,6.4E-58,7.4E-63,437.0,0.0,209,242-450,2-210,4ddp,A,100.0,1.565,184.3,7.2,Homo sapiens,46.4,X-RAY DIFFRACTION,1.547,2012-01-19
+5_5k7b.A,5,5k7b.A,Beclin-2; Coiled-coil D,98.8,8.2E-12,9.5E-17,106.4,0.0,91,178-268,8-98,5k7b,A,55.0,0.767,0.0,7.4,Homo sapiens,20.2,X-RAY DIFFRACTION,2.3,2016-05-25
+6_5k7b.B,6,5k7b.B,Beclin-2; Coiled-coil D,98.8,8.2E-12,9.5E-17,106.4,0.0,91,178-268,8-98,5k7b,B,55.0,0.767,0.0,7.4,Homo sapiens,20.2,X-RAY DIFFRACTION,2.3,2016-05-25

@@ -1,0 +1,19 @@
+2024-04-17,21:05:INFO:root:The configuration was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/run_pipeline.yaml'.
+2024-04-17,21:05:INFO:SLiMfast.uniprot_tools:The IDs of structures available in the Protein Data Bank for the protein with UniProt ID 'Q9BXH1' were successfully retrieved.
+2024-04-17,21:05:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully created.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '2M04' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '4BPI' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '4BPJ' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '4BPK' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '4HNJ' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '5UUL' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '6QFM' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '6QG8' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '6TQP' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '7DVD' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '7P0S' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '7P9W' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '7QTX' were successfully collected.
+2024-04-17,21:05:INFO:root:Metadata were successfully added to the data frame.
+2024-04-17,21:05:INFO:root:The data frame was successfully sorted.
+2024-04-17,21:05:INFO:root:The data frame was successfully saved in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q9BXH1/Q9BXH1_structures.csv'.

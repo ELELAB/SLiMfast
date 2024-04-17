@@ -1,0 +1,133 @@
+- 21:12:58.847 INFO: /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q07812/hhpred/Q07812.a3m is in A2M, A3M or FASTA format
+
+- 21:12:58.892 INFO: Searching 86434 database HHMs without prefiltering
+
+- 21:12:58.942 INFO: Iteration 1
+
+- 21:12:59.180 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
+
+- 21:12:59.457 INFO: Alternative alignment: 0
+
+- 21:13:36.598 INFO: 86434 alignments done
+
+- 21:13:36.804 INFO: Alternative alignment: 1
+
+- 21:13:36.966 INFO: 211 alignments done
+
+- 21:13:36.966 INFO: Alternative alignment: 2
+
+- 21:13:36.966 INFO: Alternative alignment: 3
+
+- 21:13:38.456 INFO: Premerge done
+
+- 21:13:38.456 INFO: 78 sequences belonging to 78 database HMMs found with an E-value < 0.001
+
+Query         sp|Q07812|BAX_HUMAN Apoptosis regulator BAX OS=Homo sapiens OX=9606 GN=BAX PE=1 SV=1
+Match_columns 192
+No_of_seqs    150 out of 1963
+Neff          8.97172
+Searched_HMMs 86434
+Date          Wed Apr 17 21:13:38 2024
+Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q07812/hhpred/Q07812.a3m -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q07812/hhpred/Q07812.hhr 
+
+ No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
+  1 6EB6_A Apoptosis regulator BAX 100.0 1.8E-41   2E-46  262.0   0.0  191    1-191     1-191 (192)
+  2 2LR1_A Apoptosis regulator BAX 100.0 3.6E-41 4.2E-46  260.3   0.0  191    1-191     1-191 (192)
+  3 5W60_A Apoptosis regulator BAX 100.0   5E-41 5.8E-46  259.9   0.0  191    1-191     1-191 (194)
+  4 4ZII_A Apoptosis Regulator Bax 100.0 1.1E-38 1.3E-43  242.1   0.0  170    1-170     1-170 (170)
+  5 4ZIE_A Apoptosis Regulator Bax 100.0 4.2E-38 4.8E-43  238.6   0.0  168    1-168     1-168 (168)
+  6 4ZIG_A Apoptosis Regulator Bax 100.0 1.2E-37 1.4E-42  236.1   0.0  168    1-168     1-168 (168)
+  7 5W63_A Apoptosis regulator bax 100.0 6.1E-37   7E-42  236.4   0.0  184    6-190     2-189 (189)
+  8 5WDD_B Bcl-2-related ovarian k  99.9 6.6E-32 7.6E-37  204.7   0.0  160    7-167     2-168 (168)
+  9 5W5Z_A 3C10 Fab' light chain,   99.9 6.9E-32   8E-37  203.7   0.0  159   32-190     1-159 (163)
+ 10 5VX1_A Bcl-2 homologous antago  99.9 1.3E-31 1.5E-36  203.5   0.0  157    9-166     1-169 (170)
+ 11 5VWV_A Bcl-2 homologous antago  99.9 4.2E-31 4.9E-36  200.7   0.0  157    9-166     1-169 (170)
+ 12 6CKV_A Bcl-2-related ovarian k  99.9 4.4E-31 5.1E-36  198.3   0.0  150   13-164     2-158 (158)
+ 13 6GL8_A Bcl-2-like protein 1,Ap  99.9 5.6E-31 6.5E-36  200.5   0.0  151   17-168    12-171 (172)
+ 14 2ROC_A Induced myeloid leukemi  99.9 8.6E-31 9.9E-36  197.5   0.0  154   11-169     1-158 (162)
+ 15 2KUA_A Bcl-2-like protein 10;   99.9   2E-30 2.4E-35  197.0   0.0  152    7-170     1-168 (170)
+ 16 6FBX_A BCL2-like 10, BCL2-anta  99.9 2.1E-30 2.4E-35  193.4   0.0  144   11-168     1-150 (152)
+ 17 2O21_A Apoptosis regulator Bcl  99.9 2.5E-30 2.9E-35  195.4   0.0  153   17-170     3-164 (164)
+ 18 6V4M_A BCL-2; BCL-2, helical b  99.9 3.2E-30 3.7E-35  196.7   0.0  151   13-169     9-166 (174)
+ 19 5JSB_A Induced myeloid leukemi  99.9 3.4E-30 3.9E-35  197.4   0.0  171   17-192     1-179 (179)
+ 20 5FMI_A BCL-2 HOMOLOGOUS ANTAGO  99.9 3.8E-30 4.4E-35  194.0   0.0  150   15-165     1-162 (162)
+ 21 5WOS_A CNPV058 bcl-2 like prot  99.9 4.2E-30 4.8E-35  191.2   0.0  145    5-162     1-147 (148)
+ 22 3IHD_A Bcl-2-like protein 1; A  99.9 6.3E-30 7.3E-35  198.5   0.0  147   19-166     2-197 (197)
+ 23 3ILC_A Bcl-2-like protein 1; A  99.9 6.3E-30 7.3E-35  198.5   0.0  147   19-166     2-197 (197)
+ 24 6RJP_A Bcl-2-related protein A  99.9 7.4E-30 8.6E-35  194.1   0.0  140   15-166    23-171 (171)
+ 25 2A5Y_A Apoptosis regulator ced  99.9 7.5E-30 8.7E-35  199.1   0.0  159    4-167    14-183 (204)
+ 26 5JSN_A Apoptosis regulator Bcl  99.9   8E-30 9.2E-35  199.9   0.0  148   21-169     9-206 (215)
+ 27 3PK1_A Induced myeloid leukemi  99.9   8E-30 9.3E-35  196.9   0.0  163    2-169    20-186 (189)
+ 28 4K5A_A Bcl-2-like protein 2, D  99.9 8.1E-30 9.4E-35  196.1   0.0  152   13-169    11-166 (184)
+ 29 6BF2_A Bcl-2-like protein 1; A  99.9 1.1E-29 1.2E-34  199.1   0.0  148   19-167     4-200 (212)
+ 30 6UDV_A Induced myeloid leukemi  99.9 1.2E-29 1.4E-34  190.5   0.0  149   16-169     1-153 (157)
+ 31 5C3F_A Induced myeloid leukemi  99.9 1.2E-29 1.4E-34  190.2   0.0  148   17-169     1-152 (156)
+ 32 6ZHC_DDD von Hippel-Lindau dis  99.9 1.5E-29 1.7E-34  199.3   0.0  150   19-169     5-203 (221)
+ 33 3PK1_C Induced myeloid leukemi  99.9 1.6E-29 1.8E-34  195.3   0.0  163    2-169    20-186 (189)
+ 34 2W3L_B APOPTOSIS REGULATOR BCL  99.9 1.6E-29 1.8E-34  187.3   0.0  138   22-168     2-143 (144)
+ 35 1LXL_A BCL-XL; APOPTOSIS, PROG  99.9 1.6E-29 1.8E-34  199.1   0.0  150   19-169     5-203 (221)
+ 36 2O2F_A Solution structure of t  99.9 2.3E-29 2.7E-34  185.1   0.0  133   21-167     2-138 (138)
+ 37 6QGG_A Induced myeloid leukemi  99.9 2.8E-29 3.2E-34  192.0   0.0  150   19-169     1-158 (177)
+ 38 6QGH_A Induced myeloid leukemi  99.9 2.8E-29 3.2E-34  192.0   0.0  150   19-169     1-158 (177)
+ 39 5UUK_A Bcl-2-related protein A  99.9 4.1E-29 4.8E-34  186.6   0.0  141   15-167     2-151 (152)
+ 40 5UUL_A Bcl-2-related protein A  99.9 4.1E-29 4.8E-34  186.6   0.0  141   15-167     2-151 (152)
+ 41 3SP7_A Bcl-2-like protein 1; B  99.9 4.5E-29 5.2E-34  190.1   0.0  148   21-169     6-162 (172)
+ 42 3QBR_A SJCHGC06286 protein, Bc  99.9 4.7E-29 5.4E-34  191.0   0.0  156   10-167     8-179 (179)
+ 43 2O2M_A Apoptosis regulator Bcl  99.9 5.6E-29 6.5E-34  184.4   0.0  139   22-166     3-145 (145)
+ 44 4CIM_A BCL-2-LIKE PROTEIN 2; A  99.9 7.2E-29 8.4E-34  187.3   0.0  148   17-169     4-155 (163)
+ 45 6HJL_E Bcl-2-like protein 1, A  99.9 7.6E-29 8.8E-34  182.2   0.0  132   22-165     3-138 (138)
+ 46 1MK3_A Apoptosis regulator Bcl  99.9 1.2E-28 1.4E-33  188.7   0.0  145   20-169     6-154 (178)
+ 47 2LP8_A Bcl-2-like protein 1/BA  99.9 1.7E-28 1.9E-33  189.0   0.0  148   21-169     3-159 (185)
+ 48 1OHU_A APOPTOSIS REGULATOR CED  99.9 2.7E-28 3.1E-33  186.3   0.0  152   11-167     1-163 (175)
+ 49 4B4S_A BCL-2-LIKE PROTEIN 10,   99.9 3.7E-28 4.2E-33  185.5   0.0  150   13-175     1-174 (175)
+ 50 1TY4_B Apoptosis regulator ced  99.9 5.8E-28 6.7E-33  183.7   0.0  155   11-169     1-165 (170)
+ 51 5TZP_A Bcl-2-like protein FPV0  99.9 2.1E-27 2.5E-32  176.7   0.0  145    9-166     1-148 (148)
+ 52 5TWA_A Bcl-x homologous protei  99.9 1.1E-26 1.3E-31  178.4   0.0  163    3-170     4-183 (187)
+ 53 5TWA_B Bcl-x homologous protei  99.9 1.1E-26 1.3E-31  178.4   0.0  163    3-170     4-183 (187)
+ 54 7JMT_C BCL-2 protein; APOPTOSI  99.9 1.5E-26 1.7E-31  181.5   0.0  173   17-191     5-205 (210)
+ 55 7JMT_D BCL-2 protein; APOPTOSI  99.9 1.5E-26 1.7E-31  181.5   0.0  173   17-191     5-205 (210)
+ 56 5UA5_A 5-HL, Uncharacterized p  99.9 4.8E-26 5.6E-31  170.3   0.0  148    9-169     1-150 (153)
+ 57 2WH6_A EARLY ANTIGEN PROTEIN R  99.9 7.6E-26 8.8E-31  172.3   0.0  162    3-167     2-172 (173)
+ 58 6TZC_B Maltose/maltodextrin-bi  99.9 7.9E-26 9.1E-31  169.3   0.0  136   21-169    10-145 (154)
+ 59 4OYD_A Bcl-2, HBRF1; Inhibitor  99.8 1.6E-25 1.8E-30  168.4   0.0  145   19-166     5-158 (158)
+ 60 4WMU_A MBP-MCL1; Apoptosis, pr  99.8   4E-24 4.7E-29  186.3   0.0  145   18-167   370-518 (518)
+ 61 1Q59_A Early antigen protein R  99.8 4.8E-24 5.6E-29  162.3   0.0  131   27-169    25-161 (172)
+ 62 1K3K_A functional anti-apoptot  99.8   6E-24   7E-29  159.9   0.0  140   14-169     1-145 (158)
+ 63 4WMX_A MBP fused to MCL1; Apop  99.8 6.1E-24 7.1E-29  185.2   0.0  145   18-167   370-518 (518)
+ 64 5VMN_A Bak protein; Apoptosis,  99.8 1.6E-22 1.9E-27  147.5   0.0  111   55-168    12-127 (132)
+ 65 5VMO_A Bak protein, Bcl-2 inte  99.8 1.6E-22 1.9E-27  147.5   0.0  111   55-168    12-127 (132)
+ 66 2M5I_A BH3-interacting domain   99.6 1.3E-19 1.5E-24  132.8   0.0  110   47-157    14-131 (135)
+ 67 6L8V_B Apoptosis regulator BAX  99.5 4.2E-18 4.9E-23  114.4   0.0   80   49-128     2-81  (81)
+ 68 6UXQ_A Bcl-2 homologous antago  99.4 1.3E-16 1.5E-21  108.2   0.0   80   50-130     2-85  (85)
+ 69 6UXQ_D Bcl-2 homologous antago  99.4 1.3E-16 1.5E-21  108.2   0.0   80   50-130     2-85  (85)
+ 70 5KTG_A Green fluorescent prote  99.1 6.7E-14 7.8E-19  115.9   0.0   99   29-128   197-309 (309)
+ 71 4U2V_C GFP-Bak; Apoptosis, Bak  99.1 9.2E-14 1.1E-18  115.2   0.0  100   29-129   200-312 (313)
+ 72 2BID_A HUMAN PRO-APOPTOTIC PRO  98.5   2E-10 2.3E-15   89.1   0.0  102   49-157    78-193 (197)
+ 73 1DDB_A PRO-APOPTOTIC MOLECULE   96.4 9.3E-05 1.1E-09   58.0   0.0  108   49-157    76-191 (195)
+ 74 3PK1_D Induced myeloid leukemi  96.1 0.00031 3.6E-09   39.3   0.0   34   48-81      1-34  (34)
+ 75 2XA0_C APOPTOSIS REGULATOR BCL  95.9  0.0005 5.8E-09   37.6   0.0   31   52-82      1-31  (31)
+ 76 5FMK_B BCL-XL, BCL-2 HOMOLOGOU  92.8   0.034   4E-07   31.3   0.0   31   49-79      2-34  (34)
+ 77 3QBR_B SJCHGC06286 protein, Bc  92.8   0.034   4E-07   31.3   0.0   31   49-79      2-34  (34)
+ 78 4MI8_A Bcl-2 homolog (Gene 16?  90.0    0.14 1.7E-06   36.8   0.0   87   60-147    39-127 (143)
+ 79 3BL2_A V-bcl-2, Beclin-1; prot  89.4    0.17   2E-06   36.0   0.0   87   60-147    34-122 (131)
+ 80 1PQ1_B Apoptosis regulator Bcl  84.4    0.62 7.1E-06   25.5   0.0   26   59-84      8-33  (33)
+ 81 3A8E_C The structure of AxCesD  65.7       5 5.8E-05   31.4   0.0   97   52-157    23-121 (162)
+ 82 3AJ1_D Cellulose synthase oper  63.9     5.7 6.6E-05   31.2   0.0   97   52-157    34-132 (167)
+ 83 3C4S_B Ssl0352 protein; P74795  35.9      33 0.00038   22.5   0.0   13   99-113    35-47  (66)
+ 84 2JZ2_A Ssl0352 protein; SH3-li  35.9      33 0.00038   22.5   0.0   13   99-113    35-47  (66)
+ 85 1VRA_B Arginine biosynthesis b  34.8      35 0.00041   28.2   0.0   19   99-118   123-141 (215)
+ 86 2V4I_H GLUTAMATE N-ACETYLTRANS  34.6      36 0.00041   28.1   0.0   19   99-118   116-134 (213)
+ 87 2YEP_B GLUTAMATE N-ACETYLTRANS  34.6      36 0.00041   28.1   0.0   19   99-118   116-134 (213)
+ 88 3IT4_B Arginine biosynthesis b  34.3      36 0.00042   27.9   0.0   19   99-118   117-135 (205)
+ 89 3IT6_B Arginine biosynthesis b  34.3      36 0.00042   27.9   0.0   19   99-118   117-135 (205)
+ 90 6A7K_A Tlr0636 protein; NADH d  31.7      43  0.0005   22.5   0.0   13   99-113    42-54  (74)
+ 91 5UA4_B 5-HL, BH3-interacting d  30.2      47 0.00054   18.9   0.0   25   49-73      1-25  (34)
+ 92 4BD2_C APOPTOSIS REGULATOR BAX  30.1      48 0.00055   18.9   0.0   25   49-73      1-25  (34)
+ 93 2KBW_B Induced myeloid leukemi  29.7      49 0.00056   19.1   0.0   28   46-73      2-29  (35)
+ 94 2V0E_A CHROMODOMAIN-HELICASE-D  24.6      69  0.0008   20.3   0.0   25  145-169    29-53  (55)
+ 95 6NBQ_S PROTEIN; photosynthesis  23.5      75 0.00086   23.0   0.0   13   99-113    78-90  (110)
+ 96 6L7O_S NAD(P)H-quinone oxidore  23.5      75 0.00086   23.0   0.0   13   99-113    78-90  (110)
+ 97 3M6Z_B Topoisomerase V; helix-  23.4      75 0.00087   26.5   0.0   49  107-155   229-281 (380)
+ 98 3M7D_A Topoisomerase V; helix-  23.4      75 0.00087   26.5   0.0   49  107-155   229-281 (380)
+ 99 5EOF_B Optineurin, Serine/thre  22.9      78  0.0009   22.0   0.0   28    2-29      2-29  (82)
+

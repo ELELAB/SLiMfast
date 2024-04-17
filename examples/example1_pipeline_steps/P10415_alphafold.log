@@ -1,0 +1,10 @@
+2024-04-17,20:55:INFO:root:The configuration was successfully loaded from 'run_get_alphafold.yaml'.
+2024-04-17,20:55:INFO:root:The data frame containing data about the structures available in the AlphaFold Protein Structure Database for the protein of interest was successfully created.
+2024-04-17,20:55:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-P10415-F1-model_v1' were successfully collected.
+2024-04-17,20:55:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-P10415-F1-model_v2' were successfully collected.
+2024-04-17,20:55:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-P10415-F1-model_v3' were successfully collected.
+2024-04-17,20:55:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-P10415-F1-model_v4' were successfully collected.
+2024-04-17,20:55:INFO:root:Metadata were successfully added to the data frame.
+2024-04-17,20:55:INFO:root:The data frame was successfully filtered.
+2024-04-17,20:55:INFO:root:The data frame was successfully sorted.
+2024-04-17,20:55:INFO:root:The data frame was successfully saved in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/P10415_alphafold.csv'.

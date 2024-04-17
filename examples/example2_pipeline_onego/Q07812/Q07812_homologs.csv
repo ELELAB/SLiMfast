@@ -1,0 +1,8 @@
+hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
+2_2lr1.A,2,2lr1.A,Apoptosis regulator BAX,100.0,3.6E-41,4.2E-46,260.3,0.0,191,1-191,1-191,2lr1,A,100.0,1.544,174.9,7.9,Homo sapiens,99.5,SOLUTION NMR,,2012-03-20
+1_6eb6.A,1,6eb6.A,Apoptosis regulator BAX,100.0,1.8E-41,2.0E-46,262.0,0.0,191,1-191,1-191,6eb6,A,99.0,1.513,160.3,7.8,Homo sapiens,99.5,X-RAY DIFFRACTION,2.023,2018-08-05
+4_4zii.A,4,4zii.A,Apoptosis Regulator Bax,100.0,1.1E-38,1.3E-43,242.1,0.0,170,1-170,1-170,4zii,A,99.0,1.524,0.0,8.1,Homo sapiens,88.5,X-RAY DIFFRACTION,2.191,2015-04-28
+5_4zie.A,5,4zie.A,Apoptosis Regulator Bax,100.0,4.2E-38,4.8E-43,238.6,0.0,168,1-168,1-168,4zie,A,98.0,1.493,0.0,8.2,Homo sapiens,87.5,X-RAY DIFFRACTION,1.797,2015-04-28
+3_5w60.A,3,5w60.A,Apoptosis regulator BAX,100.0,5.0E-41,5.8E-46,259.9,0.0,191,1-191,1-191,5w60,A,98.0,1.488,159.6,7.8,Homo sapiens,99.5,X-RAY DIFFRACTION,1.803,2017-06-16
+6_4zig.A,6,4zig.A,Apoptosis Regulator Bax,100.0,1.2E-37,1.4E-42,236.1,0.0,168,1-168,1-168,4zig,A,98.0,1.493,0.0,8.2,Homo sapiens,87.5,X-RAY DIFFRACTION,2.2,2015-04-28
+67_6l8v.B,67,6l8v.B,Apoptosis regulator BAX,99.5,4.2E-18,4.9E-23,114.4,0.0,80,49-128,2-81,6l8v,B,94.0,1.301,0.0,7.8,Homo sapiens,41.7,SOLUTION NMR,,2019-11-07

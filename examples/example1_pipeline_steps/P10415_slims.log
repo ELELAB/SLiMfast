@@ -1,0 +1,46 @@
+2024-04-17,21:04:INFO:root:The configuration was successfully loaded from 'run_find_slims.yaml'.
+2024-04-17,21:04:INFO:root:The SLiM instances were successfully loaded from 'slims.csv'.
+2024-04-17,21:04:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully loaded from 'P10415_structures.csv.'
+2024-04-17,21:04:INFO:root:The data frame containing data about the structures available in the AlphaFold Protein Structure Database for the protein of interest was successfully loaded from 'P10415_alphafold.csv'.
+2024-04-17,21:04:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the homologs of the protein of interest was successfully loaded from 'P10415_homologs.csv'.
+2024-04-17,21:04:INFO:root:The alignments were successfully loaded from 'P10415_homologs.json'.
+2024-04-17,21:04:INFO:SLiMfast.util:Data for the structure with ID '6GL8' were successfully retrieved from the Protein Data Bank.
+2024-04-17,21:04:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID '6GL8': BH4_10-DNREIVMKYIHYKLSQRGYEW-30, BH1_136-ELFRDGVNWGRIVAFFEFGG-155, BH2_187-TWIQDNGGWDAFVELY-202.
+2024-04-17,21:04:INFO:SLiMfast.util:The structure with ID '6GL8' was successfully written in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/structures/6GL8.pdb'.
+2024-04-17,21:04:INFO:SLiMfast.util:Data for the structure with ID '6O0K' were successfully retrieved from the Protein Data Bank.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '6O0K'.
+2024-04-17,21:04:INFO:SLiMfast.util:Data for the structure with ID '6O0M' were successfully retrieved from the Protein Data Bank.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '6O0M'.
+2024-04-17,21:04:INFO:SLiMfast.util:Data for the structure with ID '5VAU' were successfully retrieved from the Protein Data Bank.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5VAU'.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5VAU'.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5VAU'.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5VAU'.
+2024-04-17,21:04:INFO:SLiMfast.util:Data for the structure with ID '6O0P' were successfully retrieved from the Protein Data Bank.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '6O0P'.
+2024-04-17,21:04:INFO:SLiMfast.util:Data for the structure with ID '5VAY' were successfully retrieved from the Protein Data Bank.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5VAY'.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5VAY'.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5VAY'.
+2024-04-17,21:04:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5VAY'.
+2024-04-17,21:04:INFO:SLiMfast.util:Data for the structure with ID '7YA5' were successfully retrieved from the Protein Data Bank.
+2024-04-17,21:04:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID '7YA5': BH3_92-VVHLTLRQAGDDFSRR-107.
+2024-04-17,21:04:INFO:SLiMfast.util:The structure with ID '7YA5' was successfully written in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/structures/7YA5.pdb'.
+2024-04-17,21:04:INFO:SLiMfast.run_tools:Running DSSP on the PDB file '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/structures/6GL8.pdb'...
+2024-04-17,21:04:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/structures/6GL8.pdb'.
+2024-04-17,21:04:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 36, chain A, in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/dssp/6GL8.dssp'.
+2024-04-17,21:04:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/dssp/6GL8.dssp'.
+2024-04-17,21:04:INFO:SLiMfast.util:Now working with sequence 4-DNREIVMKYIHYKLSQRGYEW-24 (DSSP sequence: '-HHHHHHHHHHHHHHH-----')...
+2024-04-17,21:04:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 4-DNREIVMKYIHYKLSQRGYEW-24. (DSSP sequence: '-HHHHHHHHHHHHHHH-----').
+2024-04-17,21:04:INFO:SLiMfast.util:Now working with sequence 77-ELFRDGVNWGRIVAFFEFGG-96 (DSSP sequence: 'HHH-----HHHHHHHHHHHH')...
+2024-04-17,21:04:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 77-ELFRDGVNWGRIVAFFEFGG-96. (DSSP sequence: 'HHH-----HHHHHHHHHHHH').
+2024-04-17,21:04:INFO:SLiMfast.util:Now working with sequence 128-TWIQDNGGWDAFVELY-143 (DSSP sequence: 'HHHHH--HHHHHHHHH')...
+2024-04-17,21:04:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 128-TWIQDNGGWDAFVELY-143. (DSSP sequence: 'HHHHH--HHHHHHHHH').
+2024-04-17,21:04:INFO:SLiMfast.run_tools:Running DSSP on the PDB file '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/structures/7YA5.pdb'...
+2024-04-17,21:04:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/structures/7YA5.pdb'.
+2024-04-17,21:04:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 32, chain A, in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/dssp/7YA5.dssp'.
+2024-04-17,21:04:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example1_pipeline_steps/dssp/7YA5.dssp'.
+2024-04-17,21:04:WARNING:SLiMfast.util:The sequence 'VVHLTLRQAGDDFSRR' was not found in the structure with ID '7YA5', chain 'A'.
+2024-04-17,21:04:INFO:root:The data frame containing the SLiMs found in the structures available in the Protein Data Bank for the protein of interest was successfully saved in 'slims_protein.csv'.
+2024-04-17,21:04:WARNING:root:No SLiMs were found in the structures available in the AlphaFold Protein Structure Database for the protein of interest.
+2024-04-17,21:04:WARNING:root:No SLiMs were found in the structures available in the Protein Data Bank for the homologs of the protein of interest.

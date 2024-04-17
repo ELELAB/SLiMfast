@@ -1,0 +1,24 @@
+2024-04-17,21:06:INFO:root:The configuration was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/run_pipeline.yaml'.
+2024-04-17,21:06:INFO:SLiMfast.uniprot_tools:The IDs of structures available in the Protein Data Bank for the protein with UniProt ID 'Q14457' were successfully retrieved.
+2024-04-17,21:06:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully created.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '2P1L' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '2PON' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '3DVU' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '4DDP' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '4MI8' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '5EFM' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '5HHE' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '5VAU' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '5VAX' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '5VAY' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6DCN' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6DCO' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6HOI' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6HOJ' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6HOK' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '7BL1' were successfully collected.
+2024-04-17,21:06:WARNING:SLiMfast.util:It was not possible to retrieve the metadata for the structure with ID '8SOR' from the Protein Data Bank. This structure will be ignored. Error: could not convert string to float: '.'
+2024-04-17,21:06:WARNING:SLiMfast.util:It was not possible to retrieve the metadata for the structure with ID '8SRQ' from the Protein Data Bank. This structure will be ignored. Error: could not convert string to float: '.'
+2024-04-17,21:06:INFO:root:Metadata were successfully added to the data frame.
+2024-04-17,21:06:INFO:root:The data frame was successfully sorted.
+2024-04-17,21:06:INFO:root:The data frame was successfully saved in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q14457/Q14457_structures.csv'.

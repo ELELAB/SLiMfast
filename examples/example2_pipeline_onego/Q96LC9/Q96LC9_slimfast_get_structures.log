@@ -1,0 +1,9 @@
+2024-04-17,21:06:INFO:root:The configuration was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/run_pipeline.yaml'.
+2024-04-17,21:06:INFO:SLiMfast.uniprot_tools:The IDs of structures available in the Protein Data Bank for the protein with UniProt ID 'Q96LC9' were successfully retrieved.
+2024-04-17,21:06:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully created.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '7CNU' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '8IQK' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '8IQL' were successfully collected.
+2024-04-17,21:06:INFO:root:Metadata were successfully added to the data frame.
+2024-04-17,21:06:INFO:root:The data frame was successfully sorted.
+2024-04-17,21:06:INFO:root:The data frame was successfully saved in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q96LC9/Q96LC9_structures.csv'.

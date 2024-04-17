@@ -1,0 +1,3 @@
+hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
+3_2m5i.A,3,2m5i.A,BH3-interacting domain,99.9,8.3E-27,9.6E-32,185.2,0.0,135,61-195,1-135,2m5i,A,100.0,1.331,112.9,6.7,Homo sapiens,69.2,SOLUTION NMR,,2013-02-25
+2_2bid.A,2,2bid.A,HUMAN PRO-APOPTOTIC PRO,100.0,4.3E-56,5.0E-61,370.9,0.0,195,1-195,3-197,2bid,A,100.0,1.412,180.7,5.0,Homo sapiens,100.0,SOLUTION NMR,,1999-01-27

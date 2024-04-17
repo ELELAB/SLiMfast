@@ -1,0 +1,40 @@
+2024-04-17,21:05:INFO:root:The configuration was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/run_pipeline.yaml'.
+2024-04-17,21:05:INFO:SLiMfast.uniprot_tools:The IDs of structures available in the Protein Data Bank for the protein with UniProt ID 'P10415' were successfully retrieved.
+2024-04-17,21:05:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully created.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '1G5M' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '1GJH' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '1YSW' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '2O21' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '2O22' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '2O2F' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '2W3L' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '2XA0' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '4AQ3' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '4IEH' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '4LVT' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '4LXD' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '4MAN' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '5AGW' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '5AGX' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '5FCG' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID '5JSN' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '5VAU' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '5VAX' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '5VAY' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6GL8' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6IWB' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6O0K' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6O0L' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6O0M' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6O0O' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '6O0P' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '7LHB' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '7Y90' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '7YA5' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '8HLL' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '8HLM' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '8HLN' were successfully collected.
+2024-04-17,21:06:INFO:SLiMfast.util:The metadata for the structure with ID '8U27' were successfully collected.
+2024-04-17,21:06:INFO:root:Metadata were successfully added to the data frame.
+2024-04-17,21:06:INFO:root:The data frame was successfully sorted.
+2024-04-17,21:06:INFO:root:The data frame was successfully saved in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/P10415/P10415_structures.csv'.
