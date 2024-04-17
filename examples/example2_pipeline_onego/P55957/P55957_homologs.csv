@@ -1,8 +1,0 @@
-hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
-36_5ajj.B,36,5ajj.B,HOMOLOG OF VACCINIA VIR,97.5,5.5E-07,6.3E-12,56.4,0.0,34,79-112,1-34,5ajj,B,100.0,1.402,0.0,4.3,Variola virus,17.4,X-RAY DIFFRACTION,1.75,2015-02-25
-28_4bd2.C,28,4bd2.C,APOPTOSIS REGULATOR BAX,97.6,2.3E-07,2.6E-12,58.2,0.0,34,76-109,1-34,4bd2,C,100.0,1.391,0.0,4.4,Homo sapiens,17.4,X-RAY DIFFRACTION,2.206,2012-10-04
-3_2m5i.A,3,2m5i.A,BH3-interacting domain,99.9,8.3E-27,9.6E-32,185.2,0.0,135,61-195,1-135,2m5i,A,100.0,1.331,112.9,6.7,Homo sapiens,69.2,SOLUTION NMR,,2013-02-25
-2_2bid.A,2,2bid.A,HUMAN PRO-APOPTOTIC PRO,100.0,4.3E-56,5.0E-61,370.9,0.0,195,1-195,3-197,2bid,A,100.0,1.412,180.7,5.0,Homo sapiens,100.0,SOLUTION NMR,,1999-01-27
-43_2kbw.B,43,2kbw.B,Induced myeloid leukemi,97.4,1.1E-06,1.2E-11,55.5,0.0,32,75-106,4-35,2kbw,B,97.0,1.329,0.0,3.9,Homo sapiens,16.4,SOLUTION NMR,,2008-12-09
-27_5ua4.B,27,5ua4.B,"5-HL, BH3-interacting d",97.7,2.1E-07,2.5E-12,58.3,0.0,34,76-109,1-34,5ua4,B,65.0,1.02,0.0,4.4,African swine fever virus,17.4,X-RAY DIFFRACTION,2.6,2016-12-18
-1_1ddb.A,1,1ddb.A,PRO-APOPTOTIC MOLECULE,100.0,6.9E-57,8.0E-62,374.6,0.0,193,1-195,1-195,1ddb,A,63.0,0.878,181.1,4.7,Mus musculus,99.0,SOLUTION NMR,,1999-02-19
