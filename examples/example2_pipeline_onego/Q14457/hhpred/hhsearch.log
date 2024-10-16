@@ -1,38 +1,38 @@
-- 21:27:03.267 INFO: /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/hhpred/Q14457.a3m is in A2M, A3M or FASTA format
+- 21:17:57.342 INFO: /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q14457/hhpred/Q14457.a3m is in A2M, A3M or FASTA format
 
-- 21:27:03.390 INFO: Searching 86434 database HHMs without prefiltering
+- 21:17:57.463 INFO: Searching 86434 database HHMs without prefiltering
 
-- 21:27:03.439 INFO: Iteration 1
+- 21:17:57.508 INFO: Iteration 1
 
-- 21:27:03.992 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
+- 21:17:58.031 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
 
-- 21:27:04.266 INFO: Alternative alignment: 0
+- 21:17:58.292 INFO: Alternative alignment: 0
 
-- 21:27:56.830 INFO: 86434 alignments done
+- 21:18:50.927 INFO: 86434 alignments done
 
-- 21:27:57.043 INFO: Alternative alignment: 1
+- 21:18:51.132 INFO: Alternative alignment: 1
 
-- 21:27:59.961 INFO: 2859 alignments done
+- 21:18:54.037 INFO: 2859 alignments done
 
-- 21:27:59.965 INFO: Alternative alignment: 2
+- 21:18:54.040 INFO: Alternative alignment: 2
 
-- 21:28:00.988 INFO: 765 alignments done
+- 21:18:55.061 INFO: 765 alignments done
 
-- 21:28:00.989 INFO: Alternative alignment: 3
+- 21:18:55.062 INFO: Alternative alignment: 3
 
-- 21:28:01.521 INFO: 222 alignments done
+- 21:18:55.593 INFO: 222 alignments done
 
-- 21:28:04.377 INFO: Premerge done
+- 21:18:58.253 INFO: Premerge done
 
-- 21:28:04.377 INFO: 11 sequences belonging to 11 database HMMs found with an E-value < 0.001
+- 21:18:58.253 INFO: 11 sequences belonging to 11 database HMMs found with an E-value < 0.001
 
 Query         sp|Q14457|BECN1_HUMAN Beclin-1 OS=Homo sapiens OX=9606 GN=BECN1 PE=1 SV=2
 Match_columns 450
 No_of_seqs    292 out of 1596
 Neff          7.08
 Searched_HMMs 86434
-Date          Fri Nov  4 21:28:04 2022
-Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/hhpred/Q14457.a3m -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/hhpred/Q14457.hhr 
+Date          Wed Apr 17 21:18:58 2024
+Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q14457/hhpred/Q14457.a3m -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q14457/hhpred/Q14457.hhr 
 
  No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
   1 5DFZ_D Vacuolar protein sortin 100.0 1.4E-86 1.6E-91  710.2   0.0  330  110-448   155-538 (559)

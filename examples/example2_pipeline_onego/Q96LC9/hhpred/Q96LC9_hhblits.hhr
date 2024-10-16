@@ -3,8 +3,8 @@ Match_columns 184
 No_of_seqs    180 out of 253
 Neff          3.77484
 Searched_HMMs 357
-Date          Fri Nov  4 21:14:14 2022
-Command       /usr/local/hh-suite/build/bin/hhblits -d /data/databases/hh-suite-20210225/UniRef30_2020_06 -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9_hhblits.hhr -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q96LC9/Q96LC9.fasta -oa3m /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.a3m 
+Date          Wed Apr 17 21:09:13 2024
+Command       /usr/local/hh-suite/build/bin/hhblits -d /data/databases/hh-suite-20210225/UniRef30_2020_06 -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9_hhblits.hhr -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q96LC9/Q96LC9.fasta -oa3m /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.a3m 
 
  No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
   1 UniRef100_A0A1S3EMP0 bcl-2-mod 100.0 5.7E-77 1.5E-82  510.9   0.0  184    1-184    32-222 (248)

@@ -5,7 +5,7 @@
 #
 #    SLiMfast setup.
 #
-#    Copyright (C) 2022 Valentina Sora 
+#    Copyright (C) 2024 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -27,46 +27,57 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 
 
+#######################################################################
+
+
 # Standard library
 from setuptools import setup
 
 
-# Package name
+#######################################################################
+
+
+# The name of the package
 name = "SLiMfast"
 
-# GitHub URL
-url = "https://github.com/ELELAB/SLiMfast"
+# The URL where to find the package
+url = f"https://github.com/ELELAB/{name}"
 
-# Author(s)
+# The author(s) of the package
 author = "Valentina Sora, Matteo Tiberti, Elena Papaleo"
 
-# Package version
-version = "0.0.1"
+# The version of the package
+version = "0.0.2"
 
-# Short description of the package
+# A short description of the package
 description = \
-    "Structural filtering of putative SLiMs in a protein sequence."
+    "Structural filtering of putative SLiMs in protein sequences."
 
-# Mapping between the package name and the corresponding directoru
-package_dir = {"SLiMfast" : "SLiMfast"}
+# A mapping between the package names and the corresponding directories
+package_dir = {name : name}
 
-# Packages included
-packages = ["SLiMfast"]
+# Which packages are included
+packages = [name]
 
-# Package data to include
-package_data = {"SLiMfast" : ["config_run/*"]}
+# Which package data to include
+package_data = {name : ["config_run/*"]}
 
-# Entry points
+# The entry points
 entry_points = \
     {"console_scripts" : \
-        ["slimfast_get_structures = SLiMfast.slimfast_get_structures:main",
-         "slimfast_get_alphafold = SLiMfast.slimfast_get_alphafold:main",
-         "slimfast_get_homologs = SLiMfast.slimfast_get_homologs:main",
-         "slimfast_find_slims = SLiMfast.slimfast_find_slims:main",
-         "slimfast_run_pipeline = SLiMfast.slimfast_run_pipeline:main"], \
+        ["slimfast_get_structures = " \
+            f"{name}.slimfast_get_structures:main",
+         "slimfast_get_alphafold = " \
+            f"{name}.slimfast_get_alphafold:main",
+         "slimfast_get_homologs = " \
+            f"{name}.slimfast_get_homologs:main",
+         "slimfast_find_slims = " \
+            f"{name}.slimfast_find_slims:main",
+         "slimfast_run_pipeline = " \
+            f"{name}.slimfast_run_pipeline:main"], \
     }
 
-# Dependencies required
+# The dependencies required
 install_requires = ["biopython",
                     "dask",
                     "distributed",
@@ -74,6 +85,10 @@ install_requires = ["biopython",
                     "pytest",
                     "pyyaml",
                     "requests"]
+
+
+#######################################################################
+
 
 # Run the setup
 setup(name = name,
@@ -83,7 +98,6 @@ setup(name = name,
       description = description,
       package_dir = package_dir,
       packages = packages,
-      include_package_data = True,
       package_data = package_data,
       entry_points = entry_points,
       install_requires = install_requires)

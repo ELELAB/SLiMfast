@@ -1,17 +1,9 @@
-INFO:SLiMfast.slimfast_find_slims:The configuration has been successfully parsed from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/run_example2.yaml.
-INFO:SLiMfast.slimfast_find_slims:The SLiM instances have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P10415/P10415_slims.csv.
-INFO:SLiMfast.slimfast_find_slims:Data about the structures of the protein with UniProt ID P10415 found in the Protein Data Bank have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P10415/P10415_structures.csv.
-INFO:SLiMfast.slimfast_find_slims:Data about the structures of the protein with UniProt ID P10415 found in the AlphaFold Protein Structure Database have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P10415/P10415_alphafold.csv.
-INFO:SLiMfast.slimfast_find_slims:Data about the available structures of the homologs of the protein with UniProt ID P10415 have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P10415/P10415_homologs.csv.
-INFO:SLiMfast.slimfast_find_slims:Data about the alignments of the homologs to the protein with UniProt ID P10415 have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P10415/P10415_alignments.json.
-INFO:SLiMfast.util:Data for the structure with ID 6GL8 have been successfully retrieved for the Protein Data Bank.
-INFO:SLiMfast.util:No SLiMs found in the structure with ID 6GL8.
-INFO:SLiMfast.util:Data for the structure with ID 6O0K have been successfully retrieved for the Protein Data Bank.
-INFO:SLiMfast.util:The following SLiMs have been found in the structure with ID 6O0K: BH3_93-VHLTLRQAGDDF-104.
-INFO:SLiMfast.util:The structure with ID 6O0K has been written successfully to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P10415/structures/6O0K.pdb.
-INFO:SLiMfast.run_tools:Running DSSP on the PDB file /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P10415/structures/6O0K.pdb...
-WARNING:SLiMfast.dssp_tools:Missing residue at position 36 chain A in /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P10415/dssp/6O0K.dssp.
-INFO:SLiMfast.util:Data in the DSSP output /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P10415/dssp/6O0K.dssp have been parsed successfully.
-INFO:SLiMfast.slimfast_find_slims:The SLiMs found in the structures of the protein with UniProt ID P10415 found in the Protein Data Bank have been successfully written to P10415_slims_structures.csv.
-WARNING:SLiMfast.slimfast_find_slims:No SLiMs found in the structures of the protein with UniProt ID P10415 found in the AlphaFold Protein Structure Database.
-WARNING:SLiMfast.slimfast_find_slims:No SLiMs found in the structures of the homologs of the protein with UniProt ID P10415 found in the Protein Data Bank.
+2024-04-17,21:12:INFO:root:The configuration was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/run_pipeline.yaml'.
+2024-04-17,21:12:INFO:root:The SLiM instances were successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/P10415/P10415_slims.csv'.
+2024-04-17,21:12:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/P10415/P10415_structures.csv.'
+2024-04-17,21:12:INFO:root:The data frame containing data about the structures available in the AlphaFold Protein Structure Database for the protein of interest was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/P10415/P10415_alphafold.csv'.
+2024-04-17,21:12:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the homologs of the protein of interest was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/P10415/P10415_homologs.csv'.
+2024-04-17,21:12:INFO:root:The alignments were successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/P10415/P10415_alignments.json'.
+2024-04-17,21:12:WARNING:root:No SLiMs were found in the structures available in the Protein Data Bank for the protein of interest.
+2024-04-17,21:12:WARNING:root:No SLiMs were found in the structures available in the AlphaFold Protein Structure Database for the protein of interest.
+2024-04-17,21:12:WARNING:root:No SLiMs were found in the structures available in the Protein Data Bank for the homologs of the protein of interest.

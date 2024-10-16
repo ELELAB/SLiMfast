@@ -8,7 +8,7 @@
 #    such data in a CSV file, and the alignments used to find the
 #    homologs in a JSON file.
 #
-#    Copyright (C) 2022 Valentina Sora 
+#    Copyright (C) 2024 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -30,6 +30,8 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 
 
+#######################################################################
+
 
 # Standard library
 import json
@@ -39,32 +41,23 @@ import sys
 # SLiMfast
 from .argparse_tools import get_arguments
 from . import (
+    defaults,
     dataframe_tools,
     hhsearch_tools,
     run_tools,
     util,
     )
-from .defaults import (
-    HIT_ID_FIELD,
-    LOG_GET_HOMOLOGS_FILE,
-    )
 
 
-
-# Get the module logger
-logger = log.getLogger(__name__)
-
+#######################################################################
 
 
 def run():
 
+    # Set the script's name
+    name = "slimfast_get_homologs"
 
-
-    #------------------------ Argument parser ------------------------#
-
-
-
-    # Set the script description
+    # Set the script's description
     description = \
         "\nGiven the UniProt ID of a protein, find its homologs, " \
         "get data about the structures of the homologs in the " \
@@ -72,19 +65,26 @@ def run():
         "Save the alignments used to find the homologs in a JSON " \
         "file.\n"
 
+    # Set the names of the relevant arguments to be parsed from the
+    # command line
+    args_names = \
+        ["uniprot_id", "output_homologs_file",
+         "output_alignments_file", "configrun_file",
+         "log_file", "v", "vv", "log_to_stdout"]
+
+    # Set the default values for the arguments
+    default_values = \
+        {"log_file" : defaults.LOG_FILES["slimfast_get_homologs"]}
+
+    #-----------------------------------------------------------------#
+
     # Add relevant arguments to the argument parser and return them
-    args = \
-        get_arguments(\
-            description = description,
-            uniprot_id = True,
-            output_homologs_file = True,
-            output_alignments_file = True,
-            configrun_file = True,
-            log_file = True,
-            v = True,
-            vv = True,
-            log_to_stdout = True,
-            log_file_default = LOG_GET_HOMOLOGS_FILE)
+    args = get_arguments(name = name,
+                         description = description,
+                         args_names = args_names,
+                         default_values = default_values)
+
+    #-----------------------------------------------------------------#
 
     # Retrieve the arguments
     uniprot_id = args.uniprot_id
@@ -96,160 +96,150 @@ def run():
     v = args.verbose
     vv = args.verbose_debug
 
+    #-----------------------------------------------------------------#
 
+    # Get the default logging level
+    log_level = defaults.LOG_LEVEL
 
-    #---------------------------- Logging ----------------------------#
-
-
-
-    # Default logging level is WARNING
-    level = log.WARNING
-
-    # If verbose logging required
+    # If the user requested verbose logging
     if v:
 
-        # Logging level will be INFO
-        level = log.INFO
+        # The minimal logging level will be INFO
+        log_level = log.INFO
 
-    # If debug logging required
+    # If the user requested logging for debug purposes
+    # (-vv overrides -v if both are provided)
     if vv:
 
-        # Logging level will be DEBUG
-        level = log.DEBUG
+        # The minimal logging level will be DEBUG
+        log_level = log.DEBUG
 
-    # Create the list containing the log handlers
-    handlers = [log.FileHandler(filename = log_file, mode = "w")]
+    # Get the handlers
+    handlers = \
+        util.get_log_handlers(\
+            # Whether to log to the standard output or not
+            log_to_stdout = log_to_stdout,
+            # The class of the file handler, if any
+            log_file_handler_class = log.FileHandler,
+            # The options to set the file handler
+            log_file_handler_options = {"filename" : log_file,
+                                        "mode" : "w"},
+            # The level below which log messages are silenced
+            log_level = log_level)
 
-    # If the user selected the option to log also to the standard
-    # output
-    if log_to_stdout:
+    # Set the logging configuration
+    log.basicConfig(# The level below which log messages are silenced
+                    level = log_level,
+                    # The handlers
+                    handlers = handlers,
+                    # Other logging options
+                    **defaults.LOG_OPTIONS)
 
-        # Add the StreamHandler to the list of handlers
-        handlers.append(log.StreamHandler(sys.stdout))
+    #-----------------------------------------------------------------#
 
-    # Set the basic logging configuration
-    log.basicConfig(level = level,
-                    handlers = handlers)
-
-
-
-    #------------------------- Configuration -------------------------#
-
-
-
-    # Try to load the configuration file for running
+    # Try to load the configuration for running
     try:
+        
+        config_run = \
+            util.load_config(config_file = configrun_file,
+                             config_type = "slimfast_get_homologs")
 
-        config_run = util.read_config_file(configrun_file)
-    
-    # If something went wrong, report it and exit
+    # If something went wrong 
     except Exception as e:
+        
+        # Set the error message
         errstr = \
-            f"Could not parse the configuration file " \
-            f"{configrun_file}: {e}"
-        logger.exception(errstr)
-        sys.exit(errstr)
+            "It was not possible to load the configuration from " \
+            f"'{configrun_file}'."
 
-    # Inform the user about the successful parsing of the
-    # configuration file
+        # Re-raise the exception
+        raise Exception(errstr) from e
+
+    # Inform the user that the configuration was successfully loaded
     infostr = \
-        f"Configuration parsed successfully from {configrun_file}."
-    logger.info(infostr)
+        "The configuration was successfully loaded from " \
+        f"'{configrun_file}'."
+    log.info(infostr)
 
+    #-----------------------------------------------------------------#
 
+    # Get the working directory where the program will be run
+    wd = config_run["wd"]
 
-    #------------------------------ Run ------------------------------#
-
-
-
-    # Get the working directory where the pipeline will be run
-    wd = util.get_wd(config_run)
-
-    # Get the configuration for the PDB structures
-    struct_params = config_run["structures"]["homolog"]
-
-    # Get the HHblits and HHsearch parameters
-    hhblits_params = config_run["hhblits"]["run"]
-    hhsearch_params = config_run["hhsearch"]["run"]
-
-
-
-    #--------------------------- Run HHpred --------------------------#
-
-
+    #-----------------------------------------------------------------#
 
     # Inform the user that the HHpred pipeline is about to run
     infostr = \
-        "Preparing to run the HHpred pipeline (HHpred + HHsearch)..."
-    logger.info(infostr)
+        "Preparing to run the HHpred pipeline (HHblits + HHsearch)..."
+    log.info(infostr)
+
+    #-----------------------------------------------------------------#
 
     # Try to run the HHpred pipeline
     try:
         
         _, hhsearch_output = \
             run_tools.run_hhpred(uniprot_id = uniprot_id,
-                                 hhblits_params = hhblits_params,
-                                 hhsearch_params = hhsearch_params,
+                                 hhblits_params = \
+                                    config_run["hhblits"]["run"],
+                                 hhsearch_params = 
+                                    config_run["hhsearch"]["run"],
                                  wd = wd)
 
     # If something went wrong
     except Exception as e:
 
-        # Log the error
-        errstr = f"Could not complete the HHpred run. Exception: {e}"
-        logger.exception(errstr)
-
+        # Set the error message
+        errstr = "It was not possible to complete the HHpred run."
+        
         # Re-raise the exception
-        raise Exception(errstr)
+        raise Exception(errstr) from e
 
+    # Inform the user that the HHpred run completed successfully
+    infostr = "The HHpred run completed successfully."
+    log.info(infostr)
 
-
-    #------------------ Get the homologs' structures -----------------#
-
-
-
+    #-----------------------------------------------------------------#
+    
     # Create the parser to parse the HHsearch output
     parser = hhsearch_tools.HHsearchParser()
 
-    # Try to parse the HHsearch output to get the list of homologs
-    # of the protein of interest and their associated data
+    # Try to get the data frame with data about the available
+    # structures and the alignments
     try:
         
         df, als = parser.parse(hhsearch_output = hhsearch_output)
 
-        # Inform the user that the IDs of the available structures
-        # for the homologs were successfully retrieved
-        infostr = \
-            f"The IDs of the structures of the homologs of the " \
-            f"protein with UniProt ID {uniprot_id} in the Protein " \
-            f"Data Bank have been successfully retrieved."
-        logger.info(infostr)
-
     # If something went wrong
     except Exception as e:
 
-        # Log the error
+        # Set the error message
         errstr = \
-            f"Could not get the structures of the homologs of the " \
-            f"protein with UniProt ID {uniprot_id} found in the " \
-            f"Protein Data Bank. Exception: {e}"
-        logger.exception(errstr)
+            "It was not possible to create the data frame " \
+            "containing data about the structures of the homologs " \
+            "of the protein of interest available in the Protein " \
+            "Data Bank."
         
         # Re-raise the exception
-        raise Exception(errstr)
+        raise Exception(errstr) from e
+
+    # Inform the user that the data frame was successfully created
+    infostr = \
+        "The data frame containing data about the structures of the " \
+        "homologs of the protein of interest available in the " \
+        "Protein Data Bank was successfully created."
+    log.info(infostr)
+
+    #-----------------------------------------------------------------#
 
     # Convert the index of the data frame into one of the columns
     # storing the unique IDs of the hits
     df = df.reset_index()
-    df = df.rename(columns = {"index" : HIT_ID_FIELD})
+    df = df.rename(columns = {"index" : defaults.DF_COLUMNS["hit_id"]})
 
+    #-----------------------------------------------------------------#
 
-
-    #------------------------ Add the metadata -----------------------#
-
-
-
-    # Try to add structures' metadata
+    # Try to add metadata to the data frame
     try:
         
         df = util.add_structures_metadata(df = df,
@@ -258,157 +248,131 @@ def run():
     # If something went wrong
     except Exception as e:
 
-        # Log the error
+        # Set the error message
         errstr = \
-            f"Could not add metadata to the structures of the " \
-            f"homologs of the protein with UniProt ID {uniprot_id} " \
-            f"found in the Protein Data Bank. Exception: {e}"
-        logger.exception(errstr)
+            "It was not possible to add metadata to the data frame."
         
         # Re-raise the exception
-        raise Exception(errstr)
+        raise Exception(errstr) from e
 
+    # Inform the user that the metadata were successfully added
+    infostr = "Metadata were successfully added to the data frame."
+    log.info(infostr)
 
+    #-----------------------------------------------------------------#
 
-    #---------------------- Filter the data frame --------------------#
+    # If there is a configuration for filtering the data frame
+    if "filter" in config_run["structures"]["homolog"]["df"]:
 
+        # Get the configuration
+        config_filter = \
+            config_run["structures"]["homolog"]["df"]["filter"]
 
+        # Try to filter the data frame
+        try:
+            
+            df = dataframe_tools.filter_df(df = df,
+                                           filters = config_filter)
 
-    # Try to filter the hits
-    try:
-        
-        df = dataframe_tools.filter_df(\
-                df = df,
-                filters = struct_params["df"]["filter"])
+            # Only keep the hits in the filtered data frame in the
+            # alignments
+            als = \
+                {hit : data for hit, data in als.items() \
+                 if hit in df[defaults.DF_COLUMNS["hit_id"]].tolist()}
 
-        # Only keep the hits in the filtered data frame in the
-        # alignments
-        als = \
-            {hit : data for hit, data in als.items() \
-             if hit in df[HIT_ID_FIELD].tolist()}
+        # If something went wrong
+        except Exception as e:
+
+            # Set the error message
+            errstr = "It was not possible to filter the data frame."
+
+            # Re-raise the exception
+            raise Exception(errstr) from e
 
         # Inform the user that the data frame was successfully
         # filtered
-        infostr = \
-            f"The data frame of the structures of the homologs of " \
-            f"protein with UniProt ID {uniprot_id} found in the " \
-            f"Protein Data Bank has been successfully filtered."
-        logger.info(infostr)
-    
-    # If something went wrong
-    except Exception as e:
+        infostr = "The data frame was successfully filtered."
+        log.info(infostr)
 
-        # Log the error
-        errstr = \
-            f"Could not filter the data frame of the structures " \
-            f"of the homologs of the protein with UniProt ID " \
-            f"{uniprot_id} found in the Protein Data Bank. " \
-            f"Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
+    #-----------------------------------------------------------------#
 
-
-
-    #----------------------- Sort the datarame -----------------------#
-
-
-
-    # Try to sort the hits
-    try:
-        
-        df = \
-            df.sort_values(\
-                by = struct_params["df"]["sort"]["sort_by"], 
-                ascending = struct_params["df"]["sort"]["ascending"])
-
-        # Inform the user that the data frame was successfully
-        # sorted
-        infostr = \
-            f"The data frame of the structures of the homologs of " \
-            f"the protein with UniProt ID {uniprot_id} found in the " \
-            f"Protein Data Bank has been successfully sorted."
-        logger.info(infostr)
-    
-    # If something went wrong
-    except Exception as e:
-
-        # Log the error
-        errstr = \
-            f"Could not sort the data frame of the structures of " \
-            f"the homologs of the protein with UniProt ID " \
-            f"{uniprot_id} found in the Protein Data Bank. " \
-            f"Exception: {e}"
-        logger.exception(errstr)
-        
-        # Re-raise the exception
-        raise Exception(errstr)
-
-    infostr = \
-        f"All data for the structures the homologs of the protein " \
-        f"with {uniprot_id} found in the Protein Data Bank " \
-        f"have been successfully collected."
-    logger.info(infostr)
-
-
-    # If no homologs were found (fitting the criteria provided in
-    # the configuration file)
+    # If no structures were left after filtering
     if df.empty:
 
         # Inform the user and do not generate any output file
         warnstr = \
-            f"{uniprot_id}: no structures remained in the data " \
-            f"frame after filtering. Relaxing the filtering " \
-            f"criteria may help in getting more hits."
-        logger.warning(warnstr)
+            "No structures were left in the data frame after " \
+            "filtering."
+        log.warning(warnstr)
 
         # Return
         return
 
+    #-----------------------------------------------------------------#
 
+    # If there is a configuration for sorting the data frame
+    if "sort" in config_run["structures"]["homolog"]["df"]:
 
-    #----------------------- Write the CSV file ----------------------#
+        # Get the configuration
+        config_sort = \
+            config_run["structures"]["homolog"]["df"]["sort"]
 
+        # Try to sort the dataframe according to the given criteria
+        try:
+            
+            df = \
+                df.sort_values(by = config_sort["sort_by"], 
+                               ascending = config_sort["ascending"])
+        
+        # If something went wrong
+        except Exception as e:
 
+            # Set the error message
+            errstr = "It was not possible to sort the data frame."
+
+            # Re-raise the exception
+            raise Exception(errstr) from e
+
+        # Inform the user that the data frame was successfully
+        # sorted
+        infostr = "The data frame was successfully sorted."
+        log.info(infostr)
+
+    #-----------------------------------------------------------------#
 
     # Specify the path to the output CSV file for the homologs'
-    # data frame and save it to the CSV file
-    output_homologs_path = \
-        os.path.join(wd, output_homologs_file)
+    # data frame
+    output_homologs_path = os.path.join(wd, output_homologs_file)
+
+    # Save the data frame to the output CSV file
     df.to_csv(output_homologs_path,
-              **struct_params["out"])
+              **defaults.OUTPUT_FILES["homologs"]["options"])
 
     # Inform the user that the file was successfully written
     infostr = \
-        f"The data frame containing data about the structures " \
-        f"of the homologs of the protein with UniProt ID " \
-        f"{uniprot_id} found in the Protein Data Bank has been " \
-        f"successfully written to {output_homologs_path}."
-    logger.info(infostr)
+        "The data frame was successfully saved in " \
+        f"'{output_homologs_path}'."
+    log.info(infostr)
 
-
-
-    #---------------------- Write the JSON file ----------------------#
-
-
+    #-----------------------------------------------------------------#
 
     # Specify the path to the output JSON file for the alignments
-    # and save them to the JSON file
-    output_alignments_path = \
-        os.path.join(wd, output_alignments_file)
+    output_alignments_path = os.path.join(wd, output_alignments_file)
+
+    # Save the alignments to the output JSON file
     with open(output_alignments_path, "w") as out:
         json.dump(als, out)
 
     # Inform the user that the file was successfully written
     infostr = \
-        f"The alignments of the structures of the homologs of " \
-        f"the protein with UniProt ID {uniprot_id} " \
-        f"(aligned with the protein itself) found in the " \
-        f"Protein Data Bank have been successfully written " \
-        f"to {output_alignments_path}."
-    logger.info(infostr)
+        "The alignments of the structures of the homologs of " \
+        "the protein of interest (aligned with the protein " \
+        "itself) were successfully saved in " \
+        f"'{output_alignments_path}'."
+    log.info(infostr)
 
+
+#######################################################################
 
 
 def main():
@@ -418,10 +382,12 @@ def main():
 
         run()
 
-    # If something went wrong, report and exit
+    # If something went wrong
     except Exception as e:
 
+        # Report it and exit
         errstr = \
-            f"Could not run slimfast_get_homologs. Exception: {e}"
-        logger.exception(errstr)
+            "It was not possible to run " \
+            f"'slimfast_get_homologs'. Error: {e}"
+        log.exception(errstr)
         sys.exit(errstr)

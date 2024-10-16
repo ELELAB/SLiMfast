@@ -1,36 +1,36 @@
-- 21:18:01.484 INFO: /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q16548/hhpred/Q16548.a3m is in A2M, A3M or FASTA format
+- 21:14:59.082 INFO: /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q16548/hhpred/Q16548.a3m is in A2M, A3M or FASTA format
 
-- 21:18:01.516 INFO: Searching 86434 database HHMs without prefiltering
+- 21:14:59.124 INFO: Searching 86434 database HHMs without prefiltering
 
-- 21:18:01.566 INFO: Iteration 1
+- 21:14:59.174 INFO: Iteration 1
 
-- 21:18:01.791 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
+- 21:14:59.400 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
 
-- 21:18:02.068 INFO: Alternative alignment: 0
+- 21:14:59.707 INFO: Alternative alignment: 0
 
-- 21:18:39.032 INFO: 86434 alignments done
+- 21:15:36.285 INFO: 86434 alignments done
 
-- 21:18:39.275 INFO: Alternative alignment: 1
+- 21:15:36.504 INFO: Alternative alignment: 1
 
-- 21:18:39.440 INFO: 252 alignments done
+- 21:15:36.670 INFO: 252 alignments done
 
-- 21:18:39.440 INFO: Alternative alignment: 2
+- 21:15:36.670 INFO: Alternative alignment: 2
 
-- 21:18:39.453 INFO: 2 alignments done
+- 21:15:36.683 INFO: 2 alignments done
 
-- 21:18:39.453 INFO: Alternative alignment: 3
+- 21:15:36.683 INFO: Alternative alignment: 3
 
-- 21:18:41.077 INFO: Premerge done
+- 21:15:38.134 INFO: Premerge done
 
-- 21:18:41.077 INFO: 76 sequences belonging to 76 database HMMs found with an E-value < 0.001
+- 21:15:38.134 INFO: 76 sequences belonging to 76 database HMMs found with an E-value < 0.001
 
 Query         sp|Q16548|B2LA1_HUMAN Bcl-2-related protein A1 OS=Homo sapiens OX=9606 GN=BCL2A1 PE=1 SV=1
 Match_columns 175
 No_of_seqs    109 out of 1537
 Neff          9.11033
 Searched_HMMs 86434
-Date          Fri Nov  4 21:18:41 2022
-Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q16548/hhpred/Q16548.a3m -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q16548/hhpred/Q16548.hhr 
+Date          Wed Apr 17 21:15:38 2024
+Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q16548/hhpred/Q16548.a3m -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q16548/hhpred/Q16548.hhr 
 
  No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
   1 6RJP_A Bcl-2-related protein A 100.0 9.9E-35 1.1E-39  214.5   0.0  148    1-149    23-171 (171)

@@ -3,8 +3,8 @@ Match_columns 184
 No_of_seqs    156 out of 198
 Neff          3.83285
 Searched_HMMs 86434
-Date          Fri Nov  4 21:15:02 2022
-Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.a3m -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.hhr 
+Date          Wed Apr 17 21:09:59 2024
+Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.a3m -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.hhr 
 
  No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
   1 1PQ1_B Apoptosis regulator Bcl  94.8  0.0044 5.1E-08   40.7   0.0   33  126-158     1-33  (33)

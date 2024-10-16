@@ -3,9 +3,9 @@
 
 #    dataframe_tools.py
 #
-#    Utility functions to manipulate Pandas data frames.
+#    Utilities to manipulate Pandas data frames.
 #
-#    Copyright (C) 2022 Valentina Sora 
+#    Copyright (C) 2024 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -27,10 +27,60 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 
 
+#######################################################################
+
+
+# Set the module's description
+__doc__ = "Utilities to manipulate Pandas data frames."
+
+
+#######################################################################
+
+
+# Standard library
+import logging as log
+
+
+#######################################################################
+
+
+# Get the module logger
+logger = log.getLogger(__name__)
+
+
+#######################################################################
+
 
 def filter_df(df,
               filters):
     """Filter the data frame.
+
+    Parameters
+    ----------
+    df : ``pandas.DataFrame``
+        The data frame.
+
+    filters : ``dict``
+        A dictionary of filters to apply to the data frame.
+
+        The filters can have the following formats:
+
+        - "min_{col_name}" to filter out all values lower than the
+          provided value from the column 'col_name'.
+
+        - "max_{col_name}" to filter out all values higher than the
+          provided value from the column 'col_name'.
+
+        - "{col_name}_in" to filter out all values not in the
+          provided list from the column 'col_name'.
+
+        - "{col_name}" to filter out all values not matching the
+          provided value from the column 'col_name'.
+
+    Returns
+    -------
+    df_filtered : ``pandas.DataFrame``
+        The filtered data frame.
     """
 
     # For each filter passed
@@ -39,52 +89,58 @@ def filter_df(df,
         # If it defines a minimum value
         if arg.startswith("min_"):
             
-            # The name of the column it refers to will be
-            # after min_
+            # The name of the column it refers to will be after 'min_'
             col = arg[4:]
             
             # Set the filtering condition
             cond = (df[col] >= val)
+
+        #-------------------------------------------------------------#
                 
         # If it defines a maximum value
         elif arg.startswith("max_"):
             
-            # The name of the column it refers to will be
-            # after max_
+            # The name of the column it refers to will be after 'max_'
             col = arg[4:]
             
             # Set the filtering condition
             cond = (df[col] <= val)
 
-        # If it defines a series of values that can be
-        # matches
+        #-------------------------------------------------------------#
+
+        # If it defines a series of values that can be matched
         elif arg.endswith("_in"):
 
-            # The name of the column it refers to will be
-            # before _in
+            # The name of the column it refers to will be before '_in'
             col = arg[:-3]
 
             # Set the filtering condition
             cond = df[col].isin(val)
 
-        # If it defines an exact value (the argument is the
-        # name of a column)
+        #-------------------------------------------------------------#
+
+        # If it defines an exact value (the argument is the name of a
+        # column)
         elif arg in df.columns:
             
             # Set the filtering condition
             cond = (df[arg] == val)
 
+        #-------------------------------------------------------------#
+
         # Otherwise, it is an invalid keyword
         else:
 
-            # Inform the user and raise an error
-            errstr = \
-                f"Invalid keyword '{arg}' passed for filtering " \
-                f"the data frame."
+            # Raise an error
+            errstr = f"Invalid filter '{arg}' provided."
             raise ValueError(errstr)
+
+        #-------------------------------------------------------------#
 
         # Filter the data frame
         df = df[cond]
+
+    #-----------------------------------------------------------------#
 
     # Return the filtered data frame
     return df

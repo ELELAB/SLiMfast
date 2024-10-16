@@ -6,7 +6,7 @@
 #    Utility functions to retrieve data from PDB/mmCIF files from
 #    the AlphaFold Protein Structure Database.
 #
-#    Copyright (C) 2022 Valentina Sora 
+#    Copyright (C) 2024 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -28,116 +28,151 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 
 
+#######################################################################
+
+
+# Set the module's description
+__doc__ = \
+    "Utility functions to retrieve data from PDB/mmCIF files from " \
+    "the AlphaFold Protein Structure Database."
+
+
+#######################################################################
+
+
 # Standard library
 import itertools
 import json
+import logging as log
 import requests
 from tempfile import NamedTemporaryFile
 # Third-party packages
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
 # SLiMfast
-from SLiMfast.defaults import (
-    ALPHAFOLD_ID_FIELD,
-    DEPOSITION_DATE_FIELD,
-    RANGE_SEP,
-    STRUCT_CHAIN_FIELD,
-    STRUCT_ID_FIELD,
-    STRUCT_SEGMENTS_FIELD,
-    UNP_ISOFORM_FIELD,
-    UNP_SEGMENTS_FIELD,
-    )
+from . import defaults
 
 
+#######################################################################
 
-# Metadata (taken from MMCIF files) retrieved for AlphaFold
+
+# Get the module logger
+logger = log.getLogger(__name__)
+
+
+#######################################################################
+
+
+# The metadata (taken from MMCIF files) retrieved for the AlphaFold
 # IDs of interest
 STRUCTURE_METADATA = [
     
-    # Beginning of the sequence covered by the structure
-    # in the UniProt numbering
+    # The beginning of the sequence covered by the structure in
+    # UniProt numbering
     ("_ma_target_ref_db_details.seq_db_align_begin",
      int,
      "uniprot_start"),
-    # End of the sequence covered by the structure
-    # in the UniProt numbering
+    
+    # The end of the sequence covered by the structure in UniProt
+    # numbering
     ("_ma_target_ref_db_details.seq_db_align_end",
      int,
      "uniprot_end"),
-    # Begin of the sequence covered by the structure
-    # in the PDB numbering
+    
+    # The beginning of the sequence covered by the structure in
+    # in the structure's own numbering
     ("_struct_ref.pdbx_align_begin",
      int,
      "struct_start"),
-    # End of the sequence covered by the structure
-    # in the PDB numbering
+
+    # The end of the sequence covered by the structure in the
+    # structure's own numbering
     ("_struct_ref.pdbx_align_begin",
      int,
      "struct_end"),
-    # AlphaFold ID
+
+    # The alphaFold ID
     ("_database_2.database_code",
      str, 
-     ALPHAFOLD_ID_FIELD),
-    # Chain ID
+     defaults.DF_COLUMNS["alphafold_id"]),
+
+    # The chain ID
     ("_entity_poly.pdbx_strand_id",
      str,
-     STRUCT_CHAIN_FIELD),
-    # UniProt isoform
+     defaults.DF_COLUMNS["struct_chain"]),
+
+    # The UniProt isoform
     ("_ma_target_ref_db_details.seq_db_align_isoform",
      str,
-     UNP_ISOFORM_FIELD),
-    # Deposition date
+     defaults.DF_COLUMNS["uniprot_isoform"]),
+
+    # The deposition date
     ("_pdbx_database_status.recvd_initial_deposition_date",
      str,
-     DEPOSITION_DATE_FIELD),
+     defaults.DF_COLUMNS["deposition_date"]),
     ]
 
+
+#######################################################################
 
 
 def get_alphafold_data(uniprot_id = None,
                        struct_id = None):
-    """Get the PDB structure(s) associated to a specific
-    UniProt ID in the AlphaFold Protein Structure Database,
-    or a specific structure from the database.
+    """Get the PDB structure(s) associated with a specific UniProt ID
+    in the AlphaFold Protein Structure Database, or a specific
+    structure from the database.
+
+    Parameters
+    ----------
+    uniprot_id : ``str``, optional
+        The UniProt ID of the protein whose structure(s) should be
+        retrieved from the AlphaFold Protein Structure Database.
+
+        It needs to be provided if ``struct_id`` is not provided.
+
+    struct_id : ``str``, optional
+        The ID of a specific structure stored in the AlphaFold
+        Protein Structure Database.
+
+        It needs to be provided if ``uniprot_id`` is not provided.
+
+    Returns
+    -------
+    alphafold_data : ``dict``
+        A dictionary mapping each structure's ID to a tuple
+        containing:
+
+        - The structure's version.
+        - The structure's fragment.
+        - The content of the PDB file associated with the
+          structure.
     """
 
-    # Check if either the UniProt ID or the structure ID have
-    # been passed
+    # If neither the UniProt ID nor the structure ID were passed
     if uniprot_id is None and struct_id is None:
 
         # Raise an error
         errstr = \
-            "You must provide either the UniProt ID (to find " \
-            "all structures associated with it in the AlphaFold " \
-            "Protein Structure Database) or the specific structure " \
-            "ID (i.e., AF-P10415-F1-model_v3)."
+            "You must provide either a UniProt ID or a specific " \
+            "structure's ID (i.e., AF-P10415-F1-model_v3)."
         raise ValueError(errstr)
 
-    # Generic string representing the ID of the
-    # structures deposited in AlphaFoldDB
+    #-----------------------------------------------------------------#
+
+    # Set the generic string representing the ID of the structures
+    # deposited in AlphaFold Protein Structure Database
     struct_id_fmt = "AF-{:s}-F{:d}-model_v{:d}"
 
-    # If the structure ID has been specified
-    if struct_id is not None:
+    # Set the generic URL where AlphaFoldDB PDB files are found
+    struct_url = "https://www.alphafold.ebi.ac.uk/files/{:s}.pdb"
 
-        # This will become the string to be used to
-        # find the structure in the database
-        struct_id_fmt = struct_id 
-    
-    # Generic URL where AlphaFoldDB PDB files are found
-    struct_url = \
-        f"https://www.alphafold.ebi.ac.uk/files/" \
-        f"{struct_id_fmt}.pdb"
-
-
-    #-------------------- Structure ID specified ---------------------#
-
+    #-----------------------------------------------------------------#
 
     # If the structure ID was specified
     if struct_id is not None:
 
         # Try to get the data from the AlphaFold Protein Structure
         # Database
-        response = requests.get(struct_url)
+        response = requests.get(struct_url.format(struct_id))
 
         # If something went wrong
         if not response.ok:
@@ -148,34 +183,41 @@ def get_alphafold_data(uniprot_id = None,
         # Return the data
         return [l for l in response.text.split("\n")]
 
-
-    #------------------ Structure ID not specified -------------------#
-
-
+    #-----------------------------------------------------------------#
+    
     # Create an empty dictionary to store the structures
     alphafold_data = {}
+
+    #-----------------------------------------------------------------#
 
     # Try to get all versions of the structure
     for version in itertools.count(start = 1):
 
-        # Try to get all fragments (if the structure
-        # is split in multiple fragments
+        # Try to get all fragments (if the structure is split into
+        # multiple fragments)
         for fragment in itertools.count(start = 1):
+
+            # Set the URL where to retrieve the structure
+            curr_struct_url = \
+                struct_url.format(struct_id_fmt.format(uniprot_id,
+                                                       fragment,
+                                                       version))
             
-            # Try to get the data from the AlphaFold
-            # Protein Structure Database
-            response = \
-                requests.get(struct_url.format(uniprot_id,
-                                               fragment,
-                                               version))
+            # Try to get the data from the AlphaFold Protein
+            # Structure Database
+            response = requests.get(curr_struct_url)
+
+            #---------------------------------------------------------#
 
             # If the structure was not found (it does
             # not exist)
             if response.status_code == 404:
 
-                # Break out of the loop since we
-                # do not have more fragments
+                # Break out of the loop since we do not have more
+                # fragments
                 break
+
+            #---------------------------------------------------------#
 
             # If the structure was found
             else:
@@ -201,46 +243,71 @@ def get_alphafold_data(uniprot_id = None,
                     # Raise the corresponding error
                     response.raise_for_status()
 
-        # If the structure was not found and it is because
-        # we have reached the latest version
+        #-------------------------------------------------------------#
+
+        # If the structure was not found and it is because we reached
+        # he last version available
         if response.status_code == 404 and fragment == 1:
 
-            # Break out of the loop since we
-            # do not have more versions
+            # Break out of the loop
             break
+
+    #-----------------------------------------------------------------#
 
     # Return the data retrieved
     return alphafold_data
 
 
 def get_structure_metadata(struct_id):
-    """Get metadata associated to a structure in the 
-    AlphaFoldDB from its mmCIF file.
+    """Get metadata associated with a structure in the AlphaFold
+    Protein Structure Database from the structure's mmCIF file.
     """
 
-    # Metadata are collected from mmCIF files and not
+    # The metadata are collected from mmCIF files and not
     # directly from the PDB files since the mmCIF format
-    # is more consistent and contains more information
+    # is more recent, more consistent, and contains
+    # more information
 
-    # Generic URL where mmCIF files for single entries
+    # Set the generic URL where mmCIF files for single entries
     # are found
-    mmcif_url = \
-        "https://www.alphafold.ebi.ac.uk/files/{:s}.cif"
+    mmcif_url = "https://www.alphafold.ebi.ac.uk/files/{:s}.cif"
+
+    #-----------------------------------------------------------------#
     
     # Create a dictionary to store the metadata
     metadata = {}
 
-    # Use a temporary file to store the mmCIF file
+    #-----------------------------------------------------------------#
+
+    # Open a temporary file to store the mmCIF file
     with NamedTemporaryFile("w") as tmp:
         
-        # Get the mmCIF file
+        # Try to get the mmCIF file
         response = requests.get(mmcif_url.format(struct_id))
+
+        # If something went wrong
+        if not response.ok:
+
+            # Raise an error
+            errstr = \
+                "It was not possible to retrieve the mmCIF " \
+                f"file for the structure with ID '{struct_id}' " \
+                "from the AlphaFold Protein Structure Database " \
+                "(to get the structure's metadata). Error code: " \
+                f"{response.status_code}."
+            raise Exception(errstr)
+
+        #-------------------------------------------------------------#
 
         # Write the mmCIF file to the temporary file
         tmp.write(response.text)
+
+        #-------------------------------------------------------------#
          
-        # Create a dictionary from the header data
+        # Create a dictionary from the mmCIF file's header
         mmcif_dict = MMCIF2Dict(tmp.name)
+
+        #-------------------------------------------------------------#
 
         # Initialize a list to store the segment
         # covered by the AlphaFold structure in the
@@ -252,13 +319,15 @@ def get_structure_metadata(struct_id):
         # numbering
         struct_segment = [None, None]
 
+        #-------------------------------------------------------------#
+
         # For each field of interest
         for field, datatype, col in STRUCTURE_METADATA:
 
             # If the field is present in the mmCIF file
             if field in mmcif_dict.keys():
 
-                # Retrieve data for that field
+                # Retrieve the data for that field
                 data = mmcif_dict[field]
 
                 # If the data type is not tuple
@@ -285,54 +354,55 @@ def get_structure_metadata(struct_id):
                         ":".join(datatype(\
                             [item for item in data if item != "?"]))
 
+                #-----------------------------------------------------#
 
-                # If the field is the start of the sequence
-                # covered by the structure in the UniProt
-                # numbering
+                # If the field is the start of the sequence covered by
+                # the structure provided in UniProt numbering
                 if col == "uniprot_start":
 
                     # Add the information to the list
                     unp_segment[0] = data
 
-                    # Continue (we do not need to save
-                    # this field)
+                    # Continue (we do not need to save this field)
                     continue
 
-                # If the field is the end of the sequence
-                # covered by the structure in the UniProt
-                # numbering
+                #-----------------------------------------------------#
+
+                # If the field is the end of the sequence covered by
+                # the structure provided in UniProt numbering
                 elif col == "uniprot_end":
 
                     # Add the information to the list
                     unp_segment[1] = data
 
-                    # Continue (we do not need to save
-                    # this field)
+                    # Continue (we do not need to save this field)
                     continue
 
-                # If the field is the start of the sequence
-                # covered by the structure in the PDB
-                # numbering
+                #-----------------------------------------------------#
+
+                # If the field is the start of the sequence covered by
+                # the structure in the structure's own numbering
                 elif col == "struct_start":
 
                     # Add the information to the list
                     struct_segment[0] = data
 
-                    # Continue (we do not need to save
-                    # this field)
+                    # Continue (we do not need to save this field)
                     continue
 
-                # If the field is the end of the sequence
-                # covered by the structure in the PDB
-                # numbering
+                #-----------------------------------------------------#
+
+                # If the field is the end of the sequence covered by
+                # the structure in the structure's own numbering
                 elif col == "struct_end":
 
                     # Add the information to the list
                     struct_segment[1] = data
 
-                    # Continue (we do not need to save
-                    # this field)
+                    # Continue (we do not need to save this field)
                     continue
+
+            #---------------------------------------------------------#
             
             # Otherwise
             else:
@@ -340,20 +410,27 @@ def get_structure_metadata(struct_id):
                 # The field is not present
                 data = None
 
-            # Add data to the dictionary
+            #---------------------------------------------------------#
+
+            # Add the data to the dictionary
             metadata[col] = data
 
-        # Format and add the sequence segment covered
-        # by the structure in the UniProt numbering
-        # to the metadata
-        metadata[UNP_SEGMENTS_FIELD] = \
-            RANGE_SEP.join(unp_segment)
+        #-------------------------------------------------------------#
 
-        # Format and add the sequence segment covered
-        # by the structure in the PDB numbering
-        # to the metadata
-        metadata[STRUCT_SEGMENTS_FIELD] = \
-            RANGE_SEP.join(struct_segment)
+        # Format and add the segment covered by the structure and
+        # provided in UniProt numbering to the metadata
+        metadata[defaults.DF_COLUMNS["uniprot_segments"]] = \
+            defaults.DF_SEPARATORS["range"].join(unp_segment)
+
+        #-------------------------------------------------------------#
+
+        # Format and add the segment covered by the structure and
+        # provided in the structure's own numbering to the metadata
+        metadata[defaults.DF_COLUMNS["struct_segments"]] = \
+            defaults.DF_SEPARATORS["range"].join(struct_segment)
+
+        #-------------------------------------------------------------#
 
         # Return the dictionary of metadata
         return metadata
+

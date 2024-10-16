@@ -3,10 +3,10 @@
 
 #    argparse_tools.py
 #
-#    Utility functions to handle the command line arguments passed
-#    to the SLiMfast executables.
+#    Utilities to handle the command-line arguments passed to the
+#    SLiMfast executables.
 #
-#    Copyright (C) 2022 Valentina Sora 
+#    Copyright (C) 2024 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
@@ -28,384 +28,636 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 
 
+#######################################################################
+
+
+__doc__ = \
+    "Utilities to handle the command-line arguments passed to " \
+    "the SLiMfast executables."
+
+
+#######################################################################
+
 
 # Standard library
 import argparse
 # SLiMfast
-from .defaults import (
-    CONFIG_RUN_DIR,
-    NPROC_DEFAULT,
-    OUTPUT_PROTEIN_FILE,
-    OUTPUT_ALPHAFOLD_FILE,
-    OUTPUT_HOMOLOGS_FILE,
-    OUTPUT_ALIGNMENTS_FILE,
-    OUTPUT_SLIMS_PROTEIN_FILE,
-    OUTPUT_SLIMS_ALPHAFOLD_FILE,
-    OUTPUT_SLIMS_HOMOLOGS_FILE,
-    OUTPUT_SLIMS_DISPROT_FILE,
-    )
+from . import defaults
 
 
+#######################################################################
 
-def get_arguments(description,
-                  log_file_default = None,
-                  **kwargs):
-    """Create the argument parser, add the arguments requested
-    and return them.
+
+def get_arguments(name,
+                  description,
+                  args_names,
+                  default_values = None):
+    """Create an argument parser for a script, add the requested
+    arguments, and return them.
+
+    Parameters
+    ----------
+    name : ``str``
+        The name of the script.
+
+    description : ``str``
+        The description of the script.
+
+    args_names : ``list``
+        A list containing the names of the arguments to be added
+        to the parser.
+
+    default_values : ``dict``, optional
+        A dictionary mapping arguments' names to their default
+        values, if any.
+
+    Returns
+    -------
+    args : ``argparser.Namespace``
+        The namespace where the arguments live.
     """
 
     # Create the argument parser
-    parser = argparse.ArgumentParser(description = description)
+    parser = argparse.ArgumentParser(prog = name,
+                                     description = description)
 
-    # Add the arguments to the parser
+    #-----------------------------------------------------------------#
     
-    # UniProt ID of the protein of interest.
+    # The UniProt ID of the protein of interest.
+    #
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_homologs
-    if "uniprot_id" in kwargs.keys():
-        id_help = "UniProt ID of the protein of interest."
+    if "uniprot_id" in args_names:
+
+        # Set the help message
+        help_msg = "The UniProt ID of the protein of interest."
+
+        # Add the argument to the parser
         parser.add_argument("-id", "--uniprot-id",
                              type = str,
                              required = True,
-                             help = id_help)
+                             help = help_msg)
 
-    # Whether to run slimfast_get_structures as part of the
-    # pipeline.
+    #-----------------------------------------------------------------#
+
+    # Whether to run 'slimfast_get_structures' as part of the pipeline.
+    #
     # Taken by:
     # - slimfast_run_pipeline
-    if "do_get_structures" in kwargs.keys():
-        dgs_help = "Run slimfast_get_structures."
+    if "do_get_structures" in args_names:
+
+        # Set the help message
+        help_msg = "Run 'slimfast_get_structures'."
+
+        # Add the argument to the parser
         parser.add_argument("-dgs", "--do-get-structures",
                             action = "store_true",
-                            help = dgs_help)
+                            help = help_msg)
 
-    # Whether to run slimfast_get_alphafold as part of the
-    # pipeline.
+    #-----------------------------------------------------------------#
+
+    # Whether to run 'slimfast_get_alphafold' as part of the pipeline.
+    #
     # Taken by:
     # - slimfast_run_pipeline
-    if "do_get_alphafold" in kwargs.keys():
-        dga_help = "Run slimfast_get_alphafold."
+    if "do_get_alphafold" in args_names:
+
+        # Set the help message
+        help_msg = "Run 'slimfast_get_alphafold'."
+
+        # Add the argument to the parser
         parser.add_argument("-dga", "--do-get-alphafold",
                             action = "store_true",
-                            help = dga_help)
+                            help = help_msg)
 
-    # Whether to run slimfast_get_homologs as part of the
-    # pipeline.
+    #-----------------------------------------------------------------#
+
+    # Whether to run 'slimfast_get_homologs' as part of the pipeline.
+    #
     # Taken by:
     # - slimfast_run_pipeline
-    if "do_get_homologs" in kwargs.keys():
-        dgh_help = "Run slimfast_get_homologs."
+    if "do_get_homologs" in args_names:
+
+        # Set the help message
+        help_msg = "Run 'slimfast_get_homologs'."
+
+        # Add the argument to the parser
         parser.add_argument("-dgh", "--do-get-homologs",
                             action = "store_true",
-                            help = dgh_help)
+                            help = help_msg)
 
-    # Whether to run slimfast_find_slims as part of the
-    # pipeline.
+    #-----------------------------------------------------------------#
+
+    # Whether to run 'slimfast_find_slims' as part of the pipeline.
+    # 
     # Taken by:
     # - slimfast_run_pipeline
-    if "do_find_slims" in kwargs.keys():
-        dfs_help = "Run slimfast_find_slims."
+    if "do_find_slims" in args_names:
+
+        # Set the help message
+        help_msg = "Run 'slimfast_find_slims'."
+
+        # Add the argument to the parser
         parser.add_argument("-dfs", "--do-find-slims",
                             action = "store_true",
-                            help = dfs_help)
+                            help = help_msg)
 
-    # CSV file containing the UniProt IDs of the proteins of
+    #-----------------------------------------------------------------#
+
+    # The CSV file containing the UniProt IDs of the proteins of
     # interest and the associated SLiMs to be found in their
     # sequences.
+    #
     # Taken by:
     # - slimfast_run_pipeline
-    if "input_ids_slims_file" in kwargs.keys():
-        ids_help = \
-            "Input CSV file containing the UniProt IDs of the " \
+    if "input_ids_slims_file" in args_names:
+
+        # Set the help message
+        help_msg = \
+            "The input CSV file containing the UniProt IDs of the " \
             "proteins of interest and the SLiMs to be found " \
             "in their sequences."
+
+        # Add the argument to the parser
         parser.add_argument("-ids", "--input-ids-slims-file",
                              type = str,
                              required = True,
-                             help = ids_help)
+                             help = help_msg)
 
-    # CSV file containing the structures of the protein of interest
+    #-----------------------------------------------------------------#
+
+    # The CSV file containing the structures of the protein of interest
     # found in the Protein Data Bank.
+    #
     # Taken by:
     # - slimfast_find_slims
+    #
     # Generated by:
     # - slimfast_get_structures
-    if "input_protein_file" in kwargs.keys():
-        ip_help = \
-            "Input CSV file containing the structures of the " \
+    if "input_protein_file" in args_names:
+
+        # Set the help message
+        help_msg = \
+            "The input CSV file containing the structures of the " \
             "protein of interest found in the Protein Data Bank."
+
+        # Add the argument to the parser
         parser.add_argument("-ip", "--input-protein-file",
                              type = str,
                              default = None,
-                             help = ip_help)
+                             help = help_msg)
 
-    # CSV file containing the structures of the protein of interest
+    #-----------------------------------------------------------------#
+
+    # The CSV file containing the structures of the protein of interest
     # found in the AlphaFold Protein Structure Database.
+    #
     # Taken by:
     # - slimfast_find_slims
+    #
     # Generated by:
     # - slimfast_get_alphafold
-    if "input_alphafold_file" in kwargs.keys():
-        ia_help = \
-            "Input CSV file containing the structures of the " \
+    if "input_alphafold_file" in args_names:
+
+        # Set the help message
+        help_msg = \
+            "The input CSV file containing the structures of the " \
             "protein of interest found in the AlphaFold Protein " \
             "Structure Database."
+
+        # Add the argument to the parser
         parser.add_argument("-ia", "--input-alphafold-file",
                              type = str,
                              default = None,
-                             help = ia_help)
+                             help = help_msg)
 
-    # CSV file containing the structures of the homologs of the
+    #-----------------------------------------------------------------#
+
+    # The CSV file containing the structures of the homologs of the
     # protein of interest found in the Protein Data Bank.
+    #
     # Taken by:
     # - slimfast_find_slims
+    #
     # Generated by:
     # - slimfast_get_homologs
-    if "input_homologs_file" in kwargs.keys():
-        ih_help = \
-            "Input CSV file containing the structures of the " \
+    if "input_homologs_file" in args_names:
+
+        # Set the help message
+        help_msg = \
+            "The input CSV file containing the structures of the " \
             "homologs of the protein of interest found in the " \
             "Protein Data Bank."
+
+        # Add the argument to the parser
         parser.add_argument("-ih", "--input-homologs-file",
                              type = str,
                              default = None,
-                             help = ih_help)
+                             help = help_msg)
 
-    # JSON file containing the alignments between the homologs'
+    #-----------------------------------------------------------------#
+
+    # The JSON file containing the alignments between the homologs'
     # structures and the protein of interest.
+    #
     # Taken by:
     # - slimfast_find_slims
+    #    
     # Generated by:
     # - slimfast_get_homologs
-    if "input_alignments_file" in kwargs.keys():
-        ial_help = \
-            "Input JSON file containing the alignments between " \
+    if "input_alignments_file" in args_names:
+
+        # Set the help message
+        help_msg = \
+            "The input JSON file containing the alignments between " \
             "each of the structures of the homologs found in the " \
             "Protein Data Bank and the protein of interest."
+
+        # Add the argument to the parser
         parser.add_argument("-ial", "--input-alignments-file",
                              type = str,
                              default = None,
-                             help = ial_help)
+                             help = help_msg)
 
-    # Text file containing the SLiMs found in the UniProt sequence
-    # of the protien of interest.
+    #-----------------------------------------------------------------#
+
+    # The input CSV file containing the SLiMs found in the UniProt
+    # sequence of the protien of interest.
+    #
     # Taken by:
     # - slimfast_find_slims
-    if "input_slims_file" in kwargs.keys():
-        is_help = \
-            "Input CSV file containing the SLiMs in the UniProt " \
+    if "input_slims_file" in args_names:
+
+        # Set the help message
+        help_msg = \
+            "The input CSV file containing the SLiMs in the UniProt " \
             "sequence of the protein of interest."
+
+        # Add the argument to the parser
         parser.add_argument("-is", "--input-slims-file",
                             type = str,
                             required = True,
-                            help = is_help)
+                            help = help_msg)
 
-    # CSV file containing the structures of the protein of interest
-    # found in the Protein Data Bank.
+    #-----------------------------------------------------------------#
+
+    # The name of the output CSV file containing the structures of the
+    # protein of interest found in the Protein Data Bank.
+    #
     # Taken by:
     # - slimfast_get_structures
-    if "output_protein_file" in kwargs.keys():
-        op_help = \
-            f"Name of the output CSV file containing the structures " \
-            f"of the protein of interest found in the Protein Data " \
-            f"Bank. The default is '{OUTPUT_PROTEIN_FILE}'."
+    if "output_protein_file" in args_names:
+
+        # Set the default value
+        default = defaults.OUTPUT_FILES["protein"]["name"]
+
+        # Set the help message
+        help_msg = \
+            "The name of the output CSV file containing the " \
+            "structures of the protein of interest found in the " \
+            "Protein Data Bank. The file is written in the 'wd' " \
+            "directory specified in the configuration file. " \
+            f"The default file name is '{default}'."
+
+        # Add the argument to the parser
         parser.add_argument("-op", "--output-protein-file",
                              type = str,
-                             default = OUTPUT_PROTEIN_FILE,
-                             help = op_help)
+                             default = default,
+                             help = help_msg)
 
-    # CSV file containing the structures of the protein of interest
-    # found in the AlphaFold Protein Structure Database.
+    #-----------------------------------------------------------------#
+
+    # The name of the output CSV file containing the structures of the
+    # protein of interest found in the AlphaFold Protein Structure
+    # Database.
+    #
     # Taken by:
     # - slimfast_get_alphafold
-    if "output_alphafold_file" in kwargs.keys():
-        oa_help = \
-            f"Name of the output CSV file containing the structures " \
-            f"of the protein of interest found in the AlphaFold " \
-            f"Protein Structure Database. The default is " \
-            f"'{OUTPUT_ALPHAFOLD_FILE}'."
+    if "output_alphafold_file" in args_names:
+
+        # Set the default value
+        default = defaults.OUTPUT_FILES["alphafold"]["name"]
+
+        # Set the help message
+        help_msg = \
+            "The name of the output CSV file containing the " \
+            "structures of the protein of interest found in the " \
+            "AlphaFold Protein Structure Database. The file is " \
+            "written in the 'wd' directory specified in the " \
+            "configuration file. The default file name is " \
+            f"'{default}'."
+
+        # Add the argument to the parser
         parser.add_argument("-oa", "--output-alphafold-file",
                              type = str,
-                             default = OUTPUT_ALPHAFOLD_FILE,
-                             help = oa_help)
+                             default = default,
+                             help = help_msg)
 
-    # CSV file containing the structures of the homologs of the
-    # protein of interest found in the Protein Data Bank.
+    #-----------------------------------------------------------------#
+
+    # The name of the output CSV file containing the structures of the
+    # homologs of the protein of interest found in the Protein Data
+    # Bank.
+    #
     # Taken by:
     # - slimfast_get_homologs
-    if "output_homologs_file" in kwargs.keys():
-        oh_help = \
-            f"Name of the output CSV file containing the structures " \
-            f"of the homologs of the protein of interest found in " \
-            f"the Protein Data Bank. The default is " \
-            f"'{OUTPUT_HOMOLOGS_FILE}'."
+    if "output_homologs_file" in args_names:
+
+        # Set the default value
+        default = defaults.OUTPUT_FILES["homologs"]["name"]
+
+        # Set the help message
+        help_msg = \
+            "The name of the output CSV file containing the " \
+            "structures of the homologs of the protein of " \
+            "interest found in the Protein Data Bank. The file " \
+            "is written in the 'wd' directory specified in the " \
+            "configuration file. The default file name is " \
+            f"'{default}'."
+
+        # Add the argument to the parser
         parser.add_argument("-oh", "--output-homologs-file",
                              type = str,
-                             default = OUTPUT_HOMOLOGS_FILE,
-                             help = oh_help)
+                             default = default,
+                             help = help_msg)
 
-    # JSON file containing the alignments between the homologs'
-    # structures and the protein of interest.
+    #-----------------------------------------------------------------#
+
+    # The name of the output JSON file containing the alignments
+    # between the homologs' structures and the protein of interest.
+    #
     # Taken by:
     # - slimfast_get_homologs
-    if "output_alignments_file" in kwargs.keys():
-        oal_help = \
-            f"Name of the output JSON file containing the " \
-            f"alignments between each of the structures of the " \
-            f"homologs found in the Protein Data Bank and the " \
-            f"protein of interest. The default is " \
-            f"'{OUTPUT_ALIGNMENTS_FILE}'."
+    if "output_alignments_file" in args_names:
+
+        # Set the default value
+        default = defaults.OUTPUT_FILES["alignments"]["name"]
+
+        # Set the help message
+        help_msg = \
+            "The name of the output JSON file containing the " \
+            "alignments between each of the structures of the " \
+            "homologs found in the Protein Data Bank and the " \
+            "protein of interest. The file is written in the 'wd' " \
+            "directory specified in the configuration file. The " \
+            f"default file name is '{default}'."
+
+        # Add the argument to the parser
         parser.add_argument("-oal", "--output-alignments-file",
                              type = str,
-                             default = OUTPUT_ALIGNMENTS_FILE,
-                             help = oal_help)
+                             default = default,
+                             help = help_msg)
 
-    # Output CSV file containing the SLiMs found in the structures
-    # of the protein of interest found in the Protein Data Bank.
+    #-----------------------------------------------------------------#
+
+    # The name of the output CSV file containing the SLiMs found in
+    # the structures of the protein of interest found in the Protein
+    # Data Bank.
+    #
     # Taken by:
     # - slimfast_find_slims
-    if "output_slims_protein_file" in kwargs.keys():
-        osp_help = \
-            f"Name of the output CSV file containing the SLiMs " \
-            f"found in the structures of the protein of interest " \
-            f"found in the Protein Data Bank. The default is " \
-            f"'{OUTPUT_SLIMS_PROTEIN_FILE}'."
+    if "output_slims_protein_file" in args_names:
+
+        # Set the default value
+        default = defaults.OUTPUT_FILES["slims_protein"]["name"]
+
+        # Set the help message
+        help_msg = \
+            "The name of the output CSV file containing the SLiMs " \
+            "found in the structures of the protein of interest " \
+            "found in the Protein Data Bank. The file is written " \
+            "in the 'wd' directory specified in the configuration " \
+            f"file. The default file name is '{default}'."
+
+        # Add the argument to the parser
         parser.add_argument("-osp", "--output-slims-protein-file",
                              type = str,
-                             default = OUTPUT_SLIMS_PROTEIN_FILE,
-                             help = osp_help)
+                             default = default,
+                             help = help_msg)
 
-    # Output CSV file containing the SLiMs found in the structures
-    # of the protein of interest found in the AlphaFold Protein
-    # Structure Database.
+    #-----------------------------------------------------------------#
+
+    # The name of the output CSV file containing the SLiMs found in
+    # the structures of the protein of interest found in the AlphaFold
+    # Protein Structure Database.
+    #
     # Taken by:
     # - slimfast_find_slims
-    if "output_slims_alphafold_file" in kwargs.keys():
-        osa_help = \
-            f"Name of the output CSV file containing the SLiMs " \
-            f"found in the structures of the protein of interest " \
-            f"found in the AlphaFold Protein Structure Database. " \
-            f"The default is '{OUTPUT_SLIMS_ALPHAFOLD_FILE}'."
+    if "output_slims_alphafold_file" in args_names:
+
+        # Set the default value
+        default = defaults.OUTPUT_FILES["slims_alphafold"]["name"]
+
+        # Set the help message
+        help_msg = \
+            "The name of the output CSV file containing the SLiMs " \
+            "found in the structures of the protein of interest " \
+            "found in the AlphaFold Protein Structure Database. " \
+            "The file is written in the 'wd' directory specified " \
+            "in the configuration file. The default file name is " \
+            f"'{default}'."
+
+        # Add the argument to the parser
         parser.add_argument("-osa", "--output-slims-alphafold-file",
                              type = str,
-                             default = OUTPUT_SLIMS_ALPHAFOLD_FILE,
-                             help = osa_help)
+                             default = default,
+                             help = help_msg)
 
-    # Output CSV file containing the SLiMs found in the structures
-    # of the homolgs of the protein of interest found in the Protein
-    # Data Bank.
+    #-----------------------------------------------------------------#
+
+    # The name of the output CSV file containing the SLiMs found in
+    # the structures of the homolgs of the protein of interest found
+    # in the Protein Data Bank.
+    #
     # Taken by:
     # - slimfast_find_slims
-    if "output_slims_homologs_file" in kwargs.keys():
-        osh_help = \
-            f"Name of the output CSV file containing the SLiMs " \
-            f"found in the structures of the homologs of the " \
-            f"protein of interest found in the Protein Data "\
-            f"Bank. The default is '{OUTPUT_SLIMS_HOMOLOGS_FILE}'."
+    if "output_slims_homologs_file" in args_names:
+
+        # Set the default value
+        default = defaults.OUTPUT_FILES["slims_homologs"]["name"]
+
+        # Set the help message
+        help_msg = \
+            "The name of the output CSV file containing the SLiMs " \
+            "found in the structures of the homologs of the " \
+            "protein of interest found in the Protein Data " \
+            "Bank. The file is written in the 'wd' directory " \
+            "specified in the configuration file. The default " \
+            f"file name is '{default}'."
+
+        # Add the argument to the parser
         parser.add_argument("-osh", "--output-slims-homologs-file",
                              type = str,
-                             default = OUTPUT_SLIMS_HOMOLOGS_FILE,
-                             help = osh_help)
+                             default = default,
+                             help = help_msg)
 
-    # Output CSV file containing the SLiMs not found in the structures
-    # and annotated through DisProt.
+    #-----------------------------------------------------------------#
+
+    # The name of the output CSV file containing the SLiMs not found
+    # in the structures and annotated through DisProt.
+    #
     # Taken by:
     # - slimfast_find_slims
-    if "output_slims_disprot_file" in kwargs.keys():
-        osd_help = \
-            f"Name of the output CSV file containing the SLiMs not " \
-            f"found in the structures available either for the protein " \
-            f"of interest or for the homologs, but annotated as " \
-            f"disordered in DisProt. The default is " \
-            f"'{OUTPUT_SLIMS_DISPROT_FILE}'."
+    if "output_slims_disprot_file" in args_names:
+
+        # Set the default value
+        default = defaults.OUTPUT_FILES["slims_disprot"]["name"]
+
+        # Set the help message
+        help_msg = \
+            "The name of the output CSV file containing the SLiMs " \
+            "not found in the structures available either for the " \
+            "protein of interest or for the homologs, but annotated " \
+            "as disordered in DisProt. The file is written in the " \
+            "'wd' directory specified in the configuration file. " \
+            f"The default file name is '{default}'."
+
+        # Add the argument to the parser
         parser.add_argument("-osd", "--output-slims-disprot-file",
                              type = str,
-                             default = OUTPUT_SLIMS_DISPROT_FILE,
-                             help = osd_help)
+                             default = default,
+                             help = help_msg)
 
-    # YAML configuration file.
+    #-----------------------------------------------------------------#
+
+    # The YAML configuration file.
+    #
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
     # - slimfast_get_homologs
     # - slimfast_find_slims
-    if "configrun_file" in kwargs.keys():
-        cr_help = \
-            f"YAML configuration file for running any of the " \
-            f"SLiMfast tools. If it is a name without extension, " \
-            f"it is assumed to be a YAML file in {CONFIG_RUN_DIR} " \
-            f"with that name."
+    if "configrun_file" in args_names:
+
+        # Set the directory where the default files can be found
+        default_dir = defaults.CONFIG_RUN_DIR
+
+        # Set the help message
+        help_msg = \
+            "The YAML configuration file for running. If it is a " \
+            "name without an extension, it is assumed to be a " \
+            f"YAML file in '{default_dir}' with that name."
+
+        # Add the argument to the parser
         parser.add_argument("-cr", "--configrun-file",
                             type = str,
                             required = True,
-                            help = cr_help)
+                            help = help_msg)
 
-    # Name of the log file.
+    #-----------------------------------------------------------------#
+
+    # The name of the log file.
+    #
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
     # - slimfast_get_homologs
     # - slimfast_find_slims
-    if "log_file" in kwargs.keys():
-        lf_default = log_file_default
-        lf_help = \
-            f"Name of the log file. The default is '{lf_default}'."
+    if "log_file" in args_names:
+
+        # Set the default value
+        default = default_values.get("log_file")
+
+        # Set the help message
+        help_msg = \
+            "The name of the log file. The file is written in the " \
+            "'wd' directory specified in the configuration file. " \
+            f"The default file name is '{default}'."
+
+        # Add the argument to the parser
         parser.add_argument("-lf", "--log-file",
                             type = str,
-                            default = lf_default,
-                            help = lf_help)
+                            default = default,
+                            help = help_msg)
+
+    #-----------------------------------------------------------------#
 
     # Whether to log also to the standard output.
+    #
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
     # - slimfast_get_homologs
     # - slimfast_find_slims
-    if "log_to_stdout" in kwargs.keys():
-        ls_help = "Log also to the standard output."
+    if "log_to_stdout" in args_names:
+
+        # Set the help message
+        help_msg = "Log also to the standard output."
+
+        # Add the argument to the parser
         parser.add_argument("-ls", "--log-to-stdout",
                             action = "store_true",
-                            help = ls_help)
+                            help = help_msg)
+
+    #-----------------------------------------------------------------#
     
     # Whether to enable verbose (INFO level) logging.
+    #
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
     # - slimfast_get_homologs
     # - slimfast_find_slims
-    if "v" in kwargs.keys():
-        v_help = "Verbose (INFO level) logging."
+    if "v" in args_names:
+
+        # Set the help message
+        help_msg = "Whether to enable verbose (INFO level) logging."
+
+        # Add the argument to the parser
         parser.add_argument("-v", "--verbose",
                             action = "store_true",
-                            help = v_help)
+                            help = help_msg)
 
-    # Whether to enable verbose (DEBUG level) logging.
+    #-----------------------------------------------------------------#
+
+    # Whether to enable maximally verbose (DEBUG level) logging.
+    #
     # Taken by:
     # - slimfast_get_structures
     # - slimfast_get_alphafold
     # - slimfast_get_homologs
     # - slimfast_find_slims
-    if "vv" in kwargs.keys():
-        vv_help = "More verbose (DEBUG level) logging."
+    if "vv" in args_names:
+
+        # Set the help message
+        help_msg = \
+            "Whether to enable maximally verbose (DEBUG level) " \
+            "logging."
+
+        # Add the argument to the parser
         parser.add_argument("-vv", "--verbose-debug",
                             action = "store_true",
-                            help = vv_help)
+                            help = help_msg)
 
-    # How many cores to use when running.
+    #-----------------------------------------------------------------#
+
+    # The number of processes to use when running.
+    #
     # Taken by:
     # - slimfast_run_pipeline
-    if "nproc" in kwargs.keys():
-        n_help = \
-            f"Number of processes (cores) to use when running. " \
-            f"The default is {NPROC_DEFAULT} process(es)."
+    if "nproc" in args_names:
+
+        # Set the default value
+        default = defaults.NPROC_DEFAULT
+
+        # Set the help message
+        help_msg = \
+            "The number of processes (cores) to use when running. " \
+            f"The default is {default} process(es)."
+
+        # Add the argument to the parser
         parser.add_argument("-n", "--nproc",
                             type = int,
-                            default = NPROC_DEFAULT,
-                            help = n_help)
+                            default = default,
+                            help = help_msg)
+
+    #-----------------------------------------------------------------#
 
     # Parse the command line arguments
     args = parser.parse_args()
+
+    #-----------------------------------------------------------------#
 
     # Return the arguments
     return args

@@ -1,34 +1,34 @@
-- 21:14:16.213 INFO: /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.a3m is in A2M, A3M or FASTA format
+- 21:09:15.932 INFO: /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.a3m is in A2M, A3M or FASTA format
 
-- 21:14:16.234 INFO: Searching 86434 database HHMs without prefiltering
+- 21:09:15.951 INFO: Searching 86434 database HHMs without prefiltering
 
-- 21:14:16.286 INFO: Iteration 1
+- 21:09:15.001 INFO: Iteration 1
 
-- 21:14:16.534 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
+- 21:09:16.258 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
 
-- 21:14:16.824 INFO: Alternative alignment: 0
+- 21:09:16.529 INFO: Alternative alignment: 0
 
-- 21:15:01.918 INFO: 86434 alignments done
+- 21:09:58.948 INFO: 86434 alignments done
 
-- 21:15:02.128 INFO: Alternative alignment: 1
+- 21:09:59.170 INFO: Alternative alignment: 1
 
-- 21:15:02.228 INFO: 172 alignments done
+- 21:09:59.271 INFO: 172 alignments done
 
-- 21:15:02.228 INFO: Alternative alignment: 2
+- 21:09:59.271 INFO: Alternative alignment: 2
 
-- 21:15:02.228 INFO: Alternative alignment: 3
+- 21:09:59.271 INFO: Alternative alignment: 3
 
-- 21:15:02.901 INFO: Premerge done
+- 21:09:59.920 INFO: Premerge done
 
-- 21:15:02.901 INFO: 0 sequences belonging to 0 database HMMs found with an E-value < 0.001
+- 21:09:59.920 INFO: 0 sequences belonging to 0 database HMMs found with an E-value < 0.001
 
 Query         sp|Q96LC9|BMF_HUMAN Bcl-2-modifying factor OS=Homo sapiens OX=9606 GN=BMF PE=1 SV=1
 Match_columns 184
 No_of_seqs    156 out of 198
 Neff          3.83285
 Searched_HMMs 86434
-Date          Fri Nov  4 21:15:02 2022
-Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.a3m -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.hhr 
+Date          Wed Apr 17 21:09:59 2024
+Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.a3m -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q96LC9/hhpred/Q96LC9.hhr 
 
  No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
   1 1PQ1_B Apoptosis regulator Bcl  94.8  0.0044 5.1E-08   40.7   0.0   33  126-158     1-33  (33)

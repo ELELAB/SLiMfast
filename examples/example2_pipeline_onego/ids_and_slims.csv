@@ -1,4 +1,4 @@
-uniprot_id,slim_type,slim_start,slim_sequence,slim_end
+uniprot_id,slim_name,slim_start,slim_seq,slim_end
 Q92934,BH3,103,NLWAAQRYGRELRRMSDEFVDSF,125
 Q16611,BH3,74,VGRQLAIIGDDI,85
 Q07812,BH3,59,LSECLKRIGDELDSNM,74

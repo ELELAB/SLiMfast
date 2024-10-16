@@ -1,0 +1,5 @@
+source,struct_id,struct_chain,slim_name,slim_start,slim_sequence,slim_end,disordered_region
+structures,6GL8,A,BH4,10,DNREIVMKYIHYKLSQRGYEW,30,False
+structures,6GL8,A,BH1,136,ELFRDGVNWGRIVAFFEFGG,155,False
+structures,6GL8,A,BH2,187,TWIQDNGGWDAFVELY,202,False
+structures,7YA5,A,BH3,92,VVHLTLRQAGDDFSRR,107,None

@@ -1,0 +1,196 @@
+# Configuration file to run 'slimfast_get_homologs'
+
+# The directory where 'slimfast_get_homologs' will be run. An
+# empty string represents the directory from where the executable is
+# launched
+wd: ""
+
+#---------------------------------------------------------------------#
+
+# The settings to be used for the structures
+structures:
+
+  # The settings to be used when running the executable
+  homolog:
+
+    # The settings for the output data frame
+    df:
+      
+      # The options for sorting the data frame
+      sort:
+        
+        # The sorting criteria (will be applied in order)
+        sort_by: ["identities", "resolution", "deposition_date"]
+        
+        # Whether, for each sorting criterion, to sort in ascending
+        # order (if False, descending order will be used)
+        ascending: [False, True, False]
+    
+      # The filters to be used on the data frame
+      filter:
+        
+        # Only homologs covering a portion of the protein of
+        # interest higher than this threshold will be kept
+        min_identities: 30
+        
+        # Only homologs covering a portion of the protein of
+        # interest higher than this threshold will be kept
+        min_uniprot_coverage_percent: 20
+        
+        # Only proteins from humans will be kept
+        organism: "Homo sapiens"
+
+    # In general, the data frame can be filtered on the following
+    # columns:
+    #
+    # - "prob" (numerical)
+    # - "e_value" (numerical)
+    # - "p_value" (numerical)
+    # - "score" (numerical)
+    # - "identities" (numerical)
+    # - "similarity" (numerical)
+    # - "sum_probs" (numerical)
+    # - "template_neff" (numerical)
+    # - "organism" (string)
+    # - "coverage" (numerical)
+    # - "coverage_percent" (numerical)
+    # - "method" (string)
+    # - "resolution" (numerical)
+    # - "deposition_date" (string)
+    #
+    # For all columns, a filter named after the column itself and
+    # associated to a single value means that that only rows
+    # where the value of the column is the one provided will be
+    # kept.
+    #
+    # For all columns, a filter named '{column_name}_in' (for
+    # instance, 'resolution_in') and associated with a list of
+    # values means that only rows where the column's values is one
+    # of those provided will be kept.
+    #
+    # For numerical columns, any filter named 'min_{column_name}'
+    # (for instance, 'min_prob') and associated to a single value
+    # means that only rows where the column's value is higher than
+    # or equal to the value provided will be kept.
+    #
+    # For numerical columns, any filter named 'max_{column_name}'
+    # (for instance, 'max_prob') and associated to a single value
+    # means that only rows where the column's value is higher than
+    # or equal to the value provided will be kept.
+
+#---------------------------------------------------------------------#
+
+# The settings to run HHblits
+hhblits:
+  
+  # The options to run the program
+  run:
+    
+    # The HHblits executable
+    executable: "/usr/local/hh-suite/build/bin/hhblits"
+    
+    # The name of the directory where to run HHblits (if it is an
+    # string, it will be the same directory specified in the 'wd'
+    # option above)
+    wd: "hhpred"
+    
+    # The name of the file where the log of the run will be stored.
+    # This file will be written inside the 'wd' directory
+    outfile: "hhblits.log"
+    
+    # The options to launch HHblits
+    options:
+
+      # The database to use. Multiple databases can be specified with
+      # '-d <db1> -d <db2>'
+      -d: "/data/databases/hh-suite-20210225/UniRef30_2020_06"
+
+#---------------------------------------------------------------------#
+
+# The settings to run HHsearch
+hhsearch:
+  
+  # The options to run the program
+  run:
+    
+    # The HHsearch executable
+    executable: "/usr/local/hh-suite/build/bin/hhsearch"
+    
+    # The name of the directory where to run HHsearch (if it is an
+    # string, it will be the same directory specified in the 'wd'
+    # option above)
+    wd: "hhpred"
+    
+    # The name of the file where the log of the run will be stored.
+    # This file will be written inside the 'wd' directory
+    outfile: "hhsearch.log"
+    
+    # The options to launch HHsearch
+    options:
+
+      # We are using the default values used by hhsearch on the
+      # HHpred server as of Apr 12th 2024
+
+      # The descriptions of the options are taken from the HHsuite
+      # user guide
+
+      # The HMM database of concatenated HMMs in hhm, HMMER, or A3M
+      # format or, if the file has extension pal, a list of HMM file
+      # names, one per line. 
+      # Multiple dbs, HMMs, or pal files should be given with
+      # -d ’<db1> <db2>...’
+      -d: "/data/databases/hh-suite-20210225/pdb70"
+      
+      # The maximum number of query/template sequences displayed
+      -seq: 1
+      
+      # The minimum probability in the summary and alignment list
+      -p: 20
+      
+      # The maximum number of lines in summary hit list
+      -Z: 250
+      
+      # The minimum number of lines in summary hit list
+      -z: 1
+      
+      # The maximum number of alignments in alignment list
+      -B: 250
+      
+      # The minimum number of alignments in alignment list
+      -b: 1
+      
+      # The maximum length for a database string to be printed
+      # in the HHR (standard format) file
+      -dbstrlen: 10000
+      
+      # Do NOT realign displayed hits with MAC algorithm
+      -norealign: True
+      
+      # Use the local alignment mode for searching/ranking
+      -loc: True
+      
+      # How the amino acid score is calculated
+      # (tja: template HMM at column j)
+      #
+      # 0 = log2 Sum(tja*qia/pa) (pa: aa background frequencies)
+      # 1 = log2 Sum(tja*qia/pqa) (pqa = 1/2*(pa+ta) )
+      # 2 = log2 Sum(tja*qia/ta) (ta: av. aa freqs in template)﻿
+      # 3 = log2 Sum(tja*qia/qa) (qa: av. aa freqs in query)
+      # 5 = local amino acid composition correction
+      -sc: 1
+      
+      # How the secondary structure score is calulcated
+      #
+      # 0 = no ss scoring﻿
+      # 1,2 = ss scoring after or during alignment
+      # 3,4 = ss scoring after or during alignment,
+      #       predicted vs. predicted
+      -ssm: 2
+      
+      # The context file to be used for computing context-specific
+      # pseudocounts
+      -contxt: "/usr/local/hh-suite/data/context_data.crf"
+      
+      # The maximum number of HMM columns
+      -maxres: 32000
+

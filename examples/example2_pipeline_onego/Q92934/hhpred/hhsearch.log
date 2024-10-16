@@ -1,34 +1,34 @@
-- 21:13:32.895 INFO: /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/hhpred/Q92934.a3m is in A2M, A3M or FASTA format
+- 21:08:26.777 INFO: /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q92934/hhpred/Q92934.a3m is in A2M, A3M or FASTA format
 
-- 21:13:32.921 INFO: Searching 86434 database HHMs without prefiltering
+- 21:08:26.804 INFO: Searching 86434 database HHMs without prefiltering
 
-- 21:13:32.003 INFO: Iteration 1
+- 21:08:26.879 INFO: Iteration 1
 
-- 21:13:33.256 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
+- 21:08:27.116 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
 
-- 21:13:33.655 INFO: Alternative alignment: 0
+- 21:08:27.495 INFO: Alternative alignment: 0
 
-- 21:14:13.786 INFO: 86434 alignments done
+- 21:09:06.560 INFO: 86434 alignments done
 
-- 21:14:14.017 INFO: Alternative alignment: 1
+- 21:09:06.786 INFO: Alternative alignment: 1
 
-- 21:14:14.111 INFO: 107 alignments done
+- 21:09:06.878 INFO: 107 alignments done
 
-- 21:14:14.111 INFO: Alternative alignment: 2
+- 21:09:06.878 INFO: Alternative alignment: 2
 
-- 21:14:14.111 INFO: Alternative alignment: 3
+- 21:09:06.879 INFO: Alternative alignment: 3
 
-- 21:14:14.853 INFO: Premerge done
+- 21:09:07.577 INFO: Premerge done
 
-- 21:14:14.853 INFO: 0 sequences belonging to 0 database HMMs found with an E-value < 0.001
+- 21:09:07.577 INFO: 0 sequences belonging to 0 database HMMs found with an E-value < 0.001
 
 Query         sp|Q92934|BAD_HUMAN Bcl2-associated agonist of cell death OS=Homo sapiens OX=9606 GN=BAD PE=1 SV=3
 Match_columns 168
 No_of_seqs    123 out of 168
 Neff          3.80816
 Searched_HMMs 86434
-Date          Fri Nov  4 21:14:14 2022
-Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/hhpred/Q92934.a3m -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/hhpred/Q92934.hhr 
+Date          Wed Apr 17 21:09:07 2024
+Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q92934/hhpred/Q92934.a3m -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q92934/hhpred/Q92934.hhr 
 
  No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
   1 1PQ1_B Apoptosis regulator Bcl  88.9    0.21 2.4E-06   32.7   0.0   21  101-125     3-23  (33)

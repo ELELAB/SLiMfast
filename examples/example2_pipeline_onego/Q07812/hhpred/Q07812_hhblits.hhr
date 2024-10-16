@@ -3,8 +3,8 @@ Match_columns 192
 No_of_seqs    1234 out of 2085
 Neff          7.31958
 Searched_HMMs 2082
-Date          Fri Nov  4 21:18:37 2022
-Command       /usr/local/hh-suite/build/bin/hhblits -d /data/databases/hh-suite-20210225/UniRef30_2020_06 -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q07812/hhpred/Q07812_hhblits.hhr -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q07812/Q07812.fasta -oa3m /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q07812/hhpred/Q07812.a3m 
+Date          Wed Apr 17 21:12:56 2024
+Command       /usr/local/hh-suite/build/bin/hhblits -d /data/databases/hh-suite-20210225/UniRef30_2020_06 -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q07812/hhpred/Q07812_hhblits.hhr -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q07812/Q07812.fasta -oa3m /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q07812/hhpred/Q07812.a3m 
 
  No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
   1 UniRef100_A0A091D7M9 Apoptosis 100.0 1.1E-58 2.9E-64  373.0   0.0  192    1-192    26-217 (227)

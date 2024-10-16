@@ -1,16 +1,6 @@
-INFO:SLiMfast.slimfast_find_slims:The configuration has been successfully parsed from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/run_example2.yaml.
-INFO:SLiMfast.slimfast_find_slims:The SLiM instances have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/Q92934_slims.csv.
-INFO:SLiMfast.slimfast_find_slims:Data about the structures of the protein with UniProt ID Q92934 found in the Protein Data Bank have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/Q92934_structures.csv.
-INFO:SLiMfast.slimfast_find_slims:Data about the structures of the protein with UniProt ID Q92934 found in the AlphaFold Protein Structure Database have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/Q92934_alphafold.csv.
-INFO:SLiMfast.slimfast_find_slims:Data about the available structures of the homologs of the protein with UniProt ID Q92934 have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/Q92934_homologs.csv.
-INFO:SLiMfast.slimfast_find_slims:Data about the alignments of the homologs to the protein with UniProt ID Q92934 have been successfully retrieved from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/Q92934_alignments.json.
-INFO:SLiMfast.util:Data for the structure with ID 7Q16 have been successfully retrieved for the Protein Data Bank.
-INFO:SLiMfast.util:No SLiMs found in the structure with ID 7Q16.
-INFO:SLiMfast.util:Data for the structure with ID 1G5J have been successfully retrieved for the Protein Data Bank.
-INFO:SLiMfast.util:The following SLiMs have been found in the structure with ID 1G5J: BH3_103-NLWAAQRYGRELRRMSDEFVDSF-125.
-INFO:SLiMfast.util:The structure with ID 1G5J has been written successfully to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/structures/1G5J.pdb.
-INFO:SLiMfast.run_tools:Running DSSP on the PDB file /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/structures/1G5J.pdb...
-INFO:SLiMfast.util:Data in the DSSP output /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q92934/dssp/1G5J.dssp have been parsed successfully.
-INFO:SLiMfast.slimfast_find_slims:The SLiMs found in the structures of the protein with UniProt ID Q92934 found in the Protein Data Bank have been successfully written to Q92934_slims_structures.csv.
-WARNING:SLiMfast.slimfast_find_slims:No SLiMs found in the structures of the protein with UniProt ID Q92934 found in the AlphaFold Protein Structure Database.
-WARNING:SLiMfast.slimfast_find_slims:No SLiMs found in the structures of the homologs of the protein with UniProt ID Q92934 found in the Protein Data Bank.
+2024-04-17,21:12:INFO:root:The configuration was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/run_pipeline.yaml'.
+2024-04-17,21:12:INFO:root:The SLiM instances were successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q92934/Q92934_slims.csv'.
+2024-04-17,21:12:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q92934/Q92934_structures.csv.'
+2024-04-17,21:12:INFO:root:The data frame containing data about the structures available in the AlphaFold Protein Structure Database for the protein of interest was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q92934/Q92934_alphafold.csv'.
+2024-04-17,21:12:WARNING:root:No SLiMs were found in the structures available in the Protein Data Bank for the protein of interest.
+2024-04-17,21:12:WARNING:root:No SLiMs were found in the structures available in the AlphaFold Protein Structure Database for the protein of interest.

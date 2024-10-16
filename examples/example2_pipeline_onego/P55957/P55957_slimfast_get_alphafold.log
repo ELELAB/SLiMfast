@@ -1,10 +1,10 @@
-INFO:SLiMfast.slimfast_get_alphafold:Configuration parsed successfully from /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/run_example2.yaml.
-INFO:SLiMfast.slimfast_get_alphafold:The IDs of the available structures of the protein with UniProt ID P55957 have been successfully retrieved from the AlphaFold Protein Structure Database.
-INFO:SLiMfast.util:Metadata successfully collected for the structure with ID AF-P55957-F1-model_v1.
-INFO:SLiMfast.util:Metadata successfully collected for the structure with ID AF-P55957-F1-model_v2.
-INFO:SLiMfast.util:Metadata successfully collected for the structure with ID AF-P55957-F1-model_v3.
-INFO:SLiMfast.util:Metadata successfully collected for the structure with ID AF-P55957-F1-model_v4.
-INFO:SLiMfast.slimfast_get_alphafold:The data frame of the structures of the protein with UniProt ID P55957 found in the AlphaFold Protein Structure Database has been successfully filtered.
-INFO:SLiMfast.slimfast_get_alphafold:The data frame of the structures of the protein with UniProt ID P55957 found in the AlphaFold Protein Structure Database has been successfully sorted.
-INFO:SLiMfast.slimfast_get_alphafold:All data for the structures of the protein with UniProt ID P55957 found in the AlphaFold Protein Structure Database have been successfully collected.
-INFO:SLiMfast.slimfast_get_alphafold:The data frame containing data about the structures of the protein with UniProt ID P55957 found in the AlphaFold Protein Structure Database has been successfully written to /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/P55957/P55957_alphafold.csv.
+2024-04-17,21:05:INFO:root:The configuration was successfully loaded from '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/run_pipeline.yaml'.
+2024-04-17,21:05:INFO:root:The data frame containing data about the structures available in the AlphaFold Protein Structure Database for the protein of interest was successfully created.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-P55957-F1-model_v1' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-P55957-F1-model_v2' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-P55957-F1-model_v3' were successfully collected.
+2024-04-17,21:05:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-P55957-F1-model_v4' were successfully collected.
+2024-04-17,21:05:INFO:root:Metadata were successfully added to the data frame.
+2024-04-17,21:05:INFO:root:The data frame was successfully filtered.
+2024-04-17,21:05:INFO:root:The data frame was successfully sorted.
+2024-04-17,21:05:INFO:root:The data frame was successfully saved in '/data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/P55957/P55957_alphafold.csv'.

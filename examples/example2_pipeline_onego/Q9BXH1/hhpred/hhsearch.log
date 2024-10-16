@@ -1,36 +1,36 @@
-- 21:14:19.571 INFO: /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/hhpred/Q9BXH1.a3m is in A2M, A3M or FASTA format
+- 21:09:13.618 INFO: /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q9BXH1/hhpred/Q9BXH1.a3m is in A2M, A3M or FASTA format
 
-- 21:14:19.586 INFO: Searching 86434 database HHMs without prefiltering
+- 21:09:13.629 INFO: Searching 86434 database HHMs without prefiltering
 
-- 21:14:19.671 INFO: Iteration 1
+- 21:09:13.679 INFO: Iteration 1
 
-- 21:14:19.985 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
+- 21:09:13.938 INFO: Scoring 86434 HMMs using HMM-HMM Viterbi alignment
 
-- 21:14:20.267 INFO: Alternative alignment: 0
+- 21:09:14.277 INFO: Alternative alignment: 0
 
-- 21:14:58.368 INFO: 86434 alignments done
+- 21:09:56.919 INFO: 86434 alignments done
 
-- 21:14:58.577 INFO: Alternative alignment: 1
+- 21:09:57.238 INFO: Alternative alignment: 1
 
-- 21:14:58.828 INFO: 216 alignments done
+- 21:09:57.533 INFO: 216 alignments done
 
-- 21:14:58.828 INFO: Alternative alignment: 2
+- 21:09:57.533 INFO: Alternative alignment: 2
 
-- 21:14:58.890 INFO: 3 alignments done
+- 21:09:57.599 INFO: 3 alignments done
 
-- 21:14:58.890 INFO: Alternative alignment: 3
+- 21:09:57.599 INFO: Alternative alignment: 3
 
-- 21:14:59.547 INFO: Premerge done
+- 21:09:58.863 INFO: Premerge done
 
-- 21:14:59.547 INFO: 0 sequences belonging to 0 database HMMs found with an E-value < 0.001
+- 21:09:58.863 INFO: 0 sequences belonging to 0 database HMMs found with an E-value < 0.001
 
 Query         sp|Q9BXH1|BBC3_HUMAN Bcl-2-binding component 3, isoforms 1/2 OS=Homo sapiens OX=9606 GN=BBC3 PE=1 SV=1
 Match_columns 193
 No_of_seqs    42 out of 42
 Neff          2.91499
 Searched_HMMs 86434
-Date          Fri Nov  4 21:14:59 2022
-Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/hhpred/Q9BXH1.a3m -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q9BXH1/hhpred/Q9BXH1.hhr 
+Date          Wed Apr 17 21:09:58 2024
+Command       /usr/local/hh-suite/build/bin/hhsearch -d /data/databases/hh-suite-20210225/pdb70 -seq 1 -p 20 -Z 250 -z 1 -B 250 -b 1 -dbstrlen 10000 -norealign -loc -sc 1 -ssm 2 -contxt /usr/local/hh-suite/data/context_data.crf -maxres 32000 -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q9BXH1/hhpred/Q9BXH1.a3m -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q9BXH1/hhpred/Q9BXH1.hhr 
 
  No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
   1 3QBR_B SJCHGC06286 protein, Bc  59.9     7.5 8.7E-05   26.3   0.0   23  136-158    11-33  (34)

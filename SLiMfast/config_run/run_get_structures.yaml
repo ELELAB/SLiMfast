@@ -1,0 +1,29 @@
+# Configuration file to run 'slimfast_get_structures'
+
+
+# The directory where 'slimfast_get_structures' will be run. An
+# empty string represents the directory from where the executable is
+# launched
+wd: ""
+
+#---------------------------------------------------------------------#
+
+# The settings to be used for the structures
+structures:
+
+  # The settings to be used when running the executable
+  protein:
+    
+    # The settings for the output data frame
+    df:
+      
+      # The options for sorting the data frame
+      sort:
+        
+        # The sorting criteria (will be applied in order)
+        sort_by: ["resolution", "deposition_date"]
+        
+        # For each sorting criterion, whether to sort in ascending
+        # order (if False, the sorting will be in descending order)
+        ascending: [True, False]
+

@@ -3,8 +3,8 @@ Match_columns 450
 No_of_seqs    770 out of 1160
 Neff          6.21513
 Searched_HMMs 30254
-Date          Fri Nov  4 21:27:00 2022
-Command       /usr/local/hh-suite/build/bin/hhblits -d /data/databases/hh-suite-20210225/UniRef30_2020_06 -o /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/hhpred/Q14457_hhblits.hhr -i /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/Q14457.fasta -oa3m /data/user/valentina/TESTS/test_slimfast/prova/examples/example2_pipeline_onego/Q14457/hhpred/Q14457.a3m 
+Date          Wed Apr 17 21:17:54 2024
+Command       /usr/local/hh-suite/build/bin/hhblits -d /data/databases/hh-suite-20210225/UniRef30_2020_06 -o /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q14457/hhpred/Q14457_hhblits.hhr -i /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q14457/Q14457.fasta -oa3m /data/user/valentina/TESTS/test_slimfast/SLiMfast-naccess/examples/example2_pipeline_onego/Q14457/hhpred/Q14457.a3m 
 
  No Hit                             Prob E-value P-value  Score    SS Cols Query HMM  Template HMM
   1 UniRef100_A0A087XFL6 Beclin-1  100.0  1E-142  3E-148 1066.1   0.0  448    1-450   108-555 (584)

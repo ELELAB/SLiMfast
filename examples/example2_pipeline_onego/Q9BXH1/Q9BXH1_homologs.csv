@@ -1,3 +1,0 @@
-hit_id,num,hit,description,prob,e_value,p_value,score,ss,cols,uniprot_segments,struct_segments,struct_id,struct_chain,identities,similarity,sum_probs,template_neff,organism,uniprot_coverage_percent,method,resolution,deposition_date
-2_5fmk.B,2,5fmk.B,"BCL-XL, BCL-2 HOMOLOGOU",59.9,7.5E+00,8.7E-05,26.3,0.0,23,136-158,11-33,5fmk,B,35.0,0.645,0.0,4.5,Homo sapiens,11.9,X-RAY DIFFRACTION,1.731,2015-11-06
-1_3qbr.B,1,3qbr.B,"SJCHGC06286 protein, Bc",59.9,7.5E+00,8.7E-05,26.3,0.0,23,136-158,11-33,3qbr,B,35.0,0.645,0.0,4.5,Schistosoma japonicum,11.9,X-RAY DIFFRACTION,2.601,2011-01-13
