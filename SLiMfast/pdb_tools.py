@@ -111,31 +111,45 @@ def get_protein_segments(struct_id,
 
     # If something went wrong
     if not response.ok:
-        
-        # Inform the user that something went wrong
-        errstr = \
-            "It was not possible to retrieve the mapping between " \
-            f"the PDB structure with ID '{struct_id}' and the " \
-            "protein segments covered by it from PDBe. " \
-            f"Error code: {response.status_code}."
+        if response.status_code == 404:
+            errstr = \
+                f"The PDB structure with ID '{struct_id}' was not found on PDBe. " \
+                f"Please check if the ID is correct or if the structure is available."
+        else:        # Inform the user that something went wrong
+            errstr = \
+                "It was not possible to retrieve the mapping between " \
+                f"the PDB structure with ID '{struct_id}' and the " \
+                "protein segments covered by it from PDBe. " \
+                f"Error code: {response.status_code}."
 
-        # Raise an error
-        raise ValueError(errstr)
+            # Raise an error
+            raise ValueError(errstr)
 
     #-----------------------------------------------------------------#
 
     # Convert to text and read the resulting dictionary through JSON
     response_text = json.loads(response.text)
 
+
     #-----------------------------------------------------------------#
+
+    # Check if the struct_id and uniprot_id exist in the response
+    if struct_id.lower() not in response_text or \
+       "UniProt" not in response_text[struct_id.lower()] or \
+       uniprot_id not in response_text[struct_id.lower()]["UniProt"]:
+        print(f"Mapping data not found for UniProt ID '{uniprot_id}' and PDB ID '{struct_id}'.")
+        return {}
+
+    #------------------------------------------------------------------#
 
     # Get the data about the mappings
     data = \
         response_text[struct_id.lower()][\
             "UniProt"][uniprot_id]["mappings"]
 
+
     #-----------------------------------------------------------------#
-    
+        
     # Create an empty dictionary to store the mapping between the PDB
     # ID and the chains corresponding to the protein of interest
     mappings = {}
@@ -190,21 +204,21 @@ def get_protein_segments(struct_id,
         # chain corresponds to multiple discontinuous protein
         # segments)
         if struct_chain in mappings.keys():
-            
+                
             # Add the ranges to the mapping
             mappings[struct_chain].append(ranges)
 
         # If it is the first time that the chain ID is encountered
         else:
-            
+                
             # Create a new list and add the mapping as the list's
             # first element
             mappings[struct_chain] = [ranges]
 
-    #-----------------------------------------------------------------#
+        #-----------------------------------------------------------------#
 
-    # Return the mappings found
-    return mappings
+        # Return the mappings found
+        return mappings
 
 
 def get_pdb_data(struct_id,

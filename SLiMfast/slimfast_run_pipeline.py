@@ -83,6 +83,7 @@ def run():
 
     #-----------------------------------------------------------------#
 
+
     # Retrieve the arguments
     input_ids_slims_file = args.input_ids_slims_file
     do_get_structures = args.do_get_structures

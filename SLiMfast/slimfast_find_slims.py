@@ -262,7 +262,6 @@ def run():
             
             alphafold_df = pd.read_csv(input_alphafold_file,
                                        sep = sep)
-        
         # If something went wrong
         except Exception as e:
 
@@ -452,7 +451,7 @@ def run():
             # Add the structures and the SLiMs found in them
             # to the list
             structures_and_slims.extend(structures_and_slims_prot)
-        
+
         # If something went wrong
         except Exception as e:
 
