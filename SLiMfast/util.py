@@ -769,7 +769,6 @@ def load_slims(slims_file):
     # Convert the data frame to a list of tuples
     slims_tuples = list(df_slims.itertuples(index = False,
                                             name = None))
-
     #-----------------------------------------------------------------#
 
     # Create an empty list to store the results
@@ -778,7 +777,7 @@ def load_slims(slims_file):
     #-----------------------------------------------------------------#
 
     # If there are four columns
-    if len(slims_tuples) == 4:
+    if len(slims_tuples[0]) == 4:
 
         # If they are not the supported ones
         if df_slims.columns.tolist() != VALID_COLS[:-1]:
@@ -806,7 +805,7 @@ def load_slims(slims_file):
     #-----------------------------------------------------------------#
 
     # If there are five columns
-    elif len(slims_tuples) == 5:
+    elif len(slims_tuples[0]) == 5:
 
         # If they are not the supported ones
         if df_slims.columns.tolist() != VALID_COLS:
@@ -831,17 +830,17 @@ def load_slims(slims_file):
             # Get the residues for which we have to calculate the
             # solvent accessibility
             slim_acc_res_abs = \
-                [int(item) for item in tup[4].split(".")]
+                [int(item) for item in tup[4].split(":")]
 
             # Get the relative positions of the residues with respect
             # to the SLiM
             slim_acc_res_rel = \
-                [res + slim_start for res in slim_acc_res_abs]
+                [res - slim_start for res in slim_acc_res_abs]
 
             # Add a new tuple with the updated data to the final list
             slims.append(\
                 (tup[0], tup[1], tup[2], tup[3], 
-                 (slim_acc_res_abs, slim_acc_res_rel)))
+                 (tuple(slim_acc_res_abs), tuple(slim_acc_res_rel))))
 
     #-----------------------------------------------------------------#
 
@@ -977,6 +976,7 @@ def get_structures_df(uniprot_id):
     # protein of interest in the Protein Data Bank (it yields one
     # structure at a time)
     pdbs = uniprot_tools.get_pdbs(uniprot_id = uniprot_id)
+
 
     #-----------------------------------------------------------------#
     
@@ -1311,7 +1311,7 @@ def region_in_protein_segments(seq_range,
         uniprot_ranges = \
             [(int(s.split(range_sep)[0]), int(s.split(range_sep)[1])) \
              for s in uniprot_segments.split(segments_sep)]
-    
+
     # If something went wrong
     except ValueError:
 
@@ -1334,7 +1334,7 @@ def region_in_protein_segments(seq_range,
         struct_ranges = \
             [(int(s.split(range_sep)[0]), int(s.split(range_sep)[1])) \
              for s in struct_segments.split(segments_sep)]
-    
+
     # If something went wrong
     except ValueError:
 
@@ -1593,7 +1593,6 @@ def find_slims(source,
 
             # Exit the loop
             break
-
         #-------------------------------------------------------------#
 
         # Create an empty list to store the SLiMs found in each

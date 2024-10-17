@@ -227,6 +227,7 @@ def get_pdbs(uniprot_id):
             # are not reported (i.e. in Q07817)
 
             # Yield the structure's PDB ID
+
             yield struct_id
 
     #-----------------------------------------------------------------#
