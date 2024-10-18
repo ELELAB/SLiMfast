@@ -464,9 +464,6 @@ def run():
             # Re-raise the exception
             raise Exception(errstr) from e
 
-        # Update the list of SLiMs still to be found
-        slims_to_find = still_to_find
-
     #-----------------------------------------------------------------#
 
     # If there are still SLiMs to find and we have the structures
@@ -499,9 +496,6 @@ def run():
 
             # Re-raise the exception
             raise Exception(errstr) from e
-
-        # Update the list of SLiMs still to be found
-        slims_to_find = still_to_find
 
     #-----------------------------------------------------------------#
 
@@ -536,9 +530,6 @@ def run():
 
             # Re-raise the exception
             raise Exception(errstr) from e
-
-        # Update the list of SLiMs still to be found
-        slims_to_find = still_to_find
 
     #-----------------------------------------------------------------#
 

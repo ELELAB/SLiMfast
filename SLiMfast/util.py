@@ -1588,11 +1588,6 @@ def find_slims(source,
     # For each row in the data frame (= structure)
     for index, row in structures_df.iterrows():
 
-        # If no SLiMs are left to search
-        if set(slims_to_find) == set(slims_found):
-
-            # Exit the loop
-            break
         #-------------------------------------------------------------#
 
         # Create an empty list to store the SLiMs found in each
@@ -1700,12 +1695,6 @@ def find_slims(source,
         # For each SLiM still not found in a structure
         for slim in slims_to_find:
 
-            # If the SLiM was found
-            if slim in slims_found:
-
-                # Go to the next SLiM
-                continue
-
             #---------------------------------------------------------#
 
             # Get the SLiM's type
@@ -1771,12 +1760,7 @@ def find_slims(source,
                     # No need to check the structure for missing
                     # residues, since all segments with problems
                     # in the mapping were already excluded
-                    
-                    # Add the SLiM to the set of SLiMs found
-                    slims_found.add(slim)
 
-                    # Add the SLiM to the list of SLiMs found in
-                    # the current structure
                     slims_in_struct.append([s_type, \
                                            (s_start, s_seq, s_end),
                                             s_acc_res[0]])
@@ -1817,9 +1801,6 @@ def find_slims(source,
                     # If the SLiM is in the structure
                     if slim_in_struct_segments:
                     
-                        # Add the SLiM to the set of SLiMs found
-                        slims_found.add(slim)
-
                         # Get the relative positions of the residues
                         # for which solvent accessibility will be
                         # calculated (with respect to the SLiM)
@@ -1908,7 +1889,7 @@ def find_slims(source,
 
     # Return the list of PDB structures and the associated SLiMs
     return structures_and_slims, \
-           [s for s in slims_to_find if s not in slims_found]
+           [s for s in slims_to_find]
 
 
 
@@ -2298,6 +2279,7 @@ def get_naccess_data(pdb_file,
     except Exception as e:
 
         # Set the error message
+
         errstr = \
             "It was not possible to parse data from NACCESS' output " \
             f"file '{naccess_output_rel}'"
