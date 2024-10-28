@@ -40,7 +40,6 @@ __doc__ = "(Mostly internal) fefault values for SLiMfast."
 # Standard library
 import logging as log
 import os
-from pkg_resources import resource_filename, Requirement
 
 
 #######################################################################
