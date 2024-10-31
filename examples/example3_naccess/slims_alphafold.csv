@@ -1,0 +1,7 @@
+source,struct_id,struct_chain,slim_name,slim_start,slim_sequence,slim_end,disordered_region,abs_total_acc,rel_total_acc
+alphafold,AF-Q9BQS8-F1-model_v3,A,LIR,1280,FDII,1283,False,1280:180.33_1283:145.72,1280:90.4_1283:83.2
+alphafold,AF-Q9BQS8-F1-model_v3,A,LIR,1401,FSVV,1404,False,1401:8.14_1404:0.0,1401:4.1_1404:0.0
+alphafold,AF-Q9BQS8-F1-model_v2,A,LIR,1280,FDII,1283,False,1280:180.33_1283:145.72,1280:90.4_1283:83.2
+alphafold,AF-Q9BQS8-F1-model_v2,A,LIR,1401,FSVV,1404,False,1401:8.14_1404:0.0,1401:4.1_1404:0.0
+alphafold,AF-Q9BQS8-F1-model_v1,A,LIR,1280,FDII,1283,False,1280:180.33_1283:145.72,1280:90.4_1283:83.2
+alphafold,AF-Q9BQS8-F1-model_v1,A,LIR,1401,FSVV,1404,False,1401:8.14_1404:0.0,1401:4.1_1404:0.0

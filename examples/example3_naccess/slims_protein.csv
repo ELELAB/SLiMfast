@@ -1,0 +1,3 @@
+source,struct_id,struct_chain,slim_name,slim_start,slim_sequence,slim_end,disordered_region,abs_total_acc,rel_total_acc
+structures,5D94,B,LIR,1280,FDII,1283,False,1280:29.46_1283:0.0,1280:14.8_1283:0.0
+structures,5CX3,E,LIR,1280,FDII,1283,False,1280:29.55_1283:0.0,1280:14.8_1283:0.0

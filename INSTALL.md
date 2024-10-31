@@ -1,12 +1,12 @@
 # Installing SLiMfast
 
-Last updated: 17/04/2024
+Last updated: 31/10/2024
 
 ## Introduction
 
 SLiMfast is a Python package.
 
-You will need Python 3.8 or higher and some open-source Python packages to install SLiMfast.
+You will need Python 3.10 or higher and some open-source Python packages to install SLiMfast.
 
 Python is usually available by default in any Linux installation, and the Python packages are installed automatically during the installation process. For the required Python package list, please see the `requirements.txt` file or the `environment.yaml` file.
 
@@ -16,7 +16,7 @@ Here, we provide instructions for installing SLiMfast in a `virtualenv` or `cond
 
 ### Installing in a `virtualenv` environment
 
-This simple installation procedure requires a Python >= 3.8 distribution to be available. It guides you in installing the SLiMfast package in a virtual environment, meaning an instance of Python isolated from your system.
+This simple installation procedure requires a Python >= 3.10 distribution to be available. It guides you in installing the SLiMfast package in a virtual environment, meaning an instance of Python isolated from your system.
 
 This is not strictly necessary, and SLiMfast may be installed system-wide similarly, following steps 4 to 9.
 
@@ -44,10 +44,10 @@ If the installation is successful, the `virtualenv` command will be available.
 
 #### Step 2 - Create the virtual environment
 
-Create your Python 3.8 virtual environment in a directory of your choice (in this case, it will be `slimfast-env`).
+Create your Python 3.10 virtual environment in a directory of your choice (in this case, it will be `slimfast-env`).
 
 ```shell
-virtualenv -p /usr/bin/python3.8 slimfast-env
+virtualenv -p /usr/bin/python3.10 slimfast-env
 ```
 
 You should replace the argument of option `-p` according to the location of your Python installation in the system.
@@ -84,8 +84,7 @@ pip install -r requirements.txt
 You can now install SLiMfast.
 
 ```shell
-cd ..
-pip ./SLiMfast
+python setup.py install
 ```
 
 If the installation is successful, the SLiMfast executables (`slimfast_get_structures`, `slimfast_get_homologs`, `slimfast_find_slims`, `slimfast_run_pipeline`) should now be available.
