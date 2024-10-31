@@ -318,8 +318,7 @@ NPROC_DEFAULT = 1
 
 # The directory where the configuration files for running
 CONFIG_RUN_DIR = \
-    resource_filename(Requirement("SLiMfast"), "SLiMfast/config_run")
-
+        os.path.join(os.path.dirname(__file__), "SLiMfast", "config_run")
 
 #######################################################################
 
