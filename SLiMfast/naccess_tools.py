@@ -41,6 +41,7 @@ __doc__ = "Utilities to parse data from NACCESS' output files."
 import logging as log
 # Third-party packages
 import pandas as pd
+import re
 
 
 #######################################################################
@@ -107,49 +108,76 @@ class NACCESSParser:
             for line in f:
 
                 # Get the single items from the line
-                items = \
-                    [item for item in line.rstrip().split(" ") \
-                     if item != ""]
+                items = [item for item in line.rstrip().split(" ") \
+                         if item != ""]
 
-                # If we are parsing a line containing residue-level
+                # If we are parsing a line containing residue-level 
                 # information
                 if items[0] == "RES":
 
-                    # Set the index for the current residue
-                    index = \
-                        f"{curr_model}_{items[2]}_" \
-                        f"{self.RESIDUES_3to1[items[1]]}_{items[3]}"
+
+                    # Handle the case where chain ID and residue number 
+                    # are combined (e.g., 'A1200')
+                    chain_res_combined = items[2]
+
                     
-                    # If it is already present in the data (= we are
-                    # parsing a new model)
+                    # Use a regex to separate the chain ID (one letter) 
+                    # and the residue number (digits)
+                    match = re.match(r"([A-Za-z])(\d+)",\
+                                     chain_res_combined)
+
+                    if match:
+
+                        # This will be the chain ID, e.g., 'A'
+                        chain_id = match.group(1)
+
+                        # This will be the residue number, e.g., '1200'
+                        res_num = match.group(2)
+
+                        # Update the list to have the correct 
+                        # list length
+                        items[2] = chain_id
+                        items.insert(3, res_num)
+
+                    # In case of any unexpected format, 
+                    # fallback to the original   
+                    else:
+                        chain_id = items[2]
+                        res_num = items[3]
+
+                    # Set the index for the current residue
+                    index = f"{curr_model}_{chain_id}_\
+                            {self.RESIDUES_3to1[items[1]]}_{res_num}"
+
+                    # If it is already present in the data 
+                    # (= we are parsing a new model)
                     if index in data:
 
                         # Update the number of the current model
                         curr_model += 1
 
                         # Re-define the index with the new model number
-                        index = \
-                            f"{curr_model}_{items[2]}_" \
-                            f"{self.RESIDUES_3to1[items[1]]}_" \
-                            f"{items[3]}"
+                        index = f"{curr_model}_{chain_id}_\
+                                {self.RESIDUES_3to1[items[1]]}_\
+                                {res_num}"
 
                     # Add the current residue to the dictionary
-                    data[index] = \
-                        {"model" : curr_model,
-                         "chain_id" : items[2],
-                         "res_num" : int(items[3]),
-                         "res_name" : items[1],
-                         "abs_total_acc" : float(items[4]),
-                         "rel_total_acc" : float(items[5]),
-                         "abs_sc_total_acc" : float(items[6]),
-                         "rel_sc_total_acc" : float(items[7]),
-                         "abs_mc_total_acc" : float(items[8]),
-                         "rel_mc_total_acc" : float(items[9]),
-                         "abs_sc_nonpolar_acc" : float(items[10]),
-                         "rel_sc_nonpolar_acc" : float(items[11]),
-                         "abs_sc_polar_acc" : float(items[12]),
-                         "rel_sc_polar_acc" : float(items[13])}
-
+                    data[index] = {
+                        "model": curr_model,
+                        "chain_id": chain_id,
+                        "res_num": int(res_num),
+                        "res_name": items[1],
+                        "abs_total_acc": float(items[4]),
+                        "rel_total_acc": float(items[5]),
+                        "abs_sc_total_acc": float(items[6]),
+                        "rel_sc_total_acc": float(items[7]),
+                        "abs_mc_total_acc": float(items[8]),
+                        "rel_mc_total_acc": float(items[9]),
+                        "abs_sc_nonpolar_acc": float(items[10]),
+                        "rel_sc_nonpolar_acc": float(items[11]),
+                        "abs_sc_polar_acc": float(items[12]),
+                        "rel_sc_polar_acc": float(items[13]),
+                    }
             #---------------------------------------------------------#
 
             # Convert the dictionary into a data frame and transpose it
