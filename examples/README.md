@@ -18,7 +18,6 @@ In the `example2_pipeline_onego` directory, you will find the scripts and input 
 
 You will also find the output files produced by the run and a `readme.txt` file detailing how the run was performed in the same directory.
 
-
 ### Example 3 - Running the entire `SLiMfast` pipeline on one protein, calling each tool separately, with NACCESS calculations
 
 In the `example3_naccess` directory, you will find the scripts and input files used to run `slimfast_get_structures`, `slimfast_get_alphafold`, `slimfast_get_homologs`, and `slimfast_find_slims` on the human protein FYCO1, whose UniProt ID is `Q9BQS8`.

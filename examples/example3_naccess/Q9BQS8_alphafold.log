@@ -1,0 +1,10 @@
+2024-10-18,10:46:INFO:root:The configuration was successfully loaded from 'run_get_alphafold.yaml'.
+2024-10-18,10:46:INFO:root:The data frame containing data about the structures available in the AlphaFold Protein Structure Database for the protein of interest was successfully created.
+2024-10-18,10:46:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-Q9BQS8-F1-model_v1' were successfully collected.
+2024-10-18,10:46:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-Q9BQS8-F1-model_v2' were successfully collected.
+2024-10-18,10:46:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-Q9BQS8-F1-model_v3' were successfully collected.
+2024-10-18,10:46:INFO:SLiMfast.util:The metadata for the structure with ID 'AF-Q9BQS8-F1-model_v4' were successfully collected.
+2024-10-18,10:46:INFO:root:Metadata were successfully added to the data frame.
+2024-10-18,10:46:INFO:root:The data frame was successfully filtered.
+2024-10-18,10:46:INFO:root:The data frame was successfully sorted.
+2024-10-18,10:46:INFO:root:The data frame was successfully saved in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/Q9BQS8_alphafold.csv'.

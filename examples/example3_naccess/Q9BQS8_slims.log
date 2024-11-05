@@ -1,0 +1,90 @@
+2024-10-18,13:16:INFO:root:The configuration was successfully loaded from 'run_find_slims.yaml'.
+2024-10-18,13:16:INFO:root:The SLiM instances were successfully loaded from 'slims.csv'.
+2024-10-18,13:16:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully loaded from 'Q9BQS8_structures.csv.'
+2024-10-18,13:16:INFO:root:The data frame containing data about the structures available in the AlphaFold Protein Structure Database for the protein of interest was successfully loaded from 'Q9BQS8_alphafold.csv'.
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/7BQI.pdb HTTP/1.1" 200 38012
+2024-10-18,13:16:INFO:SLiMfast.util:Data for the structure with ID '7BQI' were successfully retrieved from the Protein Data Bank.
+2024-10-18,13:16:INFO:SLiMfast.util:No SLiMs found in the structure with ID '7BQI'.
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5D94.pdb HTTP/1.1" 200 31642
+2024-10-18,13:16:INFO:SLiMfast.util:Data for the structure with ID '5D94' were successfully retrieved from the Protein Data Bank.
+2024-10-18,13:16:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID '5D94': LIR_1280-FDII-1283.
+2024-10-18,13:16:INFO:SLiMfast.util:The structure with ID '5D94' was successfully written in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/5D94.pdb'.
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5CX3.pdb HTTP/1.1" 200 207918
+2024-10-18,13:16:INFO:SLiMfast.util:Data for the structure with ID '5CX3' were successfully retrieved from the Protein Data Bank.
+2024-10-18,13:16:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID '5CX3': LIR_1280-FDII-1283.
+2024-10-18,13:16:INFO:SLiMfast.util:The structure with ID '5CX3' was successfully written in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/5CX3.pdb'.
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.alphafold.ebi.ac.uk:443
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:https://www.alphafold.ebi.ac.uk:443 "GET /files/AF-Q9BQS8-F1-model_v3.pdb HTTP/1.1" 200 214006
+2024-10-18,13:16:DEBUG:charset_normalizer:Encoding detection: ascii is most likely the one.
+2024-10-18,13:16:INFO:SLiMfast.util:Data for the structure with ID 'AF-Q9BQS8-F1-model_v3' were successfully retrieved for the AlphaFold Protein Structure Database.
+2024-10-18,13:16:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID 'AF-Q9BQS8-F1-model_v3': LIR_1280-FDII-1283, LIR_1401-FSVV-1404.
+2024-10-18,13:16:INFO:SLiMfast.util:The structure with ID 'AF-Q9BQS8-F1-model_v3' was successfully written in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/AF-Q9BQS8-F1-model_v3.pdb'.
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.alphafold.ebi.ac.uk:443
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:https://www.alphafold.ebi.ac.uk:443 "GET /files/AF-Q9BQS8-F1-model_v2.pdb HTTP/1.1" 200 214005
+2024-10-18,13:16:DEBUG:charset_normalizer:Encoding detection: ascii is most likely the one.
+2024-10-18,13:16:INFO:SLiMfast.util:Data for the structure with ID 'AF-Q9BQS8-F1-model_v2' were successfully retrieved for the AlphaFold Protein Structure Database.
+2024-10-18,13:16:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID 'AF-Q9BQS8-F1-model_v2': LIR_1280-FDII-1283, LIR_1401-FSVV-1404.
+2024-10-18,13:16:INFO:SLiMfast.util:The structure with ID 'AF-Q9BQS8-F1-model_v2' was successfully written in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/AF-Q9BQS8-F1-model_v2.pdb'.
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.alphafold.ebi.ac.uk:443
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:https://www.alphafold.ebi.ac.uk:443 "GET /files/AF-Q9BQS8-F1-model_v1.pdb HTTP/1.1" 200 213924
+2024-10-18,13:16:DEBUG:charset_normalizer:Encoding detection: ascii is most likely the one.
+2024-10-18,13:16:INFO:SLiMfast.util:Data for the structure with ID 'AF-Q9BQS8-F1-model_v1' were successfully retrieved for the AlphaFold Protein Structure Database.
+2024-10-18,13:16:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID 'AF-Q9BQS8-F1-model_v1': LIR_1280-FDII-1283, LIR_1401-FSVV-1404.
+2024-10-18,13:16:INFO:SLiMfast.util:The structure with ID 'AF-Q9BQS8-F1-model_v1' was successfully written in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/AF-Q9BQS8-F1-model_v1.pdb'.
+2024-10-18,13:16:WARNING:SLiMfast.run_tools:The file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/5D94.dssp' was found in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp'. SLiMfast will not run DSSP again.
+2024-10-18,13:16:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/5D94.pdb'.
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/5D94.dssp'.
+2024-10-18,13:16:INFO:SLiMfast.util:Now working with sequence 4-FDII-7 (DSSP sequence: '-EE-')...
+2024-10-18,13:16:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 1-DAVFDIITDE-10. (DSSP sequence: '----EE--HH').
+2024-10-18,13:16:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/5D94.pdb'...
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/5D94.rsa'.
+2024-10-18,13:16:WARNING:SLiMfast.run_tools:The file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/5CX3.dssp' was found in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp'. SLiMfast will not run DSSP again.
+2024-10-18,13:16:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/5CX3.pdb'.
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/5CX3.dssp'.
+2024-10-18,13:16:INFO:SLiMfast.util:Now working with sequence 8-FDII-11 (DSSP sequence: 'EEE-')...
+2024-10-18,13:16:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 5-DAVFDIITDE-14. (DSSP sequence: 'EEEEEE--HH').
+2024-10-18,13:16:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/5CX3.pdb'...
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/5CX3.rsa'.
+2024-10-18,13:16:WARNING:SLiMfast.run_tools:The file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/AF-Q9BQS8-F1-model_v3.dssp' was found in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp'. SLiMfast will not run DSSP again.
+2024-10-18,13:16:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/AF-Q9BQS8-F1-model_v3.pdb'.
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/AF-Q9BQS8-F1-model_v3.dssp'.
+2024-10-18,13:16:INFO:SLiMfast.util:Now working with sequence 1280-FDII-1283 (DSSP sequence: '----')...
+2024-10-18,13:16:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 1277-DAVFDIITDE-1286. (DSSP sequence: '--------HH').
+2024-10-18,13:16:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/AF-Q9BQS8-F1-model_v3.pdb'...
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v3.rsa'.
+2024-10-18,13:16:INFO:SLiMfast.util:Now working with sequence 1401-FSVV-1404 (DSSP sequence: 'EEEE')...
+2024-10-18,13:16:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 1398-SISFSVVFQE-1407. (DSSP sequence: '-EEEEEEEE-').
+2024-10-18,13:16:WARNING:SLiMfast.run_tools:The files '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v3.asa' and  '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v3.rsa' were found in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess'. SLiMfast will not run NACCESS again.
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v3.rsa'.
+2024-10-18,13:16:WARNING:SLiMfast.run_tools:The file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/AF-Q9BQS8-F1-model_v2.dssp' was found in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp'. SLiMfast will not run DSSP again.
+2024-10-18,13:16:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/AF-Q9BQS8-F1-model_v2.pdb'.
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/AF-Q9BQS8-F1-model_v2.dssp'.
+2024-10-18,13:16:INFO:SLiMfast.util:Now working with sequence 1280-FDII-1283 (DSSP sequence: '----')...
+2024-10-18,13:16:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 1277-DAVFDIITDE-1286. (DSSP sequence: '--------HH').
+2024-10-18,13:16:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/AF-Q9BQS8-F1-model_v2.pdb'...
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v2.rsa'.
+2024-10-18,13:16:INFO:SLiMfast.util:Now working with sequence 1401-FSVV-1404 (DSSP sequence: 'EEEE')...
+2024-10-18,13:16:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 1398-SISFSVVFQE-1407. (DSSP sequence: '-EEEEEEEE-').
+2024-10-18,13:16:WARNING:SLiMfast.run_tools:The files '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v2.asa' and  '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v2.rsa' were found in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess'. SLiMfast will not run NACCESS again.
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v2.rsa'.
+2024-10-18,13:16:WARNING:SLiMfast.run_tools:The file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/AF-Q9BQS8-F1-model_v1.dssp' was found in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp'. SLiMfast will not run DSSP again.
+2024-10-18,13:16:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/AF-Q9BQS8-F1-model_v1.pdb'.
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/dssp/AF-Q9BQS8-F1-model_v1.dssp'.
+2024-10-18,13:16:INFO:SLiMfast.util:Now working with sequence 1280-FDII-1283 (DSSP sequence: '----')...
+2024-10-18,13:16:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 1277-DAVFDIITDE-1286. (DSSP sequence: '--------HH').
+2024-10-18,13:16:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/structures/AF-Q9BQS8-F1-model_v1.pdb'...
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v1.rsa'.
+2024-10-18,13:16:INFO:SLiMfast.util:Now working with sequence 1401-FSVV-1404 (DSSP sequence: 'EEEE')...
+2024-10-18,13:16:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 1398-SISFSVVFQE-1407. (DSSP sequence: '-EEEEEEEE-').
+2024-10-18,13:16:WARNING:SLiMfast.run_tools:The files '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v1.asa' and  '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v1.rsa' were found in '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess'. SLiMfast will not run NACCESS again.
+2024-10-18,13:16:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/SLiMfast_Naccess/test_Q9BQS8/naccess/AF-Q9BQS8-F1-model_v1.rsa'.
+2024-10-18,13:16:INFO:root:The data frame containing the SLiMs found in the structures available in the Protein Data Bank for the protein of interest was successfully saved in 'slims_protein.csv'.
+2024-10-18,13:16:INFO:root:The data frame containing the SLiMs found in the structures available in the AlphaFold Protein Structure Database for the protein of interest was successfully saved in 'slims_alphafold.csv'.
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.disprot.org:443
+2024-10-18,13:16:DEBUG:urllib3.connectionpool:https://www.disprot.org:443 "GET /api/Q9BQS8 HTTP/1.1" 404 None
+2024-10-18,13:16:WARNING:SLiMfast.disprot_tools:No DisProt annotations exist for the protein with UniProt ID 'Q9BQS8' (status: 'not-exist').
+2024-10-18,13:16:INFO:SLiMfast.util:The DisProt annotations for the protein with UniProt ID 'Q9BQS8' were successfully retrieved.
+2024-10-18,13:16:WARNING:root:No annotations were found in DisProt for the SLiMs of interest.

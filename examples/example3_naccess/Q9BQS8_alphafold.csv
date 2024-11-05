@@ -1,0 +1,4 @@
+struct_id,struct_chain,struct_segments,struct_version,struct_fragment,uniprot_id,uniprot_segments,uniprot_isoform,alphafold_id,deposition_date
+AF-Q9BQS8-F1-model_v3,A,1-1,3,1,Q9BQS8,1-1478,,AF-Q9BQS8-F1,2022-06-01
+AF-Q9BQS8-F1-model_v2,A,1-1,2,1,Q9BQS8,1-1478,,AF-Q9BQS8-F1,2021-07-01
+AF-Q9BQS8-F1-model_v1,A,1-1,1,1,Q9BQS8,1-1478,,AF-Q9BQS8-F1,2021-07-01

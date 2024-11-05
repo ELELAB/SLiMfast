@@ -1,0 +1,4 @@
+struct_id,struct_chain,struct_segments,uniprot_id,uniprot_segments,method,resolution,deposition_date
+7BQI,A,6-183,Q9BQS8,1-178,X-RAY DIFFRACTION,1.3,2020-03-24
+5D94,B,1-13,Q9BQS8,1276-1288,X-RAY DIFFRACTION,1.53,2015-08-18
+5CX3,E,1-26,Q9BQS8,1273-1298,X-RAY DIFFRACTION,2.3,2015-07-28
