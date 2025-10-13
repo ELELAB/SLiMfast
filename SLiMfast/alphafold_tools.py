@@ -153,7 +153,7 @@ def get_alphafold_data(uniprot_id = None,
         # Raise an error
         errstr = \
             "You must provide either a UniProt ID or a specific " \
-            "structure's ID (i.e., AF-P10415-F1-model_v3)."
+            "structure's ID (i.e., AF-P10415-F1-v3)."
         raise ValueError(errstr)
 
     #-----------------------------------------------------------------#
@@ -191,7 +191,7 @@ def get_alphafold_data(uniprot_id = None,
     #-----------------------------------------------------------------#
 
     # Try to get all versions of the structure
-    for version in itertools.count(start = 1):
+    for version in itertools.count(start = 6):
 
         # Try to get all fragments (if the structure is split into
         # multiple fragments)
