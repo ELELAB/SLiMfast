@@ -82,143 +82,113 @@ STRUCTURE_METADATA = [
 #######################################################################
 
 
-def get_protein_segments(struct_id,
-                         uniprot_id):
-    """Given a protein's UniProt ID and a structure's PDB ID, identify
-    which portions (segments) of the protein are covered by the
-    structure.
-    
-    Parameters
-    ----------
-    struct_id : ``str``
-        The structure's PDB ID.
 
-    uniprot_id : ``str``
-        The protein's UniProt ID.
+def get_protein_segments(struct_id, uniprot_id):
+    """Retrieve PDB-UniProt residue mappings from PDBe.
+
+    Returns
+    -------
+    mappings : dict
+        Dictionary containing the PDB chains and their
+        corresponding PDB and UniProt residue ranges.
+
+        Format:
+        {
+            "A": [
+                [[pdb_start, pdb_end],
+                 [uniprot_start, uniprot_end]]
+            ]
+        }
     """
 
-    # The generic URL where the mapping between entities in a PDB
-    # entry and their corresponding UniProt data are stored on PDBe
-    mapping_url = \
-        "https://www.ebi.ac.uk/pdbe/api/mappings/uniprot_segments/{:s}"
+    # Updated PDBe API endpoint
+    mapping_url = (
+        "https://www.ebi.ac.uk/pdbe/api/v2/"
+        "mappings/uniprot/{:s}"
+    )
 
-    #-----------------------------------------------------------------#
+    pdb_id = struct_id.lower()
 
-    # Get the data from PDBe
-    response = requests.get(mapping_url.format(struct_id))
+    # Retrieve mapping data
+    response = requests.get(
+        mapping_url.format(pdb_id),
+        timeout=30
+    )
 
-    #-----------------------------------------------------------------#
-
-    # If something went wrong
-    if not response.ok:
-        if response.status_code == 404:
-            errstr = \
-                f"The PDB structure with ID '{struct_id}' was not found on PDBe. " \
-                f"Please check if the ID is correct or if the structure is available."
-        else:        # Inform the user that something went wrong
-            errstr = \
-                "It was not possible to retrieve the mapping between " \
-                f"the PDB structure with ID '{struct_id}' and the " \
-                "protein segments covered by it from PDBe. " \
-                f"Error code: {response.status_code}."
-
-            # Raise an error
-            raise ValueError(errstr)
-
-    #-----------------------------------------------------------------#
-
-    # Convert to text and read the resulting dictionary through JSON
-    response_text = json.loads(response.text)
-
-
-    #-----------------------------------------------------------------#
-
-    # Check if the struct_id and uniprot_id exist in the response
-    if struct_id.lower() not in response_text or \
-       "UniProt" not in response_text[struct_id.lower()] or \
-       uniprot_id not in response_text[struct_id.lower()]["UniProt"]:
-        print(f"Mapping data not found for UniProt ID '{uniprot_id}' and PDB ID '{struct_id}'.")
+    # Handle missing mappings
+    if response.status_code == 404:
+        logger.warning(
+            f"No PDBe mapping found for PDB '{struct_id}'."
+        )
         return {}
 
-    #------------------------------------------------------------------#
+    # Handle other HTTP errors
+    response.raise_for_status()
 
-    # Get the data about the mappings
-    data = \
-        response_text[struct_id.lower()][\
-            "UniProt"][uniprot_id]["mappings"]
+    # Parse JSON
+    response_data = response.json()
 
+    # Extract mapping information
+    pdb_data = response_data.get(pdb_id, {})
+    uniprot_data = pdb_data.get("UniProt", {})
 
-    #-----------------------------------------------------------------#
-        
-    # Create an empty dictionary to store the mapping between the PDB
-    # ID and the chains corresponding to the protein of interest
+    if uniprot_id not in uniprot_data:
+        logger.warning(
+            f"Mapping data not found for UniProt ID "
+            f"'{uniprot_id}' and PDB ID '{struct_id}'."
+        )
+        return {}
+
+    data = uniprot_data[uniprot_id].get("mappings", [])
+
+    # Initialize mappings dictionary
     mappings = {}
 
-    #-----------------------------------------------------------------#
-
-    # For each mapping found
     for m in data:
 
-        # Get the chain ID
-        struct_chain = m["chain_id"]
+        struct_chain = m.get("chain_id")
 
-        # Get the start of the chain in the structure's own numbering
-        struct_start = m["start"]["residue_number"]
+        struct_start = m.get("start", {}).get(
+            "residue_number"
+        )
 
-        # Get the start of the chain in the structure's own numbering
-        struct_end = m["end"]["residue_number"]
+        struct_end = m.get("end", {}).get(
+            "residue_number"
+        )
 
-        # Get the start of the chain in UniProt numbering
-        uniprot_start = m["unp_start"]
+        uniprot_start = m.get("unp_start")
+        uniprot_end = m.get("unp_end")
 
-        # Get the end of the chain in UniProt numbering
-        uniprot_end = m["unp_end"]
-
-        #-------------------------------------------------------------#
-
-        # If no mapping was available
-        if struct_start == "null" or struct_end == "null":
-
-            # Warn the user
-            warnstr = \
-                "There is no mapping available for residues " \
-                f"{unp_start}-{unp_end} of the protein with UniProt " \
-                f"ID '{uniprot_id}' in chain '{struct_chain}' " \
-                f"of the PDB structure with ID '{struct_id}'. " \
-                "Therefore, this protein segment will be ignored."
-            logger.warning(warnstr)
-
-            # Go to the next mapping
+        # Skip incomplete mappings
+        if any(
+            value is None or value == "null"
+            for value in [
+                struct_chain,
+                struct_start,
+                struct_end,
+                uniprot_start,
+                uniprot_end
+            ]
+        ):
+            logger.warning(
+                f"Incomplete mapping for UniProt "
+                f"'{uniprot_id}' in PDB '{struct_id}'. "
+                f"Skipping segment."
+            )
             continue
 
-        #-------------------------------------------------------------#
+        ranges = [
+            [struct_start, struct_end],
+            [uniprot_start, uniprot_end]
+        ]
 
-        # Create a tuple of tuples to store the mapping's ranges
-        ranges = \
-            [[struct_start, struct_end], \
-             [uniprot_start, uniprot_end]]
+        # Append all segments belonging to each chain
+        if struct_chain not in mappings:
+            mappings[struct_chain] = []
 
-        #-------------------------------------------------------------#
+        mappings[struct_chain].append(ranges)
 
-        # If the chain ID was already encountered (i.e., the PDB
-        # chain corresponds to multiple discontinuous protein
-        # segments)
-        if struct_chain in mappings.keys():
-                
-            # Add the ranges to the mapping
-            mappings[struct_chain].append(ranges)
-
-        # If it is the first time that the chain ID is encountered
-        else:
-                
-            # Create a new list and add the mapping as the list's
-            # first element
-            mappings[struct_chain] = [ranges]
-
-        #-----------------------------------------------------------------#
-
-        # Return the mappings found
-        return mappings
+    return mappings
 
 
 def get_pdb_data(struct_id,
