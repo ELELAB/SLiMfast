@@ -416,6 +416,29 @@ def run():
     # Get the name of the directory where to store the PDB files
     struct_dir = \
         os.path.join(wd, config_run["structures"]["struct_dir"])
+    
+    # Directory containing custom PDB structures
+    local_structures_dir = config_run["structures"].get(
+        "local_structures_dir"
+    )
+
+    if local_structures_dir is not None:
+        local_structures_dir = os.path.join(
+            wd, local_structures_dir
+        )
+
+    # CSV containing metadata for local structures
+    local_structures_csv = config_run["structures"].get(
+        "local_structures_csv"
+    )
+    print("DEBUG wd:", repr(wd))
+    print("DEBUG local_structures_csv:", repr(local_structures_csv))
+    print("DEBUG local_structures_dir:", repr(local_structures_dir))
+    print("DEBUG config structures:", config_run["structures"])
+    if local_structures_csv is not None:
+        local_structures_csv = os.path.join(
+            wd, local_structures_csv
+        )
 
     # Get the options for running DSSP
     dssp_params = config_run["dssp"]["run"]
@@ -427,6 +450,78 @@ def run():
 
     # Get the options to run NACCESS
     naccess_params = config_run["naccess"]["run"]
+
+    # --------------------------------------------------
+    # Load custom local PDB structures
+    # --------------------------------------------------
+
+    if local_structures_csv is not None:
+
+        if local_structures_dir is None:
+            raise ValueError(
+                "local_structures_dir must be specified "
+                "when local_structures_csv is provided."
+            )
+
+        local_df = pd.read_csv(
+            local_structures_csv,
+            dtype={
+                "struct_id": str,
+                "struct_chain": str
+            }
+        )
+
+        required_columns = [
+            "struct_id",
+            "struct_chain",
+            "struct_segments",
+            "uniprot_id",
+            "uniprot_segments",
+            "method",
+            "resolution",
+            "deposition_date"
+        ]
+
+        missing_columns = [
+            col for col in required_columns
+            if col not in local_df.columns
+        ]
+
+        if missing_columns:
+            raise ValueError(
+                "Missing columns in local structures CSV: "
+                f"{missing_columns}"
+            )
+
+        # Ensure only structures for the requested protein
+        # are included
+        local_df = local_df[
+            local_df["uniprot_id"] == uniprot_id
+        ].copy()
+
+        # Check that local PDB files exist
+        for struct_id in local_df["struct_id"].unique():
+
+            pdb_path = os.path.join(
+                local_structures_dir,
+                f"{struct_id}.pdb"
+            )
+
+            if not os.path.isfile(pdb_path):
+                raise FileNotFoundError(
+                    f"Local PDB not found: {pdb_path}"
+                )
+
+        # Merge local structures with public PDB structures
+        protein_df = pd.concat(
+            [local_df, protein_df],
+            ignore_index=True
+        )
+
+        log.info(
+            f"Loaded {len(local_df)} local structure entries "
+            f"from '{local_structures_csv}'."
+        )
 
     # Create an empty list to store the structures and the SLiMs
     # found in them
@@ -446,7 +541,9 @@ def run():
                 util.find_slims(source = "structures",
                                 structures_df = protein_df,
                                 slims_to_find = slims_to_find,
-                                struct_dir = struct_dir)
+                                struct_dir = struct_dir,
+                                local_structures_dir = local_structures_dir
+                                )
 
             # Add the structures and the SLiMs found in them
             # to the list

@@ -5,8 +5,10 @@
 #
 #    Miscellanea utility functions for SLiMfast.
 #
-#    Copyright (C) 2024 Valentina Sora 
+#    Copyright (C) 2026 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
+#                       Mattia Utichi
+#                       <biomatt90@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
 #                       Elena Papaleo
@@ -1493,7 +1495,8 @@ def find_slims(source,
                structures_df,
                slims_to_find,
                struct_dir,
-               als = None):
+               als = None,
+               local_structures_dir = None):
     """Find SLiMs of interest in a set of structures.
 
     Parameters
@@ -1621,34 +1624,45 @@ def find_slims(source,
             # If the structure comes from the Protein Data Bank
             if source in ("structures", "homologs"):
 
-                # Try to fetch the structure's data. Use only the first
-                # model for multi-model structures
                 try:
-                    
-                    struct_data = \
-                        pdb_tools.get_pdb_data(struct_id = struct_id,
-                                               model = 1)
-                
-                # If something went wrong
+                    local_path = None
+
+                    # Check whether a local PDB is available
+                    if local_structures_dir is not None:
+
+                        candidate_path = os.path.join(
+                            local_structures_dir,
+                            f"{struct_id}.pdb"
+                        )
+
+                        if os.path.isfile(candidate_path):
+                            local_path = candidate_path
+
+                    # Load structure locally or from RCSB
+                    struct_data = pdb_tools.get_pdb_data(
+                        struct_id=struct_id,
+                        model=1,
+                        local_path=local_path
+                    )
+
                 except Exception as e:
 
-                    # Log a warning
-                    warnstr = \
-                        "It was not possible to retrieve data for " \
-                        f"the structure with ID '{struct_id}' from " \
-                        "the Protein Data Bank. This structure " \
-                        f"will be ignored. Error: {e}"
-                    logger.warning(warnstr)
-                    
-                    # Go to the next structure
+                    logger.warning(
+                        f"Could not retrieve structure "
+                        f"'{struct_id}': {e}"
+                    )
                     continue
 
-                # Inform the user that data were successfully retrieved
-                infostr = \
-                    f"Data for the structure with ID '{struct_id}' " \
-                    "were successfully retrieved from the Protein " \
-                    "Data Bank."
-                logger.info(infostr)
+                if local_path is not None:
+                    logger.info(
+                        f"Structure '{struct_id}' "
+                        "successfully loaded from local PDB."
+                    )
+                else:
+                    logger.info(
+                        f"Structure '{struct_id}' "
+                        "successfully retrieved from RCSB."
+                    )
 
             #---------------------------------------------------------#
 
