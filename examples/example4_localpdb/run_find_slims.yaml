@@ -1,0 +1,91 @@
+# Configuration file to run 'slimfast_find_slims'
+
+# The directory where 'slimfast_find_slims' will be run. An
+# empty string represents the directory from where the executable is
+# launched
+wd: ""
+
+#---------------------------------------------------------------------#
+
+# The settings to be used for the structures
+structures:
+
+  # The minimum length (in number of residues) that a disordered region
+  # needs to be to be considered a true disordered region
+  min_len_disorder: 10
+
+  # The name of the directory where to save the structures, if at least
+  # one SLiM of interest is found in them. If not provided, '!!null',
+  # or an empty string, it will be the same directory specified in the
+  # 'wd' option above
+  struct_dir: structures
+  
+  # Directory containing custom local PDB structures
+  # Set to null to disable local structure support
+  local_structures_dir: local_structures
+
+  # CSV file containing metadata and residue mappings
+  # for custom local structures
+  # Set to null to disable local structure support
+  local_structures_csv: local_structures.csv
+
+#---------------------------------------------------------------------#
+
+# The settings to run DSSP
+dssp:
+  
+  # The options to run the program
+  run:
+    
+    # The DSSP executable
+    executable: "/usr/local/dssp-3.0.10/bin/mkdssp"
+     
+    # The name of the directory where to run DSSP (if it is an
+    # string, it will be the same directory specified in the 'wd'
+    # option above)
+    wd: "dssp"
+    
+    # The options to launch DSSP (it should not be passed or it
+    # should be an empty dictionary if no option should be used)
+    options: {}
+  
+  # The processing options for the DSSP output
+  processing:
+    
+    # The mapping of DSSP symbols to custom symbols
+    dssp_mapping:
+
+      G: "H"
+      I: "H"
+      H: "H"
+      B: "-"
+      S: "-"
+      E: "E"
+      T: "-"
+    
+    # How to represent unstructured residues (represented by
+    # whitespaces in DSSP outputs) in the FASTA-like DSSP sequence)
+    whitespace_repr: "-"
+    
+    # Which symbols of the DSSP mapping represent disordered residues
+    disorder_symbols: ["-"]
+
+#---------------------------------------------------------------------#
+
+# The settings to run NACCESS
+naccess:
+
+  # The options to run the program
+  run:
+    
+    # The NACCESS executable
+    executable: "/usr/local/bin/naccess"
+     
+    # The name of the directory where to run NACCESS (if it is an
+    # string, it will be the same directory specified in the 'wd'
+    # option above)
+    wd: "naccess"
+    
+    # The options to launch NACCESS (it should not be passed or it
+    # should be an empty dictionary if no option should be used)
+    options: {}

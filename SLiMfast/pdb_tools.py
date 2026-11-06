@@ -6,8 +6,10 @@
 #    Utilities to retrieve data from PDB/mmCIF files or from the
 #    PDB/PDBe databases.
 #
-#    Copyright (C) 2024 Valentina Sora 
+#    Copyright (C) 2026 Valentina Sora 
 #                       <sora.valentina1@gmail.com>
+#                       Mattia Utichi
+#                       <biomatt90@gmail.com>
 #                       Matteo Tiberti 
 #                       <matteo.tiberti@gmail.com> 
 #                       Elena Papaleo
@@ -192,9 +194,11 @@ def get_protein_segments(struct_id, uniprot_id):
 
 
 def get_pdb_data(struct_id,
-                 model = None):
+                 model = None,
+                 local_path = None):
     """Given a PDB structure's ID, retrieve the data associated
-    with the corresponding PDB file and return them as a list.
+    with the corresponding PDB file and return them as a list, if local
+    model is provided retieve that instead.
 
     Parameters
     ----------
@@ -214,33 +218,55 @@ def get_pdb_data(struct_id,
         PDB file.
     """
     
-    # The generic URL where PDB files for single entries are found
-    struct_url = "https://files.rcsb.org/view/{:s}.pdb"
+    #-----------------------------------------------------------------#
+    # Retrieve structure from a local PDB file, if provided
+
+    if local_path is not None:
+
+        # Read local PDB structure
+        with open(local_path, "r") as f:
+            pdb_lines = f.readlines()
+
+        # Assign chain A to records without chain ID
+        processed_lines = []
+
+        for line in pdb_lines:
+
+            if line.startswith(("ATOM  ", "HETATM", "ANISOU", "TER   ")):
+
+                # Chain ID is in column 22 (index 21)
+                if len(line) >= 22 and line[21] == " ":
+
+                    line = line[:21] + "A" + line[22:]
+
+            processed_lines.append(line)
+
+        pdb_text = "".join(processed_lines)
 
     #-----------------------------------------------------------------#
-    
-    # Get the data from the Protein Data Bank
-    response = requests.get(struct_url.format(struct_id))
+    # Otherwise, retrieve the structure from RCSB
+    else:
+
+        struct_url = "https://files.rcsb.org/view/{:s}.pdb"
+
+        response = requests.get(
+            struct_url.format(struct_id),
+            timeout=30
+        )
+        if not response.ok:
+            errstr = (
+                f"Could not retrieve PDB structure '{struct_id}'. "
+                f"HTTP status: {response.status_code}"
+            )
+            logger.error(errstr)
+            raise RuntimeError(errstr)
+
+        pdb_text = response.text
 
     #-----------------------------------------------------------------#
-    
-    # If something went wrong
-    if not response.ok:
-        
-        # Warn the user
-        errstr = \
-            "It was not possible to retrieve the data for the " \
-            f"structure with ID '{struct_id}' from the Protein Data " \
-            f"Bank. Error code: {response.status_code}."
-        logger.exception(errstr)
-
-        # Raise an error
-        raise Exception(errstr)
-
-    #-----------------------------------------------------------------#
-
-    # Create an empty list with the lines to be kept
+    # Create an empty list to store PDB lines
     data = []
+
 
     #-----------------------------------------------------------------#
 
@@ -257,7 +283,7 @@ def get_pdb_data(struct_id,
     #-----------------------------------------------------------------#
 
     # For each line in the data
-    for line in response.text.split("\n"):
+    for line in pdb_text.split("\n"):
 
         # If no model was specified, all of them will be saved
         if model is None:

@@ -1,0 +1,3 @@
+2026-11-05,15:25:INFO:root:The configuration was successfully loaded from 'run_get_alphafold.yaml'.
+2026-11-05,15:25:INFO:root:The data frame containing data about the structures available in the AlphaFold Protein Structure Database for the protein of interest was successfully created.
+2026-11-05,15:25:WARNING:root:No structures were found in the AlphaFold Protein Structure Database for the protein of interest.

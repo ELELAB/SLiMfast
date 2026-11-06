@@ -19,6 +19,15 @@ structures:
   # or an empty string, it will be the same directory specified in the
   # 'wd' option above
   struct_dir: structures
+  
+  # Directory containing custom local PDB structures
+  # Set to null to disable local structure support
+  local_structures_dir: local_structures
+
+  # CSV file containing metadata and residue mappings
+  # for custom local structures
+  # Set to null to disable local structure support
+  local_structures_csv: local_structures.csv
 
 #---------------------------------------------------------------------#
 

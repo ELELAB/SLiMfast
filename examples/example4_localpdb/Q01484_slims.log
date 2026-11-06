@@ -1,0 +1,123 @@
+2026-11-05,15:25:INFO:root:The configuration was successfully loaded from 'run_find_slims.yaml'.
+2026-11-05,15:25:INFO:root:The SLiM instances were successfully loaded from 'slims.csv'.
+2026-11-05,15:25:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully loaded from 'Q01484_structures.csv.'
+2026-11-05,15:25:INFO:root:Loaded 1 local structure entries from '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/local_structures.csv'.
+2026-11-05,15:25:INFO:SLiMfast.util:Structure 'ank2_AF3_1-3957' successfully loaded from local PDB.
+2026-11-05,15:25:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID 'ank2_AF3_1-3957': LIR_1364-FAEV-1367, LIR_729-YTPL-732.
+2026-11-05,15:25:INFO:SLiMfast.util:The structure with ID 'ank2_AF3_1-3957' was successfully written in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/ank2_AF3_1-3957.pdb'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/6KZJ.pdb HTTP/1.1" 200 53526
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '6KZJ' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '6KZJ'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5Y4F.pdb HTTP/1.1" 200 262929
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '5Y4F' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID '5Y4F': LIR_729-YTPL-732.
+2026-11-05,15:25:INFO:SLiMfast.util:The structure with ID '5Y4F' was successfully written in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/5Y4F.pdb'.
+2026-11-05,15:25:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID '5Y4F': LIR_729-YTPL-732.
+2026-11-05,15:25:INFO:SLiMfast.util:The structure with ID '5Y4F' was successfully written in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/5Y4F.pdb'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/8ZE8.pdb HTTP/1.1" 200 98193
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '8ZE8' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '8ZE8'.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '8ZE8'.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '8ZE8'.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '8ZE8'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5YIS.pdb HTTP/1.1" 200 102361
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '5YIS' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5YIS'.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5YIS'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/4D8O.pdb HTTP/1.1" 200 177026
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '4D8O' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID '4D8O': LIR_1364-FAEV-1367.
+2026-11-05,15:25:INFO:SLiMfast.util:The structure with ID '4D8O' was successfully written in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/4D8O.pdb'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5Y4E.pdb HTTP/1.1" 200 156352
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '5Y4E' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5Y4E'.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5Y4E'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/4RLY.pdb HTTP/1.1" 200 105910
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '4RLY' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '4RLY'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5YIR.pdb HTTP/1.1" 200 74963
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '5YIR' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5YIR'.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5YIR'.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5YIR'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5Y4D.pdb HTTP/1.1" 200 110856
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '5Y4D' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:No SLiMs found in the structure with ID '5Y4D'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/6M3Q.pdb HTTP/1.1" 200 239633
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '6M3Q' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID '6M3Q': LIR_1364-FAEV-1367.
+2026-11-05,15:25:INFO:SLiMfast.util:The structure with ID '6M3Q' was successfully written in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/6M3Q.pdb'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/4RLV.pdb HTTP/1.1" 200 281064
+2026-11-05,15:25:INFO:SLiMfast.util:Structure '4RLV' successfully retrieved from RCSB.
+2026-11-05,15:25:INFO:SLiMfast.util:The following SLiMs were found in the structure with ID '4RLV': LIR_729-YTPL-732.
+2026-11-05,15:25:INFO:SLiMfast.util:The structure with ID '4RLV' was successfully written in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/4RLV.pdb'.
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running DSSP on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/ank2_AF3_1-3957.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/ank2_AF3_1-3957.pdb'.
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/ank2_AF3_1-3957.dssp'.
+2026-11-05,15:25:INFO:SLiMfast.util:Now working with sequence 1364-FAEV-1367 (DSSP sequence: '-EEE')...
+2026-11-05,15:25:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 1361-QENFAEVARS-1370. (DSSP sequence: '----EEEEE-').
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/ank2_AF3_1-3957.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/ank2_AF3_1-3957.rsa'.
+2026-11-05,15:25:WARNING:SLiMfast.util:Multiple occurrences of 'YTPL' were found in the structure with ID 'ank2_AF3_1-3957', chain 'A', and SLiMfast has no way of determining which one is the one of interest.
+2026-11-05,15:25:WARNING:SLiMfast.run_tools:The files '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/ank2_AF3_1-3957.asa' and  '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/ank2_AF3_1-3957.rsa' were found in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess'. SLiMfast will not run NACCESS again.
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/ank2_AF3_1-3957.rsa'.
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running DSSP on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/5Y4F.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/5Y4F.pdb'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 820, chain B, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/5Y4F.dssp'.
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/5Y4F.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.util:Multiple occurrences of 'YTPL' were found in the structure with ID '5Y4F', chain 'A', and SLiMfast has no way of determining which one is the one of interest.
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/5Y4F.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/5Y4F.rsa'.
+2026-11-05,15:25:WARNING:SLiMfast.run_tools:The file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/5Y4F.dssp' was found in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp'. SLiMfast will not run DSSP again.
+2026-11-05,15:25:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/5Y4F.pdb'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 820, chain B, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/5Y4F.dssp'.
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/5Y4F.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.util:Multiple occurrences of 'YTPL' were found in the structure with ID '5Y4F', chain 'B', and SLiMfast has no way of determining which one is the one of interest.
+2026-11-05,15:25:WARNING:SLiMfast.run_tools:The files '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/5Y4F.asa' and  '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/5Y4F.rsa' were found in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess'. SLiMfast will not run NACCESS again.
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/5Y4F.rsa'.
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running DSSP on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/4D8O.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/4D8O.pdb'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1080, chain A, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/4D8O.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1361, chain A, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/4D8O.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1402, chain A, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/4D8O.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1424, chain A, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/4D8O.dssp'.
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/4D8O.dssp'.
+2026-11-05,15:25:INFO:SLiMfast.util:Now working with sequence 349-FAEV-352 (DSSP sequence: '-EEE')...
+2026-11-05,15:25:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 346-QENFAEVARS-355. (DSSP sequence: '----EEEEE-').
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/4D8O.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/4D8O.rsa'.
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running DSSP on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/6M3Q.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/6M3Q.pdb'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1011, chain E, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/6M3Q.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1243, chain E, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/6M3Q.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1436, chain E, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/6M3Q.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1652, chain F, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/6M3Q.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1823, chain F, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/6M3Q.dssp'.
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/6M3Q.dssp'.
+2026-11-05,15:25:INFO:SLiMfast.util:Now working with sequence 361-FAEV-364 (DSSP sequence: '-EEE')...
+2026-11-05,15:25:INFO:SLiMfast.util:Extended sequence (if 'min_len_disorder' > length_of_sequence): 358-QENFAEVARS-367. (DSSP sequence: 'H---EEEEE-').
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/6M3Q.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/6M3Q.rsa'.
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running DSSP on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/4RLV.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:DSSP was successfully run on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/4RLV.pdb'.
+2026-11-05,15:25:WARNING:SLiMfast.dssp_tools:A missing residue was found at position 1631, chain A, in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/4RLV.dssp'.
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from DSSP's output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/dssp/4RLV.dssp'.
+2026-11-05,15:25:WARNING:SLiMfast.util:Multiple occurrences of 'YTPL' were found in the structure with ID '4RLV', chain 'A', and SLiMfast has no way of determining which one is the one of interest.
+2026-11-05,15:25:INFO:SLiMfast.run_tools:Running NACCESS on the PDB file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/structures/4RLV.pdb'...
+2026-11-05,15:25:INFO:SLiMfast.util:Data were successfully parsed from NACCESS' output file '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/naccess/4RLV.rsa'.
+2026-11-05,15:25:INFO:root:The data frame containing the SLiMs found in the structures available in the Protein Data Bank for the protein of interest was successfully saved in 'slims_protein.csv'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.disprot.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.disprot.org:443 "GET /api/Q01484 HTTP/1.1" 200 None
+2026-11-05,15:25:INFO:SLiMfast.util:The DisProt annotations for the protein with UniProt ID 'Q01484' were successfully retrieved.
+2026-11-05,15:25:INFO:root:The data frame containing the SLiMs annotated through DisProt was successfully saved in 'slims_disprot.csv'.

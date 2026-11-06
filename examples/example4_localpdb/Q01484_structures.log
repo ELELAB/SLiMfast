@@ -1,0 +1,66 @@
+2026-11-05,15:25:INFO:root:The configuration was successfully loaded from 'run_get_structures.yaml'.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.uniprot.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.uniprot.org:443 "GET /uniprot/Q01484.txt HTTP/1.1" 301 0
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rest.uniprot.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://rest.uniprot.org:443 "GET /uniprot/Q01484.txt HTTP/1.1" 301 0
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://rest.uniprot.org:443 "GET /uniprotkb/Q01484.txt HTTP/1.1" 200 16940
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/4d8o HTTP/1.1" 200 378
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/4rlv HTTP/1.1" 200 276
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/4rly HTTP/1.1" 200 282
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/5y4d HTTP/1.1" 200 276
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/5y4e HTTP/1.1" 200 271
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/5y4f HTTP/1.1" 200 240
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/5yir HTTP/1.1" 200 327
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/5yis HTTP/1.1" 200 316
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/6kzj HTTP/1.1" 200 313
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/6m3q HTTP/1.1" 200 291
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.ebi.ac.uk:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://www.ebi.ac.uk:443 "GET /pdbe/api/v2/mappings/uniprot/8ze8 HTTP/1.1" 200 355
+2026-11-05,15:25:INFO:SLiMfast.uniprot_tools:The IDs of structures available in the Protein Data Bank for the protein with UniProt ID 'Q01484' were successfully retrieved.
+2026-11-05,15:25:INFO:root:The data frame containing data about the structures available in the Protein Data Bank for the protein of interest was successfully created.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/4D8O.cif HTTP/1.1" 200 223688
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '4D8O' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/4RLV.cif HTTP/1.1" 200 342108
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '4RLV' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/4RLY.cif HTTP/1.1" 200 134584
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '4RLY' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5Y4D.cif HTTP/1.1" 200 146494
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '5Y4D' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5Y4E.cif HTTP/1.1" 200 195700
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '5Y4E' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5Y4F.cif HTTP/1.1" 200 325715
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '5Y4F' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5YIR.cif HTTP/1.1" 200 101965
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '5YIR' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/5YIS.cif HTTP/1.1" 200 131655
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '5YIS' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/6KZJ.cif HTTP/1.1" 200 73109
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '6KZJ' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/6M3Q.cif HTTP/1.1" 200 304004
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '6M3Q' were successfully collected.
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): files.rcsb.org:443
+2026-11-05,15:25:DEBUG:urllib3.connectionpool:https://files.rcsb.org:443 "GET /view/8ZE8.cif HTTP/1.1" 200 125425
+2026-11-05,15:25:INFO:SLiMfast.util:The metadata for the structure with ID '8ZE8' were successfully collected.
+2026-11-05,15:25:INFO:root:Metadata were successfully added to the data frame.
+2026-11-05,15:25:INFO:root:The data frame was successfully sorted.
+2026-11-05,15:25:INFO:root:The data frame was successfully saved in '/data/user/mattia/scripts/SLiMfast/examples/example4_localpdb/Q01484_structures.csv'.
