@@ -1,0 +1,8 @@
+source,struct_id,struct_chain,slim_name,slim_start,slim_sequence,slim_end,disordered_region,abs_total_acc,rel_total_acc
+structures,ank2_AF3_1-3957,A,LIR,1364,FAEV,1367,False,1364:27.45_1367:25.26,1364:13.8_1367:16.7
+structures,ank2_AF3_1-3957,A,LIR,729,YTPL,732,None,729:6.07_732:0.17,729:2.9_732:0.1
+structures,5Y4F,A,LIR,729,YTPL,732,None,729:0.02_732:0.0,729:0.0_732:0.0
+structures,5Y4F,B,LIR,729,YTPL,732,None,729:0.06_732:0.0,729:0.0_732:0.0
+structures,4D8O,A,LIR,1364,FAEV,1367,False,1364:119.48_1367:83.07,1364:66.9_1367:47.4
+structures,6M3Q,E,LIR,1364,FAEV,1367,False,1364:17.37_1367:28.16,1364:8.7_1367:18.6
+structures,4RLV,A,LIR,729,YTPL,732,None,,
